@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">Q8RN</string>
+
+    <!-- Elementos -->
     <string name="titulo_main">Questionário dos Oito Remédios Naturais</string>
     <string name="botao_main">Realizar Questionário</string>
     <string name="titulo_form">Preencha o formulário</string>
+
+    <!-- Strings -->
     <string name="altura">Altura</string>
     <string name="cintura_quadril">Cintura-Quadril</string>
     <string name="sexo">Sexo:</string>
@@ -25,5 +29,7 @@
     <string name="cor_da_pele">Cor da pele:</string>
     <string name="botao_proximo">Próximo</string>
     <string name="nutricao">Nutrição</string>
+
+    <!-- Questoes -->
     <string name="questao1">Com que frequência você inclui em suas refeições diária todos esses alimentos: feijões, castanhas, frutas, legumes e verduras?</string>
 </resources>

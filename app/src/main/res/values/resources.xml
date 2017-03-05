@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="corpele_array">
+        <item>Selecione uma opção</item>
         <item>Branca</item>
         <item>Parda</item>
         <item>Preta</item>
@@ -9,6 +10,7 @@
     </string-array>
 
     <string-array name="escolaridade_array">
+        <item>Selecione uma opção</item>
         <item>Fundamental completo</item>
         <item>Médio completo</item>
         <item>Médio incompleto</item>
@@ -17,6 +19,7 @@
     </string-array>
     
     <string-array name="saude_array">
+        <item>Selecione uma opção</item>
         <item>Muito boa</item>
         <item>Boa</item>
         <item>Regular</item>
