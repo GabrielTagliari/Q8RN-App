@@ -38,10 +38,20 @@
         android:layout_width="match_parent"
         android:id="@+id/botaoMainId"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:elevation="10dp"
         android:layout_height="60dp"
         android:layout_marginTop="68dp"
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="@string/botao_simular"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/botaoSimularId"
+        android:layout_below="@+id/botaoMainId"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"
+        style="@style/Widget.AppCompat.Button.Colored" />
+
 </RelativeLayout>

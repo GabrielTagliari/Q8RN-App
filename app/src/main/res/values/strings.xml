@@ -10,8 +10,8 @@
     <string name="altura">Altura</string>
     <string name="cintura_quadril">Cintura-Quadril</string>
     <string name="sexo">Sexo:</string>
-    <string name="sa_de_mental">Saúde mental</string>
-    <string name="sa_de_f_sica">Saúde física</string>
+    <string name="sa_de_mental">Saúde mental:</string>
+    <string name="sa_de_f_sica">Saúde física:</string>
     <string name="religi_o_referida">Religião Referida</string>
     <string name="profiss_o">Profissão</string>
     <string name="press_o_arterial">Pressão Arterial</string>
@@ -32,4 +32,5 @@
 
     <!-- Questoes -->
     <string name="questao1">Com que frequência você inclui em suas refeições diária todos esses alimentos: feijões, castanhas, frutas, legumes e verduras?</string>
+    <string name="botao_simular">Simular Questionário</string>
 </resources>
