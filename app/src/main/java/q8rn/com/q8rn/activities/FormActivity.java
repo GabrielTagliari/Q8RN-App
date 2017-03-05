@@ -1,5 +1,6 @@
 package q8rn.com.q8rn.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -52,6 +54,7 @@ public class FormActivity extends AppCompatActivity {
 
     private Button botaoProximo;
 
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,21 +64,13 @@ public class FormActivity extends AppCompatActivity {
         instanciaElementosTela();
         populaTodosSpinners();
 
-        radioGroupSexo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if (i == R.id.masculinoId) {
-                    Toast.makeText(FormActivity.this, "Masculino", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(FormActivity.this, "Feminino", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
         botaoProximo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 salvarEntrevistadoEProximaActivity();
+                /*progressDialog.show(FormActivity.this, "", "Carregando", false);
+                Intent intent = new Intent(FormActivity.this, QuestionarioActivity.class);
+                startActivity(intent);*/
             }
         });
     }
@@ -95,6 +90,7 @@ public class FormActivity extends AppCompatActivity {
                         Entrevistado entrevistadoRetorno = jsonRetorno.fromJson(response, Entrevistado.class);
                         Intent intent = new Intent(FormActivity.this, QuestionarioActivity.class);
                         intent.putExtra("idEntrevistado", entrevistadoRetorno.getId());
+                        progressDialog.dismiss();
                         startActivity(intent);
                     }
                 }, new Response.ErrorListener() {
@@ -121,12 +117,14 @@ public class FormActivity extends AppCompatActivity {
         };
         queue.add(stringRequest);
         queue.start();
+        progressDialog = progressDialog.show(FormActivity.this, "", "Carregando", false);
     }
 
     @NonNull
     private Entrevistado instanciaEntrevistado() {
+        RadioButton rb = (RadioButton) findViewById(radioGroupSexo.getCheckedRadioButtonId());
         return new Entrevistado(iniciaisNome.getText().toString(),
-                Integer.parseInt(idade.getText().toString()), "Masculino",
+                Integer.parseInt(idade.getText().toString()), rb.getText().toString(),
                 corPeleSpinner.getSelectedItem().toString(),
                 religiao.getText().toString(), tempoReligiao.getText().toString(),
                 profissao.getText().toString(),
@@ -182,9 +180,5 @@ public class FormActivity extends AppCompatActivity {
         saudeMentalSpinner = (Spinner) findViewById(R.id.saudeMentalIdSpinner);
 
         botaoProximo = (Button) findViewById(R.id.botaoProximoId);
-    }
-
-    private void loadData() {
-
     }
 }

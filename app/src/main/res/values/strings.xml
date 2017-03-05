@@ -24,4 +24,6 @@
     <string name="doen_as_referidas">Doenças referidas</string>
     <string name="cor_da_pele">Cor da pele:</string>
     <string name="botao_proximo">Próximo</string>
+    <string name="nutricao">Nutrição</string>
+    <string name="questao1">Com que frequência você inclui em suas refeições diária todos esses alimentos: feijões, castanhas, frutas, legumes e verduras?</string>
 </resources>
