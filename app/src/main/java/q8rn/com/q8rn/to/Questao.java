@@ -3,6 +3,11 @@ package q8rn.com.q8rn.to;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -13,12 +18,21 @@ public class Questao implements Parcelable{
 
     private long id;
     private String titulo;
-    private Date dtaAlteracao;
     private String alternativa1;
     private String alternativa2;
     private String alternativa3;
     private String alternativa4;
     private String alternativa5;
+
+    public Questao(JSONObject jsonObject) throws JSONException, ParseException {
+        this.id = jsonObject.getLong("id");
+        this.titulo = jsonObject.getString("titulo");
+        this.alternativa1 = jsonObject.getString("alternativa1");
+        this.alternativa2 = jsonObject.getString("alternativa2");
+        this.alternativa3 = jsonObject.getString("alternativa3");
+        this.alternativa4 = jsonObject.getString("alternativa4");
+        this.alternativa5 = jsonObject.getString("alternativa5");
+    }
 
     protected Questao(Parcel in) {
         id = in.readLong();
@@ -56,14 +70,6 @@ public class Questao implements Parcelable{
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
-    }
-
-    public Date getDtaAlteracao() {
-        return dtaAlteracao;
-    }
-
-    public void setDtaAlteracao(Date dtaAlteracao) {
-        this.dtaAlteracao = dtaAlteracao;
     }
 
     public String getAlternativa1() {

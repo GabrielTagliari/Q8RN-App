@@ -7,6 +7,7 @@ package q8rn.com.q8rn.constants;
 public class Constants {
     /* URLS */
     public static final String URL_ENTREVISTADO = "https://q8rn.herokuapp.com/rest/entrevistado";
+    public static final String URL_QUESTAO = "https://q8rn.herokuapp.com/rest/questao";
 
     /* MENSAGENS */
     public static final String CARREGANDO = "Carregando";
