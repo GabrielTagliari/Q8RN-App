@@ -3,7 +3,8 @@
 
     <!-- Elementos -->
     <string name="titulo_main">Questionário dos Oito Remédios Naturais</string>
-    <string name="botao_main">Realizar Questionário</string>
+    <string name="botao_main">Questionário ONLINE</string>
+    <string name="botao_simular">Questionário OFFLINE</string>
     <string name="titulo_form">Preencha o formulário</string>
 
     <!-- Strings -->
@@ -32,5 +33,4 @@
 
     <!-- Questoes -->
     <string name="questao1">Com que frequência você inclui em suas refeições diária todos esses alimentos: feijões, castanhas, frutas, legumes e verduras?</string>
-    <string name="botao_simular">Simular Questionário</string>
 </resources>

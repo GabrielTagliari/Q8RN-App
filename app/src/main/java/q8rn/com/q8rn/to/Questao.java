@@ -7,16 +7,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-/**
- * Created by Gabriel on 05/03/2017.
- */
+/* Created by Gabriel on 05/03/2017. */
 
 public class Questao implements Parcelable{
 
     private long id;
+    private long codQuestao;
     private String titulo;
     private String alternativa1;
     private String alternativa2;
@@ -24,8 +21,11 @@ public class Questao implements Parcelable{
     private String alternativa4;
     private String alternativa5;
 
+    public Questao() {}
+
     public Questao(JSONObject jsonObject) throws JSONException, ParseException {
         this.id = jsonObject.getLong("id");
+        this.codQuestao = jsonObject.getLong("codQuestao");
         this.titulo = jsonObject.getString("titulo");
         this.alternativa1 = jsonObject.getString("alternativa1");
         this.alternativa2 = jsonObject.getString("alternativa2");
@@ -36,6 +36,7 @@ public class Questao implements Parcelable{
 
     protected Questao(Parcel in) {
         id = in.readLong();
+        codQuestao = in.readLong();
         titulo = in.readString();
         alternativa1 = in.readString();
         alternativa2 = in.readString();
@@ -110,6 +111,14 @@ public class Questao implements Parcelable{
 
     public void setAlternativa5(String alternativa5) {
         this.alternativa5 = alternativa5;
+    }
+
+    public long getCodQuestao() {
+        return codQuestao;
+    }
+
+    public void setCodQuestao(long codQuestao) {
+        this.codQuestao = codQuestao;
     }
 
     @Override

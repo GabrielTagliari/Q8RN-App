@@ -12,7 +12,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,6 +22,7 @@ import java.util.List;
 
 import q8rn.com.q8rn.R;
 import q8rn.com.q8rn.constants.Constants;
+import q8rn.com.q8rn.controllers.QuestaoController;
 import q8rn.com.q8rn.to.Questao;
 
 public class QuestionarioActivity extends AppCompatActivity {
@@ -40,7 +40,18 @@ public class QuestionarioActivity extends AppCompatActivity {
 
         titulo = (TextView) findViewById(R.id.tituloId);
 
-        makeJsonArrayRequest();
+        QuestaoController controller = new QuestaoController(getBaseContext());
+
+        controller.deletaAllQuestoes();
+
+        controller.insereDados(1,"Com que frequência você inclui em suas refeições diária todos " +
+                "esses alimentos: feijões, castanhas, frutas, legumes e verduras?",
+                "Sempre", "Com relativa frequência", "Algumas vezes",
+                "Raramente", "Quase nunca", 1);
+
+        Questao questao = controller.findQuestaoByCod(1);
+
+        titulo.setText(questao.getTitulo());
     }
 
     private void makeJsonArrayRequest() {
