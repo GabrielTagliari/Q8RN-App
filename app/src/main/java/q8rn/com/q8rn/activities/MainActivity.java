@@ -10,18 +10,18 @@ import q8rn.com.q8rn.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button botaoRealizaQuestionario;
-    private Button botaoSimularId;
+    private Button botaoOnline;
+    private Button botaoOffline;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        botaoRealizaQuestionario = (Button) findViewById(R.id.botaoMainId);
-        botaoSimularId = (Button) findViewById(R.id.botaoSimularId);
+        botaoOnline = (Button) findViewById(R.id.botaoOnlineId);
+        botaoOffline = (Button) findViewById(R.id.botaoOfflineId);
 
-        botaoRealizaQuestionario.setOnClickListener(new View.OnClickListener() {
+        botaoOnline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, FormActivity.class);
@@ -29,10 +29,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        botaoSimularId.setOnClickListener(new View.OnClickListener() {
+        botaoOffline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, QuestionarioActivity.class);
+                intent.putExtra("codQuestao", 1);
                 startActivity(intent);
             }
         });
