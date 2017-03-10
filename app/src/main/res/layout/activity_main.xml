@@ -27,12 +27,12 @@
     <ImageView
         app:srcCompat="@mipmap/logo"
         android:id="@+id/imageView"
-        android:layout_height="@dimen/tamanho_logo"
-        android:layout_width="@dimen/tamanho_logo"
         android:layout_marginTop="41dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:contentDescription="" />
+        android:contentDescription=""
+        android:layout_height="150dp"
+        android:layout_width="250dp" />
 
     <Button
         android:text="@string/botao_main"
