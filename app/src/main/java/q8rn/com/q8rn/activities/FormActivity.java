@@ -32,7 +32,7 @@ import java.util.Map;
 
 import q8rn.com.q8rn.R;
 import q8rn.com.q8rn.constants.Constants;
-import q8rn.com.q8rn.to.Entrevistado;
+import q8rn.com.q8rn.entities.Entrevistado;
 import q8rn.com.q8rn.validators.EntrevistadoValidator;
 
 public class FormActivity extends AppCompatActivity {

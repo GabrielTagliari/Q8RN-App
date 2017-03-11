@@ -16,7 +16,6 @@ public class CriaBanco extends SQLiteOpenHelper{
 
     /* NOMES TABELAS */
     public static final String TABELA_QUESTAO = "questao";
-    private static final String TABELA_DOMINIO = "dominio";
 
     /* IDS */
     public static final String ID_QUESTAO = "_id";
@@ -26,7 +25,7 @@ public class CriaBanco extends SQLiteOpenHelper{
     public static final String ALTERNATIVA_QUESTAO = "alternativa";
     public static final String TITULO_QUESTAO = "titulo";
     private static final String DTAALTERACAO_QUESTAO = "dta_alteracao";
-    public static final String PK_DOMINIO_QUESTAO = "id_dominio";
+    public static final String DOMINIO = "dominio";
 
     public CriaBanco(Context context) {
         super(context, NOME_BANCO, null, VERSAO);
@@ -53,7 +52,7 @@ public class CriaBanco extends SQLiteOpenHelper{
         }
         sql.append(" "+ DTAALTERACAO_QUESTAO +" timestamp, ");
         sql.append(" "+ TITULO_QUESTAO +" varchar(255), ");
-        sql.append(" "+ PK_DOMINIO_QUESTAO +" integer ");
+        sql.append(" "+ DOMINIO +" varchar(50) ");
         sql.append(" )");
         return String.valueOf(sql);
     }

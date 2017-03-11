@@ -26,9 +26,8 @@ import java.text.ParseException;
 
 import q8rn.com.q8rn.R;
 import q8rn.com.q8rn.constants.Constants;
-import q8rn.com.q8rn.controllers.QuestaoController;
 import q8rn.com.q8rn.model.PopulaBanco;
-import q8rn.com.q8rn.to.Questao;
+import q8rn.com.q8rn.entities.Questao;
 
 public class MainActivity extends AppCompatActivity {
 

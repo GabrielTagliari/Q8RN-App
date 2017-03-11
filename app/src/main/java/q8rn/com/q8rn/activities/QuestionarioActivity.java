@@ -1,9 +1,9 @@
 package q8rn.com.q8rn.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -11,25 +11,12 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.ParseException;
 import java.util.HashMap;
-import java.util.List;
 
 import q8rn.com.q8rn.R;
 import q8rn.com.q8rn.constants.Constants;
 import q8rn.com.q8rn.controllers.QuestaoController;
-import q8rn.com.q8rn.to.Questao;
+import q8rn.com.q8rn.entities.Questao;
 
 public class QuestionarioActivity extends AppCompatActivity {
 
@@ -39,31 +26,50 @@ public class QuestionarioActivity extends AppCompatActivity {
     private Button botaoProximo;
     private int codQuestao;
     private HashMap<Integer, Integer> pontos;
+    private RadioButton alternativa1;
+    private RadioButton alternativa2;
+    private RadioButton alternativa3;
+    private RadioButton alternativa4;
+    private RadioButton alternativa5;
+    private TextView dominio;
 
     private QuestaoController questaoController;
 
+    @SuppressLint("UseSparseArrays")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionario);
 
-        titulo = (TextView) findViewById(R.id.tituloId);
-        radioGroupAlternativas = (RadioGroup) findViewById(R.id.radioGroupAlternativasId);
-        botaoVoltar = (Button) findViewById(R.id.botaoVoltarId);
-        botaoProximo = (Button) findViewById(R.id.botaoProximoId);
+        instanciaElementos();
 
         Intent intent = getIntent();
         codQuestao = intent.getExtras().getInt("codQuestao");
         pontos = new HashMap<>();
-        pontos = (HashMap<Integer, Integer>) intent.getExtras().getSerializable("pontos");
+        HashMap<Integer, Integer> pontosRecebidos = new HashMap<>();
+        pontosRecebidos = (HashMap<Integer, Integer>) intent.getExtras().getSerializable("pontos");
+
+        if (pontosRecebidos != null) {
+            pontos = pontosRecebidos;
+        }
+
+        populaQuestao();
+
+        controleRadioButtons();
 
         botaoProximo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                codQuestao++;
-                Intent intentProximo = new Intent(QuestionarioActivity.this, QuestionarioActivity.class);
-                intentProximo.putExtra("codQuestao", codQuestao);
-                startActivity(intentProximo);
+                if (radioGroupAlternativas.getCheckedRadioButtonId() != -1) {
+                    calculaEscoreAtual();
+                    codQuestao++;
+                    Intent intentProximo = new Intent(QuestionarioActivity.this, QuestionarioActivity.class);
+                    intentProximo.putExtra("codQuestao", codQuestao);
+                    startActivity(intentProximo);
+                } else {
+                    Toast.makeText(QuestionarioActivity.this, Constants.SELECIONE_ALTERNATIVA,
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -73,13 +79,16 @@ public class QuestionarioActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
 
+    private void populaQuestao() {
         questaoController = new QuestaoController(getBaseContext());
 
         Questao questao = questaoController.findQuestaoByCod(codQuestao);
 
         if (questao != null) {
             titulo.setText(questao.getTitulo());
+            dominio.setText(questao.getDominio());
 
             RadioButton alternativa1 = (RadioButton) radioGroupAlternativas.getChildAt(0);
             RadioButton alternativa2 = (RadioButton) radioGroupAlternativas.getChildAt(1);
@@ -96,6 +105,55 @@ public class QuestionarioActivity extends AppCompatActivity {
             Toast.makeText(QuestionarioActivity.this, Constants.ERRO_CARREGAR,
                     Toast.LENGTH_SHORT).show();
             finish();
+        }
+    }
+
+    private void calculaEscoreAtual() {
+        int selecionado = radioGroupAlternativas.getCheckedRadioButtonId();
+        switch(selecionado){
+            case R.id.radioUmId:
+                pontos.put(codQuestao, 4);
+                break;
+            case R.id.radioDoisId:
+                pontos.put(codQuestao, 3);
+                break;
+            case R.id.radioTresId:
+                pontos.put(codQuestao, 2);
+                break;
+            case R.id.radioQuatroId:
+                pontos.put(codQuestao, 1);
+                break;
+            case R.id.radioCincoId:
+                pontos.put(codQuestao, 0);
+                break;
+        }
+    }
+
+    private void controleRadioButtons() {
+        mostrarRadioButton(alternativa1);
+        mostrarRadioButton(alternativa2);
+        mostrarRadioButton(alternativa3);
+        mostrarRadioButton(alternativa4);
+        mostrarRadioButton(alternativa5);
+    }
+
+    private void instanciaElementos() {
+        titulo = (TextView) findViewById(R.id.tituloId);
+        radioGroupAlternativas = (RadioGroup) findViewById(R.id.radioGroupAlternativasId);
+        botaoVoltar = (Button) findViewById(R.id.botaoVoltarId);
+        botaoProximo = (Button) findViewById(R.id.botaoProximoId);
+
+        alternativa1 = (RadioButton) findViewById(R.id.radioUmId);
+        alternativa2 = (RadioButton) findViewById(R.id.radioDoisId);
+        alternativa3 = (RadioButton) findViewById(R.id.radioTresId);
+        alternativa4 = (RadioButton) findViewById(R.id.radioQuatroId);
+        alternativa5 = (RadioButton) findViewById(R.id.radioCincoId);
+        dominio = (TextView) findViewById(R.id.dominioId);
+    }
+
+    private void mostrarRadioButton(RadioButton radioButton) {
+        if (radioButton.getText().equals(Constants.VAZIO)){
+            radioButton.setVisibility(View.GONE);
         }
     }
 

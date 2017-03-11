@@ -5,15 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.widget.Toast;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-import q8rn.com.q8rn.activities.QuestionarioActivity;
 import q8rn.com.q8rn.model.CriaBanco;
-import q8rn.com.q8rn.to.Questao;
+import q8rn.com.q8rn.entities.Questao;
 
 /* Created by Gabriel on 08/03/2017. */
 
@@ -31,7 +28,7 @@ public class QuestaoController {
 
     public String insereDados(long codQuestao, String titulo, String alternativa1,
                               String alternativa2, String alternativa3, String alternativa4,
-                              String alternativa5, int pkDominio) {
+                              String alternativa5, String dominio) {
         ContentValues valores;
         long resultado;
 
@@ -44,7 +41,7 @@ public class QuestaoController {
         valores.put(CriaBanco.ALTERNATIVA_QUESTAO + 3, alternativa3);
         valores.put(CriaBanco.ALTERNATIVA_QUESTAO + 4, alternativa4);
         valores.put(CriaBanco.ALTERNATIVA_QUESTAO + 5, alternativa5);
-        valores.put(CriaBanco.PK_DOMINIO_QUESTAO, String.valueOf(pkDominio));
+        valores.put(CriaBanco.DOMINIO, dominio);
 
         resultado = db.insert(CriaBanco.TABELA_QUESTAO, null, valores);
         db.close();
@@ -67,9 +64,10 @@ public class QuestaoController {
                 String alternativa3 = c.getString(4);
                 String alternativa4 = c.getString(5);
                 String alternativa5 = c.getString(6);
+                String dominio = c.getString(7);
 
                 Log.i("questao", id + titulo + alternativa1 + alternativa2 + alternativa3 +
-                        alternativa4 + alternativa5);
+                        alternativa4 + alternativa5 + dominio);
             }while(c.moveToNext());
         }
         c.close();
@@ -93,10 +91,11 @@ public class QuestaoController {
                 questao.setAlternativa3(c.getString(4));
                 questao.setAlternativa4(c.getString(5));
                 questao.setAlternativa5(c.getString(6));
+                questao.setDominio(c.getString(9));
 
                 questoes.add(questao);
 
-                Log.i("questao", questao.getCodQuestao() + questao.getTitulo());
+                Log.i("questao", questao.getCodQuestao() + questao.getTitulo() + questao.getDominio());
             }while(c.moveToNext());
         }
         c.close();

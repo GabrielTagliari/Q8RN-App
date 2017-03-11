@@ -1,4 +1,4 @@
-package q8rn.com.q8rn.to;
+package q8rn.com.q8rn.entities;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -20,6 +20,7 @@ public class Questao implements Parcelable{
     private String alternativa3;
     private String alternativa4;
     private String alternativa5;
+    private String dominio;
 
     public Questao() {}
 
@@ -135,5 +136,13 @@ public class Questao implements Parcelable{
         parcel.writeString(alternativa3);
         parcel.writeString(alternativa4);
         parcel.writeString(alternativa5);
+    }
+
+    public String getDominio() {
+        return dominio;
+    }
+
+    public void setDominio(String dominio) {
+        this.dominio = dominio;
     }
 }

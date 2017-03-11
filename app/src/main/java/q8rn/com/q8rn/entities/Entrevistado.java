@@ -1,4 +1,4 @@
-package q8rn.com.q8rn.to;
+package q8rn.com.q8rn.entities;
 
 /**
  * Created by Gabriel on 04/03/2017.

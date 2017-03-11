@@ -19,6 +19,7 @@ public class Constants {
     public static final String JSON = "json";
     public static final String VAZIO = "";
     public static final String PREENCHA_CAMPOS = "Preencha todos os campos obrigatórios";
+    public static final String SELECIONE_ALTERNATIVA = "Selecione uma alternativa";
 
     /* PREFERENCES */
     public static final String PREFERENCES = "entrevistado";

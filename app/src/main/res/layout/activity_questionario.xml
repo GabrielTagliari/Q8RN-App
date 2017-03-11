@@ -16,10 +16,9 @@
         android:orientation="vertical">
 
         <TextView
-            android:text="@string/nutricao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView3"
+            android:id="@+id/dominioId"
             android:textSize="18sp"
             android:textAlignment="center"
             android:gravity="center_horizontal|center"
