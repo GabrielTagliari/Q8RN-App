@@ -44,7 +44,7 @@
         android:layout_marginTop="38dp" />
 
     <Button
-        android:text="@string/botao_simular"
+        android:text="@string/realizar_questionario"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:id="@+id/botaoOfflineId"

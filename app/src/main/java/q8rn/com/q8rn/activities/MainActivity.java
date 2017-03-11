@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         botaoOnline = (Button) findViewById(R.id.botaoOnlineId);
         botaoOffline = (Button) findViewById(R.id.botaoOfflineId);
 
+        botaoOnline.setVisibility(View.GONE);
+
         botaoOnline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
