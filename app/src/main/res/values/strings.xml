@@ -36,4 +36,6 @@
     <string name="Volar" />
     <string name="botao_voltar">Voltar</string>
     <string name="logo">Logo</string>
+    <string name="voltar_menu">Voltar ao menu</string>
+    <string name="escore_total">Escore total</string>
 </resources>

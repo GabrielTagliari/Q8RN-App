@@ -24,4 +24,8 @@ public class Constants {
     /* PREFERENCES */
     public static final String PREFERENCES = "entrevistado";
     public static final String ID_ENTREVISTADO = "idEntrevistado";
+
+    /* OUTROS */
+    public static final String ESCORE = "escore";
+    public static final String COD_QUESTAO = "codQuestao";
 }

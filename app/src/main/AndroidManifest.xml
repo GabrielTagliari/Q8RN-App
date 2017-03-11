@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.FormActivity" />
-        <activity android:name=".activities.QuestionarioActivity"></activity>
+        <activity android:name=".activities.QuestionarioActivity" />
+        <activity android:name=".activities.EscoreActivity"></activity>
     </application>
 
 </manifest>

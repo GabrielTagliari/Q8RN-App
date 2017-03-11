@@ -44,8 +44,12 @@ public class QuestionarioActivity extends AppCompatActivity {
         instanciaElementos();
 
         Intent intent = getIntent();
-        codQuestao = intent.getExtras().getInt("codQuestao");
-        pontos = new HashMap<>();
+        codQuestao = intent.getExtras().getInt(Constants.COD_QUESTAO);
+
+        if (codQuestao == 1) {
+            pontos = new HashMap<>();
+        }
+
         HashMap<Integer, Integer> pontosRecebidos = new HashMap<>();
         pontosRecebidos = (HashMap<Integer, Integer>) intent.getExtras().getSerializable("pontos");
 
@@ -57,15 +61,32 @@ public class QuestionarioActivity extends AppCompatActivity {
 
         controleRadioButtons();
 
+        radioGroupAlternativas.check(R.id.radioUmId);
+
         botaoProximo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (radioGroupAlternativas.getCheckedRadioButtonId() != -1) {
                     calculaEscoreAtual();
-                    codQuestao++;
-                    Intent intentProximo = new Intent(QuestionarioActivity.this, QuestionarioActivity.class);
-                    intentProximo.putExtra("codQuestao", codQuestao);
-                    startActivity(intentProximo);
+                    if (codQuestao == 25) {
+                        int escoreTotal = 0;
+
+                        for (int value : pontos.values()) {
+                            escoreTotal += value;
+                        }
+                        codQuestao++;
+                        Intent intentEscore;
+                        intentEscore = new Intent(QuestionarioActivity.this, EscoreActivity.class);
+                        intentEscore.putExtra("escore", escoreTotal);
+                        startActivity(intentEscore);
+                    } else {
+                        codQuestao++;
+                        Intent intentProximo = new Intent(QuestionarioActivity.this, QuestionarioActivity.class);
+                        intentProximo.putExtra("codQuestao", codQuestao);
+                        intentProximo.putExtra("pontos", pontos);
+                        startActivity(intentProximo);
+                    }
                 } else {
                     Toast.makeText(QuestionarioActivity.this, Constants.SELECIONE_ALTERNATIVA,
                             Toast.LENGTH_SHORT).show();
