@@ -1,82 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_questionario"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="q8rn.com.q8rn.activities.QuestionarioActivity"
+    android:orientation="vertical">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/activity_questionario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="q8rn.com.q8rn.activities.QuestionarioActivity"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/dominioId"
-            android:textSize="18sp"
-            android:textAlignment="center"
-            android:gravity="center_horizontal|center"
-            android:layout_gravity="center" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:id="@+id/tituloId"
-            android:textSize="18sp" />
-
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radioGroupAlternativasId"
-            android:textAlignment="viewStart"
-            android:layout_gravity="center"
-            android:layout_margin="50dp">
-
-            <RadioButton
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/footer">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/radioUmId"
-                android:layout_weight="1"
-                android:layout_marginBottom="10dp" />
+                android:id="@+id/dominioId"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:gravity="center_horizontal|center"
+                android:layout_gravity="center" />
 
-            <RadioButton
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/radioDoisId"
-                android:layout_weight="1"
-                android:layout_marginBottom="10dp" />
+                android:layout_marginTop="25dp"
+                android:id="@+id/tituloId"
+                android:textSize="18sp"
+                android:layout_gravity="center" />
 
-            <RadioButton
+            <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/radioTresId"
-                android:layout_marginBottom="10dp" />
+                android:id="@+id/radioGroupAlternativasId"
+                android:layout_gravity="center"
+                android:layout_margin="50dp">
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/radioQuatroId"
-                android:layout_weight="1"
-                android:layout_marginBottom="10dp" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioUmId"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="10dp" />
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/radioCincoId"
-                android:layout_weight="1" />
-        </RadioGroup>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioDoisId"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="10dp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioTresId"
+                    android:layout_marginBottom="10dp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioQuatroId"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="10dp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioCincoId"
+                    android:layout_weight="1" />
+            </RadioGroup>
+        </LinearLayout>
+    </ScrollView>
 
         <LinearLayout
+            android:id="@+id/footer"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
 
             <Button
                 android:text="@string/botao_voltar"
@@ -95,6 +104,6 @@
                 style="@style/Widget.AppCompat.Button.Colored" />
         </LinearLayout>
 
-    </LinearLayout>
+</RelativeLayout>
 
-</ScrollView>
+
