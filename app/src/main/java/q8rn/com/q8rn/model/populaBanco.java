@@ -8,7 +8,7 @@ import q8rn.com.q8rn.controllers.QuestaoController;
 public class PopulaBanco {
 
     public static final String SEMPRE = "Sempre";
-    public static final String COM_RELATIVA_FREQUÊNCIA = "Com relativa frequência";
+    public static final String COM_RELATIVA_FREQUENCIA = "Com relativa frequência";
     public static final String ALGUMAS_VEZES = "Algumas vezes";
     public static final String RARAMENTE = "Raramente";
     public static final String QUASE_NUNCA = "Quase nunca";
@@ -26,6 +26,7 @@ public class PopulaBanco {
     public static final String AR_PURO = "Ar puro";
     public static final String DESCANSO = "Descanso";
     public static final String CONFIANCA = "Confiança";
+
     private QuestaoController controller;
 
     public PopulaBanco(Context context) {
@@ -40,11 +41,11 @@ public class PopulaBanco {
     public void inserirAll() {
         controller.insereDados(1,"Com que frequência você inclui em suas refeições diária todos " +
                         "esses alimentos: feijões, castanhas, frutas, legumes e verduras?",
-                SEMPRE, COM_RELATIVA_FREQUÊNCIA, ALGUMAS_VEZES,
+                SEMPRE, COM_RELATIVA_FREQUENCIA, ALGUMAS_VEZES,
                 RARAMENTE, QUASE_NUNCA, NUTRIÇÃO);
 
-        controller.insereDados(2,"Quantas refeições você faz por dia? (Desjejum, almoço, jantar, lanches, ceia)",
-                "2 a 3", null, null, null, "4 ou mais", NUTRIÇÃO);
+        controller.insereDados(2,"Quantas refeições você faz por dia? (Desjejum, almoço, jantar, " +
+                "lanches, ceia)", "2 a 3", null, null, null, "4 ou mais", NUTRIÇÃO);
 
         controller.insereDados(3,"Além de consumir outros alimentos do dia a dia como: feijão, " +
                 "arroz, massa, frutas, legumes e verduras, como você classifica o seu padrão " +
@@ -64,7 +65,7 @@ public class PopulaBanco {
 
         controller.insereDados(5, "Você pratica atividades de lazer: caminhar, pedalar, " +
                 "jogar bola, esportes radicais ou outros hobbies e outras atividades do dia a dia.",
-                SEMPRE, COM_RELATIVA_FREQUÊNCIA, ALGUMAS_VEZES, QUASE_NUNCA, NUNCA,
+                SEMPRE, COM_RELATIVA_FREQUENCIA, ALGUMAS_VEZES, QUASE_NUNCA, NUNCA,
                 EXERCÍCIO);
 
         controller.insereDados(6, "Quantas vezes por semana você pratica exercício físico vigoroso " +
@@ -81,14 +82,14 @@ public class PopulaBanco {
 
         controller.insereDados(9, "Você utiliza a água para tratamentos? (Exemplo: " +
                 "compressas quentes e frias, aplicação de gelo, inalação, banhos em geral). ",
-                SEMPRE, COM_RELATIVA_FREQUÊNCIA, ALGUMAS_VEZES, QUASE_NUNCA, NUNCA, AGUA);
+                SEMPRE, COM_RELATIVA_FREQUENCIA, ALGUMAS_VEZES, QUASE_NUNCA, NUNCA, AGUA);
 
         controller.insereDados(10, "Com que frequência você se expõe ao sol durante 15 a 20 " +
-                "minutos/dia?",SEMPRE, COM_RELATIVA_FREQUÊNCIA, ALGUMAS_VEZES, QUASE_NUNCA, NUNCA,
+                "minutos/dia?",SEMPRE, COM_RELATIVA_FREQUENCIA, ALGUMAS_VEZES, QUASE_NUNCA, NUNCA,
                 SOL);
 
         controller.insereDados(11, "Você mantém diariamente as janelas abertas da casa para " +
-                "entrada de luz natural? ",SEMPRE, COM_RELATIVA_FREQUÊNCIA, ALGUMAS_VEZES,
+                "entrada de luz natural? ",SEMPRE, COM_RELATIVA_FREQUENCIA, ALGUMAS_VEZES,
                 QUASE_NUNCA, NUNCA, SOL);
 
         controller.insereDados(12, "Você se considera equilibrado ao tempo dedicado para estudos, " +
@@ -114,22 +115,22 @@ public class PopulaBanco {
                 "Ruim", "Muito ruim", AR_PURO);
 
         controller.insereDados(18, "Você pratica a respiração profunda em ambientes arejados?",
-                SEMPRE, COM_RELATIVA_FREQUÊNCIA, ALGUMAS_VEZES, RARAMENTE, NUNCA, AR_PURO);
+                SEMPRE, COM_RELATIVA_FREQUENCIA, ALGUMAS_VEZES, RARAMENTE, NUNCA, AR_PURO);
 
         controller.insereDados(19, "Você dorme entre 7 a 8h por noite (em média)?",
-                SEMPRE, COM_RELATIVA_FREQUÊNCIA, ALGUMAS_VEZES, RARAMENTE, NUNCA, DESCANSO);
+                SEMPRE, COM_RELATIVA_FREQUENCIA, ALGUMAS_VEZES, RARAMENTE, NUNCA, DESCANSO);
 
         controller.insereDados(20, "Você costuma dormir cedo? (por volta das 22h).",
-                SEMPRE, COM_RELATIVA_FREQUÊNCIA, ALGUMAS_VEZES, RARAMENTE, NUNCA, DESCANSO);
+                SEMPRE, COM_RELATIVA_FREQUENCIA, ALGUMAS_VEZES, RARAMENTE, NUNCA, DESCANSO);
 
         controller.insereDados(21, "Você separa um dia na semana para descansar?",
-                SEMPRE, COM_RELATIVA_FREQUÊNCIA, ALGUMAS_VEZES, RARAMENTE, NUNCA, DESCANSO);
+                SEMPRE, COM_RELATIVA_FREQUENCIA, ALGUMAS_VEZES, RARAMENTE, NUNCA, DESCANSO);
 
         controller.insereDados(22, "Você confia em Deus? (ou Ser Superior ou algo sagrado)",
-                SEMPRE, COM_RELATIVA_FREQUÊNCIA, ALGUMAS_VEZES, RARAMENTE, NUNCA, CONFIANCA);
+                SEMPRE, COM_RELATIVA_FREQUENCIA, ALGUMAS_VEZES, RARAMENTE, NUNCA, CONFIANCA);
 
         controller.insereDados(23, "Sua confiança em Deus (Ser Superior ou algo sagrado) " +
-                "influencia positivamente na sua maneira de viver?", SEMPRE, COM_RELATIVA_FREQUÊNCIA,
+                "influencia positivamente na sua maneira de viver?", SEMPRE, COM_RELATIVA_FREQUENCIA,
                 ALGUMAS_VEZES, RARAMENTE, NUNCA, CONFIANCA);
 
         controller.insereDados(24, "Com que frequência você participa de reuniões religiosas ou " +
