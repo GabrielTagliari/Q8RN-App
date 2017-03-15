@@ -27,6 +27,8 @@ public class Entrevistado {
     private String doencas;
     private transient Boolean flgAtivo = true;
 
+    public Entrevistado() {}
+
     public Entrevistado(String codIdentificacao, int idade, String sexo, String corPele,
                         String religiao, String tempoReligiao, String profissao,
                         String escolaridade, double peso, double altura, double imc,

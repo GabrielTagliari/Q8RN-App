@@ -7,6 +7,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import q8rn.com.q8rn.constants.Constants;
 import q8rn.com.q8rn.entities.Entrevistado;
 import q8rn.com.q8rn.model.CriaBanco;
 
@@ -56,35 +62,65 @@ public class EntrevistadoController {
             return ENTREVISTADO_INSERIDO_SUCESSO;
     }
 
-    public void findAllEntrevistados() {
+    public List<Entrevistado> findAllEntrevistados() {
+        List<Entrevistado> entrevistados = new ArrayList<>();
+
         SQLiteDatabase db = banco.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM " + CriaBanco.TABELA_ENTREVISTADO, null);
         if(c.moveToFirst()){
             do{
-                String id = c.getString(0);
-                String altura = c.getString(1);
-                String cintura = c.getString(2);
-                String codIdentificacao = c.getString(3);
-                String cor_pele = c.getString(4);
-                String doencas = c.getString(5);
-                String escolaridade = c.getString(6);
-                String espirometria = c.getString(7);
-                String glicemia_capilar = c.getString(8);
-                String idade = c.getString(9);
-                String imc = c.getString(10);
-                String pa = c.getString(11);
-                String peso = c.getString(12);
-                String profissao = c.getString(13);
-                String religiao = c.getString(14);
-                String saude_fisica = c.getString(15);
-                String saude_mental = c.getString(16);
-                String sexo = c.getString(17);
-                String tempo_religiao = c.getString(18);
+                Entrevistado entrevistado = new Entrevistado();
 
-                Log.i("entrevistado", id + ", " + altura + ", " + cintura + ", " + codIdentificacao);
+                entrevistado.setId(c.getLong(0));
+                entrevistado.setAltura(c.getDouble(1));
+                entrevistado.setCinturaQuadril(c.getDouble(2));
+                entrevistado.setCodIdentificacao(c.getString(3));
+                entrevistado.setCorPele(c.getString(4));
+                entrevistado.setDoencas(c.getString(5));
+                entrevistado.setEscolaridade(c.getString(6));
+                entrevistado.setEspirometria(c.getInt(7));
+                entrevistado.setGlicemiaCapilar(c.getDouble(8));
+                entrevistado.setIdade(c.getInt(9));
+                entrevistado.setImc(c.getDouble(10));
+                entrevistado.setPa(c.getDouble(11));
+                entrevistado.setPeso(c.getDouble(12));
+                entrevistado.setProfissao(c.getString(13));
+                entrevistado.setReligiao(c.getString(14));
+                entrevistado.setSaudeFisica(c.getString(15));
+                entrevistado.setSaudeMental(c.getString(16));
+                entrevistado.setSexo(c.getString(17));
+                entrevistado.setTempoReligiao(c.getString(18));
+
+                entrevistados.add(entrevistado);
+
+                Gson gson = new Gson();
+                String textEntrevistado = gson.toJson(entrevistado);
+                Log.i("entrevistado", textEntrevistado);
             }while(c.moveToNext());
         }
         c.close();
         db.close();
+
+        if (!entrevistados.isEmpty()) {
+            return entrevistados;
+        }
+        return null;
+    }
+
+    public int recuperaLastId() {
+        int lastId = 0;
+
+        SQLiteDatabase db = banco.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM " + CriaBanco.TABELA_ENTREVISTADO +
+                " ORDER BY " + CriaBanco.ID_ENTREVISTADO + " DESC LIMIT 1" , null);
+        if(c.moveToFirst()){
+            do{
+                lastId = c.getInt(0);
+            }while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+        
+        return lastId;
     }
 }

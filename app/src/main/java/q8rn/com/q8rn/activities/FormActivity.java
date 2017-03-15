@@ -87,17 +87,19 @@ public class FormActivity extends AppCompatActivity {
 
                 if (permiteSalvar) {
                     Entrevistado entrevistado = instanciaEntrevistado();
-                    //salvarOnlineEntrevistadoEProximaActivity(entrevistado);
                     salvarOfflineEntrevistado(entrevistado);
                     entrevistadoController.findAllEntrevistados();
+                    int id = entrevistadoController.recuperaLastId();
+                    salvarIdSharedPreferences(id);
+                    Log.i("entrevistado", String.valueOf(id));
+                    Intent intent = new Intent(FormActivity.this, QuestionarioActivity.class);
+                    intent.putExtra("codQuestao", 1);
+                    startActivity(intent);
+
                 } else {
                     Toast.makeText(FormActivity.this,
                             Constants.PREENCHA_CAMPOS, Toast.LENGTH_SHORT).show();
                 }
-
-                /*progressDialog.show(FormActivity.this, "", "Carregando", false);
-                Intent intent = new Intent(FormActivity.this, QuestionarioActivity.class);
-                startActivity(intent);*/
             }
         });
     }
