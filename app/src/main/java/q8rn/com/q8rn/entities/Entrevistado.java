@@ -1,4 +1,4 @@
-package q8rn.com.q8rn.to;
+package q8rn.com.q8rn.entities;
 
 /**
  * Created by Gabriel on 04/03/2017.
@@ -26,6 +26,8 @@ public class Entrevistado {
     private String saudeMental;
     private String doencas;
     private transient Boolean flgAtivo = true;
+
+    public Entrevistado() {}
 
     public Entrevistado(String codIdentificacao, int idade, String sexo, String corPele,
                         String religiao, String tempoReligiao, String profissao,

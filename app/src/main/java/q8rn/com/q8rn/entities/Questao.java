@@ -1,4 +1,4 @@
-package q8rn.com.q8rn.to;
+package q8rn.com.q8rn.entities;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -7,25 +7,26 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-/**
- * Created by Gabriel on 05/03/2017.
- */
+/* Created by Gabriel on 05/03/2017. */
 
 public class Questao implements Parcelable{
 
     private long id;
+    private long codQuestao;
     private String titulo;
     private String alternativa1;
     private String alternativa2;
     private String alternativa3;
     private String alternativa4;
     private String alternativa5;
+    private String dominio;
+
+    public Questao() {}
 
     public Questao(JSONObject jsonObject) throws JSONException, ParseException {
         this.id = jsonObject.getLong("id");
+        this.codQuestao = jsonObject.getLong("codQuestao");
         this.titulo = jsonObject.getString("titulo");
         this.alternativa1 = jsonObject.getString("alternativa1");
         this.alternativa2 = jsonObject.getString("alternativa2");
@@ -36,6 +37,7 @@ public class Questao implements Parcelable{
 
     protected Questao(Parcel in) {
         id = in.readLong();
+        codQuestao = in.readLong();
         titulo = in.readString();
         alternativa1 = in.readString();
         alternativa2 = in.readString();
@@ -112,6 +114,14 @@ public class Questao implements Parcelable{
         this.alternativa5 = alternativa5;
     }
 
+    public long getCodQuestao() {
+        return codQuestao;
+    }
+
+    public void setCodQuestao(long codQuestao) {
+        this.codQuestao = codQuestao;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -126,5 +136,13 @@ public class Questao implements Parcelable{
         parcel.writeString(alternativa3);
         parcel.writeString(alternativa4);
         parcel.writeString(alternativa5);
+    }
+
+    public String getDominio() {
+        return dominio;
+    }
+
+    public void setDominio(String dominio) {
+        this.dominio = dominio;
     }
 }

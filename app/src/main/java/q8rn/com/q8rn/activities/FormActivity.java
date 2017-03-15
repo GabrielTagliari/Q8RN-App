@@ -32,7 +32,8 @@ import java.util.Map;
 
 import q8rn.com.q8rn.R;
 import q8rn.com.q8rn.constants.Constants;
-import q8rn.com.q8rn.to.Entrevistado;
+import q8rn.com.q8rn.controllers.EntrevistadoController;
+import q8rn.com.q8rn.entities.Entrevistado;
 import q8rn.com.q8rn.validators.EntrevistadoValidator;
 
 public class FormActivity extends AppCompatActivity {
@@ -61,6 +62,8 @@ public class FormActivity extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
 
+    private EntrevistadoController entrevistadoController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,17 +87,26 @@ public class FormActivity extends AppCompatActivity {
 
                 if (permiteSalvar) {
                     Entrevistado entrevistado = instanciaEntrevistado();
-                    salvarEntrevistadoEProximaActivity(entrevistado);
+                    salvarOfflineEntrevistado(entrevistado);
+                    entrevistadoController.findAllEntrevistados();
+                    int id = entrevistadoController.recuperaLastId();
+                    salvarIdSharedPreferences(id);
+                    Log.i("entrevistado", String.valueOf(id));
+                    Intent intent = new Intent(FormActivity.this, QuestionarioActivity.class);
+                    intent.putExtra("codQuestao", 1);
+                    startActivity(intent);
+
                 } else {
                     Toast.makeText(FormActivity.this,
                             Constants.PREENCHA_CAMPOS, Toast.LENGTH_SHORT).show();
                 }
-
-                /*progressDialog.show(FormActivity.this, "", "Carregando", false);
-                Intent intent = new Intent(FormActivity.this, QuestionarioActivity.class);
-                startActivity(intent);*/
             }
         });
+    }
+
+    private void salvarOfflineEntrevistado(Entrevistado entrevistado) {
+        entrevistadoController = new EntrevistadoController(getBaseContext());
+        entrevistadoController.insereEntrevistado(entrevistado);
     }
 
     private void clearRadioErrorOnChange() {
@@ -133,7 +145,7 @@ public class FormActivity extends AppCompatActivity {
         return lista;
     }
 
-    private void salvarEntrevistadoEProximaActivity(final Entrevistado entrevistado) {
+    private void salvarOnlineEntrevistadoEProximaActivity(final Entrevistado entrevistado) {
 
         RequestQueue queue = Volley.newRequestQueue(FormActivity.this);
         String url = Constants.URL_ENTREVISTADO;
