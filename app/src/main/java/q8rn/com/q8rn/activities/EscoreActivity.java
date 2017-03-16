@@ -3,15 +3,22 @@ package q8rn.com.q8rn.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 import q8rn.com.q8rn.R;
 import q8rn.com.q8rn.constants.Constants;
+import q8rn.com.q8rn.controllers.QuestaoEntrevistadoController;
 
 public class EscoreActivity extends AppCompatActivity {
 
@@ -29,7 +36,23 @@ public class EscoreActivity extends AppCompatActivity {
         resultado = (TextView) findViewById(R.id.textResultadoId);
 
         Intent intent = getIntent();
-        int escoreTotal = intent.getExtras().getInt(Constants.ESCORE);
+        HashMap<Integer, Integer> pontos;
+        pontos = (HashMap<Integer, Integer>) intent.getExtras().getSerializable("pontos");
+
+        long idEntrevistado = recuperaIdEntrevistadoShared();
+
+        QuestaoEntrevistadoController qeController =
+                new QuestaoEntrevistadoController(getBaseContext());
+
+        Iterator it = pontos.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry item = (Map.Entry)it.next();
+            qeController.insereQuestaoEntrevistado((int) idEntrevistado, (int) item.getKey(),
+                    (int) item.getValue());
+            it.remove();
+        }
+
+        int escoreTotal = calculaEscoreTotal(pontos);
 
         escore.setText(String.valueOf(escoreTotal));
 
@@ -41,6 +64,22 @@ public class EscoreActivity extends AppCompatActivity {
                 mostrarConfirmacao();
             }
         });
+    }
+
+    private long recuperaIdEntrevistadoShared() {
+        SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCES, MODE_PRIVATE);
+        long idEntrevistado = preferences.getLong("idEntrevistado", 0);
+        Log.i("questaoentrevistado", "valor do id:" + idEntrevistado);
+        return idEntrevistado;
+    }
+
+    private int calculaEscoreTotal(HashMap<Integer, Integer> pontos) {
+        int escoreTotal = 0;
+
+        for (int value : pontos.values()) {
+            escoreTotal += value;
+        }
+        return escoreTotal;
     }
 
     private String calculaResultado(int escoreTotal) {

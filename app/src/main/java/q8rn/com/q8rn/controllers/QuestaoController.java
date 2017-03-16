@@ -9,30 +9,29 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import q8rn.com.q8rn.model.CriaBanco;
 import q8rn.com.q8rn.entities.Questao;
+import q8rn.com.q8rn.model.CriaBanco;
 
 /* Created by Gabriel on 08/03/2017. */
 
 public class QuestaoController {
 
-    public static final String ERRO_AO_INSERIR_QUESTÃO = "Erro ao inserir questão";
-    public static final String QUESTÃO_INSERIDA_COM_SUCESSO = "Questão inserida com sucesso";
+    private static final String ERRO_AO_INSERIR_QUESTÃO = "Erro ao inserir questão";
+    private static final String QUESTÃO_INSERIDA_COM_SUCESSO = "Questão inserida com sucesso";
 
-    private SQLiteDatabase db;
     private CriaBanco banco;
 
     public QuestaoController(Context context) {
         this.banco = new CriaBanco(context);
     }
 
-    public String insereDados(long codQuestao, String titulo, String alternativa1,
-                              String alternativa2, String alternativa3, String alternativa4,
-                              String alternativa5, String dominio) {
+    public String insereQuestao(long codQuestao, String titulo, String alternativa1,
+                                String alternativa2, String alternativa3, String alternativa4,
+                                String alternativa5, String dominio) {
         ContentValues valores;
         long resultado;
 
-        db = banco.getWritableDatabase();
+        SQLiteDatabase db = banco.getWritableDatabase();
         valores = new ContentValues();
         valores.put(CriaBanco.COD_QUESTAO, codQuestao);
         valores.put(CriaBanco.TITULO_QUESTAO, titulo);
@@ -50,28 +49,6 @@ public class QuestaoController {
             return ERRO_AO_INSERIR_QUESTÃO;
         else
             return QUESTÃO_INSERIDA_COM_SUCESSO;
-    }
-    
-    public void findAllQuestao() {
-        SQLiteDatabase db = banco.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM " + CriaBanco.TABELA_QUESTAO, null);
-        if(c.moveToFirst()){
-            do{
-                String id = c.getString(0);
-                String titulo = c.getString(1);
-                String alternativa1 = c.getString(2);
-                String alternativa2 = c.getString(3);
-                String alternativa3 = c.getString(4);
-                String alternativa4 = c.getString(5);
-                String alternativa5 = c.getString(6);
-                String dominio = c.getString(7);
-
-                Log.i("questao", id + titulo + alternativa1 + alternativa2 + alternativa3 +
-                        alternativa4 + alternativa5 + dominio);
-            }while(c.moveToNext());
-        }
-        c.close();
-        db.close();
     }
 
     public Questao findQuestaoByCod(long codQuestao) {
