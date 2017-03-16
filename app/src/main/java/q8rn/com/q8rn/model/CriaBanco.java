@@ -17,9 +17,10 @@ public class CriaBanco extends SQLiteOpenHelper{
     /* NOMES TABELAS */
     public static final String TABELA_QUESTAO = "questao";
     public static final String TABELA_ENTREVISTADO = "entrevistado";
+    public static final String TABELA_QUESTAO_ENTREVISTADO = "questaoentrevistado";
 
     /* IDS */
-    public static final String ID_QUESTAO = "_id";
+    public static final String ID_QUESTAO = "id_questao";
     public static final String ID_ENTREVISTADO = "id_entrevistado";
 
     /* CAMPOS TABELA QUESTAO */
@@ -38,10 +39,9 @@ public class CriaBanco extends SQLiteOpenHelper{
     public static final String IDADE = "idade";
     public static final String ESCOLARIDADE = "escolar" + IDADE;
     public static final String ESPIROMETRIA = "espirometria";
-    public static final String FLG_ATIVO = "flg_ativo";
+    private static final String FLG_ATIVO = "flg_ativo";
     public static final String GLICEMIA_CAPILAR = "glicemia_capilar";
     public static final String IMC = "imc";
-    public static final String NOME = "nome";
     public static final String PA = "pa";
     public static final String PESO = "peso";
     public static final String PROFISSAO = "profissao";
@@ -51,6 +51,11 @@ public class CriaBanco extends SQLiteOpenHelper{
     public static final String SEXO = "sexo";
     public static final String TEMPO_RELIGIAO = "tempo_";
 
+    /* TABELA RELACIONAMENTO QUESTAO USUARIO */
+    public static final String ENTREVISTADO_ID = "entrevistado_id";
+    public static final String QUESTAO_ID = "questao_id";
+    public static final String ESCORE = "escore";
+
     public CriaBanco(Context context) {
         super(context, NOME_BANCO, null, VERSAO);
     }
@@ -59,12 +64,14 @@ public class CriaBanco extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(criaTabelaQuestao());
         sqLiteDatabase.execSQL(criaTabelaEntrevistado());
+        sqLiteDatabase.execSQL(criaTabelaQuestaoEntrevistado());
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS" + TABELA_QUESTAO);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS" + TABELA_ENTREVISTADO);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS" + TABELA_QUESTAO_ENTREVISTADO);
         onCreate(sqLiteDatabase);
     }
 
@@ -107,6 +114,18 @@ public class CriaBanco extends SQLiteOpenHelper{
         sql.append("   " + SAUDE_MENTAL + " varchar(255), ");
         sql.append("   " + SEXO + " varchar(255), ");
         sql.append("   " + TEMPO_RELIGIAO + " varchar(255) ");
+        sql.append(")");
+        return String.valueOf(sql);
+    }
+
+    private String criaTabelaQuestaoEntrevistado() {
+        StringBuffer sql = new StringBuffer();
+        sql.append("CREATE TABLE " + TABELA_QUESTAO_ENTREVISTADO);
+        sql.append("( ");
+        sql.append(" " + ENTREVISTADO_ID + " integer, ");
+        sql.append(" " + QUESTAO_ID + " integer, ");
+        sql.append(" " + ESCORE + " integer, ");
+        sql.append(" PRIMARY KEY(" + ENTREVISTADO_ID + ", " + QUESTAO_ID + ") ");
         sql.append(")");
         return String.valueOf(sql);
     }

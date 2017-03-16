@@ -50,7 +50,7 @@ public class QuestionarioActivity extends AppCompatActivity {
             pontos = new HashMap<>();
         }
 
-        HashMap<Integer, Integer> pontosRecebidos = new HashMap<>();
+        HashMap<Integer, Integer> pontosRecebidos;
         pontosRecebidos = (HashMap<Integer, Integer>) intent.getExtras().getSerializable("pontos");
 
         if (pontosRecebidos != null) {
@@ -78,7 +78,7 @@ public class QuestionarioActivity extends AppCompatActivity {
                         codQuestao++;
                         Intent intentEscore;
                         intentEscore = new Intent(QuestionarioActivity.this, EscoreActivity.class);
-                        intentEscore.putExtra("escore", escoreTotal);
+                        intentEscore.putExtra("pontos", pontos);
                         startActivity(intentEscore);
                     } else {
                         codQuestao++;

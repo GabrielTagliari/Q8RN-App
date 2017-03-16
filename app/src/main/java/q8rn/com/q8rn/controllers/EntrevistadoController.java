@@ -12,7 +12,6 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-import q8rn.com.q8rn.constants.Constants;
 import q8rn.com.q8rn.entities.Entrevistado;
 import q8rn.com.q8rn.model.CriaBanco;
 
@@ -20,18 +19,17 @@ public class EntrevistadoController {
 
     private static final String ERRO_AO_INSERIR_ENTREVISTADO = "Erro ao inserir entrevistado";
     private static final String ENTREVISTADO_INSERIDO_SUCESSO = "Entrevistado inserido com sucesso";
-    private SQLiteDatabase db;
     private CriaBanco banco;
 
     public EntrevistadoController(Context context) {
-        this.banco = new CriaBanco(context);;
+        this.banco = new CriaBanco(context);
     }
 
     public String insereEntrevistado(Entrevistado entrevistado) {
         ContentValues valores;
         long resultado;
 
-        db = banco.getWritableDatabase();
+        SQLiteDatabase db = banco.getWritableDatabase();
         valores = new ContentValues();
         valores.put(CriaBanco.ALTURA, entrevistado.getAltura());
         valores.put(CriaBanco.CINTURA_QUADRIL, entrevistado.getCinturaQuadril());

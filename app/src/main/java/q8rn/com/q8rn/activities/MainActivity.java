@@ -26,6 +26,7 @@ import java.text.ParseException;
 
 import q8rn.com.q8rn.R;
 import q8rn.com.q8rn.constants.Constants;
+import q8rn.com.q8rn.controllers.QuestaoEntrevistadoController;
 import q8rn.com.q8rn.model.PopulaBanco;
 import q8rn.com.q8rn.entities.Questao;
 
@@ -62,9 +63,13 @@ public class MainActivity extends AppCompatActivity {
         botaoOffline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, QuestionarioActivity.class);
+                /*Intent intent = new Intent(MainActivity.this, QuestionarioActivity.class);
                 intent.putExtra("codQuestao", 1);
-                startActivity(intent);
+                startActivity(intent);*/
+                QuestaoEntrevistadoController qeController =
+                        new QuestaoEntrevistadoController(getBaseContext());
+
+                qeController.findAllQuestaoEntrevistadoByIdEntrevistado(1);
             }
         });
     }
