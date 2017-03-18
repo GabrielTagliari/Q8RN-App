@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import q8rn.com.q8rn.R;
@@ -81,13 +82,15 @@ public class MainActivity extends AppCompatActivity {
                 Uri u1  =   null;
                 u1  =   Uri.fromFile(file);
 
-                SimpleDateFormat spf = new SimpleDateFormat("dd/mm/yyyy");
-                String dataAtual = spf.format(new Date());
+                Date dataSemformato = Calendar.getInstance().getTime();
+
+                SimpleDateFormat spf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+                String dataFormatada = spf.format(dataSemformato);
 
                 Intent sendIntent = new Intent(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Q8RN - " + dataAtual);
+                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Q8RN - " + dataFormatada);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, "Banco de dados do questionário dos " +
-                        "oito reméridos naturais gerado em: " + dataAtual);
+                        "oito reméridos naturais gerado em: " + dataFormatada);
                 sendIntent.putExtra(Intent.EXTRA_STREAM, u1);
                 sendIntent.setType("text/html");
                 startActivity(sendIntent);

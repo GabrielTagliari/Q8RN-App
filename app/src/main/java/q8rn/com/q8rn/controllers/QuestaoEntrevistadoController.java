@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -13,9 +14,11 @@ import android.widget.Toast;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import au.com.bytecode.opencsv.CSVWriter;
 import q8rn.com.q8rn.activities.MainActivity;
 import q8rn.com.q8rn.entities.QuestaoEntrevistado;
 import q8rn.com.q8rn.model.CriaBanco;
@@ -83,64 +86,68 @@ public class QuestaoEntrevistadoController {
 
     public File gerarExcel() {
         SQLiteDatabase db = banco.getReadableDatabase();
-        Cursor c = null;
 
-            try {
-                c = db.rawQuery("SELECT * FROM " + CriaBanco.TABELA_QUESTAO_ENTREVISTADO
-                        +" WHERE "+ CriaBanco.ENTREVISTADO_ID + " = " + 1
-                        + " ORDER BY " + CriaBanco.QUESTAO_ID + " ASC", null);
-                int rowcount = 0;
-                int colcount = 0;
-                File sdCardDir = Environment.getExternalStorageDirectory();
-                String filename = "MyBackUp.csv";
-                // the name of the file to export with
-                File saveFile = new File(sdCardDir, filename);
-                FileWriter fw = new FileWriter(saveFile);
+        File exportDir = new File(Environment.getExternalStorageDirectory(), "");
+        if (!exportDir.exists()) {
+            exportDir.mkdirs();
+        }
 
-                BufferedWriter bw = new BufferedWriter(fw);
-                rowcount = c.getCount();
-                colcount = c.getColumnCount();
-                if (rowcount > 0) {
-                    c.moveToFirst();
+        File file = new File(exportDir, "q8rn.csv");
+        try {
 
-                    for (int i = 0; i < colcount; i++) {
-                        if (i != colcount - 1) {
+            file.createNewFile();
+            CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
 
-                            bw.write(c.getColumnName(i) + ",");
+            //Headers
+            String arrStr1[] = {"nutricao1", "nutricao2", "nutricao3", "nutricao4", "exercicio5",
+                    "exercicio6", "exercicio7", "agua8", "agua9", "sol10", "sol11", "temp12",
+                    "temp13", "temp14", "temp15", "temp16", "ar17", "ar18","descanso19",
+                    "descanso20", "descanso21", "conf22", "conf23", "conf24", "conf25",
+                    "Q8RNtotal"};
 
-                        } else {
+            csvWrite.writeNext(arrStr1);
 
-                            bw.write(c.getColumnName(i));
+            //TODO adicionar a parte do entrevistado
 
-                        }
-                    }
-                    bw.newLine();
+            ArrayList<Integer> pontos = recuperaDadosPontosRelatorio(db);
 
-                    for (int i = 0; i < rowcount; i++) {
-                        c.moveToPosition(i);
+            String arrStr[] = new String[pontos.size() + 1];
+            int total = 0;
 
-                        for (int j = 0; j < colcount; j++) {
-                            if (j != colcount - 1)
-                                bw.write(c.getString(j) + ",");
-                            else
-                                bw.write(c.getString(j));
-                        }
-                        bw.newLine();
-                    }
-                    bw.flush();
-                    Log.i("excel","Exportado com sucesso");
-                    return saveFile;
-                }
-            } catch (Exception ex) {
-                if (db.isOpen()) {
-                    db.close();
-                    Log.i("excel",ex.getMessage().toString());
-                }
-
-            } finally {
-
+            for (int i = 0;i < pontos.size();i++){
+                arrStr[i] = String.valueOf(pontos.get(i));
+                total += pontos.get(i);
             }
-        return null;
+
+            arrStr[pontos.size()] = String.valueOf(total);
+
+            csvWrite.writeNext(arrStr);
+
+            csvWrite.close();
+            return file;
+        } catch (IOException e) {
+            Log.e("MainActivity", e.getMessage(), e);
+            return file;
+        }
+    }
+
+    @NonNull
+    private ArrayList<Integer> recuperaDadosPontosRelatorio(SQLiteDatabase db) {
+        Cursor cq = null;
+
+        cq = db.rawQuery("SELECT * FROM " + CriaBanco.TABELA_QUESTAO_ENTREVISTADO
+                + " WHERE " + CriaBanco.ENTREVISTADO_ID + " = " + 1
+                + " ORDER BY " + CriaBanco.QUESTAO_ID + " ASC", null);
+
+        ArrayList<Integer> resultado = new ArrayList<>();
+
+        if(cq.moveToFirst()){
+            do{
+                resultado.add(cq.getInt(2));
+            }while(cq.moveToNext());
+        }
+        cq.close();
+        db.close();
+        return resultado;
     }
 }
-
