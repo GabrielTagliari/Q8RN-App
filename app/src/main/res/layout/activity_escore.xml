@@ -36,8 +36,7 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/textResultadoId"
         android:textSize="30sp"
-        android:layout_below="@+id/totalEscoreId"
-        android:layout_marginTop="20dp" />
+        android:layout_below="@+id/totalEscoreId" />
 
     <TextView
         android:text="Pontos a melhorar"
