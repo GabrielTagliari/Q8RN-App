@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -24,6 +25,7 @@ public class QuestaoEntrevistadoController {
 
     private static final String ERRO_AO_INSERIR_QE = "Erro ao inserir resultado";
     private static final String QE_INSERIDA_COM_SUCESSO = "Resultado inserido com sucesso";
+    public static final String OCORREU_UM_ERRO = "Ocorreu um erro";
 
     private CriaBanco banco;
 
@@ -81,7 +83,7 @@ public class QuestaoEntrevistadoController {
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    public File gerarExcel(Context context) {
+    public File gerarExcel(Context context) throws IOException {
         File exportDir = new File(Environment.getExternalStorageDirectory(), "");
         if (!exportDir.exists()) {
             exportDir.mkdirs();
@@ -94,19 +96,23 @@ public class QuestaoEntrevistadoController {
             CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
 
             //Headers
-            String header[] = {"numeração","IDADE", "sexo", "CORDAPELE", "religiao", "haqtotempo", "profissao",
-                    "anosdeestudo", "peso", "altura", "IMC", "cintura", "PAS", "PAD", "glicemiacap",
-                    "espirometria", "saudefisica", "saudemental", "doençarefer", "nutricao1",
-                    "nutricao2", "nutricao3", "nutricao4", "exercicio5", "exercicio6", "exercicio7",
-                    "agua8", "agua9", "sol10", "sol11", "temp12", "temp13", "temp14", "temp15",
-                    "temp16", "ar17", "ar18","descanso19", "descanso20", "descanso21", "conf22",
-                    "conf23", "conf24", "conf25", "Q8RNtotal"};
+            String header[] = {"numeração","IDADE", "sexo", "CORDAPELE", "religiao", "haqtotempo",
+                    "profissao", "anosdeestudo", "peso", "altura", "IMC", "cintura", "PAS", "PAD",
+                    "glicemiacap", "espirometria", "saudefisica", "saudemental", "doençarefer",
+                    "nutricao1", "nutricao2", "nutricao3", "nutricao4", "exercicio5", "exercicio6",
+                    "exercicio7", "agua8", "agua9", "sol10", "sol11", "temp12", "temp13", "temp14",
+                    "temp15", "temp16", "ar17", "ar18","descanso19", "descanso20", "descanso21",
+                    "conf22", "conf23", "conf24", "conf25", "Q8RNtotal"};
 
             csvWrite.writeNext(header);
 
             EntrevistadoController entrevistadoController = new EntrevistadoController(context);
             ArrayList<Entrevistado> allEntrevistados =
                     (ArrayList<Entrevistado>) entrevistadoController.findAllEntrevistados();
+
+            if (allEntrevistados.isEmpty()) {
+                throw new RuntimeException();
+            }
 
             for (Entrevistado entrevistado : allEntrevistados) {
                 String[] eachRow = new String[45];
@@ -149,8 +155,7 @@ public class QuestaoEntrevistadoController {
             csvWrite.close();
             return file;
         } catch (IOException e) {
-            Log.e("MainActivity", e.getMessage(), e);
-            return file;
+            throw new IOException(OCORREU_UM_ERRO);
         }
     }
 

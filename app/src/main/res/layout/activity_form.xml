@@ -31,7 +31,8 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/iniciaisNomeId"
-        android:hint="@string/iniciais_do_nome" />
+        android:hint="@string/iniciais_do_nome"
+        android:maxLength="7" />
 
     <EditText
         android:layout_height="wrap_content"
@@ -39,7 +40,8 @@
         android:ems="10"
         android:id="@+id/idadeId"
         android:hint="@string/idade"
-        android:layout_width="match_parent" />
+        android:layout_width="match_parent"
+        android:maxLength="3" />
 
     <RadioGroup
         android:layout_width="match_parent"
@@ -51,7 +53,7 @@
             android:text="@string/sexo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView4"
+            android:id="@+id/sexoTextId"
             android:textSize="18sp" />
 
         <RadioButton
@@ -79,7 +81,7 @@
             android:text="@string/cor_da_pele"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView8"
+            android:id="@+id/corPeleTextId"
             android:layout_weight="10.83"
             android:textSize="18sp" />
 
@@ -96,7 +98,8 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/religiaoId"
-        android:hint="@string/religi_o_referida" />
+        android:hint="@string/religi_o_referida"
+        android:maxLength="30" />
 
     <EditText
         android:layout_width="match_parent"
@@ -104,7 +107,8 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/tempoReligiaoId"
-        android:hint="@string/h_quanto_tempo" />
+        android:hint="@string/h_quanto_tempo"
+        android:maxLength="30" />
 
     <EditText
         android:layout_width="match_parent"
@@ -112,7 +116,8 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/profissaoId"
-        android:hint="@string/profiss_o" />
+        android:hint="@string/profiss_o"
+        android:maxLength="30" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -122,7 +127,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView8"
+            android:id="@+id/escolaridadeTextId"
             android:layout_weight="10.83"
             android:textSize="18sp"
             android:text="@string/escolaridade" />
@@ -140,7 +145,8 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/pesoId"
-        android:hint="@string/peso" />
+        android:hint="@string/peso"
+        android:maxLength="4" />
 
     <EditText
         android:layout_width="match_parent"
@@ -148,7 +154,8 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/alturaId"
-        android:hint="@string/altura" />
+        android:hint="@string/altura"
+        android:maxLength="4" />
 
     <EditText
         android:layout_width="match_parent"
@@ -156,7 +163,8 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/imcId"
-        android:hint="@string/imc" />
+        android:hint="@string/imc"
+        android:maxLength="4" />
 
     <EditText
         android:layout_width="match_parent"
@@ -164,7 +172,8 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/cinturaQuadrilId"
-        android:hint="@string/cintura_quadril" />
+        android:hint="@string/cintura_quadril"
+        android:maxLength="4" />
 
     <EditText
         android:layout_width="match_parent"
@@ -172,7 +181,8 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/pressaoId"
-        android:hint="@string/press_o_arterial" />
+        android:hint="@string/press_o_arterial"
+        android:maxLength="4" />
 
     <EditText
         android:layout_width="match_parent"
@@ -180,7 +190,8 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/glicemiaId"
-        android:hint="@string/glicemia_capilar" />
+        android:hint="@string/glicemia_capilar"
+        android:maxLength="4" />
 
     <EditText
         android:layout_width="match_parent"
@@ -188,7 +199,8 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/espirometriaId"
-        android:hint="@string/espirometria" />
+        android:hint="@string/espirometria"
+        android:maxLength="4" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -199,7 +211,7 @@
             android:text="@string/sa_de_f_sica"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView8"
+            android:id="@+id/saudeFisicaTextId"
             android:layout_weight="10.83"
             android:textSize="18sp" />
 
@@ -219,7 +231,7 @@
             android:text="@string/sa_de_mental"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView8"
+            android:id="@+id/saudeMentalTextId"
             android:layout_weight="10.83"
             android:textSize="18sp" />
 
@@ -236,14 +248,14 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/doencasId"
-        android:hint="@string/doen_as_referidas" />
+        android:hint="@string/doen_as_referidas"
+        android:maxLength="30" />
 
     <Button
         android:text="@string/botao_proximo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/botaoProximoId"
-        android:elevation="10dp"
         style="@style/Widget.AppCompat.Button.Colored" />
 
 </LinearLayout>
