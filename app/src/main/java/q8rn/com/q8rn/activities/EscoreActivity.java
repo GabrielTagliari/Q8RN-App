@@ -40,6 +40,7 @@ public class EscoreActivity extends AppCompatActivity {
         pontos = (HashMap<Integer, Integer>) intent.getExtras().getSerializable("pontos");
 
         long idEntrevistado = recuperaIdEntrevistadoShared();
+        int escoreTotal = 0;
 
         QuestaoEntrevistadoController qeController =
                 new QuestaoEntrevistadoController(getBaseContext());
@@ -49,10 +50,9 @@ public class EscoreActivity extends AppCompatActivity {
             Map.Entry item = (Map.Entry)it.next();
             qeController.insereQuestaoEntrevistado((int) idEntrevistado, (int) item.getKey(),
                     (int) item.getValue());
+            escoreTotal += (int) item.getValue();
             it.remove();
         }
-
-        int escoreTotal = calculaEscoreTotal(pontos);
 
         escore.setText(String.valueOf(escoreTotal));
 
@@ -71,15 +71,6 @@ public class EscoreActivity extends AppCompatActivity {
         long idEntrevistado = preferences.getLong("idEntrevistado", 0);
         Log.i("questaoentrevistado", "valor do id:" + idEntrevistado);
         return idEntrevistado;
-    }
-
-    private int calculaEscoreTotal(HashMap<Integer, Integer> pontos) {
-        int escoreTotal = 0;
-
-        for (int value : pontos.values()) {
-            escoreTotal += value;
-        }
-        return escoreTotal;
     }
 
     private String calculaResultado(int escoreTotal) {

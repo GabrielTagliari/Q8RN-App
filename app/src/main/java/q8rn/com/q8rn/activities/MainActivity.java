@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 QuestaoEntrevistadoController qe = new QuestaoEntrevistadoController(getBaseContext());
 
-                File file = qe.gerarExcel();
+                File file = qe.gerarExcel(getBaseContext());
                 Uri u1  =   null;
                 u1  =   Uri.fromFile(file);
 
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent sendIntent = new Intent(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Q8RN - " + dataFormatada);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, "Banco de dados do questionário dos " +
-                        "oito reméridos naturais gerado em: " + dataFormatada);
+                        "oito remédios naturais gerado em: " + dataFormatada + "\n");
                 sendIntent.putExtra(Intent.EXTRA_STREAM, u1);
                 sendIntent.setType("text/html");
                 startActivity(sendIntent);
