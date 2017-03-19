@@ -35,7 +35,7 @@ public class Questao implements Parcelable{
         this.alternativa5 = jsonObject.getString("alternativa5");
     }
 
-    protected Questao(Parcel in) {
+    private Questao(Parcel in) {
         id = in.readLong();
         codQuestao = in.readLong();
         titulo = in.readString();

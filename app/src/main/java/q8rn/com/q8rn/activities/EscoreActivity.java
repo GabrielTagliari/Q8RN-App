@@ -4,8 +4,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -40,19 +40,22 @@ public class EscoreActivity extends AppCompatActivity {
         pontos = (HashMap<Integer, Integer>) intent.getExtras().getSerializable("pontos");
 
         long idEntrevistado = recuperaIdEntrevistadoShared();
+        int escoreTotal = 0;
 
         QuestaoEntrevistadoController qeController =
                 new QuestaoEntrevistadoController(getBaseContext());
 
-        Iterator it = pontos.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry item = (Map.Entry)it.next();
-            qeController.insereQuestaoEntrevistado((int) idEntrevistado, (int) item.getKey(),
-                    (int) item.getValue());
-            it.remove();
-        }
+        Iterator it = pontos != null ? pontos.entrySet().iterator() : null;
 
-        int escoreTotal = calculaEscoreTotal(pontos);
+        if (it != null) {
+            while (it.hasNext()) {
+                Map.Entry item = (Map.Entry)it.next();
+                qeController.insereQuestaoEntrevistado((int) idEntrevistado, (int) item.getKey(),
+                        (int) item.getValue());
+                escoreTotal += (int) item.getValue();
+                it.remove();
+            }
+        }
 
         escore.setText(String.valueOf(escoreTotal));
 
@@ -71,15 +74,6 @@ public class EscoreActivity extends AppCompatActivity {
         long idEntrevistado = preferences.getLong("idEntrevistado", 0);
         Log.i("questaoentrevistado", "valor do id:" + idEntrevistado);
         return idEntrevistado;
-    }
-
-    private int calculaEscoreTotal(HashMap<Integer, Integer> pontos) {
-        int escoreTotal = 0;
-
-        for (int value : pontos.values()) {
-            escoreTotal += value;
-        }
-        return escoreTotal;
     }
 
     private String calculaResultado(int escoreTotal) {

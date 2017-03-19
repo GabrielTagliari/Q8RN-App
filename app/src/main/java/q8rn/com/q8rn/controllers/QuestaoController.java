@@ -31,7 +31,8 @@ public class QuestaoController {
         ContentValues valores;
         long resultado;
 
-        SQLiteDatabase db = banco.getWritableDatabase();
+        SQLiteDatabase db;
+        db = banco.getWritableDatabase();
         valores = new ContentValues();
         valores.put(CriaBanco.COD_QUESTAO, codQuestao);
         valores.put(CriaBanco.TITULO_QUESTAO, titulo);

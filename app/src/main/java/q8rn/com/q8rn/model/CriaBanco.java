@@ -20,7 +20,7 @@ public class CriaBanco extends SQLiteOpenHelper{
     public static final String TABELA_QUESTAO_ENTREVISTADO = "questaoentrevistado";
 
     /* IDS */
-    public static final String ID_QUESTAO = "id_questao";
+    private static final String ID_QUESTAO = "id_questao";
     public static final String ID_ENTREVISTADO = "id_entrevistado";
 
     /* CAMPOS TABELA QUESTAO */
@@ -81,7 +81,7 @@ public class CriaBanco extends SQLiteOpenHelper{
         sql.append(" ("+ ID_QUESTAO + " integer primary key autoincrement, ");
         sql.append(" "+ COD_QUESTAO +" integer, ");
         for (int numQuestao = 1;numQuestao < 6;numQuestao++) {
-            sql.append(" " + ALTERNATIVA_QUESTAO + numQuestao + " varchar(255), ");
+            sql.append(" " + ALTERNATIVA_QUESTAO).append(numQuestao).append(" varchar(255), ");
         }
         sql.append(" "+ DTAALTERACAO_QUESTAO +" timestamp, ");
         sql.append(" "+ TITULO_QUESTAO +" varchar(255), ");

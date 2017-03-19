@@ -3,8 +3,8 @@ package q8rn.com.q8rn.activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -190,14 +190,14 @@ public class FormActivity extends AppCompatActivity {
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
+                HashMap<String, String> headers = new HashMap<>();
                 headers.put(Constants.CONTENT_TYPE, Constants.APPLICATION_JSON_CHARSET_UTF_8);
                 return headers;
             }
         };
         queue.add(stringRequest);
         queue.start();
-        progressDialog = progressDialog.show(FormActivity.this,
+        progressDialog = ProgressDialog.show(FormActivity.this,
                 Constants.VAZIO, Constants.CARREGANDO, false);
     }
 

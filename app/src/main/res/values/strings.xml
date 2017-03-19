@@ -3,8 +3,8 @@
 
     <!-- Elementos -->
     <string name="titulo_main">Questionário dos Oito Remédios Naturais</string>
-    <string name="botao_main">Questionário ONLINE</string>
-    <string name="botao_simular">Questionário OFFLINE</string>
+    <string name="botao_main">Realiza questionário</string>
+    <string name="botao_simular">Enviar dados por email</string>
     <string name="titulo_form">Preencha o formulário</string>
 
     <!-- Strings -->

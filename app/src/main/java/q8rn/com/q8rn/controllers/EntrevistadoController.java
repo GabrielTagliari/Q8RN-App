@@ -65,37 +65,35 @@ public class EntrevistadoController {
 
         SQLiteDatabase db = banco.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM " + CriaBanco.TABELA_ENTREVISTADO, null);
-        if(c.moveToFirst()){
-            do{
-                Entrevistado entrevistado = new Entrevistado();
+        if(c.moveToFirst()) do {
+            Entrevistado entrevistado = new Entrevistado();
 
-                entrevistado.setId(c.getLong(0));
-                entrevistado.setAltura(c.getDouble(1));
-                entrevistado.setCinturaQuadril(c.getDouble(2));
-                entrevistado.setCodIdentificacao(c.getString(3));
-                entrevistado.setCorPele(c.getString(4));
-                entrevistado.setDoencas(c.getString(5));
-                entrevistado.setEscolaridade(c.getString(6));
-                entrevistado.setEspirometria(c.getInt(7));
-                entrevistado.setGlicemiaCapilar(c.getDouble(8));
-                entrevistado.setIdade(c.getInt(9));
-                entrevistado.setImc(c.getDouble(10));
-                entrevistado.setPa(c.getDouble(11));
-                entrevistado.setPeso(c.getDouble(12));
-                entrevistado.setProfissao(c.getString(13));
-                entrevistado.setReligiao(c.getString(14));
-                entrevistado.setSaudeFisica(c.getString(15));
-                entrevistado.setSaudeMental(c.getString(16));
-                entrevistado.setSexo(c.getString(17));
-                entrevistado.setTempoReligiao(c.getString(18));
+            entrevistado.setId(c.getLong(0));
+            entrevistado.setAltura(c.getDouble(1));
+            entrevistado.setCinturaQuadril(c.getDouble(2));
+            entrevistado.setCodIdentificacao(c.getString(3));
+            entrevistado.setCorPele(c.getString(4));
+            entrevistado.setDoencas(c.getString(5));
+            entrevistado.setEscolaridade(c.getString(6));
+            entrevistado.setEspirometria(c.getInt(7));
+            entrevistado.setGlicemiaCapilar(c.getDouble(9));
+            entrevistado.setIdade(c.getInt(10));
+            entrevistado.setImc(c.getDouble(11));
+            entrevistado.setPa(c.getDouble(12));
+            entrevistado.setPeso(c.getDouble(13));
+            entrevistado.setProfissao(c.getString(14));
+            entrevistado.setReligiao(c.getString(15));
+            entrevistado.setSaudeFisica(c.getString(16));
+            entrevistado.setSaudeMental(c.getString(17));
+            entrevistado.setSexo(c.getString(18));
+            entrevistado.setTempoReligiao(c.getString(19));
 
-                entrevistados.add(entrevistado);
+            entrevistados.add(entrevistado);
 
-                Gson gson = new Gson();
-                String textEntrevistado = gson.toJson(entrevistado);
-                Log.i("entrevistado", textEntrevistado);
-            }while(c.moveToNext());
-        }
+            Gson gson = new Gson();
+            String textEntrevistado = gson.toJson(entrevistado);
+            Log.i("entrevistado", textEntrevistado);
+        } while (c.moveToNext());
         c.close();
         db.close();
 

@@ -5,20 +5,26 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import au.com.bytecode.opencsv.CSVWriter;
+import q8rn.com.q8rn.entities.Entrevistado;
 import q8rn.com.q8rn.entities.QuestaoEntrevistado;
 import q8rn.com.q8rn.model.CriaBanco;
 
 public class QuestaoEntrevistadoController {
 
-    public static final String ERRO_AO_INSERIR_QE = "Erro ao inserir resultado";
-    public static final String QE_INSERIDA_COM_SUCESSO = "Resultado inserido com sucesso";
+    private static final String ERRO_AO_INSERIR_QE = "Erro ao inserir resultado";
+    private static final String QE_INSERIDA_COM_SUCESSO = "Resultado inserido com sucesso";
 
-    private SQLiteDatabase db;
     private CriaBanco banco;
 
     public QuestaoEntrevistadoController(Context context) {
@@ -26,10 +32,10 @@ public class QuestaoEntrevistadoController {
     }
 
     public String insereQuestaoEntrevistado(int idEntrevistado, int idQuestao, int escore) {
+        SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues valores;
         long resultado;
 
-        db = banco.getWritableDatabase();
         valores = new ContentValues();
         valores.put(CriaBanco.ENTREVISTADO_ID, idEntrevistado);
         valores.put(CriaBanco.QUESTAO_ID, idQuestao);
@@ -72,5 +78,100 @@ public class QuestaoEntrevistadoController {
         db.close();
 
         return resultados;
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public File gerarExcel(Context context) {
+        File exportDir = new File(Environment.getExternalStorageDirectory(), "");
+        if (!exportDir.exists()) {
+            exportDir.mkdirs();
+        }
+
+        File file = new File(exportDir, "q8rn.csv");
+        try {
+
+            file.createNewFile();
+            CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
+
+            //Headers
+            String header[] = {"numeração","IDADE", "sexo", "CORDAPELE", "religiao", "haqtotempo", "profissao",
+                    "anosdeestudo", "peso", "altura", "IMC", "cintura", "PAS", "PAD", "glicemiacap",
+                    "espirometria", "saudefisica", "saudemental", "doençarefer", "nutricao1",
+                    "nutricao2", "nutricao3", "nutricao4", "exercicio5", "exercicio6", "exercicio7",
+                    "agua8", "agua9", "sol10", "sol11", "temp12", "temp13", "temp14", "temp15",
+                    "temp16", "ar17", "ar18","descanso19", "descanso20", "descanso21", "conf22",
+                    "conf23", "conf24", "conf25", "Q8RNtotal"};
+
+            csvWrite.writeNext(header);
+
+            EntrevistadoController entrevistadoController = new EntrevistadoController(context);
+            ArrayList<Entrevistado> allEntrevistados =
+                    (ArrayList<Entrevistado>) entrevistadoController.findAllEntrevistados();
+
+            for (Entrevistado entrevistado : allEntrevistados) {
+                String[] eachRow = new String[45];
+                eachRow[0] = String.valueOf(entrevistado.getId());
+                eachRow[1] = String.valueOf(entrevistado.getIdade());
+                eachRow[2] = String.valueOf(entrevistado.getSexo());
+                eachRow[3] = String.valueOf(entrevistado.getCorPele());
+                eachRow[4] = String.valueOf(entrevistado.getReligiao());
+                eachRow[5] = String.valueOf(entrevistado.getTempoReligiao());
+                eachRow[6] = String.valueOf(entrevistado.getProfissao());
+                eachRow[7] = String.valueOf(entrevistado.getEscolaridade());
+                eachRow[8] = String.valueOf(entrevistado.getPeso());
+                eachRow[9] = String.valueOf(entrevistado.getAltura());
+                eachRow[10] = String.valueOf(entrevistado.getImc());
+                eachRow[11] = String.valueOf(entrevistado.getCinturaQuadril());
+                eachRow[12] = String.valueOf(entrevistado.getPa());
+                eachRow[13] = String.valueOf(entrevistado.getCodIdentificacao());
+                eachRow[14] = String.valueOf(entrevistado.getGlicemiaCapilar());
+                eachRow[15] = String.valueOf(entrevistado.getEspirometria());
+                eachRow[16] = String.valueOf(entrevistado.getSaudeFisica());
+                eachRow[17] = String.valueOf(entrevistado.getSaudeMental());
+                eachRow[18] = String.valueOf(entrevistado.getDoencas());
+
+                ArrayList<Integer> pontos = recuperaDadosPontosRelatorio(entrevistado.getId());
+
+                int total = 0;
+                int contador = 0;
+
+                for (int i = 19;i < 44;i++){
+                    eachRow[i] = String.valueOf(pontos.get(contador));
+                    total += pontos.get(contador);
+                    contador++;
+                }
+
+                eachRow[44] = String.valueOf(total);
+
+                csvWrite.writeNext(eachRow);
+            }
+
+            csvWrite.close();
+            return file;
+        } catch (IOException e) {
+            Log.e("MainActivity", e.getMessage(), e);
+            return file;
+        }
+    }
+
+    @NonNull
+    private ArrayList<Integer> recuperaDadosPontosRelatorio(long idEntrevistado) {
+        SQLiteDatabase db = banco.getReadableDatabase();
+        Cursor cq;
+
+        cq = db.rawQuery("SELECT * FROM " + CriaBanco.TABELA_QUESTAO_ENTREVISTADO
+                + " WHERE " + CriaBanco.ENTREVISTADO_ID + " = " + idEntrevistado
+                + " ORDER BY " + CriaBanco.QUESTAO_ID + " ASC", null);
+
+        ArrayList<Integer> resultado = new ArrayList<>();
+
+        if(cq.moveToFirst()){
+            do{
+                resultado.add(cq.getInt(2));
+            }while(cq.moveToNext());
+        }
+        cq.close();
+        db.close();
+        return resultado;
     }
 }

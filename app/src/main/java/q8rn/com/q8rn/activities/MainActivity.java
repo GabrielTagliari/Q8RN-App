@@ -4,8 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.v7.app.AppCompatActivity;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,13 +23,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import q8rn.com.q8rn.R;
 import q8rn.com.q8rn.constants.Constants;
 import q8rn.com.q8rn.controllers.QuestaoEntrevistadoController;
-import q8rn.com.q8rn.model.PopulaBanco;
 import q8rn.com.q8rn.entities.Questao;
+import q8rn.com.q8rn.model.CriaBanco;
+import q8rn.com.q8rn.model.PopulaBanco;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private Button botaoOffline;
 
     private PopulaBanco populaBanco;
+
+    private CriaBanco banco;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,13 +71,24 @@ public class MainActivity extends AppCompatActivity {
         botaoOffline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent = new Intent(MainActivity.this, QuestionarioActivity.class);
-                intent.putExtra("codQuestao", 1);
-                startActivity(intent);*/
-                QuestaoEntrevistadoController qeController =
-                        new QuestaoEntrevistadoController(getBaseContext());
+                QuestaoEntrevistadoController qe = new QuestaoEntrevistadoController(getBaseContext());
 
-                qeController.findAllQuestaoEntrevistadoByIdEntrevistado(1);
+                File file = qe.gerarExcel(getBaseContext());
+                Uri u1;
+                u1  =   Uri.fromFile(file);
+
+                Date dataSemformato = Calendar.getInstance().getTime();
+
+                SimpleDateFormat spf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+                String dataFormatada = spf.format(dataSemformato);
+
+                Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Q8RN - " + dataFormatada);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "Banco de dados do questionário dos " +
+                        "oito remédios naturais gerado em: " + dataFormatada + "\n");
+                sendIntent.putExtra(Intent.EXTRA_STREAM, u1);
+                sendIntent.setType("text/html");
+                startActivity(sendIntent);
             }
         });
     }
