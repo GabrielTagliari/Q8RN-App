@@ -1,9 +1,6 @@
 package q8rn.com.q8rn.entities;
 
-/**
- * Created by Gabriel on 04/03/2017.
- */
-
+/* Created by Gabriel on 04/03/2017. */
 public class Entrevistado {
 
     private transient long id;
@@ -25,7 +22,6 @@ public class Entrevistado {
     private String saudeFisica;
     private String saudeMental;
     private String doencas;
-    private transient Boolean flgAtivo = true;
 
     public Entrevistado() {}
 
@@ -206,11 +202,4 @@ public class Entrevistado {
         this.doencas = doencas;
     }
 
-    public Boolean getFlgAtivo() {
-        return flgAtivo;
-    }
-
-    public void setFlgAtivo(Boolean flgAtivo) {
-        this.flgAtivo = flgAtivo;
-    }
 }

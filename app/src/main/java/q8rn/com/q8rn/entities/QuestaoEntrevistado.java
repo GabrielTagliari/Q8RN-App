@@ -1,6 +1,6 @@
 package q8rn.com.q8rn.entities;
-/* Created by Gabriel on 15/03/2017. */
 
+/* Created by Gabriel on 15/03/2017. */
 public class QuestaoEntrevistado {
 
     private long idEntrevistado;
@@ -8,12 +8,6 @@ public class QuestaoEntrevistado {
     private int escore;
 
     public QuestaoEntrevistado() {}
-
-    public QuestaoEntrevistado(long idEntrevistado, long idQuestao, int escore) {
-        this.idEntrevistado = idEntrevistado;
-        this.idQuestao = idQuestao;
-        this.escore = escore;
-    }
 
     public long getIdEntrevistado() {
         return idEntrevistado;

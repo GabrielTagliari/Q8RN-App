@@ -10,13 +10,11 @@ import java.util.List;
 
 import q8rn.com.q8rn.R;
 
-/**
- * Created by Gabriel on 05/03/2017.
- */
-
+/* Created by Gabriel on 05/03/2017. */
 public class EntrevistadoValidator {
+
     private static final String CAMPO_OBRIGATORIO = "Campo obrigatório";
-    public static final String SELECIONE_UMA_OPÇÃO = "Selecione uma opção";
+    private static final String SELECIONE_UMA_OPÇÃO = "Selecione uma opção";
 
     public boolean validate(List<EditText> listaEditText, RadioGroup radioGroupSexo,
                             RadioButton errorRadio, List<Spinner> listaSpinners) {
@@ -40,11 +38,7 @@ public class EntrevistadoValidator {
             erroPreenchimento = true;
         }
 
-        if (erroPreenchimento) {
-            return false;
-        } else {
-            return true;
-        }
+        return !erroPreenchimento;
     }
 
     private boolean isSelecionado(Spinner spinner) {
@@ -56,7 +50,7 @@ public class EntrevistadoValidator {
         return true;
     }
 
-    public boolean preenchido(EditText editText) {
+    private boolean preenchido(EditText editText) {
 
         String text = editText.getText().toString().trim();
         editText.setError(null);

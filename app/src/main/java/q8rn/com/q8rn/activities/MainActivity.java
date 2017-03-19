@@ -2,14 +2,11 @@ package q8rn.com.q8rn.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,9 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -37,9 +32,9 @@ import java.util.Date;
 import q8rn.com.q8rn.R;
 import q8rn.com.q8rn.constants.Constants;
 import q8rn.com.q8rn.controllers.QuestaoEntrevistadoController;
+import q8rn.com.q8rn.entities.Questao;
 import q8rn.com.q8rn.model.CriaBanco;
 import q8rn.com.q8rn.model.PopulaBanco;
-import q8rn.com.q8rn.entities.Questao;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -79,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 QuestaoEntrevistadoController qe = new QuestaoEntrevistadoController(getBaseContext());
 
                 File file = qe.gerarExcel(getBaseContext());
-                Uri u1  =   null;
+                Uri u1;
                 u1  =   Uri.fromFile(file);
 
                 Date dataSemformato = Calendar.getInstance().getTime();

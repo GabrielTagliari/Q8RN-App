@@ -22,8 +22,8 @@ import q8rn.com.q8rn.model.CriaBanco;
 
 public class QuestaoEntrevistadoController {
 
-    public static final String ERRO_AO_INSERIR_QE = "Erro ao inserir resultado";
-    public static final String QE_INSERIDA_COM_SUCESSO = "Resultado inserido com sucesso";
+    private static final String ERRO_AO_INSERIR_QE = "Erro ao inserir resultado";
+    private static final String QE_INSERIDA_COM_SUCESSO = "Resultado inserido com sucesso";
 
     private CriaBanco banco;
 
@@ -80,6 +80,7 @@ public class QuestaoEntrevistadoController {
         return resultados;
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public File gerarExcel(Context context) {
         File exportDir = new File(Environment.getExternalStorageDirectory(), "");
         if (!exportDir.exists()) {

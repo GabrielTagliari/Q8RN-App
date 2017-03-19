@@ -1,8 +1,6 @@
 package q8rn.com.q8rn.constants;
 
-/**
- * Created by Gabriel on 05/03/2017.
- */
+/* Created by Gabriel on 05/03/2017. */
 
 public class Constants {
     /* URLS */
@@ -21,10 +19,7 @@ public class Constants {
 
     /* PREFERENCES */
     public static final String PREFERENCES = "entrevistado";
-    public static final String ID_ENTREVISTADO = "idEntrevistado";
 
-    /* OUTROS */
-    public static final String ESCORE = "escore";
     public static final String COD_QUESTAO = "codQuestao";
 
     /* RESULTADOS */
