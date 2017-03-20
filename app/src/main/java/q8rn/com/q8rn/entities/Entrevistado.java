@@ -12,9 +12,9 @@ public class Entrevistado implements Parcelable{
     private String sexo;
     private String corPele;
     private String religiao;
-    private String tempoReligiao;
+    private int tempoReligiao;
     private String profissao;
-    private String escolaridade;
+    private int escolaridade;
     private double peso;
     private double altura;
     private double imc;
@@ -29,8 +29,8 @@ public class Entrevistado implements Parcelable{
     public Entrevistado() {}
 
     public Entrevistado(String codIdentificacao, int idade, String sexo, String corPele,
-                        String religiao, String tempoReligiao, String profissao,
-                        String escolaridade, double peso, double altura, double imc,
+                        String religiao, int tempoReligiao, String profissao,
+                        int escolaridade, double peso, double altura, double imc,
                         double cinturaQuadril, double pa, double glicemiaCapilar, int espirometria,
                         String saudeFisica, String saudeMental, String doencas) {
         this.codIdentificacao = codIdentificacao;
@@ -53,15 +53,15 @@ public class Entrevistado implements Parcelable{
         this.doencas = doencas;
     }
 
-    protected Entrevistado(Parcel in) {
+    private Entrevistado(Parcel in) {
         codIdentificacao = in.readString();
         idade = in.readInt();
         sexo = in.readString();
         corPele = in.readString();
         religiao = in.readString();
-        tempoReligiao = in.readString();
+        tempoReligiao = in.readInt();
         profissao = in.readString();
-        escolaridade = in.readString();
+        escolaridade = in.readInt();
         peso = in.readDouble();
         altura = in.readDouble();
         imc = in.readDouble();
@@ -81,9 +81,9 @@ public class Entrevistado implements Parcelable{
         dest.writeString(sexo);
         dest.writeString(corPele);
         dest.writeString(religiao);
-        dest.writeString(tempoReligiao);
+        dest.writeInt(tempoReligiao);
         dest.writeString(profissao);
-        dest.writeString(escolaridade);
+        dest.writeInt(escolaridade);
         dest.writeDouble(peso);
         dest.writeDouble(altura);
         dest.writeDouble(imc);
@@ -161,11 +161,11 @@ public class Entrevistado implements Parcelable{
         this.religiao = religiao;
     }
 
-    public String getTempoReligiao() {
+    public int getTempoReligiao() {
         return tempoReligiao;
     }
 
-    public void setTempoReligiao(String tempoReligiao) {
+    public void setTempoReligiao(int tempoReligiao) {
         this.tempoReligiao = tempoReligiao;
     }
 
@@ -177,11 +177,11 @@ public class Entrevistado implements Parcelable{
         this.profissao = profissao;
     }
 
-    public String getEscolaridade() {
+    public int getEscolaridade() {
         return escolaridade;
     }
 
-    public void setEscolaridade(String escolaridade) {
+    public void setEscolaridade(int escolaridade) {
         this.escolaridade = escolaridade;
     }
 

@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(sendIntent);
 
                 } catch (RuntimeException e){
+                    Log.i(TAG, e.getMessage());
                     Toast.makeText(MainActivity.this, NÃO_EXISTEM_DADOS, Toast.LENGTH_SHORT).show();
                 } catch (IOException e){
                     Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();

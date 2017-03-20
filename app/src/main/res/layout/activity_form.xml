@@ -104,11 +104,11 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/tempoReligiaoId"
         android:hint="@string/h_quanto_tempo"
-        android:maxLength="30" />
+        android:maxLength="4"
+        android:inputType="number" />
 
     <EditText
         android:layout_width="match_parent"
@@ -119,25 +119,14 @@
         android:hint="@string/profiss_o"
         android:maxLength="30" />
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/escolaridadeTextId"
-            android:layout_weight="10.83"
-            android:textSize="18sp"
-            android:text="@string/escolaridade" />
-
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/escolaridadeIdSpinner"
-            android:layout_weight="33.36" />
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/escolaridadeId"
+        android:hint="@string/escolaridade"
+        android:maxLength="4"
+        android:inputType="number" />
 
     <EditText
         android:layout_width="match_parent"

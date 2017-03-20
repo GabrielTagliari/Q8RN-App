@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -115,6 +114,8 @@ public class QuestaoEntrevistadoController {
             }
 
             for (Entrevistado entrevistado : allEntrevistados) {
+                adicionaLegendaCampos(entrevistado);
+
                 String[] eachRow = new String[45];
                 eachRow[0] = String.valueOf(entrevistado.getId());
                 eachRow[1] = String.valueOf(entrevistado.getIdade());
@@ -157,6 +158,56 @@ public class QuestaoEntrevistadoController {
         } catch (IOException e) {
             throw new IOException(OCORREU_UM_ERRO);
         }
+    }
+
+    private void adicionaLegendaCampos(Entrevistado entrevistado) {
+        if (entrevistado.getSexo().equals("Feminino")) {
+            entrevistado.setSexo("1");
+        } else {
+            entrevistado.setSexo("2");
+        }
+
+        entrevistado.setSaudeFisica(adicionaLegendaSaude(entrevistado.getSaudeFisica()));
+        entrevistado.setSaudeMental(adicionaLegendaSaude(entrevistado.getSaudeMental()));
+
+        switch (entrevistado.getCorPele()) {
+            case "Branca":
+                entrevistado.setCorPele("1");
+                break;
+            case "Parda":
+                entrevistado.setCorPele("1");
+                break;
+            case "Preta":
+                entrevistado.setCorPele("1");
+                break;
+            case "Indígena":
+                entrevistado.setCorPele("1");
+                break;
+            case "Amarela":
+                entrevistado.setCorPele("1");
+                break;
+        }
+    }
+
+    private String adicionaLegendaSaude(String saude) {
+        switch (saude) {
+            case "Muito boa":
+                saude = "1";
+                break;
+            case "Boa":
+                saude = "2";
+                break;
+            case "Regular":
+                saude = "3";
+                break;
+            case "Ruim":
+                saude = "4";
+                break;
+            case "Muito ruim":
+                saude = "5";
+                break;
+        }
+        return saude;
     }
 
     @NonNull

@@ -29,6 +29,7 @@ import q8rn.com.q8rn.entities.Entrevistado;
 public class EscoreActivity extends AppCompatActivity {
 
     public static final String LISTA_MELHORAR = "listaMelhorar";
+    public static final String NÃO_É_PERMITIDO_VOLTAR_AO_QUESTIONÁRIO = "Não é permitido voltar ao questionário";
 
     private TextView escore;
     private Button voltarMenu;
@@ -151,5 +152,10 @@ public class EscoreActivity extends AppCompatActivity {
             })
             .setNegativeButton("Não", null)
             .show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, NÃO_É_PERMITIDO_VOLTAR_AO_QUESTIONÁRIO, Toast.LENGTH_SHORT).show();
     }
 }

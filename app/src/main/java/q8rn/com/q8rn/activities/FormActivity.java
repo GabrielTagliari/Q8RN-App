@@ -33,7 +33,7 @@ public class FormActivity extends AppCompatActivity {
     private EditText religiao;
     private EditText tempoReligiao;
     private EditText profissao;
-    private Spinner escolaridadeSpinner;
+    private EditText escolaridade;
     private EditText peso;
     private EditText altura;
     private EditText imc;
@@ -95,7 +95,6 @@ public class FormActivity extends AppCompatActivity {
     private List<Spinner> montaListaSpinners() {
         List<Spinner> lista = new ArrayList<>();
         lista.add(corPeleSpinner);
-        lista.add(escolaridadeSpinner);
         lista.add(saudeFisicaSpinner);
         lista.add(saudeMentalSpinner);
         return lista;
@@ -108,6 +107,7 @@ public class FormActivity extends AppCompatActivity {
         lista.add(religiao);
         lista.add(tempoReligiao);
         lista.add(profissao);
+        lista.add(escolaridade);
         lista.add(peso);
         lista.add(altura);
         lista.add(imc);
@@ -133,9 +133,9 @@ public class FormActivity extends AppCompatActivity {
         return new Entrevistado(iniciaisNome.getText().toString(),
                 Integer.parseInt(idade.getText().toString()), rb.getText().toString(),
                 corPeleSpinner.getSelectedItem().toString(),
-                religiao.getText().toString(), tempoReligiao.getText().toString(),
+                religiao.getText().toString(), Integer.parseInt(tempoReligiao.getText().toString()),
                 profissao.getText().toString(),
-                escolaridadeSpinner.getSelectedItem().toString(),
+                Integer.parseInt(escolaridade.getText().toString()),
                 Double.parseDouble(peso.getText().toString()),
                 Double.parseDouble(altura.getText().toString()),
                 Double.parseDouble(imc.getText().toString()),
@@ -150,7 +150,6 @@ public class FormActivity extends AppCompatActivity {
 
     private void populaTodosSpinners() {
         populaSpinner(R.array.corpele_array, corPeleSpinner);
-        populaSpinner(R.array.escolaridade_array, escolaridadeSpinner);
         populaSpinner(R.array.saude_array, saudeFisicaSpinner);
         populaSpinner(R.array.saude_array, saudeMentalSpinner);
     }
@@ -170,6 +169,7 @@ public class FormActivity extends AppCompatActivity {
         religiao = (EditText) findViewById(R.id.religiaoId);
         tempoReligiao = (EditText) findViewById(R.id.tempoReligiaoId);
         profissao = (EditText) findViewById(R.id.profissaoId);
+        escolaridade = (EditText) findViewById(R.id.escolaridadeId);
         peso = (EditText) findViewById(R.id.pesoId);
         altura = (EditText) findViewById(R.id.alturaId);
         imc = (EditText) findViewById(R.id.imcId);
@@ -183,7 +183,6 @@ public class FormActivity extends AppCompatActivity {
         femininoRadio = (RadioButton) findViewById(R.id.femininoId);
 
         corPeleSpinner = (Spinner) findViewById(R.id.corPeleIdSpinner);
-        escolaridadeSpinner = (Spinner) findViewById(R.id.escolaridadeIdSpinner);
         saudeFisicaSpinner = (Spinner) findViewById(R.id.saudeFisicaIdSpinner);
         saudeMentalSpinner = (Spinner) findViewById(R.id.saudeMentalIdSpinner);
 
