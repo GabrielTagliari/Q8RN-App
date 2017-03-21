@@ -1,11 +1,9 @@
 package q8rn.com.q8rn.activities;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,24 +13,13 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import q8rn.com.q8rn.R;
 import q8rn.com.q8rn.constants.Constants;
-import q8rn.com.q8rn.controllers.EntrevistadoController;
 import q8rn.com.q8rn.entities.Entrevistado;
 import q8rn.com.q8rn.validators.EntrevistadoValidator;
 
@@ -46,7 +33,7 @@ public class FormActivity extends AppCompatActivity {
     private EditText religiao;
     private EditText tempoReligiao;
     private EditText profissao;
-    private Spinner escolaridadeSpinner;
+    private EditText escolaridade;
     private EditText peso;
     private EditText altura;
     private EditText imc;
@@ -59,10 +46,6 @@ public class FormActivity extends AppCompatActivity {
     private EditText doencas;
 
     private Button botaoProximo;
-
-    private ProgressDialog progressDialog;
-
-    private EntrevistadoController entrevistadoController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,11 +70,7 @@ public class FormActivity extends AppCompatActivity {
 
                 if (permiteSalvar) {
                     Entrevistado entrevistado = instanciaEntrevistado();
-                    salvarOfflineEntrevistado(entrevistado);
-                    entrevistadoController.findAllEntrevistados();
-                    int id = entrevistadoController.recuperaLastId();
-                    salvarIdSharedPreferences(id);
-                    Log.i("entrevistado", String.valueOf(id));
+                    salvarIdSharedPreferences(entrevistado);
                     Intent intent = new Intent(FormActivity.this, QuestionarioActivity.class);
                     intent.putExtra("codQuestao", 1);
                     startActivity(intent);
@@ -102,11 +81,6 @@ public class FormActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    private void salvarOfflineEntrevistado(Entrevistado entrevistado) {
-        entrevistadoController = new EntrevistadoController(getBaseContext());
-        entrevistadoController.insereEntrevistado(entrevistado);
     }
 
     private void clearRadioErrorOnChange() {
@@ -121,7 +95,6 @@ public class FormActivity extends AppCompatActivity {
     private List<Spinner> montaListaSpinners() {
         List<Spinner> lista = new ArrayList<>();
         lista.add(corPeleSpinner);
-        lista.add(escolaridadeSpinner);
         lista.add(saudeFisicaSpinner);
         lista.add(saudeMentalSpinner);
         return lista;
@@ -134,6 +107,7 @@ public class FormActivity extends AppCompatActivity {
         lista.add(religiao);
         lista.add(tempoReligiao);
         lista.add(profissao);
+        lista.add(escolaridade);
         lista.add(peso);
         lista.add(altura);
         lista.add(imc);
@@ -145,67 +119,13 @@ public class FormActivity extends AppCompatActivity {
         return lista;
     }
 
-    private void salvarOnlineEntrevistadoEProximaActivity(final Entrevistado entrevistado) {
-
-        RequestQueue queue = Volley.newRequestQueue(FormActivity.this);
-        String url = Constants.URL_ENTREVISTADO;
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.i(Constants.JSON, response);
-
-                        Gson jsonRetorno = new Gson();
-                        Entrevistado entrevistadoRetorno = jsonRetorno.fromJson(response, Entrevistado.class);
-
-                        salvarIdSharedPreferences(entrevistadoRetorno.getId());
-
-                        progressDialog.dismiss();
-
-                        Intent intent = new Intent(FormActivity.this, QuestionarioActivity.class);
-                        startActivity(intent);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i("json", error.toString());
-                if (error instanceof TimeoutError) {
-                    Toast.makeText(FormActivity.this,
-                            Constants.FALHA_AO_SALVAR_DADOS, Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(FormActivity.this,
-                            Constants.ERRO_TENTE_NOVAMENTE, Toast.LENGTH_LONG).show();
-                }
-                progressDialog.dismiss();
-            }
-        }){
-            @Override
-            public byte[] getBody() throws AuthFailureError {
-                Gson gson = new Gson();
-                String json = gson.toJson(entrevistado);
-                Log.i("json",json);
-                return json.getBytes();
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<>();
-                headers.put(Constants.CONTENT_TYPE, Constants.APPLICATION_JSON_CHARSET_UTF_8);
-                return headers;
-            }
-        };
-        queue.add(stringRequest);
-        queue.start();
-        progressDialog = ProgressDialog.show(FormActivity.this,
-                Constants.VAZIO, Constants.CARREGANDO, false);
-    }
-
-    private void salvarIdSharedPreferences(long id) {
+    private void salvarIdSharedPreferences(Entrevistado entrevistado) {
         SharedPreferences.Editor editor;
         editor = getSharedPreferences(Constants.PREFERENCES, MODE_PRIVATE).edit();
-        editor.putLong("idEntrevistado", id);
-        editor.commit();
+        Gson gson = new Gson();
+        String json = gson.toJson(entrevistado);
+        editor.putString("entrevistado", json);
+        editor.apply();
     }
 
     private Entrevistado instanciaEntrevistado() {
@@ -213,9 +133,9 @@ public class FormActivity extends AppCompatActivity {
         return new Entrevistado(iniciaisNome.getText().toString(),
                 Integer.parseInt(idade.getText().toString()), rb.getText().toString(),
                 corPeleSpinner.getSelectedItem().toString(),
-                religiao.getText().toString(), tempoReligiao.getText().toString(),
+                religiao.getText().toString(), Integer.parseInt(tempoReligiao.getText().toString()),
                 profissao.getText().toString(),
-                escolaridadeSpinner.getSelectedItem().toString(),
+                Integer.parseInt(escolaridade.getText().toString()),
                 Double.parseDouble(peso.getText().toString()),
                 Double.parseDouble(altura.getText().toString()),
                 Double.parseDouble(imc.getText().toString()),
@@ -230,7 +150,6 @@ public class FormActivity extends AppCompatActivity {
 
     private void populaTodosSpinners() {
         populaSpinner(R.array.corpele_array, corPeleSpinner);
-        populaSpinner(R.array.escolaridade_array, escolaridadeSpinner);
         populaSpinner(R.array.saude_array, saudeFisicaSpinner);
         populaSpinner(R.array.saude_array, saudeMentalSpinner);
     }
@@ -250,6 +169,7 @@ public class FormActivity extends AppCompatActivity {
         religiao = (EditText) findViewById(R.id.religiaoId);
         tempoReligiao = (EditText) findViewById(R.id.tempoReligiaoId);
         profissao = (EditText) findViewById(R.id.profissaoId);
+        escolaridade = (EditText) findViewById(R.id.escolaridadeId);
         peso = (EditText) findViewById(R.id.pesoId);
         altura = (EditText) findViewById(R.id.alturaId);
         imc = (EditText) findViewById(R.id.imcId);
@@ -263,7 +183,6 @@ public class FormActivity extends AppCompatActivity {
         femininoRadio = (RadioButton) findViewById(R.id.femininoId);
 
         corPeleSpinner = (Spinner) findViewById(R.id.corPeleIdSpinner);
-        escolaridadeSpinner = (Spinner) findViewById(R.id.escolaridadeIdSpinner);
         saudeFisicaSpinner = (Spinner) findViewById(R.id.saudeFisicaIdSpinner);
         saudeMentalSpinner = (Spinner) findViewById(R.id.saudeMentalIdSpinner);
 

@@ -24,6 +24,7 @@ public class QuestaoEntrevistadoController {
 
     private static final String ERRO_AO_INSERIR_QE = "Erro ao inserir resultado";
     private static final String QE_INSERIDA_COM_SUCESSO = "Resultado inserido com sucesso";
+    public static final String OCORREU_UM_ERRO = "Ocorreu um erro";
 
     private CriaBanco banco;
 
@@ -81,7 +82,7 @@ public class QuestaoEntrevistadoController {
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    public File gerarExcel(Context context) {
+    public File gerarExcel(Context context) throws IOException {
         File exportDir = new File(Environment.getExternalStorageDirectory(), "");
         if (!exportDir.exists()) {
             exportDir.mkdirs();
@@ -94,13 +95,13 @@ public class QuestaoEntrevistadoController {
             CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
 
             //Headers
-            String header[] = {"numeração","IDADE", "sexo", "CORDAPELE", "religiao", "haqtotempo", "profissao",
-                    "anosdeestudo", "peso", "altura", "IMC", "cintura", "PAS", "PAD", "glicemiacap",
-                    "espirometria", "saudefisica", "saudemental", "doençarefer", "nutricao1",
-                    "nutricao2", "nutricao3", "nutricao4", "exercicio5", "exercicio6", "exercicio7",
-                    "agua8", "agua9", "sol10", "sol11", "temp12", "temp13", "temp14", "temp15",
-                    "temp16", "ar17", "ar18","descanso19", "descanso20", "descanso21", "conf22",
-                    "conf23", "conf24", "conf25", "Q8RNtotal"};
+            String header[] = {"numeração","IDADE", "sexo", "CORDAPELE", "religiao", "haqtotempo",
+                    "profissao", "anosdeestudo", "peso", "altura", "IMC", "cintura", "PAS", "PAD",
+                    "glicemiacap", "espirometria", "saudefisica", "saudemental", "doençarefer",
+                    "nutricao1", "nutricao2", "nutricao3", "nutricao4", "exercicio5", "exercicio6",
+                    "exercicio7", "agua8", "agua9", "sol10", "sol11", "temp12", "temp13", "temp14",
+                    "temp15", "temp16", "ar17", "ar18","descanso19", "descanso20", "descanso21",
+                    "conf22", "conf23", "conf24", "conf25", "Q8RNtotal"};
 
             csvWrite.writeNext(header);
 
@@ -108,7 +109,13 @@ public class QuestaoEntrevistadoController {
             ArrayList<Entrevistado> allEntrevistados =
                     (ArrayList<Entrevistado>) entrevistadoController.findAllEntrevistados();
 
+            if (allEntrevistados.isEmpty()) {
+                throw new RuntimeException();
+            }
+
             for (Entrevistado entrevistado : allEntrevistados) {
+                adicionaLegendaCampos(entrevistado);
+
                 String[] eachRow = new String[45];
                 eachRow[0] = String.valueOf(entrevistado.getId());
                 eachRow[1] = String.valueOf(entrevistado.getIdade());
@@ -149,9 +156,58 @@ public class QuestaoEntrevistadoController {
             csvWrite.close();
             return file;
         } catch (IOException e) {
-            Log.e("MainActivity", e.getMessage(), e);
-            return file;
+            throw new IOException(OCORREU_UM_ERRO);
         }
+    }
+
+    private void adicionaLegendaCampos(Entrevistado entrevistado) {
+        if (entrevistado.getSexo().equals("Feminino")) {
+            entrevistado.setSexo("1");
+        } else {
+            entrevistado.setSexo("2");
+        }
+
+        entrevistado.setSaudeFisica(adicionaLegendaSaude(entrevistado.getSaudeFisica()));
+        entrevistado.setSaudeMental(adicionaLegendaSaude(entrevistado.getSaudeMental()));
+
+        switch (entrevistado.getCorPele()) {
+            case "Branca":
+                entrevistado.setCorPele("1");
+                break;
+            case "Parda":
+                entrevistado.setCorPele("1");
+                break;
+            case "Preta":
+                entrevistado.setCorPele("1");
+                break;
+            case "Indígena":
+                entrevistado.setCorPele("1");
+                break;
+            case "Amarela":
+                entrevistado.setCorPele("1");
+                break;
+        }
+    }
+
+    private String adicionaLegendaSaude(String saude) {
+        switch (saude) {
+            case "Muito boa":
+                saude = "1";
+                break;
+            case "Boa":
+                saude = "2";
+                break;
+            case "Regular":
+                saude = "3";
+                break;
+            case "Ruim":
+                saude = "4";
+                break;
+            case "Muito ruim":
+                saude = "5";
+                break;
+        }
+        return saude;
     }
 
     @NonNull

@@ -24,6 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -39,6 +40,7 @@ import q8rn.com.q8rn.model.PopulaBanco;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "questao";
+    public static final String NÃO_EXISTEM_DADOS = "Não existem dados a serem exportados";
 
     private Button botaoOnline;
     private Button botaoOffline;
@@ -73,22 +75,30 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 QuestaoEntrevistadoController qe = new QuestaoEntrevistadoController(getBaseContext());
 
-                File file = qe.gerarExcel(getBaseContext());
-                Uri u1;
-                u1  =   Uri.fromFile(file);
+                try{
+                    File file = qe.gerarExcel(getBaseContext());
+                    Uri u1;
+                    u1  =   Uri.fromFile(file);
 
-                Date dataSemformato = Calendar.getInstance().getTime();
+                    Date dataSemformato = Calendar.getInstance().getTime();
 
-                SimpleDateFormat spf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-                String dataFormatada = spf.format(dataSemformato);
+                    SimpleDateFormat spf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+                    String dataFormatada = spf.format(dataSemformato);
 
-                Intent sendIntent = new Intent(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Q8RN - " + dataFormatada);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "Banco de dados do questionário dos " +
-                        "oito remédios naturais gerado em: " + dataFormatada + "\n");
-                sendIntent.putExtra(Intent.EXTRA_STREAM, u1);
-                sendIntent.setType("text/html");
-                startActivity(sendIntent);
+                    Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Q8RN - " + dataFormatada);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, "Banco de dados do questionário dos " +
+                            "oito remédios naturais gerado em: " + dataFormatada + "\n");
+                    sendIntent.putExtra(Intent.EXTRA_STREAM, u1);
+                    sendIntent.setType("text/html");
+                    startActivity(sendIntent);
+
+                } catch (RuntimeException e){
+                    Log.i(TAG, e.getMessage());
+                    Toast.makeText(MainActivity.this, NÃO_EXISTEM_DADOS, Toast.LENGTH_SHORT).show();
+                } catch (IOException e){
+                    Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

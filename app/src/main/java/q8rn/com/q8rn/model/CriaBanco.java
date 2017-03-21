@@ -100,7 +100,7 @@ public class CriaBanco extends SQLiteOpenHelper{
         sql.append("   " + COD_IDENTIFICACAO + " varchar(255), ");
         sql.append("   " + COR_PELE + " varchar(255), ");
         sql.append("   " + DOENCAS + " varchar(255), ");
-        sql.append("   " + ESCOLARIDADE + " varchar(255), ");
+        sql.append("   " + ESCOLARIDADE + " int, ");
         sql.append("   " + ESPIROMETRIA + " int, ");
         sql.append("   " + FLG_ATIVO + " bool, ");
         sql.append("   " + GLICEMIA_CAPILAR + " float(19), ");
@@ -113,7 +113,7 @@ public class CriaBanco extends SQLiteOpenHelper{
         sql.append("   " + SAUDE_FISICA + " varchar(255), ");
         sql.append("   " + SAUDE_MENTAL + " varchar(255), ");
         sql.append("   " + SEXO + " varchar(255), ");
-        sql.append("   " + TEMPO_RELIGIAO + " varchar(255) ");
+        sql.append("   " + TEMPO_RELIGIAO + " int ");
         sql.append(")");
         return String.valueOf(sql);
     }

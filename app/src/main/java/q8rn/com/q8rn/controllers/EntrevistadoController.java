@@ -74,7 +74,7 @@ public class EntrevistadoController {
             entrevistado.setCodIdentificacao(c.getString(3));
             entrevistado.setCorPele(c.getString(4));
             entrevistado.setDoencas(c.getString(5));
-            entrevistado.setEscolaridade(c.getString(6));
+            entrevistado.setEscolaridade(c.getInt(6));
             entrevistado.setEspirometria(c.getInt(7));
             entrevistado.setGlicemiaCapilar(c.getDouble(9));
             entrevistado.setIdade(c.getInt(10));
@@ -86,7 +86,7 @@ public class EntrevistadoController {
             entrevistado.setSaudeFisica(c.getString(16));
             entrevistado.setSaudeMental(c.getString(17));
             entrevistado.setSexo(c.getString(18));
-            entrevistado.setTempoReligiao(c.getString(19));
+            entrevistado.setTempoReligiao(c.getInt(19));
 
             entrevistados.add(entrevistado);
 

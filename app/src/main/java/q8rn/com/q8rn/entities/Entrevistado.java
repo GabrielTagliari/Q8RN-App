@@ -1,7 +1,10 @@
 package q8rn.com.q8rn.entities;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /* Created by Gabriel on 04/03/2017. */
-public class Entrevistado {
+public class Entrevistado implements Parcelable{
 
     private transient long id;
     private String codIdentificacao;
@@ -9,9 +12,9 @@ public class Entrevistado {
     private String sexo;
     private String corPele;
     private String religiao;
-    private String tempoReligiao;
+    private int tempoReligiao;
     private String profissao;
-    private String escolaridade;
+    private int escolaridade;
     private double peso;
     private double altura;
     private double imc;
@@ -26,8 +29,8 @@ public class Entrevistado {
     public Entrevistado() {}
 
     public Entrevistado(String codIdentificacao, int idade, String sexo, String corPele,
-                        String religiao, String tempoReligiao, String profissao,
-                        String escolaridade, double peso, double altura, double imc,
+                        String religiao, int tempoReligiao, String profissao,
+                        int escolaridade, double peso, double altura, double imc,
                         double cinturaQuadril, double pa, double glicemiaCapilar, int espirometria,
                         String saudeFisica, String saudeMental, String doencas) {
         this.codIdentificacao = codIdentificacao;
@@ -49,6 +52,66 @@ public class Entrevistado {
         this.saudeMental = saudeMental;
         this.doencas = doencas;
     }
+
+    private Entrevistado(Parcel in) {
+        codIdentificacao = in.readString();
+        idade = in.readInt();
+        sexo = in.readString();
+        corPele = in.readString();
+        religiao = in.readString();
+        tempoReligiao = in.readInt();
+        profissao = in.readString();
+        escolaridade = in.readInt();
+        peso = in.readDouble();
+        altura = in.readDouble();
+        imc = in.readDouble();
+        cinturaQuadril = in.readDouble();
+        pa = in.readDouble();
+        glicemiaCapilar = in.readDouble();
+        espirometria = in.readInt();
+        saudeFisica = in.readString();
+        saudeMental = in.readString();
+        doencas = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(codIdentificacao);
+        dest.writeInt(idade);
+        dest.writeString(sexo);
+        dest.writeString(corPele);
+        dest.writeString(religiao);
+        dest.writeInt(tempoReligiao);
+        dest.writeString(profissao);
+        dest.writeInt(escolaridade);
+        dest.writeDouble(peso);
+        dest.writeDouble(altura);
+        dest.writeDouble(imc);
+        dest.writeDouble(cinturaQuadril);
+        dest.writeDouble(pa);
+        dest.writeDouble(glicemiaCapilar);
+        dest.writeInt(espirometria);
+        dest.writeString(saudeFisica);
+        dest.writeString(saudeMental);
+        dest.writeString(doencas);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Entrevistado> CREATOR = new Creator<Entrevistado>() {
+        @Override
+        public Entrevistado createFromParcel(Parcel in) {
+            return new Entrevistado(in);
+        }
+
+        @Override
+        public Entrevistado[] newArray(int size) {
+            return new Entrevistado[size];
+        }
+    };
 
     public long getId() {
         return id;
@@ -98,11 +161,11 @@ public class Entrevistado {
         this.religiao = religiao;
     }
 
-    public String getTempoReligiao() {
+    public int getTempoReligiao() {
         return tempoReligiao;
     }
 
-    public void setTempoReligiao(String tempoReligiao) {
+    public void setTempoReligiao(int tempoReligiao) {
         this.tempoReligiao = tempoReligiao;
     }
 
@@ -114,11 +177,11 @@ public class Entrevistado {
         this.profissao = profissao;
     }
 
-    public String getEscolaridade() {
+    public int getEscolaridade() {
         return escolaridade;
     }
 
-    public void setEscolaridade(String escolaridade) {
+    public void setEscolaridade(int escolaridade) {
         this.escolaridade = escolaridade;
     }
 

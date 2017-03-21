@@ -6,25 +6,37 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import q8rn.com.q8rn.R;
 import q8rn.com.q8rn.constants.Constants;
+import q8rn.com.q8rn.controllers.EntrevistadoController;
 import q8rn.com.q8rn.controllers.QuestaoEntrevistadoController;
+import q8rn.com.q8rn.entities.Entrevistado;
 
 public class EscoreActivity extends AppCompatActivity {
+
+    public static final String LISTA_MELHORAR = "listaMelhorar";
+    public static final String NÃO_É_PERMITIDO_VOLTAR_AO_QUESTIONÁRIO = "Não é permitido voltar ao questionário";
 
     private TextView escore;
     private Button voltarMenu;
     private TextView resultado;
+    private ListView listaMelhorar;
+
+    private EntrevistadoController entrevistadoController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +46,34 @@ public class EscoreActivity extends AppCompatActivity {
         escore = (TextView) findViewById(R.id.totalEscoreId);
         voltarMenu = (Button) findViewById(R.id.voltarMenuId);
         resultado = (TextView) findViewById(R.id.textResultadoId);
+        listaMelhorar = (ListView) findViewById(R.id.listaMelhorarId);
 
         Intent intent = getIntent();
         HashMap<Integer, Integer> pontos;
         pontos = (HashMap<Integer, Integer>) intent.getExtras().getSerializable("pontos");
 
-        long idEntrevistado = recuperaIdEntrevistadoShared();
+        List<String> listaRecebida = intent.getStringArrayListExtra(LISTA_MELHORAR);
+
+        if (listaRecebida != null) {
+            String[] itensListView = new String[listaRecebida.size()];
+
+            int contador = 0;
+
+            for (String item : listaRecebida) {
+                itensListView[contador] = item;
+                contador++;
+            }
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                    android.R.layout.simple_list_item_1, android.R.id.text1, itensListView);
+
+            listaMelhorar.setAdapter(adapter);
+        }
+
+        Entrevistado entrevistado = recuperaEntrevistadoShared();
+        salvarOfflineEntrevistado(entrevistado);
+        int idEntrevistado = recuperaLastId();
+
         int escoreTotal = 0;
 
         QuestaoEntrevistadoController qeController =
@@ -50,7 +84,7 @@ public class EscoreActivity extends AppCompatActivity {
         if (it != null) {
             while (it.hasNext()) {
                 Map.Entry item = (Map.Entry)it.next();
-                qeController.insereQuestaoEntrevistado((int) idEntrevistado, (int) item.getKey(),
+                qeController.insereQuestaoEntrevistado(idEntrevistado, (int) item.getKey(),
                         (int) item.getValue());
                 escoreTotal += (int) item.getValue();
                 it.remove();
@@ -69,11 +103,20 @@ public class EscoreActivity extends AppCompatActivity {
         });
     }
 
-    private long recuperaIdEntrevistadoShared() {
+    private void salvarOfflineEntrevistado(Entrevistado entrevistado) {
+        entrevistadoController = new EntrevistadoController(getBaseContext());
+        entrevistadoController.insereEntrevistado(entrevistado);
+    }
+
+    private int recuperaLastId() {
+        return entrevistadoController.recuperaLastId();
+    }
+
+    private Entrevistado recuperaEntrevistadoShared() {
         SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCES, MODE_PRIVATE);
-        long idEntrevistado = preferences.getLong("idEntrevistado", 0);
-        Log.i("questaoentrevistado", "valor do id:" + idEntrevistado);
-        return idEntrevistado;
+        Gson gson = new Gson();
+        String json = preferences.getString("entrevistado", "");
+        return gson.fromJson(json, Entrevistado.class);
     }
 
     private String calculaResultado(int escoreTotal) {
@@ -109,5 +152,10 @@ public class EscoreActivity extends AppCompatActivity {
             })
             .setNegativeButton("Não", null)
             .show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, NÃO_É_PERMITIDO_VOLTAR_AO_QUESTIONÁRIO, Toast.LENGTH_SHORT).show();
     }
 }

@@ -11,7 +11,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import q8rn.com.q8rn.R;
 import q8rn.com.q8rn.constants.Constants;
@@ -20,18 +22,23 @@ import q8rn.com.q8rn.entities.Questao;
 
 public class QuestionarioActivity extends AppCompatActivity {
 
+    public static final String LISTA = "listaMelhorar";
+    public static final String PONTOS = "pontos";
+    public static final String COD_QUESTAO = "codQuestao";
     private TextView titulo;
     private RadioGroup radioGroupAlternativas;
     private Button botaoVoltar;
     private Button botaoProximo;
-    private int codQuestao;
-    private HashMap<Integer, Integer> pontos;
     private RadioButton alternativa1;
     private RadioButton alternativa2;
     private RadioButton alternativa3;
     private RadioButton alternativa4;
     private RadioButton alternativa5;
     private TextView dominio;
+
+    private int codQuestao;
+    private HashMap<Integer, Integer> pontos;
+    private List<String> listaMelhorar;
 
     private QuestaoController questaoController;
 
@@ -48,13 +55,20 @@ public class QuestionarioActivity extends AppCompatActivity {
 
         if (codQuestao == 1) {
             pontos = new HashMap<>();
+            listaMelhorar = new ArrayList<>();
         }
 
         HashMap<Integer, Integer> pontosRecebidos;
-        pontosRecebidos = (HashMap<Integer, Integer>) intent.getExtras().getSerializable("pontos");
+        pontosRecebidos = (HashMap<Integer, Integer>) intent.getExtras().getSerializable(PONTOS);
+
+        List<String> listaRecebida = getIntent().getStringArrayListExtra(LISTA);
 
         if (pontosRecebidos != null) {
             pontos = pontosRecebidos;
+        }
+
+        if (listaRecebida != null) {
+            listaMelhorar = listaRecebida;
         }
 
         populaQuestao();
@@ -70,21 +84,18 @@ public class QuestionarioActivity extends AppCompatActivity {
                 if (radioGroupAlternativas.getCheckedRadioButtonId() != -1) {
                     calculaEscoreAtual();
                     if (codQuestao == 25) {
-                        int escoreTotal = 0;
-
-                        for (int value : pontos.values()) {
-                            escoreTotal += value;
-                        }
                         codQuestao++;
                         Intent intentEscore;
                         intentEscore = new Intent(QuestionarioActivity.this, EscoreActivity.class);
-                        intentEscore.putExtra("pontos", pontos);
+                        intentEscore.putStringArrayListExtra(LISTA, (ArrayList<String>) listaMelhorar);
+                        intentEscore.putExtra(PONTOS, pontos);
                         startActivity(intentEscore);
                     } else {
                         codQuestao++;
                         Intent intentProximo = new Intent(QuestionarioActivity.this, QuestionarioActivity.class);
-                        intentProximo.putExtra("codQuestao", codQuestao);
-                        intentProximo.putExtra("pontos", pontos);
+                        intentProximo.putExtra(COD_QUESTAO, codQuestao);
+                        intentProximo.putStringArrayListExtra(LISTA, (ArrayList<String>) listaMelhorar);
+                        intentProximo.putExtra(PONTOS, pontos);
                         startActivity(intentProximo);
                     }
                 } else {
@@ -140,13 +151,23 @@ public class QuestionarioActivity extends AppCompatActivity {
                 break;
             case R.id.radioTresId:
                 pontos.put(codQuestao, 2);
+                adicionaDominioLista();
                 break;
             case R.id.radioQuatroId:
                 pontos.put(codQuestao, 1);
+                adicionaDominioLista();
                 break;
             case R.id.radioCincoId:
                 pontos.put(codQuestao, 0);
+                adicionaDominioLista();
                 break;
+        }
+    }
+
+    private void adicionaDominioLista() {
+        String dominioText = (String) dominio.getText();
+        if (!listaMelhorar.contains(dominioText)) {
+            listaMelhorar.add(dominioText);
         }
     }
 
