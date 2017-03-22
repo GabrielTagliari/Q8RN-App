@@ -46,6 +46,7 @@ public class FormActivity extends AppCompatActivity {
     private EditText doencas;
 
     private Button botaoProximo;
+    private Button botaoLoadData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,13 @@ public class FormActivity extends AppCompatActivity {
                     Toast.makeText(FormActivity.this,
                             Constants.PREENCHA_CAMPOS, Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        botaoLoadData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadData();
             }
         });
     }
@@ -187,5 +195,30 @@ public class FormActivity extends AppCompatActivity {
         saudeMentalSpinner = (Spinner) findViewById(R.id.saudeMentalIdSpinner);
 
         botaoProximo = (Button) findViewById(R.id.botaoProximoId);
+
+        botaoLoadData = (Button) findViewById(R.id.loadDataId);
+    }
+
+    private void loadData() {
+        iniciaisNome.setText("GGG");
+        idade.setText("30");
+        religiao.setText("Evangélico");
+        tempoReligiao.setText("5");
+        profissao.setText("Padeiro");
+        escolaridade.setText("22");
+        peso.setText("76");
+        altura.setText("1.75");
+        imc.setText("25.8");
+        cinturaQuadril.setText("85.5");
+        pressaoArterial.setText("110");
+        glicemiaCapilar.setText("99");
+        espirometria.setText("400");
+        doencas.setText("Nenhuma");
+
+        femininoRadio.setChecked(true);
+
+        corPeleSpinner.setSelection(1);
+        saudeFisicaSpinner.setSelection(1);
+        saudeMentalSpinner.setSelection(2);
     }
 }
