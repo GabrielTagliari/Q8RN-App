@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -37,6 +38,10 @@ public class EscoreActivity extends AppCompatActivity {
     private TextView resultado;
     private ListView listaMelhorar;
 
+    private HashMap<Integer, Integer> pontos;
+
+    private AlertDialog alertDialog;
+
     private EntrevistadoController entrevistadoController;
 
     @Override
@@ -50,18 +55,21 @@ public class EscoreActivity extends AppCompatActivity {
         listaMelhorar = (ListView) findViewById(R.id.listaMelhorarId);
 
         Intent intent = getIntent();
-        HashMap<Integer, Integer> pontos;
         pontos = (HashMap<Integer, Integer>) intent.getExtras().getSerializable("pontos");
 
-        List<Questao> listaRecebida = intent.getParcelableArrayListExtra(LISTA_MELHORAR);
+        final List<Questao> listaRecebida = intent.getParcelableArrayListExtra(LISTA_MELHORAR);
 
         if (listaRecebida != null) {
+            criaDialog();
+
             String[] itensListView = new String[listaRecebida.size()];
 
             int contador = 0;
 
             for (Questao item : listaRecebida) {
-                itensListView[contador] = item.getDominio();
+                itensListView[contador] = item.getDominio() + " | Questão "
+                        + item.getCodQuestao() + " | Pontos: "
+                        + pontos.get((int) item.getCodQuestao());
                 contador++;
             }
 
@@ -69,6 +77,16 @@ public class EscoreActivity extends AppCompatActivity {
                     android.R.layout.simple_list_item_1, android.R.id.text1, itensListView);
 
             listaMelhorar.setAdapter(adapter);
+
+            listaMelhorar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    alertDialog.setTitle(listaRecebida.get(i).getDominio());
+                    alertDialog.setMessage(listaRecebida.get(i).getTitulo()
+                            + "\n\nPontos: " + pontos.get((int) listaRecebida.get(i).getCodQuestao()));
+                    alertDialog.show();
+                }
+            });
         }
 
         Entrevistado entrevistado = recuperaEntrevistadoShared();
@@ -102,6 +120,16 @@ public class EscoreActivity extends AppCompatActivity {
                 mostrarConfirmacao();
             }
         });
+    }
+
+    private void criaDialog() {
+        alertDialog = new AlertDialog.Builder(EscoreActivity.this).create();
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
     }
 
     private void salvarOfflineEntrevistado(Entrevistado entrevistado) {
