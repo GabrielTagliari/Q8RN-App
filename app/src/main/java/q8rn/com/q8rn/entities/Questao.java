@@ -10,7 +10,7 @@ import java.text.ParseException;
 
 /* Created by Gabriel on 05/03/2017. */
 
-public class Questao implements Parcelable{
+public class Questao implements Parcelable {
 
     private long id;
     private long codQuestao;
@@ -35,7 +35,7 @@ public class Questao implements Parcelable{
         this.alternativa5 = jsonObject.getString("alternativa5");
     }
 
-    private Questao(Parcel in) {
+    public Questao(Parcel in) {
         id = in.readLong();
         codQuestao = in.readLong();
         titulo = in.readString();
@@ -44,6 +44,25 @@ public class Questao implements Parcelable{
         alternativa3 = in.readString();
         alternativa4 = in.readString();
         alternativa5 = in.readString();
+        dominio = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeLong(codQuestao);
+        dest.writeString(titulo);
+        dest.writeString(alternativa1);
+        dest.writeString(alternativa2);
+        dest.writeString(alternativa3);
+        dest.writeString(alternativa4);
+        dest.writeString(alternativa5);
+        dest.writeString(dominio);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Questao> CREATOR = new Creator<Questao>() {
@@ -120,22 +139,6 @@ public class Questao implements Parcelable{
 
     public void setCodQuestao(long codQuestao) {
         this.codQuestao = codQuestao;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeLong(id);
-        parcel.writeString(titulo);
-        parcel.writeString(alternativa1);
-        parcel.writeString(alternativa2);
-        parcel.writeString(alternativa3);
-        parcel.writeString(alternativa4);
-        parcel.writeString(alternativa5);
     }
 
     public String getDominio() {

@@ -42,7 +42,8 @@ public class EntrevistadoController {
         valores.put(CriaBanco.GLICEMIA_CAPILAR, entrevistado.getGlicemiaCapilar());
         valores.put(CriaBanco.IDADE, entrevistado.getIdade());
         valores.put(CriaBanco.IMC, entrevistado.getImc());
-        valores.put(CriaBanco.PA, entrevistado.getPa());
+        valores.put(CriaBanco.PAS, entrevistado.getPas());
+        valores.put(CriaBanco.PAD, entrevistado.getPad());
         valores.put(CriaBanco.PESO, entrevistado.getPeso());
         valores.put(CriaBanco.PROFISSAO, entrevistado.getProfissao());
         valores.put(CriaBanco.RELIGIAO, entrevistado.getReligiao());
@@ -79,14 +80,15 @@ public class EntrevistadoController {
             entrevistado.setGlicemiaCapilar(c.getDouble(9));
             entrevistado.setIdade(c.getInt(10));
             entrevistado.setImc(c.getDouble(11));
-            entrevistado.setPa(c.getDouble(12));
-            entrevistado.setPeso(c.getDouble(13));
-            entrevistado.setProfissao(c.getString(14));
-            entrevistado.setReligiao(c.getString(15));
-            entrevistado.setSaudeFisica(c.getString(16));
-            entrevistado.setSaudeMental(c.getString(17));
-            entrevistado.setSexo(c.getString(18));
-            entrevistado.setTempoReligiao(c.getInt(19));
+            entrevistado.setPas(c.getDouble(12));
+            entrevistado.setPad(c.getDouble(13));
+            entrevistado.setPeso(c.getDouble(14));
+            entrevistado.setProfissao(c.getString(15));
+            entrevistado.setReligiao(c.getString(16));
+            entrevistado.setSaudeFisica(c.getString(17));
+            entrevistado.setSaudeMental(c.getString(18));
+            entrevistado.setSexo(c.getString(19));
+            entrevistado.setTempoReligiao(c.getInt(20));
 
             entrevistados.add(entrevistado);
 

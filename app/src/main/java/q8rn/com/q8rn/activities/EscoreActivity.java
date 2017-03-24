@@ -25,6 +25,7 @@ import q8rn.com.q8rn.constants.Constants;
 import q8rn.com.q8rn.controllers.EntrevistadoController;
 import q8rn.com.q8rn.controllers.QuestaoEntrevistadoController;
 import q8rn.com.q8rn.entities.Entrevistado;
+import q8rn.com.q8rn.entities.Questao;
 
 public class EscoreActivity extends AppCompatActivity {
 
@@ -52,15 +53,15 @@ public class EscoreActivity extends AppCompatActivity {
         HashMap<Integer, Integer> pontos;
         pontos = (HashMap<Integer, Integer>) intent.getExtras().getSerializable("pontos");
 
-        List<String> listaRecebida = intent.getStringArrayListExtra(LISTA_MELHORAR);
+        List<Questao> listaRecebida = intent.getParcelableArrayListExtra(LISTA_MELHORAR);
 
         if (listaRecebida != null) {
             String[] itensListView = new String[listaRecebida.size()];
 
             int contador = 0;
 
-            for (String item : listaRecebida) {
-                itensListView[contador] = item;
+            for (Questao item : listaRecebida) {
+                itensListView[contador] = item.getDominio();
                 contador++;
             }
 
