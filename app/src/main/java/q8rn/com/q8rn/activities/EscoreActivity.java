@@ -5,7 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -81,9 +83,10 @@ public class EscoreActivity extends AppCompatActivity {
             listaMelhorar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    alertDialog.setTitle(listaRecebida.get(i).getDominio());
-                    alertDialog.setMessage(listaRecebida.get(i).getTitulo()
-                            + "\n\nPontos: " + pontos.get((int) listaRecebida.get(i).getCodQuestao()));
+                    Questao questao = listaRecebida.get(i);
+                    alertDialog.setTitle(questao.getDominio());
+                    StringBuffer msg = montaMsgDialog(questao);
+                    alertDialog.setMessage(msg);
                     alertDialog.show();
                 }
             });
@@ -98,16 +101,16 @@ public class EscoreActivity extends AppCompatActivity {
         QuestaoEntrevistadoController qeController =
                 new QuestaoEntrevistadoController(getBaseContext());
 
-        Iterator it = pontos != null ? pontos.entrySet().iterator() : null;
+        HashMap<Integer, Integer> inserirPontos = new HashMap<>(pontos);
 
-        if (it != null) {
-            while (it.hasNext()) {
-                Map.Entry item = (Map.Entry)it.next();
-                qeController.insereQuestaoEntrevistado(idEntrevistado, (int) item.getKey(),
-                        (int) item.getValue());
-                escoreTotal += (int) item.getValue();
-                it.remove();
-            }
+        Iterator it = inserirPontos.entrySet().iterator();
+
+        while (it.hasNext()) {
+            Map.Entry item = (Map.Entry)it.next();
+            qeController.insereQuestaoEntrevistado(idEntrevistado, (int) item.getKey(),
+                    (int) item.getValue());
+            escoreTotal += (int) item.getValue();
+            it.remove();
         }
 
         escore.setText(String.valueOf(escoreTotal));
@@ -120,6 +123,32 @@ public class EscoreActivity extends AppCompatActivity {
                 mostrarConfirmacao();
             }
         });
+    }
+
+    @NonNull
+    private StringBuffer montaMsgDialog(Questao questao) {
+        Integer pontos = this.pontos.get((int) questao.getCodQuestao());
+
+        StringBuffer msg = new StringBuffer();
+        msg.append(questao.getTitulo());
+        msg.append("\n\n1) " + questao.getAlternativa1());
+        if (questao.getAlternativa2() != null){
+            msg.append("\n2) " + questao.getAlternativa2());
+        }
+        if (questao.getAlternativa2() != null) {
+            msg.append("\n3) " + questao.getAlternativa3());
+        }
+        if (questao.getAlternativa2() != null) {
+            msg.append("\n4) " + questao.getAlternativa4());
+        }
+        if (questao.getAlternativa2() != null) {
+            msg.append("\n5) " + questao.getAlternativa5());
+        } else {
+            msg.append("\n2) " + questao.getAlternativa5());
+        }
+        msg.append("\n\nResposta: " + questao.retornaAlternativaByNumero(pontos));
+        msg.append("\n\nPontos: " + pontos);
+        return msg;
     }
 
     private void criaDialog() {

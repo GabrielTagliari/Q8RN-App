@@ -148,4 +148,21 @@ public class Questao implements Parcelable {
     public void setDominio(String dominio) {
         this.dominio = dominio;
     }
+
+    public String retornaAlternativaByNumero(int num) {
+        String alternativa = null;
+
+        if (num == 0)
+            return alternativa5;
+        if (num == 1)
+            return alternativa4;
+        if (num == 2)
+            return alternativa3;
+        if (num == 3)
+            return alternativa2;
+        if (num == 4)
+            return alternativa1;
+
+        return alternativa;
+    }
 }
