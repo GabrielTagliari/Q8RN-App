@@ -38,7 +38,8 @@ public class FormActivity extends AppCompatActivity {
     private EditText altura;
     private EditText imc;
     private EditText cinturaQuadril;
-    private EditText pressaoArterial;
+    private EditText pas;
+    private EditText pad;
     private EditText glicemiaCapilar;
     private EditText espirometria;
     private Spinner saudeFisicaSpinner;
@@ -46,6 +47,7 @@ public class FormActivity extends AppCompatActivity {
     private EditText doencas;
 
     private Button botaoProximo;
+    private Button botaoLoadData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,8 @@ public class FormActivity extends AppCompatActivity {
         populaTodosSpinners();
 
         clearRadioErrorOnChange();
+
+        //botaoLoadData.setVisibility(View.GONE);
 
         botaoProximo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +83,13 @@ public class FormActivity extends AppCompatActivity {
                     Toast.makeText(FormActivity.this,
                             Constants.PREENCHA_CAMPOS, Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        botaoLoadData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadData();
             }
         });
     }
@@ -112,7 +123,8 @@ public class FormActivity extends AppCompatActivity {
         lista.add(altura);
         lista.add(imc);
         lista.add(cinturaQuadril);
-        lista.add(pressaoArterial);
+        lista.add(pas);
+        lista.add(pad);
         lista.add(glicemiaCapilar);
         lista.add(espirometria);
         lista.add(doencas);
@@ -140,7 +152,8 @@ public class FormActivity extends AppCompatActivity {
                 Double.parseDouble(altura.getText().toString()),
                 Double.parseDouble(imc.getText().toString()),
                 Double.parseDouble(cinturaQuadril.getText().toString()),
-                Double.parseDouble(pressaoArterial.getText().toString()),
+                Double.parseDouble(pas.getText().toString()),
+                Double.parseDouble(pad.getText().toString()),
                 Double.parseDouble(glicemiaCapilar.getText().toString()),
                 Integer.parseInt(espirometria.getText().toString()),
                 saudeFisicaSpinner.getSelectedItem().toString(),
@@ -174,7 +187,8 @@ public class FormActivity extends AppCompatActivity {
         altura = (EditText) findViewById(R.id.alturaId);
         imc = (EditText) findViewById(R.id.imcId);
         cinturaQuadril = (EditText) findViewById(R.id.cinturaQuadrilId);
-        pressaoArterial = (EditText) findViewById(R.id.pressaoId);
+        pas = (EditText) findViewById(R.id.pasId);
+        pad = (EditText) findViewById(R.id.padId);
         glicemiaCapilar = (EditText) findViewById(R.id.glicemiaId);
         espirometria = (EditText) findViewById(R.id.espirometriaId);
         doencas = (EditText) findViewById(R.id.doencasId);
@@ -187,5 +201,31 @@ public class FormActivity extends AppCompatActivity {
         saudeMentalSpinner = (Spinner) findViewById(R.id.saudeMentalIdSpinner);
 
         botaoProximo = (Button) findViewById(R.id.botaoProximoId);
+
+        botaoLoadData = (Button) findViewById(R.id.loadDataId);
+    }
+
+    private void loadData() {
+        iniciaisNome.setText("GGG");
+        idade.setText("30");
+        religiao.setText("Evangélico");
+        tempoReligiao.setText("5");
+        profissao.setText("Padeiro");
+        escolaridade.setText("22");
+        peso.setText("76");
+        altura.setText("1.75");
+        imc.setText("25.8");
+        cinturaQuadril.setText("85.5");
+        pas.setText("110");
+        pad.setText("70");
+        glicemiaCapilar.setText("99");
+        espirometria.setText("400");
+        doencas.setText("Nenhuma");
+
+        femininoRadio.setChecked(true);
+
+        corPeleSpinner.setSelection(1);
+        saudeFisicaSpinner.setSelection(1);
+        saudeMentalSpinner.setSelection(2);
     }
 }

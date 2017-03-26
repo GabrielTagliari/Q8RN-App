@@ -15,7 +15,8 @@
     <string name="sa_de_f_sica">Saúde física:</string>
     <string name="religi_o_referida">Religião Referida</string>
     <string name="profiss_o">Profissão</string>
-    <string name="press_o_arterial">Pressão Arterial</string>
+    <string name="pas">Pressão Arterial Sistólica (PAS)</string>
+    <string name="pad">Pressão Arterial Diastólica (PAD)</string>
     <string name="peso">Peso</string>
     <string name="masculino">Masculino</string>
     <string name="iniciais_do_nome">Iniciais do nome</string>
@@ -39,4 +40,5 @@
     <string name="voltar_menu">Voltar ao menu</string>
     <string name="escore_total">Escore total</string>
     <string name="realizar_questionario">Realizar Questionário</string>
+    <string name="load_data">Load data</string>
 </resources>

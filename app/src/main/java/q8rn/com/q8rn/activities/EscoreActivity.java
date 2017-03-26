@@ -5,8 +5,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -25,6 +28,7 @@ import q8rn.com.q8rn.constants.Constants;
 import q8rn.com.q8rn.controllers.EntrevistadoController;
 import q8rn.com.q8rn.controllers.QuestaoEntrevistadoController;
 import q8rn.com.q8rn.entities.Entrevistado;
+import q8rn.com.q8rn.entities.Questao;
 
 public class EscoreActivity extends AppCompatActivity {
 
@@ -35,6 +39,10 @@ public class EscoreActivity extends AppCompatActivity {
     private Button voltarMenu;
     private TextView resultado;
     private ListView listaMelhorar;
+
+    private HashMap<Integer, Integer> pontos;
+
+    private AlertDialog alertDialog;
 
     private EntrevistadoController entrevistadoController;
 
@@ -49,18 +57,21 @@ public class EscoreActivity extends AppCompatActivity {
         listaMelhorar = (ListView) findViewById(R.id.listaMelhorarId);
 
         Intent intent = getIntent();
-        HashMap<Integer, Integer> pontos;
         pontos = (HashMap<Integer, Integer>) intent.getExtras().getSerializable("pontos");
 
-        List<String> listaRecebida = intent.getStringArrayListExtra(LISTA_MELHORAR);
+        final List<Questao> listaRecebida = intent.getParcelableArrayListExtra(LISTA_MELHORAR);
 
         if (listaRecebida != null) {
+            criaDialog();
+
             String[] itensListView = new String[listaRecebida.size()];
 
             int contador = 0;
 
-            for (String item : listaRecebida) {
-                itensListView[contador] = item;
+            for (Questao item : listaRecebida) {
+                itensListView[contador] = item.getDominio() + " | Questão "
+                        + item.getCodQuestao() + " | Pontos: "
+                        + pontos.get((int) item.getCodQuestao());
                 contador++;
             }
 
@@ -68,6 +79,17 @@ public class EscoreActivity extends AppCompatActivity {
                     android.R.layout.simple_list_item_1, android.R.id.text1, itensListView);
 
             listaMelhorar.setAdapter(adapter);
+
+            listaMelhorar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Questao questao = listaRecebida.get(i);
+                    alertDialog.setTitle(questao.getDominio());
+                    StringBuffer msg = montaMsgDialog(questao);
+                    alertDialog.setMessage(msg);
+                    alertDialog.show();
+                }
+            });
         }
 
         Entrevistado entrevistado = recuperaEntrevistadoShared();
@@ -79,16 +101,16 @@ public class EscoreActivity extends AppCompatActivity {
         QuestaoEntrevistadoController qeController =
                 new QuestaoEntrevistadoController(getBaseContext());
 
-        Iterator it = pontos != null ? pontos.entrySet().iterator() : null;
+        HashMap<Integer, Integer> inserirPontos = new HashMap<>(pontos);
 
-        if (it != null) {
-            while (it.hasNext()) {
-                Map.Entry item = (Map.Entry)it.next();
-                qeController.insereQuestaoEntrevistado(idEntrevistado, (int) item.getKey(),
-                        (int) item.getValue());
-                escoreTotal += (int) item.getValue();
-                it.remove();
-            }
+        Iterator it = inserirPontos.entrySet().iterator();
+
+        while (it.hasNext()) {
+            Map.Entry item = (Map.Entry)it.next();
+            qeController.insereQuestaoEntrevistado(idEntrevistado, (int) item.getKey(),
+                    (int) item.getValue());
+            escoreTotal += (int) item.getValue();
+            it.remove();
         }
 
         escore.setText(String.valueOf(escoreTotal));
@@ -101,6 +123,42 @@ public class EscoreActivity extends AppCompatActivity {
                 mostrarConfirmacao();
             }
         });
+    }
+
+    @NonNull
+    private StringBuffer montaMsgDialog(Questao questao) {
+        Integer pontos = this.pontos.get((int) questao.getCodQuestao());
+
+        StringBuffer msg = new StringBuffer();
+        msg.append(questao.getTitulo());
+        msg.append("\n\n1) " + questao.getAlternativa1());
+        if (questao.getAlternativa2() != null){
+            msg.append("\n2) " + questao.getAlternativa2());
+        }
+        if (questao.getAlternativa2() != null) {
+            msg.append("\n3) " + questao.getAlternativa3());
+        }
+        if (questao.getAlternativa2() != null) {
+            msg.append("\n4) " + questao.getAlternativa4());
+        }
+        if (questao.getAlternativa2() != null) {
+            msg.append("\n5) " + questao.getAlternativa5());
+        } else {
+            msg.append("\n2) " + questao.getAlternativa5());
+        }
+        msg.append("\n\nResposta: " + questao.retornaAlternativaByNumero(pontos));
+        msg.append("\n\nPontos: " + pontos);
+        return msg;
+    }
+
+    private void criaDialog() {
+        alertDialog = new AlertDialog.Builder(EscoreActivity.this).create();
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
     }
 
     private void salvarOfflineEntrevistado(Entrevistado entrevistado) {

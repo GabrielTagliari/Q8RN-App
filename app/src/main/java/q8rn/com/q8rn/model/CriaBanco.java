@@ -42,7 +42,8 @@ public class CriaBanco extends SQLiteOpenHelper{
     private static final String FLG_ATIVO = "flg_ativo";
     public static final String GLICEMIA_CAPILAR = "glicemia_capilar";
     public static final String IMC = "imc";
-    public static final String PA = "pa";
+    public static final String PAS = "pas";
+    public static final String PAD = "pad";
     public static final String PESO = "peso";
     public static final String PROFISSAO = "profissao";
     public static final String RELIGIAO = "religiao";
@@ -106,7 +107,8 @@ public class CriaBanco extends SQLiteOpenHelper{
         sql.append("   " + GLICEMIA_CAPILAR + " float(19), ");
         sql.append("   " + IDADE + " int, ");
         sql.append("   " + IMC + " float(19), ");
-        sql.append("   " + PA + " float(19), ");
+        sql.append("   " + PAS + " float(19), ");
+        sql.append("   " + PAD + " float(19), ");
         sql.append("   " + PESO + " float(19), ");
         sql.append("   " + PROFISSAO + " varchar(255), ");
         sql.append("   " + RELIGIAO + " varchar(255), ");

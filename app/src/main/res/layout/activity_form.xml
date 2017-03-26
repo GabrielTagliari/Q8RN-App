@@ -28,7 +28,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="textCapSentences|textPersonName"
         android:ems="10"
         android:id="@+id/iniciaisNomeId"
         android:hint="@string/iniciais_do_nome"
@@ -89,13 +89,14 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/corPeleIdSpinner"
-            android:layout_weight="33.36" />
+            android:layout_weight="33.36"
+            android:spinnerMode="dialog" />
     </LinearLayout>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="textCapSentences|textPersonName"
         android:ems="10"
         android:id="@+id/religiaoId"
         android:hint="@string/religi_o_referida"
@@ -113,7 +114,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="textCapSentences|textPersonName"
         android:ems="10"
         android:id="@+id/profissaoId"
         android:hint="@string/profiss_o"
@@ -169,8 +170,17 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:id="@+id/pressaoId"
-        android:hint="@string/press_o_arterial"
+        android:id="@+id/pasId"
+        android:hint="@string/pas"
+        android:maxLength="4" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/padId"
+        android:hint="@string/pad"
         android:maxLength="4" />
 
     <EditText
@@ -208,7 +218,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/saudeFisicaIdSpinner"
-            android:layout_weight="33.36" />
+            android:layout_weight="33.36"
+            android:spinnerMode="dialog" />
     </LinearLayout>
 
     <LinearLayout
@@ -228,13 +239,14 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/saudeMentalIdSpinner"
-            android:layout_weight="33.36" />
+            android:layout_weight="33.36"
+            android:spinnerMode="dialog" />
     </LinearLayout>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="textCapSentences|textPersonName"
         android:ems="10"
         android:id="@+id/doencasId"
         android:hint="@string/doen_as_referidas"
@@ -246,6 +258,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/botaoProximoId"
         style="@style/Widget.AppCompat.Button.Colored" />
+
+    <Button
+        android:text="@string/load_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/loadDataId"
+        style="@style/Widget.AppCompat.Button.Small" />
 
 </LinearLayout>
 </ScrollView>

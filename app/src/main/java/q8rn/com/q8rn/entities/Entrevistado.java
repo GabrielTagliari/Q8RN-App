@@ -19,7 +19,8 @@ public class Entrevistado implements Parcelable{
     private double altura;
     private double imc;
     private double cinturaQuadril;
-    private double pa;
+    private double pas;
+    private double pad;
     private double glicemiaCapilar;
     private int espirometria;
     private String saudeFisica;
@@ -31,8 +32,8 @@ public class Entrevistado implements Parcelable{
     public Entrevistado(String codIdentificacao, int idade, String sexo, String corPele,
                         String religiao, int tempoReligiao, String profissao,
                         int escolaridade, double peso, double altura, double imc,
-                        double cinturaQuadril, double pa, double glicemiaCapilar, int espirometria,
-                        String saudeFisica, String saudeMental, String doencas) {
+                        double cinturaQuadril, double pas, double pad, double glicemiaCapilar,
+                        int espirometria, String saudeFisica, String saudeMental, String doencas) {
         this.codIdentificacao = codIdentificacao;
         this.idade = idade;
         this.sexo = sexo;
@@ -45,7 +46,8 @@ public class Entrevistado implements Parcelable{
         this.altura = altura;
         this.imc = imc;
         this.cinturaQuadril = cinturaQuadril;
-        this.pa = pa;
+        this.pas = pas;
+        this.pad = pad;
         this.glicemiaCapilar = glicemiaCapilar;
         this.espirometria = espirometria;
         this.saudeFisica = saudeFisica;
@@ -66,7 +68,8 @@ public class Entrevistado implements Parcelable{
         altura = in.readDouble();
         imc = in.readDouble();
         cinturaQuadril = in.readDouble();
-        pa = in.readDouble();
+        pas = in.readDouble();
+        pad = in.readDouble();
         glicemiaCapilar = in.readDouble();
         espirometria = in.readInt();
         saudeFisica = in.readString();
@@ -88,7 +91,8 @@ public class Entrevistado implements Parcelable{
         dest.writeDouble(altura);
         dest.writeDouble(imc);
         dest.writeDouble(cinturaQuadril);
-        dest.writeDouble(pa);
+        dest.writeDouble(pas);
+        dest.writeDouble(pad);
         dest.writeDouble(glicemiaCapilar);
         dest.writeInt(espirometria);
         dest.writeString(saudeFisica);
@@ -217,12 +221,20 @@ public class Entrevistado implements Parcelable{
         this.cinturaQuadril = cinturaQuadril;
     }
 
-    public double getPa() {
-        return pa;
+    public double getPas() {
+        return pas;
     }
 
-    public void setPa(double pa) {
-        this.pa = pa;
+    public void setPas(double pas) {
+        this.pas = pas;
+    }
+
+    public double getPad() {
+        return pad;
+    }
+
+    public void setPad(double pad) {
+        this.pad = pad;
     }
 
     public double getGlicemiaCapilar() {

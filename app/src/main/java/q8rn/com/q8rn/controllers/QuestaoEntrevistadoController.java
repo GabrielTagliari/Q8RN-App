@@ -129,8 +129,8 @@ public class QuestaoEntrevistadoController {
                 eachRow[9] = String.valueOf(entrevistado.getAltura());
                 eachRow[10] = String.valueOf(entrevistado.getImc());
                 eachRow[11] = String.valueOf(entrevistado.getCinturaQuadril());
-                eachRow[12] = String.valueOf(entrevistado.getPa());
-                eachRow[13] = String.valueOf(entrevistado.getCodIdentificacao());
+                eachRow[12] = String.valueOf(entrevistado.getPas());
+                eachRow[13] = String.valueOf(entrevistado.getPad());
                 eachRow[14] = String.valueOf(entrevistado.getGlicemiaCapilar());
                 eachRow[15] = String.valueOf(entrevistado.getEspirometria());
                 eachRow[16] = String.valueOf(entrevistado.getSaudeFisica());

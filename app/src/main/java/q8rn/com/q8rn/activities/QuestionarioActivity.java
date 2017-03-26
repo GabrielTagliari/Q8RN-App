@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -38,7 +39,8 @@ public class QuestionarioActivity extends AppCompatActivity {
 
     private int codQuestao;
     private HashMap<Integer, Integer> pontos;
-    private List<String> listaMelhorar;
+    private List<Questao> listaMelhorar;
+    private Questao questao;
 
     private QuestaoController questaoController;
 
@@ -61,7 +63,7 @@ public class QuestionarioActivity extends AppCompatActivity {
         HashMap<Integer, Integer> pontosRecebidos;
         pontosRecebidos = (HashMap<Integer, Integer>) intent.getExtras().getSerializable(PONTOS);
 
-        List<String> listaRecebida = getIntent().getStringArrayListExtra(LISTA);
+        ArrayList<Questao> listaRecebida = intent.getParcelableArrayListExtra(LISTA);
 
         if (pontosRecebidos != null) {
             pontos = pontosRecebidos;
@@ -71,7 +73,9 @@ public class QuestionarioActivity extends AppCompatActivity {
             listaMelhorar = listaRecebida;
         }
 
-        populaQuestao();
+        questao = findQuestaoByCod();
+
+        populaQuestao(questao);
 
         controleRadioButtons();
 
@@ -87,14 +91,14 @@ public class QuestionarioActivity extends AppCompatActivity {
                         codQuestao++;
                         Intent intentEscore;
                         intentEscore = new Intent(QuestionarioActivity.this, EscoreActivity.class);
-                        intentEscore.putStringArrayListExtra(LISTA, (ArrayList<String>) listaMelhorar);
+                        intentEscore.putParcelableArrayListExtra(LISTA, (ArrayList<Questao>) listaMelhorar);
                         intentEscore.putExtra(PONTOS, pontos);
                         startActivity(intentEscore);
                     } else {
                         codQuestao++;
                         Intent intentProximo = new Intent(QuestionarioActivity.this, QuestionarioActivity.class);
                         intentProximo.putExtra(COD_QUESTAO, codQuestao);
-                        intentProximo.putStringArrayListExtra(LISTA, (ArrayList<String>) listaMelhorar);
+                        intentProximo.putParcelableArrayListExtra(LISTA, (ArrayList<Questao>) listaMelhorar);
                         intentProximo.putExtra(PONTOS, pontos);
                         startActivity(intentProximo);
                     }
@@ -113,10 +117,13 @@ public class QuestionarioActivity extends AppCompatActivity {
         });
     }
 
-    private void populaQuestao() {
+    private Questao findQuestaoByCod() {
+        questao = new Questao();
         questaoController = new QuestaoController(getBaseContext());
+        return questaoController.findQuestaoByCod(codQuestao);
+    }
 
-        Questao questao = questaoController.findQuestaoByCod(codQuestao);
+    private void populaQuestao(Questao questao) {
 
         if (questao != null) {
             titulo.setText(questao.getTitulo());
@@ -151,23 +158,22 @@ public class QuestionarioActivity extends AppCompatActivity {
                 break;
             case R.id.radioTresId:
                 pontos.put(codQuestao, 2);
-                adicionaDominioLista();
+                adicionaQuestaoListaDeficiencia();
                 break;
             case R.id.radioQuatroId:
                 pontos.put(codQuestao, 1);
-                adicionaDominioLista();
+                adicionaQuestaoListaDeficiencia();
                 break;
             case R.id.radioCincoId:
                 pontos.put(codQuestao, 0);
-                adicionaDominioLista();
+                adicionaQuestaoListaDeficiencia();
                 break;
         }
     }
 
-    private void adicionaDominioLista() {
-        String dominioText = (String) dominio.getText();
-        if (!listaMelhorar.contains(dominioText)) {
-            listaMelhorar.add(dominioText);
+    private void adicionaQuestaoListaDeficiencia() {
+        if (!listaMelhorar.contains(questao)) {
+            listaMelhorar.add(questao);
         }
     }
 
