@@ -121,12 +121,6 @@ public class FormActivity extends AppCompatActivity {
         lista.add(escolaridade);
         lista.add(peso);
         lista.add(altura);
-        lista.add(imc);
-        lista.add(cinturaQuadril);
-        lista.add(pas);
-        lista.add(pad);
-        lista.add(glicemiaCapilar);
-        lista.add(espirometria);
         lista.add(doencas);
         return lista;
     }

@@ -83,6 +83,7 @@ public class QuestaoEntrevistadoController {
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public File gerarExcel(Context context) throws IOException {
+
         File exportDir = new File(Environment.getExternalStorageDirectory(), "");
         if (!exportDir.exists()) {
             exportDir.mkdirs();
