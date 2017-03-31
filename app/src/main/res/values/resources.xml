@@ -11,10 +11,9 @@
 
     <string-array name="escolaridade_array">
         <item>Selecione uma opção</item>
-        <item>Fundamental completo</item>
-        <item>Médio completo</item>
-        <item>Médio incompleto</item>
-        <item>Superior incompleto</item>
+        <item>Sem instrução ou Fundamental incompleto</item>
+        <item>Fundamental completo ou Ensino médio incompleto</item>
+        <item>Ensino médio completo ou Superior incompleto</item>
         <item>Superior completo</item>
     </string-array>
     

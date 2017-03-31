@@ -33,4 +33,10 @@ public class Constants {
     public static final String ERRO_TENTE_NOVAMENTE = "[ERRO] Tente novamente.";
     public static final String ERRO_CARREGAR = "Ocorreu um erro ao carregar a próxima questão";
     public static final String ERRO_AO_CARREGAR_RESULTADO = "Erro ao carregar resultado";
+
+    /* Escolaridades */
+    public static final String SIOUFI = "Sem instrução ou Fundamental incompleto";
+    public static final String FCOUEI = "Fundamental completo ou Ensino médio incompleto";
+    public static final String EMOUSI = "Ensino médio completo ou Superior incompleto";
+    public static final String SC = "Superior completo";
 }

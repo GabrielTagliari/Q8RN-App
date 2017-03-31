@@ -97,7 +97,7 @@ public class QuestaoEntrevistadoController {
 
             //Headers
             String header[] = {"numeração","IDADE", "sexo", "CORDAPELE", "religiao", "haqtotempo",
-                    "profissao", "anosdeestudo", "peso", "altura", "IMC", "cintura", "PAS", "PAD",
+                    "profissao", "escolaridade", "peso", "altura", "IMC", "cintura", "PAS", "PAD",
                     "glicemiacap", "espirometria", "saudefisica", "saudemental", "doençarefer",
                     "nutricao1", "nutricao2", "nutricao3", "nutricao4", "exercicio5", "exercicio6",
                     "exercicio7", "agua8", "agua9", "sol10", "sol11", "temp12", "temp13", "temp14",

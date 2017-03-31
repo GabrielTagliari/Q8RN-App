@@ -41,4 +41,5 @@
     <string name="escore_total">Escore total</string>
     <string name="realizar_questionario">Realizar Questionário</string>
     <string name="load_data">Load data</string>
+    <string name="cm">Cm</string>
 </resources>

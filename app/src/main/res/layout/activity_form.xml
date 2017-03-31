@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -61,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/masculinoId"
-            android:layout_weight="1" />
+            android:layout_weight="0.57" />
 
         <RadioButton
             android:text="@string/feminino"
@@ -75,7 +76,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="34dp">
+        android:layout_height="34dp"
+        android:layout_marginTop="5dp">
 
         <TextView
             android:text="@string/cor_da_pele"
@@ -83,7 +85,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/corPeleTextId"
             android:layout_weight="10.83"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:gravity="center_vertical" />
 
         <Spinner
             android:layout_width="wrap_content"
@@ -120,91 +123,236 @@
         android:hint="@string/profiss_o"
         android:maxLength="30" />
 
-    <EditText
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:id="@+id/escolaridadeId"
-        android:hint="@string/escolaridade"
-        android:maxLength="4"
-        android:inputType="number" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/pesoId"
-        android:hint="@string/peso"
-        android:maxLength="4" />
+        <TextView
+            android:text="@string/escolaridade"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/escolaridadeId"
+            android:layout_weight="33.13"
+            android:textSize="18sp" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/alturaId"
-        android:hint="@string/altura"
-        android:maxLength="4" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/imcId"
-        android:hint="@string/imc"
-        android:maxLength="4" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/cinturaQuadrilId"
-        android:hint="@string/cintura_quadril"
-        android:maxLength="4" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/pasId"
-        android:hint="@string/pas"
-        android:maxLength="4" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/padId"
-        android:hint="@string/pad"
-        android:maxLength="4" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/glicemiaId"
-        android:hint="@string/glicemia_capilar"
-        android:maxLength="4" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/espirometriaId"
-        android:hint="@string/espirometria"
-        android:maxLength="4" />
+        <Spinner
+            android:layout_height="wrap_content"
+            android:id="@+id/escolaridadeIdSpinner"
+            android:spinnerMode="dialog"
+            android:layout_width="207dp" />
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/pesoId"
+            android:hint="@string/peso"
+            android:maxLength="4"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Kg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3"
+            android:layout_weight="0.25"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textAlignment="textEnd" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/alturaId"
+            android:hint="@string/altura"
+            android:maxLength="4"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="@string/cm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4"
+            android:layout_weight="0.25"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textAlignment="textEnd" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/imcId"
+            android:hint="@string/imc"
+            android:maxLength="4"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Kg/m²"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView5"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textAlignment="textEnd"
+            android:layout_weight="0.10" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/cinturaQuadrilId"
+            android:hint="@string/cintura_quadril"
+            android:maxLength="4"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Cm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView6"
+            android:layout_weight="0.24"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textAlignment="textEnd" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/pasId"
+            android:hint="@string/pas"
+            android:maxLength="4"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="mm/Hg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView7"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textAlignment="textEnd" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/padId"
+            android:hint="@string/pad"
+            android:maxLength="4"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="mm/Hg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView10"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textAlignment="textEnd" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/glicemiaId"
+            android:hint="@string/glicemia_capilar"
+            android:maxLength="4"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="mg/dl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView12"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textAlignment="textEnd" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/espirometriaId"
+            android:hint="@string/espirometria"
+            android:maxLength="4"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="dl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView14"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textAlignment="textEnd"
+            android:layout_weight="0.47" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
 
         <TextView
             android:text="@string/sa_de_f_sica"
@@ -225,7 +373,9 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp">
 
         <TextView
             android:text="@string/sa_de_mental"

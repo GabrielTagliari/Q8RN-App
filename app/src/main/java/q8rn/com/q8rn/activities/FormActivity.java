@@ -33,7 +33,7 @@ public class FormActivity extends AppCompatActivity {
     private EditText religiao;
     private EditText tempoReligiao;
     private EditText profissao;
-    private EditText escolaridade;
+    private Spinner escolaridadeSpinner;
     private EditText peso;
     private EditText altura;
     private EditText imc;
@@ -106,6 +106,7 @@ public class FormActivity extends AppCompatActivity {
     private List<Spinner> montaListaSpinners() {
         List<Spinner> lista = new ArrayList<>();
         lista.add(corPeleSpinner);
+        lista.add(escolaridadeSpinner);
         lista.add(saudeFisicaSpinner);
         lista.add(saudeMentalSpinner);
         return lista;
@@ -118,7 +119,6 @@ public class FormActivity extends AppCompatActivity {
         lista.add(religiao);
         lista.add(tempoReligiao);
         lista.add(profissao);
-        lista.add(escolaridade);
         lista.add(peso);
         lista.add(altura);
         lista.add(doencas);
@@ -136,12 +136,14 @@ public class FormActivity extends AppCompatActivity {
 
     private Entrevistado instanciaEntrevistado() {
         RadioButton rb = (RadioButton) findViewById(radioGroupSexo.getCheckedRadioButtonId());
+        int codEscolaridade = Entrevistado
+                .getCodEscolaridade(escolaridadeSpinner.getSelectedItem().toString());
         return new Entrevistado(iniciaisNome.getText().toString(),
                 Integer.parseInt(idade.getText().toString()), rb.getText().toString(),
                 corPeleSpinner.getSelectedItem().toString(),
                 religiao.getText().toString(), Integer.parseInt(tempoReligiao.getText().toString()),
                 profissao.getText().toString(),
-                Integer.parseInt(escolaridade.getText().toString()),
+                codEscolaridade,
                 Double.parseDouble(peso.getText().toString()),
                 Double.parseDouble(altura.getText().toString()),
                 Double.parseDouble(imc.getText().toString()),
@@ -157,6 +159,7 @@ public class FormActivity extends AppCompatActivity {
 
     private void populaTodosSpinners() {
         populaSpinner(R.array.corpele_array, corPeleSpinner);
+        populaSpinner(R.array.escolaridade_array, escolaridadeSpinner);
         populaSpinner(R.array.saude_array, saudeFisicaSpinner);
         populaSpinner(R.array.saude_array, saudeMentalSpinner);
     }
@@ -176,7 +179,6 @@ public class FormActivity extends AppCompatActivity {
         religiao = (EditText) findViewById(R.id.religiaoId);
         tempoReligiao = (EditText) findViewById(R.id.tempoReligiaoId);
         profissao = (EditText) findViewById(R.id.profissaoId);
-        escolaridade = (EditText) findViewById(R.id.escolaridadeId);
         peso = (EditText) findViewById(R.id.pesoId);
         altura = (EditText) findViewById(R.id.alturaId);
         imc = (EditText) findViewById(R.id.imcId);
@@ -191,6 +193,7 @@ public class FormActivity extends AppCompatActivity {
         femininoRadio = (RadioButton) findViewById(R.id.femininoId);
 
         corPeleSpinner = (Spinner) findViewById(R.id.corPeleIdSpinner);
+        escolaridadeSpinner = (Spinner) findViewById(R.id.escolaridadeIdSpinner);
         saudeFisicaSpinner = (Spinner) findViewById(R.id.saudeFisicaIdSpinner);
         saudeMentalSpinner = (Spinner) findViewById(R.id.saudeMentalIdSpinner);
 
@@ -205,7 +208,6 @@ public class FormActivity extends AppCompatActivity {
         religiao.setText("Evangélico");
         tempoReligiao.setText("5");
         profissao.setText("Padeiro");
-        escolaridade.setText("22");
         peso.setText("76");
         altura.setText("1.75");
         imc.setText("25.8");
@@ -219,6 +221,7 @@ public class FormActivity extends AppCompatActivity {
         femininoRadio.setChecked(true);
 
         corPeleSpinner.setSelection(1);
+        escolaridadeSpinner.setSelection(3);
         saudeFisicaSpinner.setSelection(1);
         saudeMentalSpinner.setSelection(2);
     }

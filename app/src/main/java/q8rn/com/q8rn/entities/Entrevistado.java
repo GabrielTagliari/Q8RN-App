@@ -3,6 +3,9 @@ package q8rn.com.q8rn.entities;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import q8rn.com.q8rn.R;
+import q8rn.com.q8rn.constants.Constants;
+
 /* Created by Gabriel on 04/03/2017. */
 public class Entrevistado implements Parcelable{
 
@@ -277,4 +280,17 @@ public class Entrevistado implements Parcelable{
         this.doencas = doencas;
     }
 
+    public static int getCodEscolaridade(String escolaridade){
+        switch (escolaridade){
+            case Constants.SIOUFI:
+                return 1;
+            case Constants.FCOUEI:
+                return 2;
+            case Constants.EMOUSI:
+                return 3;
+            case Constants.SC:
+                return 4;
+        }
+        return 0;
+    }
 }
