@@ -47,7 +47,7 @@ public class PopulaBanco {
         controller.insereQuestao(2,"Quantas refeições você faz por dia? (Desjejum, almoço, jantar, " +
                 "lanches, ceia)", "2 a 3", null, null, null, "4 ou mais", NUTRIÇÃO);
 
-        controller.insereQuestao(3,"Além de consumir outros alimentos do dia a dia como: feijão, " +
+        controller.insereQuestao(3,"Além de consumir outros alimentos no dia a dia como: feijão, " +
                 "arroz, massa, frutas, legumes e verduras, como você classifica o seu padrão " +
                 "alimentar/dietético*, de acordo com a frequência de consumo dos alimentos de " +
                 "origem animal?", "Vegetariano estrito come laticínios, ovos, carne vermelha, " +
@@ -80,8 +80,8 @@ public class PopulaBanco {
         controller.insereQuestao(8, "Quantos copos de água, em média, você bebe diariamente?",
                 "8 ou mais", "7 copos", "4-6 copos", "1-3 copos", NENHUM, AGUA);
 
-        controller.insereQuestao(9, "Você utiliza a água para tratamentos? (Exemplo: " +
-                "compressas quentes e frias, aplicação de gelo, inalação, banhos em geral). ",
+        controller.insereQuestao(9, "Você utiliza a água para tratamentos caseiros quando necessário? " +
+                "(Exemplo: compressas quentes e frias, aplicação de gelo, inalação, banhos em geral). ",
                 SEMPRE, COM_RELATIVA_FREQUENCIA, ALGUMAS_VEZES, QUASE_NUNCA, NUNCA, AGUA);
 
         controller.insereQuestao(10, "Com que frequência você se expõe ao sol durante 15 a 20 " +
@@ -92,7 +92,7 @@ public class PopulaBanco {
                 "entrada de luz natural? ",SEMPRE, COM_RELATIVA_FREQUENCIA, ALGUMAS_VEZES,
                 QUASE_NUNCA, NUNCA, SOL);
 
-        controller.insereQuestao(12, "Você se considera equilibrado ao tempo dedicado para estudos, " +
+        controller.insereQuestao(12, "Você se considera equilibrado quanto ao tempo dedicado para estudos, " +
                 "trabalho, uso de tecnologia, alimentação, etc?", "Em todos os aspectos",
                 "Em quase todos os aspectos ", "Em alguns aspectos", "Quase nenhum",
                 "Em nenhum aspecto", TEMPERANCA);
