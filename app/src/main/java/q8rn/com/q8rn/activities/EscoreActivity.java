@@ -216,4 +216,57 @@ public class EscoreActivity extends AppCompatActivity {
     public void onBackPressed() {
         Toast.makeText(this, NÃO_É_PERMITIDO_VOLTAR_AO_QUESTIONÁRIO, Toast.LENGTH_SHORT).show();
     }
+
+    public String montaBodyEmail() {
+        StringBuffer body = new StringBuffer();
+        body.append("<!DOCTYPE html>");
+        body.append("<html>");
+        body.append("<head>");
+        body.append("<meta charset='utf-8'>");
+        body.append("</head>");
+        body.append("<body>");
+        body.append("<h3>Escore Total: 79</h3>");
+        body.append("<h3>Resultado: Muito Bom</h3>");
+        body.append("<h3><b>Pontos a melhorar</b></h3>");
+        body.append("<h3>Pergunta 1</h3><br>");
+        body.append("<h3>Resposta A</h3>");
+        body.append("<h3>Resposta B</h3>");
+        body.append("<h3>Resposta C</h3>");
+        body.append("<h3>Resposta D</h3>");
+        body.append("<h3>Resposta E</h3><br>");
+        body.append("<h3>Sua Resposta: E</h3><br>");
+        body.append("<h3>Pontos: 2</h3>");
+        body.append("<hr>");
+        body.append("<h3>Pergunta 2</h3><br>");
+        body.append("<h3>Resposta A</h3>");
+        body.append("<h3>Resposta B</h3>");
+        body.append("<h3>Resposta C</h3>");
+        body.append("<h3>Resposta D</h3>");
+        body.append("<h3>Resposta E</h3><br>");
+        body.append("<h3>Sua Resposta: E</h3><br>");
+        body.append("<h3>Pontos: 2</h3>");
+        body.append("<hr>");
+        body.append("<h3>Pergunta 3</h3><br>");
+        body.append("<h3>Resposta A</h3>");
+        body.append("<h3>Resposta B</h3>");
+        body.append("<h3>Resposta C</h3>");
+        body.append("<h3>Resposta D</h3>");
+        body.append("<h3>Resposta E</h3><br>");
+        body.append("<h3>Sua Resposta: E</h3><br>");
+        body.append("<h3>Pontos: 2</h3>");
+        body.append("<hr>");
+        body.append("</body>");
+        body.append("</html>");
+
+        return body.toString();
+    }
+
+
+    public void enviaEmail(View view) {
+        final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+        emailIntent.setType("text/html");
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Teste email Escore");
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(montaBodyEmail()));
+        startActivity(Intent.createChooser(emailIntent, "Email:"));
+    }
 }
