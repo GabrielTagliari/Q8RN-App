@@ -42,4 +42,6 @@
     <string name="realizar_questionario">Realizar Questionário</string>
     <string name="load_data">Load data</string>
     <string name="cm">Cm</string>
+    <string name="email">Enviar Resultado Email</string>
+    <string name="pontos_a_melhorar">Pontos a melhorar</string>
 </resources>
