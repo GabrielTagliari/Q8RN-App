@@ -1,11 +1,15 @@
 package q8rn.com.q8rn.activities;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -75,32 +79,55 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 QuestaoEntrevistadoController qe = new QuestaoEntrevistadoController(getBaseContext());
 
-                try{
-                    File file = qe.gerarExcel(getBaseContext());
-                    Uri u1;
-                    u1  =   Uri.fromFile(file);
+                if (isStoragePermissionGranted()) {
 
-                    Date dataSemformato = Calendar.getInstance().getTime();
+                    try {
+                        File file = qe.gerarExcel(getBaseContext());
+                        Uri u1;
+                        u1 = Uri.fromFile(file);
 
-                    SimpleDateFormat spf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-                    String dataFormatada = spf.format(dataSemformato);
+                        Date dataSemformato = Calendar.getInstance().getTime();
 
-                    Intent sendIntent = new Intent(Intent.ACTION_SEND);
-                    sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Q8RN - " + dataFormatada);
-                    sendIntent.putExtra(Intent.EXTRA_TEXT, "Banco de dados do questionário dos " +
-                            "oito remédios naturais gerado em: " + dataFormatada + "\n");
-                    sendIntent.putExtra(Intent.EXTRA_STREAM, u1);
-                    sendIntent.setType("text/html");
-                    startActivity(sendIntent);
+                        SimpleDateFormat spf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+                        String dataFormatada = spf.format(dataSemformato);
 
-                } catch (RuntimeException e){
-                    Log.i(TAG, e.getMessage());
-                    Toast.makeText(MainActivity.this, NÃO_EXISTEM_DADOS, Toast.LENGTH_SHORT).show();
-                } catch (IOException e){
-                    Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                        sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Q8RN - " + dataFormatada);
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, "Banco de dados do questionário dos " +
+                                "oito remédios naturais gerado em: " + dataFormatada + "\n");
+                        sendIntent.putExtra(Intent.EXTRA_STREAM, u1);
+                        sendIntent.setType("text/html");
+                        startActivity(sendIntent);
+
+                    } catch (RuntimeException e) {
+                        Log.i(TAG, e.getMessage());
+                        Toast.makeText(MainActivity.this, NÃO_EXISTEM_DADOS, Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }
         });
+    }
+
+    public  boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.v(TAG,"Permission is granted");
+                return true;
+            } else {
+
+                Log.v(TAG,"Permission is revoked");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            Log.v(TAG,"Permission is granted");
+            return true;
+        }
     }
 
     public boolean isOnline() {
