@@ -49,25 +49,26 @@
                 style="@android:style/Widget.DeviceDefault.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="120dp"
-                android:layout_marginRight="3dp"
+                android:layout_marginEnd="3dp"
                 android:layout_weight="1"
-                android:text="@string/botao_simular" />
+                android:text="@string/botao_simular"
+                android:layout_marginRight="3dp" />
 
             <Button
                 android:id="@+id/botaoOnlineId"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="120dp"
-                android:layout_marginLeft="3dp"
+                android:layout_marginStart="3dp"
                 android:layout_weight="1"
-                android:text="@string/realizar_questionario" />
+                android:text="@string/realizar_questionario"
+                android:layout_marginLeft="3dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_height="0dp"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -76,21 +77,28 @@
                 android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Copyright ©"
+                android:text="@string/copyright"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Autores: Gina Abdala e Dyrce Meira "
+                android:text="@string/autores_copyright"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/textView11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Desenvolvedor: Gabriel Tagliari Rodrigo"
+                android:text="@string/desenvolvedor_copyright"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/supervisor_copyright"
                 android:textAlignment="center" />
 
         </LinearLayout>
