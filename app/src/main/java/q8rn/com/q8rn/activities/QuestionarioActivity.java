@@ -127,7 +127,7 @@ public class QuestionarioActivity extends AppCompatActivity {
 
         if (questao != null) {
             titulo.setText(questao.getTitulo());
-            dominio.setText(questao.getDominio());
+            this.getSupportActionBar().setTitle(questao.getDominio());
 
             RadioButton alternativa1 = (RadioButton) radioGroupAlternativas.getChildAt(0);
             RadioButton alternativa2 = (RadioButton) radioGroupAlternativas.getChildAt(1);
@@ -196,7 +196,6 @@ public class QuestionarioActivity extends AppCompatActivity {
         alternativa3 = (RadioButton) findViewById(R.id.radioTresId);
         alternativa4 = (RadioButton) findViewById(R.id.radioQuatroId);
         alternativa5 = (RadioButton) findViewById(R.id.radioCincoId);
-        dominio = (TextView) findViewById(R.id.dominioId);
     }
 
     private void mostrarRadioButton(RadioButton radioButton) {

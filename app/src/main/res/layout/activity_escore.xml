@@ -10,60 +10,94 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="q8rn.com.q8rn.activities.EscoreActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textEscoreTotal"
-        android:text="@string/escore_total"
-        android:textSize="36sp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_height="wrap_content"
-        android:id="@+id/totalEscoreId"
-        android:textSize="30sp"
+    <LinearLayout
+        android:id="@+id/escores"
         android:layout_width="match_parent"
-        android:textAlignment="center"
-        android:layout_below="@+id/textEscoreTotal"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/textResultadoId"
-        android:textSize="30sp"
-        android:layout_below="@+id/totalEscoreId" />
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:text="Pontuação:"
+            android:textAlignment="textEnd" />
+
+        <TextView
+            android:id="@+id/totalEscoreId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_weight="1"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:text="Resultado: "
+            android:textAlignment="textEnd" />
+
+        <TextView
+            android:id="@+id/textResultadoId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_weight="1"
+            android:textSize="18sp" />
+    </LinearLayout>
 
     <TextView
-        android:text="Pontos a melhorar"
+        android:text="@string/pontos_a_melhorar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/headerId"
-        android:layout_below="@+id/textResultadoId"
+        android:layout_below="@+id/escores"
         android:textSize="18sp"
         android:textAlignment="center"
         android:background="@color/colorPrimary"
         android:textColor="@color/colorWhite" />
 
     <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/listaMelhorarId"
-        android:layout_below="@+id/headerId"
-        android:layout_above="@+id/voltarMenuId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/footer"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/headerId" />
 
-    <Button
-        android:text="@string/voltar_menu"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:id="@+id/voltarMenuId"
-        android:layout_alignParentBottom="true"
-        style="@style/Widget.AppCompat.Button.Colored" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/footer"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/voltarMenuId"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/voltar_menu" />
+
+        <Button
+            android:id="@+id/email"
+            style="@style/Widget.AppCompat.Button.Small"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:onClick="enviaEmail"
+            android:text="@string/email" />
+    </LinearLayout>
 
 </RelativeLayout>

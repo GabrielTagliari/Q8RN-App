@@ -42,4 +42,10 @@
     <string name="realizar_questionario">Realizar Questionário</string>
     <string name="load_data">Load data</string>
     <string name="cm">Cm</string>
+    <string name="email">Enviar Resultado Email</string>
+    <string name="pontos_a_melhorar">Pontos a melhorar</string>
+    <string name="autores_copyright">Autores: Gina Abdala e Dyrce Meira</string>
+    <string name="copyright">Copyright ©</string>
+    <string name="desenvolvedor_copyright">Desenvolvedor: Gabriel Tagliari Rodrigo</string>
+    <string name="supervisor_copyright">Supervisor: Roberto Sussumu Wataya</string>
 </resources>
