@@ -18,30 +18,42 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textEscoreTotal"
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/escore_total"
-            android:textAlignment="textStart"
-            android:textSize="18sp" />
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:text="Pontuação:"
+            android:textAlignment="textEnd" />
 
         <TextView
             android:id="@+id/totalEscoreId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
             android:layout_weight="1"
-            android:textAlignment="center"
+            android:textAlignment="textStart"
             android:textAllCaps="false"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:text="Resultado: "
+            android:textAlignment="textEnd" />
+
+        <TextView
             android:id="@+id/textResultadoId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:textAlignment="textEnd"
+            android:layout_gravity="bottom|start"
+            android:layout_weight="1"
             android:textSize="18sp" />
     </LinearLayout>
 

@@ -34,11 +34,15 @@ public class EscoreActivity extends AppCompatActivity {
 
     public static final String LISTA_MELHORAR = "listaMelhorar";
     public static final String NÃO_É_PERMITIDO_VOLTAR_AO_QUESTIONÁRIO = "Não é permitido voltar ao questionário";
+    public static final String RESULTADO_QUESTIONARIO = "Resultado do questionário dos oito remédios naturais";
 
     private TextView escore;
+    private TextView escoreText;
     private Button voltarMenu;
     private TextView resultado;
     private ListView listaMelhorar;
+
+    private List<Questao> listaRecebida;
 
     private HashMap<Integer, Integer> pontos;
 
@@ -51,6 +55,8 @@ public class EscoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_escore);
 
+        this.getSupportActionBar().setTitle("Escore Final");
+
         escore = (TextView) findViewById(R.id.totalEscoreId);
         voltarMenu = (Button) findViewById(R.id.voltarMenuId);
         resultado = (TextView) findViewById(R.id.textResultadoId);
@@ -59,7 +65,7 @@ public class EscoreActivity extends AppCompatActivity {
         Intent intent = getIntent();
         pontos = (HashMap<Integer, Integer>) intent.getExtras().getSerializable("pontos");
 
-        final List<Questao> listaRecebida = intent.getParcelableArrayListExtra(LISTA_MELHORAR);
+        listaRecebida = intent.getParcelableArrayListExtra(LISTA_MELHORAR);
 
         if (listaRecebida != null) {
             criaDialog();
@@ -85,7 +91,7 @@ public class EscoreActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Questao questao = listaRecebida.get(i);
                     alertDialog.setTitle(questao.getDominio());
-                    StringBuffer msg = montaMsgDialog(questao);
+                    String msg = montaDetalhesQuestao(questao);
                     alertDialog.setMessage(msg);
                     alertDialog.show();
                 }
@@ -126,29 +132,55 @@ public class EscoreActivity extends AppCompatActivity {
     }
 
     @NonNull
-    private StringBuffer montaMsgDialog(Questao questao) {
+    private String montaDetalhesQuestao(Questao questao) {
         Integer pontos = this.pontos.get((int) questao.getCodQuestao());
 
         StringBuffer msg = new StringBuffer();
         msg.append(questao.getTitulo());
-        msg.append("\n\n1) " + questao.getAlternativa1());
+        msg.append("\n\n1) ").append(questao.getAlternativa1());
         if (questao.getAlternativa2() != null){
-            msg.append("\n2) " + questao.getAlternativa2());
+            msg.append("\n2) ").append(questao.getAlternativa2());
         }
         if (questao.getAlternativa2() != null) {
-            msg.append("\n3) " + questao.getAlternativa3());
+            msg.append("\n3) ").append(questao.getAlternativa3());
         }
         if (questao.getAlternativa2() != null) {
-            msg.append("\n4) " + questao.getAlternativa4());
+            msg.append("\n4) ").append(questao.getAlternativa4());
         }
         if (questao.getAlternativa2() != null) {
-            msg.append("\n5) " + questao.getAlternativa5());
+            msg.append("\n5) ").append(questao.getAlternativa5());
         } else {
-            msg.append("\n2) " + questao.getAlternativa5());
+            msg.append("\n2) ").append(questao.getAlternativa5());
         }
-        msg.append("\n\nResposta: " + questao.retornaAlternativaByNumero(pontos));
-        msg.append("\n\nPontos: " + pontos);
-        return msg;
+        msg.append("\n\nResposta: ").append(questao.retornaAlternativaByNumero(pontos));
+        msg.append("\n\nPontos: ").append(pontos);
+        return String.valueOf(msg);
+    }
+
+    private String montaDetalhesQuestaoHtml(Questao questao) {
+        Integer pontos = this.pontos.get((int) questao.getCodQuestao());
+
+        StringBuffer msg = new StringBuffer();
+        msg.append(questao.getDominio());
+        msg.append("<br><br>").append(questao.getTitulo());
+        msg.append("<br><br>1) " + questao.getAlternativa1());
+        if (questao.getAlternativa2() != null){
+            msg.append("<br>2) " + questao.getAlternativa2());
+        }
+        if (questao.getAlternativa2() != null) {
+            msg.append("<br>3) " + questao.getAlternativa3());
+        }
+        if (questao.getAlternativa2() != null) {
+            msg.append("<br>4) " + questao.getAlternativa4());
+        }
+        if (questao.getAlternativa2() != null) {
+            msg.append("<br>5) " + questao.getAlternativa5());
+        } else {
+            msg.append("<br>2) " + questao.getAlternativa5());
+        }
+        msg.append("<br><br>Resposta: " + questao.retornaAlternativaByNumero(pontos));
+        msg.append("<br><br>Pontos: " + pontos);
+        return String.valueOf(msg);
     }
 
     private void criaDialog() {
@@ -225,36 +257,17 @@ public class EscoreActivity extends AppCompatActivity {
         body.append("<meta charset='utf-8'>");
         body.append("</head>");
         body.append("<body>");
-        body.append("<h3>Escore Total: 79</h3>");
-        body.append("<h3>Resultado: Muito Bom</h3>");
+        body.append("<h3><b>Escore Total: </b>" + escore.getText() + "</h3>");
+        body.append("<h3><b>Resultado: " + resultado.getText() + "</b></h3>");
         body.append("<h3><b>Pontos a melhorar</b></h3>");
-        body.append("<h3>Pergunta 1</h3><br>");
-        body.append("<h3>Resposta A</h3>");
-        body.append("<h3>Resposta B</h3>");
-        body.append("<h3>Resposta C</h3>");
-        body.append("<h3>Resposta D</h3>");
-        body.append("<h3>Resposta E</h3><br>");
-        body.append("<h3>Sua Resposta: E</h3><br>");
-        body.append("<h3>Pontos: 2</h3>");
-        body.append("<hr>");
-        body.append("<h3>Pergunta 2</h3><br>");
-        body.append("<h3>Resposta A</h3>");
-        body.append("<h3>Resposta B</h3>");
-        body.append("<h3>Resposta C</h3>");
-        body.append("<h3>Resposta D</h3>");
-        body.append("<h3>Resposta E</h3><br>");
-        body.append("<h3>Sua Resposta: E</h3><br>");
-        body.append("<h3>Pontos: 2</h3>");
-        body.append("<hr>");
-        body.append("<h3>Pergunta 3</h3><br>");
-        body.append("<h3>Resposta A</h3>");
-        body.append("<h3>Resposta B</h3>");
-        body.append("<h3>Resposta C</h3>");
-        body.append("<h3>Resposta D</h3>");
-        body.append("<h3>Resposta E</h3><br>");
-        body.append("<h3>Sua Resposta: E</h3><br>");
-        body.append("<h3>Pontos: 2</h3>");
-        body.append("<hr>");
+
+        for (Questao questao : listaRecebida) {
+            body.append(montaDetalhesQuestaoHtml(questao));
+            body.append("<br>");
+            body.append("---------------------------------------------------------------------");
+            body.append("<br>");
+        }
+
         body.append("</body>");
         body.append("</html>");
 
@@ -263,10 +276,10 @@ public class EscoreActivity extends AppCompatActivity {
 
 
     public void enviaEmail(View view) {
-        final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+        final Intent emailIntent = new Intent(Intent.ACTION_SEND);
         emailIntent.setType("text/html");
-        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Teste email Escore");
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, RESULTADO_QUESTIONARIO);
         emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(montaBodyEmail()));
-        startActivity(Intent.createChooser(emailIntent, "Email:"));
+        startActivity(emailIntent);
     }
 }

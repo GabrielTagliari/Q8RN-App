@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         botaoOnline = (Button) findViewById(R.id.botaoOnlineId);
         botaoOffline = (Button) findViewById(R.id.botaoOfflineId);
 
-        //botaoOnline.setVisibility(View.GONE);
+        this.getSupportActionBar().hide();
 
         botaoOnline.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                         Intent sendIntent = new Intent(Intent.ACTION_SEND);
                         sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Q8RN - " + dataFormatada);
                         sendIntent.putExtra(Intent.EXTRA_TEXT, "Banco de dados do questionário dos " +
-                                "oito remédios naturais gerado em: " + dataFormatada + "\n");
+                                "oito remédios naturais gerado em: " + dataFormatada + "\n\n");
                         sendIntent.putExtra(Intent.EXTRA_STREAM, u1);
                         sendIntent.setType("text/html");
                         startActivity(sendIntent);

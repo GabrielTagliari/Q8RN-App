@@ -59,7 +59,9 @@ public class FormActivity extends AppCompatActivity {
 
         clearRadioErrorOnChange();
 
-        //botaoLoadData.setVisibility(View.GONE);
+        this.getSupportActionBar().setTitle("Preencha o formulário");
+
+        botaoLoadData.setVisibility(View.GONE);
 
         botaoProximo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,14 +146,14 @@ public class FormActivity extends AppCompatActivity {
                 religiao.getText().toString(), Integer.parseInt(tempoReligiao.getText().toString()),
                 profissao.getText().toString(),
                 codEscolaridade,
-                Double.parseDouble(peso.getText().toString()),
-                Double.parseDouble(altura.getText().toString()),
-                Double.parseDouble(imc.getText().toString()),
-                Double.parseDouble(cinturaQuadril.getText().toString()),
-                Double.parseDouble(pas.getText().toString()),
-                Double.parseDouble(pad.getText().toString()),
-                Double.parseDouble(glicemiaCapilar.getText().toString()),
-                Integer.parseInt(espirometria.getText().toString()),
+                peso.getText().toString().equals("") ? 0 : Double.parseDouble(peso.getText().toString()),
+                altura.getText().toString().equals("") ? 0 : Double.parseDouble(altura.getText().toString()),
+                imc.getText().toString().equals("") ? 0 : Double.parseDouble(imc.getText().toString()),
+                cinturaQuadril.getText().toString().equals("") ? 0 : Double.parseDouble(cinturaQuadril.getText().toString()),
+                pas.getText().toString().equals("") ? 0 : Double.parseDouble(pas.getText().toString()),
+                pad.getText().toString().equals("") ? 0 : Double.parseDouble(pad.getText().toString()),
+                glicemiaCapilar.getText().toString().equals("") ? 0 : Double.parseDouble(glicemiaCapilar.getText().toString()),
+                espirometria.getText().toString().equals("") ? 0 : Integer.parseInt(espirometria.getText().toString()),
                 saudeFisicaSpinner.getSelectedItem().toString(),
                 saudeMentalSpinner.getSelectedItem().toString(),
                 doencas.getText().toString());
