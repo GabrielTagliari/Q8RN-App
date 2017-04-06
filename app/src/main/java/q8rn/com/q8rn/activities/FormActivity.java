@@ -1,12 +1,14 @@
 package q8rn.com.q8rn.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -24,6 +26,9 @@ import q8rn.com.q8rn.entities.Entrevistado;
 import q8rn.com.q8rn.validators.EntrevistadoValidator;
 
 public class FormActivity extends AppCompatActivity {
+
+    public static final String ENTREVISTADO = "entrevistado";
+    public static final String COD_QUESTAO = "codQuestao";
 
     private EditText iniciaisNome;
     private EditText idade;
@@ -46,9 +51,6 @@ public class FormActivity extends AppCompatActivity {
     private Spinner saudeMentalSpinner;
     private EditText doencas;
 
-    private Button botaoProximo;
-    private Button botaoLoadData;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,41 +61,25 @@ public class FormActivity extends AppCompatActivity {
 
         clearRadioErrorOnChange();
 
-        this.getSupportActionBar().setTitle("Preencha o formulário");
+        ActionBar supportActionBar = this.getSupportActionBar();
 
-        botaoLoadData.setVisibility(View.GONE);
+        if (supportActionBar != null) {
+            supportActionBar.setTitle(R.string.titulo_form);
+            supportActionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
-        botaoProximo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                List<EditText> listaEditText = montaListaEditText();
-                List<Spinner> listaSpinners = montaListaSpinners();
+        //botaoLoadData.setVisibility(View.GONE);
+    }
 
-                EntrevistadoValidator validator = new EntrevistadoValidator();
-
-                boolean permiteSalvar = validator.validate(listaEditText, radioGroupSexo,
-                        femininoRadio, listaSpinners);
-
-                if (permiteSalvar) {
-                    Entrevistado entrevistado = instanciaEntrevistado();
-                    salvarIdSharedPreferences(entrevistado);
-                    Intent intent = new Intent(FormActivity.this, QuestionarioActivity.class);
-                    intent.putExtra("codQuestao", 1);
-                    startActivity(intent);
-
-                } else {
-                    Toast.makeText(FormActivity.this,
-                            Constants.PREENCHA_CAMPOS, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        botaoLoadData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadData();
-            }
-        });
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void clearRadioErrorOnChange() {
@@ -132,31 +118,53 @@ public class FormActivity extends AppCompatActivity {
         editor = getSharedPreferences(Constants.PREFERENCES, MODE_PRIVATE).edit();
         Gson gson = new Gson();
         String json = gson.toJson(entrevistado);
-        editor.putString("entrevistado", json);
+        editor.putString(ENTREVISTADO, json);
         editor.apply();
     }
 
-    private Entrevistado instanciaEntrevistado() {
+    private Entrevistado retornaEntrevistado() {
+
         RadioButton rb = (RadioButton) findViewById(radioGroupSexo.getCheckedRadioButtonId());
         int codEscolaridade = Entrevistado
                 .getCodEscolaridade(escolaridadeSpinner.getSelectedItem().toString());
-        return new Entrevistado(iniciaisNome.getText().toString(),
-                Integer.parseInt(idade.getText().toString()), rb.getText().toString(),
-                corPeleSpinner.getSelectedItem().toString(),
-                religiao.getText().toString(), Integer.parseInt(tempoReligiao.getText().toString()),
-                profissao.getText().toString(),
-                codEscolaridade,
-                peso.getText().toString().equals("") ? 0 : Double.parseDouble(peso.getText().toString()),
-                altura.getText().toString().equals("") ? 0 : Double.parseDouble(altura.getText().toString()),
-                imc.getText().toString().equals("") ? 0 : Double.parseDouble(imc.getText().toString()),
-                cinturaQuadril.getText().toString().equals("") ? 0 : Double.parseDouble(cinturaQuadril.getText().toString()),
-                pas.getText().toString().equals("") ? 0 : Double.parseDouble(pas.getText().toString()),
-                pad.getText().toString().equals("") ? 0 : Double.parseDouble(pad.getText().toString()),
-                glicemiaCapilar.getText().toString().equals("") ? 0 : Double.parseDouble(glicemiaCapilar.getText().toString()),
-                espirometria.getText().toString().equals("") ? 0 : Integer.parseInt(espirometria.getText().toString()),
-                saudeFisicaSpinner.getSelectedItem().toString(),
-                saudeMentalSpinner.getSelectedItem().toString(),
-                doencas.getText().toString());
+
+        String cinturaTexto = cinturaQuadril.getText().toString();
+        String espirometriaTexto = espirometria.getText().toString();
+        String glicemiaTexto = glicemiaCapilar.getText().toString();
+
+        boolean imcVazio = isVazio(imc);
+        boolean cinturaVazio = isVazio(cinturaQuadril);
+        boolean pasVazio = isVazio(pas);
+        boolean padVazio = isVazio(pad);
+        boolean glicemiaVazio = isVazio(glicemiaCapilar);
+        boolean espirometriaVazio = isVazio(espirometria);
+
+        Entrevistado entrevistado = new Entrevistado();
+        entrevistado.setCodIdentificacao(iniciaisNome.getText().toString());
+        entrevistado.setIdade(Integer.parseInt(idade.getText().toString()));
+        entrevistado.setSexo(rb.getText().toString());
+        entrevistado.setCorPele(corPeleSpinner.getSelectedItem().toString());
+        entrevistado.setReligiao(religiao.getText().toString());
+        entrevistado.setTempoReligiao(Integer.parseInt(tempoReligiao.getText().toString()));
+        entrevistado.setProfissao(profissao.getText().toString());
+        entrevistado.setEscolaridade(codEscolaridade);
+        entrevistado.setPeso(Double.parseDouble(peso.getText().toString()));
+        entrevistado.setAltura(Double.parseDouble(altura.getText().toString()));
+        entrevistado.setImc(imcVazio ? 0 : Double.parseDouble(imc.getText().toString()));
+        entrevistado.setCinturaQuadril(cinturaVazio ? 0 : Double.parseDouble(cinturaTexto));
+        entrevistado.setPas(pasVazio ? 0 : Double.parseDouble(pas.getText().toString()));
+        entrevistado.setPad(padVazio ? 0 : Double.parseDouble(pad.getText().toString()));
+        entrevistado.setGlicemiaCapilar(glicemiaVazio ? 0 : Double.parseDouble(glicemiaTexto));
+        entrevistado.setEspirometria(espirometriaVazio ? 0 : Integer.parseInt(espirometriaTexto));
+        entrevistado.setSaudeFisica(saudeFisicaSpinner.getSelectedItem().toString());
+        entrevistado.setSaudeMental(saudeMentalSpinner.getSelectedItem().toString());
+        entrevistado.setDoencas(doencas.getText().toString());
+
+        return entrevistado;
+    }
+
+    private boolean isVazio(EditText etText) {
+        return etText.getText().toString().trim().length() <= 0;
     }
 
     private void populaTodosSpinners() {
@@ -169,9 +177,7 @@ public class FormActivity extends AppCompatActivity {
     private void populaSpinner(int array, Spinner spinner) {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 array, android.R.layout.simple_spinner_item);
-
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         spinner.setAdapter(adapter);
     }
 
@@ -198,13 +204,10 @@ public class FormActivity extends AppCompatActivity {
         escolaridadeSpinner = (Spinner) findViewById(R.id.escolaridadeIdSpinner);
         saudeFisicaSpinner = (Spinner) findViewById(R.id.saudeFisicaIdSpinner);
         saudeMentalSpinner = (Spinner) findViewById(R.id.saudeMentalIdSpinner);
-
-        botaoProximo = (Button) findViewById(R.id.botaoProximoId);
-
-        botaoLoadData = (Button) findViewById(R.id.loadDataId);
     }
 
-    private void loadData() {
+    @SuppressLint("SetTextI18n")
+    public void loadData(View view) {
         iniciaisNome.setText("GGG");
         idade.setText("30");
         religiao.setText("Evangélico");
@@ -226,5 +229,27 @@ public class FormActivity extends AppCompatActivity {
         escolaridadeSpinner.setSelection(3);
         saudeFisicaSpinner.setSelection(1);
         saudeMentalSpinner.setSelection(2);
+    }
+
+    public void iniciarQuestionario(View view) {
+        List<EditText> listaEditText = montaListaEditText();
+        List<Spinner> listaSpinners = montaListaSpinners();
+
+        EntrevistadoValidator validator = new EntrevistadoValidator();
+
+        boolean permiteSalvar = validator.validate(listaEditText, radioGroupSexo,
+                femininoRadio, listaSpinners);
+
+        if (permiteSalvar) {
+            Entrevistado entrevistado = retornaEntrevistado();
+            salvarIdSharedPreferences(entrevistado);
+            Intent intent = new Intent(FormActivity.this, QuestionarioActivity.class);
+            intent.putExtra(COD_QUESTAO, 1);
+            startActivity(intent);
+
+        } else {
+            Toast.makeText(FormActivity.this,
+                    Constants.PREENCHA_CAMPOS, Toast.LENGTH_SHORT).show();
+        }
     }
 }

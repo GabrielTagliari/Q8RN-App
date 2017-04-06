@@ -24,7 +24,7 @@
             android:layout_gravity="bottom|end"
             android:layout_marginRight="2dp"
             android:layout_weight="1"
-            android:text="Pontuação:"
+            android:text="@string/pontuacao"
             android:textAlignment="textEnd" />
 
         <TextView
@@ -45,7 +45,7 @@
             android:layout_gravity="bottom|end"
             android:layout_marginRight="2dp"
             android:layout_weight="1"
-            android:text="Resultado: "
+            android:text="@string/resultado"
             android:textAlignment="textEnd" />
 
         <TextView
@@ -88,14 +88,15 @@
             android:id="@+id/voltarMenuId"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
+            android:onClick="voltarMenu"
             android:text="@string/voltar_menu" />
 
         <Button
             android:id="@+id/email"
             style="@style/Widget.AppCompat.Button.Small"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:onClick="enviaEmail"
             android:text="@string/email" />
     </LinearLayout>

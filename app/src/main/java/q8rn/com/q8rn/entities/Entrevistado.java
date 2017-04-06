@@ -3,7 +3,6 @@ package q8rn.com.q8rn.entities;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import q8rn.com.q8rn.R;
 import q8rn.com.q8rn.constants.Constants;
 
 /* Created by Gabriel on 04/03/2017. */
@@ -31,32 +30,6 @@ public class Entrevistado implements Parcelable{
     private String doencas;
 
     public Entrevistado() {}
-
-    public Entrevistado(String codIdentificacao, int idade, String sexo, String corPele,
-                        String religiao, int tempoReligiao, String profissao,
-                        int escolaridade, double peso, double altura, double imc,
-                        double cinturaQuadril, double pas, double pad, double glicemiaCapilar,
-                        int espirometria, String saudeFisica, String saudeMental, String doencas) {
-        this.codIdentificacao = codIdentificacao;
-        this.idade = idade;
-        this.sexo = sexo;
-        this.corPele = corPele;
-        this.religiao = religiao;
-        this.tempoReligiao = tempoReligiao;
-        this.profissao = profissao;
-        this.escolaridade = escolaridade;
-        this.peso = peso;
-        this.altura = altura;
-        this.imc = imc;
-        this.cinturaQuadril = cinturaQuadril;
-        this.pas = pas;
-        this.pad = pad;
-        this.glicemiaCapilar = glicemiaCapilar;
-        this.espirometria = espirometria;
-        this.saudeFisica = saudeFisica;
-        this.saudeMental = saudeMental;
-        this.doencas = doencas;
-    }
 
     private Entrevistado(Parcel in) {
         codIdentificacao = in.readString();

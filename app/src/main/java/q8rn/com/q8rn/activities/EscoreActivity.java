@@ -6,12 +6,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,12 +35,15 @@ public class EscoreActivity extends AppCompatActivity {
     public static final String LISTA_MELHORAR = "listaMelhorar";
     public static final String NÃO_É_PERMITIDO_VOLTAR_AO_QUESTIONÁRIO = "Não é permitido voltar ao questionário";
     public static final String RESULTADO_QUESTIONARIO = "Resultado do questionário dos oito remédios naturais";
+    public static final String ALERTA = "Alerta";
+    public static final String QUER_REALMENTE_VOLTAR_AO_MENU = "Quer realmente voltar ao menu?";
+    public static final String SIM = "Sim";
+    public static final String NAO = "Não";
+    public static final String TEXT_HTML = "text/html";
+    public static final String ESCORE_FINAL = "Escore Final";
 
     private TextView escore;
-    private TextView escoreText;
-    private Button voltarMenu;
     private TextView resultado;
-    private ListView listaMelhorar;
 
     private List<Questao> listaRecebida;
 
@@ -55,12 +58,14 @@ public class EscoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_escore);
 
-        this.getSupportActionBar().setTitle("Escore Final");
+        ActionBar supportActionBar = this.getSupportActionBar();
+        if (supportActionBar != null) {
+            supportActionBar.setTitle(ESCORE_FINAL);
+        }
 
         escore = (TextView) findViewById(R.id.totalEscoreId);
-        voltarMenu = (Button) findViewById(R.id.voltarMenuId);
         resultado = (TextView) findViewById(R.id.textResultadoId);
-        listaMelhorar = (ListView) findViewById(R.id.listaMelhorarId);
+        ListView listaMelhorar = (ListView) findViewById(R.id.listaMelhorarId);
 
         Intent intent = getIntent();
         pontos = (HashMap<Integer, Integer>) intent.getExtras().getSerializable("pontos");
@@ -122,13 +127,6 @@ public class EscoreActivity extends AppCompatActivity {
         escore.setText(String.valueOf(escoreTotal));
 
         resultado.setText(calculaResultado(escoreTotal));
-
-        voltarMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mostrarConfirmacao();
-            }
-        });
     }
 
     @NonNull
@@ -163,23 +161,23 @@ public class EscoreActivity extends AppCompatActivity {
         StringBuffer msg = new StringBuffer();
         msg.append(questao.getDominio());
         msg.append("<br><br>").append(questao.getTitulo());
-        msg.append("<br><br>1) " + questao.getAlternativa1());
+        msg.append("<br><br>1) ").append(questao.getAlternativa1());
         if (questao.getAlternativa2() != null){
-            msg.append("<br>2) " + questao.getAlternativa2());
+            msg.append("<br>2) ").append(questao.getAlternativa2());
         }
         if (questao.getAlternativa2() != null) {
-            msg.append("<br>3) " + questao.getAlternativa3());
+            msg.append("<br>3) ").append(questao.getAlternativa3());
         }
         if (questao.getAlternativa2() != null) {
-            msg.append("<br>4) " + questao.getAlternativa4());
+            msg.append("<br>4) ").append(questao.getAlternativa4());
         }
         if (questao.getAlternativa2() != null) {
-            msg.append("<br>5) " + questao.getAlternativa5());
+            msg.append("<br>5) ").append(questao.getAlternativa5());
         } else {
-            msg.append("<br>2) " + questao.getAlternativa5());
+            msg.append("<br>2) ").append(questao.getAlternativa5());
         }
-        msg.append("<br><br>Resposta: " + questao.retornaAlternativaByNumero(pontos));
-        msg.append("<br><br>Pontos: " + pontos);
+        msg.append("<br><br>Resposta: ").append(questao.retornaAlternativaByNumero(pontos));
+        msg.append("<br><br>Pontos: ").append(pontos);
         return String.valueOf(msg);
     }
 
@@ -226,39 +224,24 @@ public class EscoreActivity extends AppCompatActivity {
         }
     }
 
-    public void mostrarConfirmacao() {
-        new AlertDialog.Builder(this)
-            .setIcon(android.R.drawable.ic_dialog_alert)
-            .setTitle("Alerta")
-            .setMessage("Quer realmente voltar ao menu?")
-            .setPositiveButton("Sim", new DialogInterface.OnClickListener()
-            {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent intentMenu = new Intent(EscoreActivity.this, MainActivity.class);
-                    startActivity(intentMenu);
-                }
-
-            })
-            .setNegativeButton("Não", null)
-            .show();
-    }
-
     @Override
     public void onBackPressed() {
         Toast.makeText(this, NÃO_É_PERMITIDO_VOLTAR_AO_QUESTIONÁRIO, Toast.LENGTH_SHORT).show();
     }
 
     public String montaBodyEmail() {
-        StringBuffer body = new StringBuffer();
+        StringBuilder body = new StringBuilder();
         body.append("<!DOCTYPE html>");
         body.append("<html>");
         body.append("<head>");
         body.append("<meta charset='utf-8'>");
         body.append("</head>");
         body.append("<body>");
-        body.append("<h3><b>Escore Total: </b>" + escore.getText() + "</h3>");
-        body.append("<h3><b>Resultado: " + resultado.getText() + "</b></h3>");
+        body.append("<h3><b>Escore Total: </b>");
+        body.append(escore.getText()).append("</h3>");
+        body.append("<h3><b>Resultado: ");
+        body.append(resultado.getText());
+        body.append("</b></h3>");
         body.append("<h3><b>Pontos a melhorar</b></h3>");
 
         for (Questao questao : listaRecebida) {
@@ -277,9 +260,27 @@ public class EscoreActivity extends AppCompatActivity {
 
     public void enviaEmail(View view) {
         final Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        emailIntent.setType("text/html");
+        emailIntent.setType(TEXT_HTML);
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, RESULTADO_QUESTIONARIO);
         emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(montaBodyEmail()));
         startActivity(emailIntent);
+    }
+
+    public void voltarMenu(View view) {
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle(ALERTA)
+                .setMessage(QUER_REALMENTE_VOLTAR_AO_MENU)
+                .setPositiveButton(SIM, new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intentMenu = new Intent(EscoreActivity.this, MainActivity.class);
+                        startActivity(intentMenu);
+                    }
+
+                })
+                .setNegativeButton(NAO, null)
+                .show();
     }
 }
