@@ -1,4 +1,4 @@
-package q8rn.com.q8rn.activities;
+package q8rn.com.q8rn.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -21,9 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import q8rn.com.q8rn.R;
-import q8rn.com.q8rn.constants.Constants;
-import q8rn.com.q8rn.entities.Entrevistado;
-import q8rn.com.q8rn.validators.EntrevistadoValidator;
+import q8rn.com.q8rn.infrastructure.Constants;
+import q8rn.com.q8rn.entity.Entrevistado;
+import q8rn.com.q8rn.infrastructure.EntrevistadoValidator;
 
 public class FormActivity extends AppCompatActivity {
 

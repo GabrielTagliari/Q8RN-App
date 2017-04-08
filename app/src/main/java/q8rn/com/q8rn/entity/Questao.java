@@ -1,4 +1,4 @@
-package q8rn.com.q8rn.entities;
+package q8rn.com.q8rn.entity;
 
 import android.os.Parcel;
 import android.os.Parcelable;

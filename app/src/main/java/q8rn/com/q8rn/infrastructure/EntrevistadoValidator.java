@@ -1,4 +1,4 @@
-package q8rn.com.q8rn.validators;
+package q8rn.com.q8rn.infrastructure;
 
 import android.widget.EditText;
 import android.widget.RadioButton;

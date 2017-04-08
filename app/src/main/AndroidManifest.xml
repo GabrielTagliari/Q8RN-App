@@ -13,9 +13,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.MainActivity" />
+        <activity android:name=".ui.MainActivity" />
         <activity
-            android:name=".activities.SplashActivity"
+            android:name=".ui.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,11 +23,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.FormActivity"
+        <activity android:name=".ui.FormActivity"
             android:configChanges="orientation|screenSize" />
-        <activity android:name=".activities.QuestionarioActivity"
+        <activity android:name=".ui.QuestionarioActivity"
             android:configChanges="orientation|screenSize" />
-        <activity android:name=".activities.EscoreActivity"
+        <activity android:name=".ui.EscoreActivity"
             android:configChanges="orientation|screenSize" />
     </application>
 

@@ -1,4 +1,4 @@
-package q8rn.com.q8rn.activities;
+package q8rn.com.q8rn.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -17,9 +17,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import q8rn.com.q8rn.R;
-import q8rn.com.q8rn.constants.Constants;
-import q8rn.com.q8rn.controllers.QuestaoController;
-import q8rn.com.q8rn.entities.Questao;
+import q8rn.com.q8rn.entity.Questao;
+import q8rn.com.q8rn.infrastructure.Constants;
+import q8rn.com.q8rn.manager.QuestaoManager;
 
 public class QuestionarioActivity extends AppCompatActivity {
 
@@ -94,8 +94,8 @@ public class QuestionarioActivity extends AppCompatActivity {
 
     private Questao findQuestaoByCod() {
         questao = new Questao();
-        QuestaoController questaoController = new QuestaoController(getBaseContext());
-        return questaoController.findQuestaoByCod(codQuestao);
+        QuestaoManager questaoManager = new QuestaoManager(getBaseContext());
+        return questaoManager.findQuestaoByCod(codQuestao);
     }
 
     private void populaQuestao(Questao questao) {

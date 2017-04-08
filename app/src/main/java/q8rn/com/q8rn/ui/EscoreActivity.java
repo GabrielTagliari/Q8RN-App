@@ -1,4 +1,4 @@
-package q8rn.com.q8rn.activities;
+package q8rn.com.q8rn.ui;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -24,11 +24,11 @@ import java.util.List;
 import java.util.Map;
 
 import q8rn.com.q8rn.R;
-import q8rn.com.q8rn.constants.Constants;
-import q8rn.com.q8rn.controllers.EntrevistadoController;
-import q8rn.com.q8rn.controllers.QuestaoEntrevistadoController;
-import q8rn.com.q8rn.entities.Entrevistado;
-import q8rn.com.q8rn.entities.Questao;
+import q8rn.com.q8rn.entity.Entrevistado;
+import q8rn.com.q8rn.entity.Questao;
+import q8rn.com.q8rn.infrastructure.Constants;
+import q8rn.com.q8rn.manager.EntrevistadoManager;
+import q8rn.com.q8rn.manager.QuestaoEntrevistadoManager;
 
 public class EscoreActivity extends AppCompatActivity {
 
@@ -51,7 +51,7 @@ public class EscoreActivity extends AppCompatActivity {
 
     private AlertDialog alertDialog;
 
-    private EntrevistadoController entrevistadoController;
+    private EntrevistadoManager mEntrevistadoManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,8 +109,8 @@ public class EscoreActivity extends AppCompatActivity {
 
         int escoreTotal = 0;
 
-        QuestaoEntrevistadoController qeController =
-                new QuestaoEntrevistadoController(getBaseContext());
+        QuestaoEntrevistadoManager qeManager =
+                new QuestaoEntrevistadoManager(getBaseContext());
 
         HashMap<Integer, Integer> inserirPontos = new HashMap<>(pontos);
 
@@ -118,7 +118,7 @@ public class EscoreActivity extends AppCompatActivity {
 
         while (it.hasNext()) {
             Map.Entry item = (Map.Entry)it.next();
-            qeController.insereQuestaoEntrevistado(idEntrevistado, (int) item.getKey(),
+            qeManager.insereQuestaoEntrevistado(idEntrevistado, (int) item.getKey(),
                     (int) item.getValue());
             escoreTotal += (int) item.getValue();
             it.remove();
@@ -192,12 +192,12 @@ public class EscoreActivity extends AppCompatActivity {
     }
 
     private void salvarOfflineEntrevistado(Entrevistado entrevistado) {
-        entrevistadoController = new EntrevistadoController(getBaseContext());
-        entrevistadoController.insereEntrevistado(entrevistado);
+        mEntrevistadoManager = new EntrevistadoManager(getBaseContext());
+        mEntrevistadoManager.insereEntrevistado(entrevistado);
     }
 
     private int recuperaLastId() {
-        return entrevistadoController.recuperaLastId();
+        return mEntrevistadoManager.recuperaLastId();
     }
 
     private Entrevistado recuperaEntrevistadoShared() {
@@ -268,7 +268,7 @@ public class EscoreActivity extends AppCompatActivity {
 
     public void voltarMenu(View view) {
         new AlertDialog.Builder(this)
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setIcon(android.R.drawable.ic_dialog_info)
                 .setTitle(ALERTA)
                 .setMessage(QUER_REALMENTE_VOLTAR_AO_MENU)
                 .setPositiveButton(SIM, new DialogInterface.OnClickListener()
