@@ -30,26 +30,26 @@ public class FormActivity extends AppCompatActivity {
     public static final String ENTREVISTADO = "entrevistado";
     public static final String COD_QUESTAO = "codQuestao";
 
-    private EditText iniciaisNome;
-    private EditText idade;
-    private RadioGroup radioGroupSexo;
-    private RadioButton femininoRadio;
-    private Spinner corPeleSpinner;
-    private EditText religiao;
-    private EditText tempoReligiao;
-    private EditText profissao;
-    private Spinner escolaridadeSpinner;
-    private EditText peso;
-    private EditText altura;
-    private EditText imc;
-    private EditText cinturaQuadril;
-    private EditText pas;
-    private EditText pad;
-    private EditText glicemiaCapilar;
-    private EditText espirometria;
-    private Spinner saudeFisicaSpinner;
-    private Spinner saudeMentalSpinner;
-    private EditText doencas;
+    private EditText mIniciaisNome;
+    private EditText mIdade;
+    private RadioGroup mRadioGroupSexo;
+    private RadioButton mFemininoRadio;
+    private Spinner mCorPeleSpinner;
+    private EditText mReligiao;
+    private EditText mTempoReligiao;
+    private EditText mProfissao;
+    private Spinner mEscolaridadeSpinner;
+    private EditText mPeso;
+    private EditText mAltura;
+    private EditText mImc;
+    private EditText mCinturaQuadril;
+    private EditText mPas;
+    private EditText mPad;
+    private EditText mGlicemiaCapilar;
+    private EditText mEspirometria;
+    private Spinner mSaudeFisicaSpinner;
+    private Spinner mSaudeMentalSpinner;
+    private EditText mDoencas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,33 +83,33 @@ public class FormActivity extends AppCompatActivity {
     }
 
     private void clearRadioErrorOnChange() {
-        radioGroupSexo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        mRadioGroupSexo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                femininoRadio.setError(null);
+                mFemininoRadio.setError(null);
             }
         });
     }
 
     private List<Spinner> montaListaSpinners() {
         List<Spinner> lista = new ArrayList<>();
-        lista.add(corPeleSpinner);
-        lista.add(escolaridadeSpinner);
-        lista.add(saudeFisicaSpinner);
-        lista.add(saudeMentalSpinner);
+        lista.add(mCorPeleSpinner);
+        lista.add(mEscolaridadeSpinner);
+        lista.add(mSaudeFisicaSpinner);
+        lista.add(mSaudeMentalSpinner);
         return lista;
     }
 
     private List<EditText> montaListaEditText() {
         List<EditText> lista = new ArrayList<>();
-        lista.add(iniciaisNome);
-        lista.add(idade);
-        lista.add(religiao);
-        lista.add(tempoReligiao);
-        lista.add(profissao);
-        lista.add(peso);
-        lista.add(altura);
-        lista.add(doencas);
+        lista.add(mIniciaisNome);
+        lista.add(mIdade);
+        lista.add(mReligiao);
+        lista.add(mTempoReligiao);
+        lista.add(mProfissao);
+        lista.add(mPeso);
+        lista.add(mAltura);
+        lista.add(mDoencas);
         return lista;
     }
 
@@ -124,41 +124,41 @@ public class FormActivity extends AppCompatActivity {
 
     private Entrevistado retornaEntrevistado() {
 
-        RadioButton rb = (RadioButton) findViewById(radioGroupSexo.getCheckedRadioButtonId());
+        RadioButton rb = (RadioButton) findViewById(mRadioGroupSexo.getCheckedRadioButtonId());
         int codEscolaridade = Entrevistado
-                .getCodEscolaridade(escolaridadeSpinner.getSelectedItem().toString());
+                .getCodEscolaridade(mEscolaridadeSpinner.getSelectedItem().toString());
 
-        String cinturaTexto = cinturaQuadril.getText().toString();
-        String espirometriaTexto = espirometria.getText().toString();
-        String glicemiaTexto = glicemiaCapilar.getText().toString();
+        String cinturaTexto = mCinturaQuadril.getText().toString();
+        String espirometriaTexto = mEspirometria.getText().toString();
+        String glicemiaTexto = mGlicemiaCapilar.getText().toString();
 
-        boolean imcVazio = isVazio(imc);
-        boolean cinturaVazio = isVazio(cinturaQuadril);
-        boolean pasVazio = isVazio(pas);
-        boolean padVazio = isVazio(pad);
-        boolean glicemiaVazio = isVazio(glicemiaCapilar);
-        boolean espirometriaVazio = isVazio(espirometria);
+        boolean imcVazio = isVazio(mImc);
+        boolean cinturaVazio = isVazio(mCinturaQuadril);
+        boolean pasVazio = isVazio(mPas);
+        boolean padVazio = isVazio(mPad);
+        boolean glicemiaVazio = isVazio(mGlicemiaCapilar);
+        boolean espirometriaVazio = isVazio(mEspirometria);
 
         Entrevistado entrevistado = new Entrevistado();
-        entrevistado.setCodIdentificacao(iniciaisNome.getText().toString());
-        entrevistado.setIdade(Integer.parseInt(idade.getText().toString()));
+        entrevistado.setCodIdentificacao(mIniciaisNome.getText().toString());
+        entrevistado.setIdade(Integer.parseInt(mIdade.getText().toString()));
         entrevistado.setSexo(rb.getText().toString());
-        entrevistado.setCorPele(corPeleSpinner.getSelectedItem().toString());
-        entrevistado.setReligiao(religiao.getText().toString());
-        entrevistado.setTempoReligiao(Integer.parseInt(tempoReligiao.getText().toString()));
-        entrevistado.setProfissao(profissao.getText().toString());
+        entrevistado.setCorPele(mCorPeleSpinner.getSelectedItem().toString());
+        entrevistado.setReligiao(mReligiao.getText().toString());
+        entrevistado.setTempoReligiao(Integer.parseInt(mTempoReligiao.getText().toString()));
+        entrevistado.setProfissao(mProfissao.getText().toString());
         entrevistado.setEscolaridade(codEscolaridade);
-        entrevistado.setPeso(Double.parseDouble(peso.getText().toString()));
-        entrevistado.setAltura(Double.parseDouble(altura.getText().toString()));
-        entrevistado.setImc(imcVazio ? 0 : Double.parseDouble(imc.getText().toString()));
+        entrevistado.setPeso(Double.parseDouble(mPeso.getText().toString()));
+        entrevistado.setAltura(Double.parseDouble(mAltura.getText().toString()));
+        entrevistado.setImc(imcVazio ? 0 : Double.parseDouble(mImc.getText().toString()));
         entrevistado.setCinturaQuadril(cinturaVazio ? 0 : Double.parseDouble(cinturaTexto));
-        entrevistado.setPas(pasVazio ? 0 : Double.parseDouble(pas.getText().toString()));
-        entrevistado.setPad(padVazio ? 0 : Double.parseDouble(pad.getText().toString()));
+        entrevistado.setPas(pasVazio ? 0 : Double.parseDouble(mPas.getText().toString()));
+        entrevistado.setPad(padVazio ? 0 : Double.parseDouble(mPad.getText().toString()));
         entrevistado.setGlicemiaCapilar(glicemiaVazio ? 0 : Double.parseDouble(glicemiaTexto));
         entrevistado.setEspirometria(espirometriaVazio ? 0 : Integer.parseInt(espirometriaTexto));
-        entrevistado.setSaudeFisica(saudeFisicaSpinner.getSelectedItem().toString());
-        entrevistado.setSaudeMental(saudeMentalSpinner.getSelectedItem().toString());
-        entrevistado.setDoencas(doencas.getText().toString());
+        entrevistado.setSaudeFisica(mSaudeFisicaSpinner.getSelectedItem().toString());
+        entrevistado.setSaudeMental(mSaudeMentalSpinner.getSelectedItem().toString());
+        entrevistado.setDoencas(mDoencas.getText().toString());
 
         return entrevistado;
     }
@@ -168,10 +168,10 @@ public class FormActivity extends AppCompatActivity {
     }
 
     private void populaTodosSpinners() {
-        populaSpinner(R.array.corpele_array, corPeleSpinner);
-        populaSpinner(R.array.escolaridade_array, escolaridadeSpinner);
-        populaSpinner(R.array.saude_array, saudeFisicaSpinner);
-        populaSpinner(R.array.saude_array, saudeMentalSpinner);
+        populaSpinner(R.array.corpele_array, mCorPeleSpinner);
+        populaSpinner(R.array.escolaridade_array, mEscolaridadeSpinner);
+        populaSpinner(R.array.saude_array, mSaudeFisicaSpinner);
+        populaSpinner(R.array.saude_array, mSaudeMentalSpinner);
     }
 
     private void populaSpinner(int array, Spinner spinner) {
@@ -182,53 +182,53 @@ public class FormActivity extends AppCompatActivity {
     }
 
     private void instanciaElementosTela() {
-        iniciaisNome = (EditText) findViewById(R.id.iniciaisNomeId);
-        idade = (EditText) findViewById(R.id.idadeId);
-        religiao = (EditText) findViewById(R.id.religiaoId);
-        tempoReligiao = (EditText) findViewById(R.id.tempoReligiaoId);
-        profissao = (EditText) findViewById(R.id.profissaoId);
-        peso = (EditText) findViewById(R.id.pesoId);
-        altura = (EditText) findViewById(R.id.alturaId);
-        imc = (EditText) findViewById(R.id.imcId);
-        cinturaQuadril = (EditText) findViewById(R.id.cinturaQuadrilId);
-        pas = (EditText) findViewById(R.id.pasId);
-        pad = (EditText) findViewById(R.id.padId);
-        glicemiaCapilar = (EditText) findViewById(R.id.glicemiaId);
-        espirometria = (EditText) findViewById(R.id.espirometriaId);
-        doencas = (EditText) findViewById(R.id.doencasId);
+        mIniciaisNome = (EditText) findViewById(R.id.iniciaisNomeId);
+        mIdade = (EditText) findViewById(R.id.idadeId);
+        mReligiao = (EditText) findViewById(R.id.religiaoId);
+        mTempoReligiao = (EditText) findViewById(R.id.tempoReligiaoId);
+        mProfissao = (EditText) findViewById(R.id.profissaoId);
+        mPeso = (EditText) findViewById(R.id.pesoId);
+        mAltura = (EditText) findViewById(R.id.alturaId);
+        mImc = (EditText) findViewById(R.id.imcId);
+        mCinturaQuadril = (EditText) findViewById(R.id.cinturaQuadrilId);
+        mPas = (EditText) findViewById(R.id.pasId);
+        mPad = (EditText) findViewById(R.id.padId);
+        mGlicemiaCapilar = (EditText) findViewById(R.id.glicemiaId);
+        mEspirometria = (EditText) findViewById(R.id.espirometriaId);
+        mDoencas = (EditText) findViewById(R.id.doencasId);
 
-        radioGroupSexo = (RadioGroup) findViewById(R.id.radioGroupSexoId);
-        femininoRadio = (RadioButton) findViewById(R.id.femininoId);
+        mRadioGroupSexo = (RadioGroup) findViewById(R.id.radioGroupSexoId);
+        mFemininoRadio = (RadioButton) findViewById(R.id.femininoId);
 
-        corPeleSpinner = (Spinner) findViewById(R.id.corPeleIdSpinner);
-        escolaridadeSpinner = (Spinner) findViewById(R.id.escolaridadeIdSpinner);
-        saudeFisicaSpinner = (Spinner) findViewById(R.id.saudeFisicaIdSpinner);
-        saudeMentalSpinner = (Spinner) findViewById(R.id.saudeMentalIdSpinner);
+        mCorPeleSpinner = (Spinner) findViewById(R.id.corPeleIdSpinner);
+        mEscolaridadeSpinner = (Spinner) findViewById(R.id.escolaridadeIdSpinner);
+        mSaudeFisicaSpinner = (Spinner) findViewById(R.id.saudeFisicaIdSpinner);
+        mSaudeMentalSpinner = (Spinner) findViewById(R.id.saudeMentalIdSpinner);
     }
 
     @SuppressLint("SetTextI18n")
     public void loadData(View view) {
-        iniciaisNome.setText("GGG");
-        idade.setText("30");
-        religiao.setText("Evangélico");
-        tempoReligiao.setText("5");
-        profissao.setText("Padeiro");
-        peso.setText("76");
-        altura.setText("1.75");
-        imc.setText("25.8");
-        cinturaQuadril.setText("85.5");
-        pas.setText("110");
-        pad.setText("70");
-        glicemiaCapilar.setText("99");
-        espirometria.setText("400");
-        doencas.setText("Nenhuma");
+        mIniciaisNome.setText("GGG");
+        mIdade.setText("30");
+        mReligiao.setText("Evangélico");
+        mTempoReligiao.setText("5");
+        mProfissao.setText("Padeiro");
+        mPeso.setText("76");
+        mAltura.setText("1.75");
+        mImc.setText("25.8");
+        mCinturaQuadril.setText("85.5");
+        mPas.setText("110");
+        mPad.setText("70");
+        mGlicemiaCapilar.setText("99");
+        mEspirometria.setText("400");
+        mDoencas.setText("Nenhuma");
 
-        femininoRadio.setChecked(true);
+        mFemininoRadio.setChecked(true);
 
-        corPeleSpinner.setSelection(1);
-        escolaridadeSpinner.setSelection(3);
-        saudeFisicaSpinner.setSelection(1);
-        saudeMentalSpinner.setSelection(2);
+        mCorPeleSpinner.setSelection(1);
+        mEscolaridadeSpinner.setSelection(3);
+        mSaudeFisicaSpinner.setSelection(1);
+        mSaudeMentalSpinner.setSelection(2);
     }
 
     public void iniciarQuestionario(View view) {
@@ -237,8 +237,8 @@ public class FormActivity extends AppCompatActivity {
 
         EntrevistadoValidator validator = new EntrevistadoValidator();
 
-        boolean permiteSalvar = validator.validate(listaEditText, radioGroupSexo,
-                femininoRadio, listaSpinners);
+        boolean permiteSalvar = validator.validate(listaEditText, mRadioGroupSexo,
+                mFemininoRadio, listaSpinners);
 
         if (permiteSalvar) {
             Entrevistado entrevistado = retornaEntrevistado();
