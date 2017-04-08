@@ -1,4 +1,4 @@
-package q8rn.com.q8rn.entities;
+package q8rn.com.q8rn.entity;
 
 /* Created by Gabriel on 15/03/2017. */
 public class QuestaoEntrevistado {

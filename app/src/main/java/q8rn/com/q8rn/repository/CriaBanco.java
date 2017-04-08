@@ -1,4 +1,4 @@
-package q8rn.com.q8rn.model;
+package q8rn.com.q8rn.repository;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

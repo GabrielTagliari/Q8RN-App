@@ -1,4 +1,4 @@
-package q8rn.com.q8rn.activities;
+package q8rn.com.q8rn.ui;
 
 import android.Manifest;
 import android.content.Intent;
@@ -19,8 +19,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 import q8rn.com.q8rn.R;
-import q8rn.com.q8rn.controllers.QuestaoEntrevistadoController;
-import q8rn.com.q8rn.model.PopulaBanco;
+import q8rn.com.q8rn.manager.QuestaoEntrevistadoManager;
+import q8rn.com.q8rn.repository.PopulaBanco;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -72,12 +72,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void enviarDadosEmail(View view) {
-        QuestaoEntrevistadoController qe = new QuestaoEntrevistadoController(getBaseContext());
+        QuestaoEntrevistadoManager qeManager = new QuestaoEntrevistadoManager(getBaseContext());
 
         if (temPermissaoArmazenamento()) {
 
             try {
-                File file = qe.gerarExcel(getBaseContext());
+                File file = qeManager.gerarExcel(getBaseContext());
                 Uri u1;
                 u1 = Uri.fromFile(file);
 

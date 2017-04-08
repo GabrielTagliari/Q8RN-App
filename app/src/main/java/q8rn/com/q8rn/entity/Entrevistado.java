@@ -1,9 +1,9 @@
-package q8rn.com.q8rn.entities;
+package q8rn.com.q8rn.entity;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import q8rn.com.q8rn.constants.Constants;
+import q8rn.com.q8rn.infrastructure.Constants;
 
 /* Created by Gabriel on 04/03/2017. */
 public class Entrevistado implements Parcelable{

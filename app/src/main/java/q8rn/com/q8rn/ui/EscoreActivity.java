@@ -1,4 +1,4 @@
-package q8rn.com.q8rn.activities;
+package q8rn.com.q8rn.ui;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -24,11 +24,11 @@ import java.util.List;
 import java.util.Map;
 
 import q8rn.com.q8rn.R;
-import q8rn.com.q8rn.constants.Constants;
-import q8rn.com.q8rn.controllers.EntrevistadoController;
-import q8rn.com.q8rn.controllers.QuestaoEntrevistadoController;
-import q8rn.com.q8rn.entities.Entrevistado;
-import q8rn.com.q8rn.entities.Questao;
+import q8rn.com.q8rn.entity.Entrevistado;
+import q8rn.com.q8rn.entity.Questao;
+import q8rn.com.q8rn.infrastructure.Constants;
+import q8rn.com.q8rn.manager.EntrevistadoManager;
+import q8rn.com.q8rn.manager.QuestaoEntrevistadoManager;
 
 public class EscoreActivity extends AppCompatActivity {
 
@@ -42,16 +42,16 @@ public class EscoreActivity extends AppCompatActivity {
     public static final String TEXT_HTML = "text/html";
     public static final String ESCORE_FINAL = "Escore Final";
 
-    private TextView escore;
-    private TextView resultado;
+    private TextView mEscore;
+    private TextView mResultado;
 
-    private List<Questao> listaRecebida;
+    private List<Questao> mListaRecebida;
 
-    private HashMap<Integer, Integer> pontos;
+    private HashMap<Integer, Integer> mPontos;
 
-    private AlertDialog alertDialog;
+    private AlertDialog mAlertDialog;
 
-    private EntrevistadoController entrevistadoController;
+    private EntrevistadoManager mEntrevistadoManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,26 +63,26 @@ public class EscoreActivity extends AppCompatActivity {
             supportActionBar.setTitle(ESCORE_FINAL);
         }
 
-        escore = (TextView) findViewById(R.id.totalEscoreId);
-        resultado = (TextView) findViewById(R.id.textResultadoId);
+        mEscore = (TextView) findViewById(R.id.totalEscoreId);
+        mResultado = (TextView) findViewById(R.id.textResultadoId);
         ListView listaMelhorar = (ListView) findViewById(R.id.listaMelhorarId);
 
         Intent intent = getIntent();
-        pontos = (HashMap<Integer, Integer>) intent.getExtras().getSerializable("pontos");
+        mPontos = (HashMap<Integer, Integer>) intent.getExtras().getSerializable("pontos");
 
-        listaRecebida = intent.getParcelableArrayListExtra(LISTA_MELHORAR);
+        mListaRecebida = intent.getParcelableArrayListExtra(LISTA_MELHORAR);
 
-        if (listaRecebida != null) {
+        if (mListaRecebida != null) {
             criaDialog();
 
-            String[] itensListView = new String[listaRecebida.size()];
+            String[] itensListView = new String[mListaRecebida.size()];
 
             int contador = 0;
 
-            for (Questao item : listaRecebida) {
+            for (Questao item : mListaRecebida) {
                 itensListView[contador] = item.getDominio() + " | Questão "
                         + item.getCodQuestao() + " | Pontos: "
-                        + pontos.get((int) item.getCodQuestao());
+                        + mPontos.get((int) item.getCodQuestao());
                 contador++;
             }
 
@@ -94,11 +94,11 @@ public class EscoreActivity extends AppCompatActivity {
             listaMelhorar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Questao questao = listaRecebida.get(i);
-                    alertDialog.setTitle(questao.getDominio());
+                    Questao questao = mListaRecebida.get(i);
+                    mAlertDialog.setTitle(questao.getDominio());
                     String msg = montaDetalhesQuestao(questao);
-                    alertDialog.setMessage(msg);
-                    alertDialog.show();
+                    mAlertDialog.setMessage(msg);
+                    mAlertDialog.show();
                 }
             });
         }
@@ -109,29 +109,29 @@ public class EscoreActivity extends AppCompatActivity {
 
         int escoreTotal = 0;
 
-        QuestaoEntrevistadoController qeController =
-                new QuestaoEntrevistadoController(getBaseContext());
+        QuestaoEntrevistadoManager qeManager =
+                new QuestaoEntrevistadoManager(getBaseContext());
 
-        HashMap<Integer, Integer> inserirPontos = new HashMap<>(pontos);
+        HashMap<Integer, Integer> inserirPontos = new HashMap<>(mPontos);
 
         Iterator it = inserirPontos.entrySet().iterator();
 
         while (it.hasNext()) {
             Map.Entry item = (Map.Entry)it.next();
-            qeController.insereQuestaoEntrevistado(idEntrevistado, (int) item.getKey(),
+            qeManager.insereQuestaoEntrevistado(idEntrevistado, (int) item.getKey(),
                     (int) item.getValue());
             escoreTotal += (int) item.getValue();
             it.remove();
         }
 
-        escore.setText(String.valueOf(escoreTotal));
+        mEscore.setText(String.valueOf(escoreTotal));
 
-        resultado.setText(calculaResultado(escoreTotal));
+        mResultado.setText(calculaResultado(escoreTotal));
     }
 
     @NonNull
     private String montaDetalhesQuestao(Questao questao) {
-        Integer pontos = this.pontos.get((int) questao.getCodQuestao());
+        Integer pontos = this.mPontos.get((int) questao.getCodQuestao());
 
         StringBuffer msg = new StringBuffer();
         msg.append(questao.getTitulo());
@@ -156,7 +156,7 @@ public class EscoreActivity extends AppCompatActivity {
     }
 
     private String montaDetalhesQuestaoHtml(Questao questao) {
-        Integer pontos = this.pontos.get((int) questao.getCodQuestao());
+        Integer pontos = this.mPontos.get((int) questao.getCodQuestao());
 
         StringBuffer msg = new StringBuffer();
         msg.append(questao.getDominio());
@@ -182,8 +182,8 @@ public class EscoreActivity extends AppCompatActivity {
     }
 
     private void criaDialog() {
-        alertDialog = new AlertDialog.Builder(EscoreActivity.this).create();
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+        mAlertDialog = new AlertDialog.Builder(EscoreActivity.this).create();
+        mAlertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -192,12 +192,12 @@ public class EscoreActivity extends AppCompatActivity {
     }
 
     private void salvarOfflineEntrevistado(Entrevistado entrevistado) {
-        entrevistadoController = new EntrevistadoController(getBaseContext());
-        entrevistadoController.insereEntrevistado(entrevistado);
+        mEntrevistadoManager = new EntrevistadoManager(getBaseContext());
+        mEntrevistadoManager.insereEntrevistado(entrevistado);
     }
 
     private int recuperaLastId() {
-        return entrevistadoController.recuperaLastId();
+        return mEntrevistadoManager.recuperaLastId();
     }
 
     private Entrevistado recuperaEntrevistadoShared() {
@@ -238,13 +238,13 @@ public class EscoreActivity extends AppCompatActivity {
         body.append("</head>");
         body.append("<body>");
         body.append("<h3><b>Escore Total: </b>");
-        body.append(escore.getText()).append("</h3>");
+        body.append(mEscore.getText()).append("</h3>");
         body.append("<h3><b>Resultado: ");
-        body.append(resultado.getText());
+        body.append(mResultado.getText());
         body.append("</b></h3>");
         body.append("<h3><b>Pontos a melhorar</b></h3>");
 
-        for (Questao questao : listaRecebida) {
+        for (Questao questao : mListaRecebida) {
             body.append(montaDetalhesQuestaoHtml(questao));
             body.append("<br>");
             body.append("---------------------------------------------------------------------");
@@ -268,7 +268,7 @@ public class EscoreActivity extends AppCompatActivity {
 
     public void voltarMenu(View view) {
         new AlertDialog.Builder(this)
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setIcon(android.R.drawable.ic_dialog_info)
                 .setTitle(ALERTA)
                 .setMessage(QUER_REALMENTE_VOLTAR_AO_MENU)
                 .setPositiveButton(SIM, new DialogInterface.OnClickListener()

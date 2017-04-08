@@ -1,4 +1,4 @@
-package q8rn.com.q8rn.activities;
+package q8rn.com.q8rn.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -17,31 +17,31 @@ import java.util.HashMap;
 import java.util.List;
 
 import q8rn.com.q8rn.R;
-import q8rn.com.q8rn.constants.Constants;
-import q8rn.com.q8rn.controllers.QuestaoController;
-import q8rn.com.q8rn.entities.Questao;
+import q8rn.com.q8rn.entity.Questao;
+import q8rn.com.q8rn.infrastructure.Constants;
+import q8rn.com.q8rn.manager.QuestaoManager;
 
 public class QuestionarioActivity extends AppCompatActivity {
 
-    public static final String LISTA = "listaMelhorar";
-    public static final String PONTOS = "pontos";
-    public static final String COD_QUESTAO = "codQuestao";
+    public static final String LISTA = "mListaMelhorar";
+    public static final String PONTOS = "mPontos";
+    public static final String COD_QUESTAO = "mCodQuestao";
 
     public static final int UM = 1;
     public static final int VINTE_CINCO = 25;
 
-    private TextView titulo;
-    private RadioGroup radioGroupAlternativas;
-    private RadioButton alternativa1;
-    private RadioButton alternativa2;
-    private RadioButton alternativa3;
-    private RadioButton alternativa4;
-    private RadioButton alternativa5;
+    private TextView mTitulo;
+    private RadioGroup mRadioGroupAlternativas;
+    private RadioButton mAlternativa1;
+    private RadioButton mAlternativa2;
+    private RadioButton mAlternativa3;
+    private RadioButton mAlternativa4;
+    private RadioButton mAlternativa5;
 
-    private int codQuestao;
-    private HashMap<Integer, Integer> pontos;
-    private List<Questao> listaMelhorar;
-    private Questao questao;
+    private int mCodQuestao;
+    private HashMap<Integer, Integer> mPontos;
+    private List<Questao> mListaMelhorar;
+    private Questao mQuestao;
 
     @SuppressLint("UseSparseArrays")
     @Override
@@ -52,11 +52,11 @@ public class QuestionarioActivity extends AppCompatActivity {
         instanciaElementos();
 
         Intent intent = getIntent();
-        codQuestao = intent.getExtras().getInt(Constants.COD_QUESTAO);
+        mCodQuestao = intent.getExtras().getInt(Constants.COD_QUESTAO);
 
-        if (codQuestao == UM) {
-            pontos = new HashMap<>();
-            listaMelhorar = new ArrayList<>();
+        if (mCodQuestao == UM) {
+            mPontos = new HashMap<>();
+            mListaMelhorar = new ArrayList<>();
         }
 
         HashMap<Integer, Integer> pontosRecebidos;
@@ -65,20 +65,20 @@ public class QuestionarioActivity extends AppCompatActivity {
         ArrayList<Questao> listaRecebida = intent.getParcelableArrayListExtra(LISTA);
 
         if (pontosRecebidos != null) {
-            pontos = pontosRecebidos;
+            mPontos = pontosRecebidos;
         }
 
         if (listaRecebida != null) {
-            listaMelhorar = listaRecebida;
+            mListaMelhorar = listaRecebida;
         }
 
-        questao = findQuestaoByCod();
+        mQuestao = findQuestaoByCod();
 
-        populaQuestao(questao);
+        populaQuestao(mQuestao);
 
         controleRadioButtons();
 
-        radioGroupAlternativas.check(R.id.radioUmId);
+        mRadioGroupAlternativas.check(R.id.radioUmId);
     }
 
     @Override
@@ -93,15 +93,15 @@ public class QuestionarioActivity extends AppCompatActivity {
     }
 
     private Questao findQuestaoByCod() {
-        questao = new Questao();
-        QuestaoController questaoController = new QuestaoController(getBaseContext());
-        return questaoController.findQuestaoByCod(codQuestao);
+        mQuestao = new Questao();
+        QuestaoManager questaoManager = new QuestaoManager(getBaseContext());
+        return questaoManager.findQuestaoByCod(mCodQuestao);
     }
 
     private void populaQuestao(Questao questao) {
 
         if (questao != null) {
-            titulo.setText(questao.getTitulo());
+            mTitulo.setText(questao.getTitulo());
 
             ActionBar supportActionBar = this.getSupportActionBar();
             if (supportActionBar != null) {
@@ -109,11 +109,11 @@ public class QuestionarioActivity extends AppCompatActivity {
                 supportActionBar.setTitle(questao.getDominio());
             }
 
-            RadioButton alternativa1 = (RadioButton) radioGroupAlternativas.getChildAt(0);
-            RadioButton alternativa2 = (RadioButton) radioGroupAlternativas.getChildAt(1);
-            RadioButton alternativa3 = (RadioButton) radioGroupAlternativas.getChildAt(2);
-            RadioButton alternativa4 = (RadioButton) radioGroupAlternativas.getChildAt(3);
-            RadioButton alternativa5 = (RadioButton) radioGroupAlternativas.getChildAt(4);
+            RadioButton alternativa1 = (RadioButton) mRadioGroupAlternativas.getChildAt(0);
+            RadioButton alternativa2 = (RadioButton) mRadioGroupAlternativas.getChildAt(1);
+            RadioButton alternativa3 = (RadioButton) mRadioGroupAlternativas.getChildAt(2);
+            RadioButton alternativa4 = (RadioButton) mRadioGroupAlternativas.getChildAt(3);
+            RadioButton alternativa5 = (RadioButton) mRadioGroupAlternativas.getChildAt(4);
 
             alternativa1.setText(questao.getAlternativa1());
             alternativa2.setText(questao.getAlternativa2());
@@ -128,52 +128,52 @@ public class QuestionarioActivity extends AppCompatActivity {
     }
 
     private void calculaEscoreAtual() {
-        int selecionado = radioGroupAlternativas.getCheckedRadioButtonId();
+        int selecionado = mRadioGroupAlternativas.getCheckedRadioButtonId();
         switch(selecionado){
             case R.id.radioUmId:
-                pontos.put(codQuestao, 4);
+                mPontos.put(mCodQuestao, 4);
                 break;
             case R.id.radioDoisId:
-                pontos.put(codQuestao, 3);
+                mPontos.put(mCodQuestao, 3);
                 break;
             case R.id.radioTresId:
-                pontos.put(codQuestao, 2);
+                mPontos.put(mCodQuestao, 2);
                 adicionaQuestaoListaDeficiencia();
                 break;
             case R.id.radioQuatroId:
-                pontos.put(codQuestao, 1);
+                mPontos.put(mCodQuestao, 1);
                 adicionaQuestaoListaDeficiencia();
                 break;
             case R.id.radioCincoId:
-                pontos.put(codQuestao, 0);
+                mPontos.put(mCodQuestao, 0);
                 adicionaQuestaoListaDeficiencia();
                 break;
         }
     }
 
     private void adicionaQuestaoListaDeficiencia() {
-        if (!listaMelhorar.contains(questao)) {
-            listaMelhorar.add(questao);
+        if (!mListaMelhorar.contains(mQuestao)) {
+            mListaMelhorar.add(mQuestao);
         }
     }
 
     private void controleRadioButtons() {
-        mostrarRadioButton(alternativa1);
-        mostrarRadioButton(alternativa2);
-        mostrarRadioButton(alternativa3);
-        mostrarRadioButton(alternativa4);
-        mostrarRadioButton(alternativa5);
+        mostrarRadioButton(mAlternativa1);
+        mostrarRadioButton(mAlternativa2);
+        mostrarRadioButton(mAlternativa3);
+        mostrarRadioButton(mAlternativa4);
+        mostrarRadioButton(mAlternativa5);
     }
 
     private void instanciaElementos() {
-        titulo = (TextView) findViewById(R.id.tituloId);
-        radioGroupAlternativas = (RadioGroup) findViewById(R.id.radioGroupAlternativasId);
+        mTitulo = (TextView) findViewById(R.id.tituloId);
+        mRadioGroupAlternativas = (RadioGroup) findViewById(R.id.radioGroupAlternativasId);
 
-        alternativa1 = (RadioButton) findViewById(R.id.radioUmId);
-        alternativa2 = (RadioButton) findViewById(R.id.radioDoisId);
-        alternativa3 = (RadioButton) findViewById(R.id.radioTresId);
-        alternativa4 = (RadioButton) findViewById(R.id.radioQuatroId);
-        alternativa5 = (RadioButton) findViewById(R.id.radioCincoId);
+        mAlternativa1 = (RadioButton) findViewById(R.id.radioUmId);
+        mAlternativa2 = (RadioButton) findViewById(R.id.radioDoisId);
+        mAlternativa3 = (RadioButton) findViewById(R.id.radioTresId);
+        mAlternativa4 = (RadioButton) findViewById(R.id.radioQuatroId);
+        mAlternativa5 = (RadioButton) findViewById(R.id.radioCincoId);
     }
 
     private void mostrarRadioButton(RadioButton radioButton) {
@@ -185,25 +185,25 @@ public class QuestionarioActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        codQuestao--;
+        mCodQuestao--;
     }
 
     public void proximaQuestao(View view) {
-        if (radioGroupAlternativas.getCheckedRadioButtonId() != -1) {
+        if (mRadioGroupAlternativas.getCheckedRadioButtonId() != -1) {
             calculaEscoreAtual();
-            if (codQuestao == VINTE_CINCO) {
-                codQuestao++;
+            if (mCodQuestao == VINTE_CINCO) {
+                mCodQuestao++;
                 Intent intentEscore;
                 intentEscore = new Intent(QuestionarioActivity.this, EscoreActivity.class);
-                intentEscore.putParcelableArrayListExtra(LISTA, (ArrayList<Questao>) listaMelhorar);
-                intentEscore.putExtra(PONTOS, pontos);
+                intentEscore.putParcelableArrayListExtra(LISTA, (ArrayList<Questao>) mListaMelhorar);
+                intentEscore.putExtra(PONTOS, mPontos);
                 startActivity(intentEscore);
             } else {
-                codQuestao++;
+                mCodQuestao++;
                 Intent intentProximo = new Intent(QuestionarioActivity.this, QuestionarioActivity.class);
-                intentProximo.putExtra(COD_QUESTAO, codQuestao);
-                intentProximo.putParcelableArrayListExtra(LISTA, (ArrayList<Questao>) listaMelhorar);
-                intentProximo.putExtra(PONTOS, pontos);
+                intentProximo.putExtra(COD_QUESTAO, mCodQuestao);
+                intentProximo.putParcelableArrayListExtra(LISTA, (ArrayList<Questao>) mListaMelhorar);
+                intentProximo.putExtra(PONTOS, mPontos);
                 startActivity(intentProximo);
             }
         } else {

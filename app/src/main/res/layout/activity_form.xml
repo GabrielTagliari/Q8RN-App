@@ -12,7 +12,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="q8rn.com.q8rn.activities.FormActivity"
+    tools:context="q8rn.com.q8rn.ui.FormActivity"
     android:background="@color/colorWhite"
     android:orientation="vertical"
     android:weightSum="1">
