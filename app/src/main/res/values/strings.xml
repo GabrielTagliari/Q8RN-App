@@ -3,18 +3,26 @@
 
     <!-- Elementos -->
     <string name="titulo_main">Questionário dos Oito Remédios Naturais</string>
-    <string name="botao_main">Realiza questionário</string>
-    <string name="botao_simular">Enviar dados por email</string>
+    <string name="botao_realizar_quest">Realiza questionário</string>
+    <string name="botao_enviar_email">Enviar dados por email</string>
     <string name="titulo_form">Preencha o formulário</string>
+    <string name="botao_proximo">Próximo</string>
+    <string name="logo">Logo</string>
+    <string name="voltar_menu">Voltar ao menu</string>
+    <string name="escore_total">Escore total</string>
+    <string name="realizar_questionario">Realizar Questionário</string>
+    <string name="load_data">Load data</string>
+    <string name="email">Enviar Resultado Email</string>
+    <string name="pontos_a_melhorar">Pontos a melhorar</string>
 
     <!-- Strings -->
     <string name="altura">Altura</string>
     <string name="cintura_quadril">Cintura-Quadril</string>
     <string name="sexo">Sexo:</string>
-    <string name="sa_de_mental">Saúde mental:</string>
-    <string name="sa_de_f_sica">Saúde física:</string>
-    <string name="religi_o_referida">Religião Referida</string>
-    <string name="profiss_o">Profissão</string>
+    <string name="saude_mental">Saúde mental:</string>
+    <string name="saude_f_sica">Saúde física:</string>
+    <string name="religiao_referida">Religião Referida</string>
+    <string name="profissao">Profissão</string>
     <string name="pas">Pressão Arterial Sistólica (PAS)</string>
     <string name="pad">Pressão Arterial Diastólica (PAD)</string>
     <string name="peso">Peso</string>
@@ -22,30 +30,29 @@
     <string name="iniciais_do_nome">Iniciais do nome</string>
     <string name="idade">Idade</string>
     <string name="imc">IMC</string>
-    <string name="h_quanto_tempo">Há quantos anos</string>
+    <string name="ha_quanto_tempo">Há quantos anos</string>
     <string name="glicemia_capilar">Glicemia capilar</string>
     <string name="feminino">Feminino</string>
     <string name="espirometria">Espirometria</string>
     <string name="escolaridade">Escolaridade</string>
-    <string name="doen_as_referidas">Doenças referidas</string>
+    <string name="doencas_referidas">Doenças referidas</string>
     <string name="cor_da_pele">Cor da pele:</string>
-    <string name="botao_proximo">Próximo</string>
-    <string name="nutricao">Nutrição</string>
 
-    <!-- Questoes -->
-    <string name="questao1">Com que frequência você inclui em suas refeições diária todos esses alimentos: feijões, castanhas, frutas, legumes e verduras?</string>
-    <string name="Volar" />
-    <string name="botao_voltar">Voltar</string>
-    <string name="logo">Logo</string>
-    <string name="voltar_menu">Voltar ao menu</string>
-    <string name="escore_total">Escore total</string>
-    <string name="realizar_questionario">Realizar Questionário</string>
-    <string name="load_data">Load data</string>
-    <string name="cm">Cm</string>
-    <string name="email">Enviar Resultado Email</string>
-    <string name="pontos_a_melhorar">Pontos a melhorar</string>
-    <string name="autores_copyright">Autores: Gina Abdala e Dyrce Meira</string>
+    <!-- Copyright -->
     <string name="copyright">Copyright ©</string>
+    <string name="autores_copyright">Autores: Gina Abdala e Dyrce Meira</string>
     <string name="desenvolvedor_copyright">Desenvolvedor: Gabriel Tagliari Rodrigo</string>
     <string name="supervisor_copyright">Supervisor: Roberto Sussumu Wataya</string>
+
+    <!-- Unidade de medidas -->
+    <string name="cm">Cm</string>
+    <string name="kg">Kg</string>
+    <string name="kg_m">Kg/m²</string>
+    <string name="mm_hg">mm/Hg</string>
+    <string name="mg_dl">mg/dl</string>
+    <string name="dl">dl</string>
+
+    <!-- Escore -->
+    <string name="pontuacao">Pontuação:</string>
+    <string name="resultado">Resultado:</string>
 </resources>

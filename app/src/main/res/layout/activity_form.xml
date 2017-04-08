@@ -93,7 +93,7 @@
         android:inputType="textCapSentences|textPersonName"
         android:ems="10"
         android:id="@+id/religiaoId"
-        android:hint="@string/religi_o_referida"
+        android:hint="@string/religiao_referida"
         android:maxLength="30" />
 
     <EditText
@@ -101,7 +101,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:id="@+id/tempoReligiaoId"
-        android:hint="@string/h_quanto_tempo"
+        android:hint="@string/ha_quanto_tempo"
         android:maxLength="4"
         android:inputType="number" />
 
@@ -111,7 +111,7 @@
         android:inputType="textCapSentences|textPersonName"
         android:ems="10"
         android:id="@+id/profissaoId"
-        android:hint="@string/profiss_o"
+        android:hint="@string/profissao"
         android:maxLength="30" />
 
     <LinearLayout
@@ -152,13 +152,14 @@
             android:layout_weight="1" />
 
         <TextView
-            android:text="Kg"
+            android:text="@string/kg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView3"
             android:layout_weight="0.25"
             android:textAppearance="@style/TextAppearance.AppCompat.Button"
-            android:textAlignment="textEnd" />
+            android:textAlignment="textEnd"
+            android:layout_gravity="end"/>
 
     </LinearLayout>
 
@@ -185,7 +186,8 @@
             android:id="@+id/textView4"
             android:layout_weight="0.25"
             android:textAppearance="@style/TextAppearance.AppCompat.Button"
-            android:textAlignment="textEnd" />
+            android:textAlignment="textEnd"
+            android:layout_gravity="end"/>
     </LinearLayout>
 
     <LinearLayout
@@ -204,12 +206,13 @@
             android:layout_weight="1" />
 
         <TextView
-            android:text="Kg/m²"
+            android:text="@string/kg_m"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView5"
             android:textAppearance="@style/TextAppearance.AppCompat.Button"
             android:textAlignment="textEnd"
+            android:layout_gravity="end"
             android:layout_weight="0.10" />
     </LinearLayout>
 
@@ -229,13 +232,14 @@
             android:layout_weight="1" />
 
         <TextView
-            android:text="Cm"
+            android:text="@string/cm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView6"
             android:layout_weight="0.24"
             android:textAppearance="@style/TextAppearance.AppCompat.Button"
-            android:textAlignment="textEnd" />
+            android:textAlignment="textEnd"
+            android:layout_gravity="end"/>
     </LinearLayout>
 
     <LinearLayout
@@ -254,12 +258,13 @@
             android:layout_weight="1" />
 
         <TextView
-            android:text="mm/Hg"
+            android:text="@string/mm_hg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView7"
             android:textAppearance="@style/TextAppearance.AppCompat.Button"
-            android:textAlignment="textEnd" />
+            android:textAlignment="textEnd"
+            android:layout_gravity="end"/>
     </LinearLayout>
 
     <LinearLayout
@@ -278,12 +283,13 @@
             android:layout_weight="1" />
 
         <TextView
-            android:text="mm/Hg"
+            android:text="@string/mm_hg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView10"
             android:textAppearance="@style/TextAppearance.AppCompat.Button"
-            android:textAlignment="textEnd" />
+            android:textAlignment="textEnd"
+            android:layout_gravity="end"/>
 
     </LinearLayout>
 
@@ -303,12 +309,13 @@
             android:layout_weight="1" />
 
         <TextView
-            android:text="mg/dl"
+            android:text="@string/mg_dl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView12"
             android:textAppearance="@style/TextAppearance.AppCompat.Button"
-            android:textAlignment="textEnd" />
+            android:textAlignment="textEnd"
+            android:layout_gravity="end"/>
     </LinearLayout>
 
     <LinearLayout
@@ -328,12 +335,13 @@
             android:layout_weight="1" />
 
         <TextView
-            android:text="dl"
+            android:text="@string/dl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView14"
             android:textAppearance="@style/TextAppearance.AppCompat.Button"
             android:textAlignment="textEnd"
+            android:layout_gravity="end"
             android:layout_weight="0.47" />
 
     </LinearLayout>
@@ -346,7 +354,7 @@
         android:layout_marginBottom="8dp">
 
         <TextView
-            android:text="@string/sa_de_f_sica"
+            android:text="@string/saude_f_sica"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/saudeFisicaTextId"
@@ -369,7 +377,7 @@
         android:layout_marginTop="8dp">
 
         <TextView
-            android:text="@string/sa_de_mental"
+            android:text="@string/saude_mental"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/saudeMentalTextId"
@@ -390,22 +398,24 @@
         android:inputType="textCapSentences|textPersonName"
         android:ems="10"
         android:id="@+id/doencasId"
-        android:hint="@string/doen_as_referidas"
+        android:hint="@string/doencas_referidas"
         android:maxLength="30" />
 
     <Button
-        android:text="@string/botao_proximo"
+        android:id="@+id/botaoProximoId"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/botaoProximoId"
-        style="@style/Widget.AppCompat.Button.Colored" />
+        android:onClick="iniciarQuestionario"
+        android:text="@string/botao_proximo" />
 
     <Button
-        android:text="@string/load_data"
+        android:id="@+id/loadDataId"
+        style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/loadDataId"
-        style="@style/Widget.AppCompat.Button.Small" />
+        android:onClick="loadData"
+        android:text="@string/load_data" />
 
 </LinearLayout>
 </ScrollView>

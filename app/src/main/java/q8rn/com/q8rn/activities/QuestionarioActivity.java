@@ -3,10 +3,10 @@ package q8rn.com.q8rn.activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -26,23 +26,22 @@ public class QuestionarioActivity extends AppCompatActivity {
     public static final String LISTA = "listaMelhorar";
     public static final String PONTOS = "pontos";
     public static final String COD_QUESTAO = "codQuestao";
+
+    public static final int UM = 1;
+    public static final int VINTE_CINCO = 25;
+
     private TextView titulo;
     private RadioGroup radioGroupAlternativas;
-    private Button botaoVoltar;
-    private Button botaoProximo;
     private RadioButton alternativa1;
     private RadioButton alternativa2;
     private RadioButton alternativa3;
     private RadioButton alternativa4;
     private RadioButton alternativa5;
-    private TextView dominio;
 
     private int codQuestao;
     private HashMap<Integer, Integer> pontos;
     private List<Questao> listaMelhorar;
     private Questao questao;
-
-    private QuestaoController questaoController;
 
     @SuppressLint("UseSparseArrays")
     @Override
@@ -55,7 +54,7 @@ public class QuestionarioActivity extends AppCompatActivity {
         Intent intent = getIntent();
         codQuestao = intent.getExtras().getInt(Constants.COD_QUESTAO);
 
-        if (codQuestao == 1) {
+        if (codQuestao == UM) {
             pontos = new HashMap<>();
             listaMelhorar = new ArrayList<>();
         }
@@ -80,46 +79,22 @@ public class QuestionarioActivity extends AppCompatActivity {
         controleRadioButtons();
 
         radioGroupAlternativas.check(R.id.radioUmId);
+    }
 
-        botaoProximo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (radioGroupAlternativas.getCheckedRadioButtonId() != -1) {
-                    calculaEscoreAtual();
-                    if (codQuestao == 25) {
-                        codQuestao++;
-                        Intent intentEscore;
-                        intentEscore = new Intent(QuestionarioActivity.this, EscoreActivity.class);
-                        intentEscore.putParcelableArrayListExtra(LISTA, (ArrayList<Questao>) listaMelhorar);
-                        intentEscore.putExtra(PONTOS, pontos);
-                        startActivity(intentEscore);
-                    } else {
-                        codQuestao++;
-                        Intent intentProximo = new Intent(QuestionarioActivity.this, QuestionarioActivity.class);
-                        intentProximo.putExtra(COD_QUESTAO, codQuestao);
-                        intentProximo.putParcelableArrayListExtra(LISTA, (ArrayList<Questao>) listaMelhorar);
-                        intentProximo.putExtra(PONTOS, pontos);
-                        startActivity(intentProximo);
-                    }
-                } else {
-                    Toast.makeText(QuestionarioActivity.this, Constants.SELECIONE_ALTERNATIVA,
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        botaoVoltar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
                 finish();
-            }
-        });
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private Questao findQuestaoByCod() {
         questao = new Questao();
-        questaoController = new QuestaoController(getBaseContext());
+        QuestaoController questaoController = new QuestaoController(getBaseContext());
         return questaoController.findQuestaoByCod(codQuestao);
     }
 
@@ -127,7 +102,12 @@ public class QuestionarioActivity extends AppCompatActivity {
 
         if (questao != null) {
             titulo.setText(questao.getTitulo());
-            this.getSupportActionBar().setTitle(questao.getDominio());
+
+            ActionBar supportActionBar = this.getSupportActionBar();
+            if (supportActionBar != null) {
+                supportActionBar.setDisplayHomeAsUpEnabled(true);
+                supportActionBar.setTitle(questao.getDominio());
+            }
 
             RadioButton alternativa1 = (RadioButton) radioGroupAlternativas.getChildAt(0);
             RadioButton alternativa2 = (RadioButton) radioGroupAlternativas.getChildAt(1);
@@ -188,8 +168,6 @@ public class QuestionarioActivity extends AppCompatActivity {
     private void instanciaElementos() {
         titulo = (TextView) findViewById(R.id.tituloId);
         radioGroupAlternativas = (RadioGroup) findViewById(R.id.radioGroupAlternativasId);
-        botaoVoltar = (Button) findViewById(R.id.botaoVoltarId);
-        botaoProximo = (Button) findViewById(R.id.botaoProximoId);
 
         alternativa1 = (RadioButton) findViewById(R.id.radioUmId);
         alternativa2 = (RadioButton) findViewById(R.id.radioDoisId);
@@ -208,5 +186,29 @@ public class QuestionarioActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         codQuestao--;
+    }
+
+    public void proximaQuestao(View view) {
+        if (radioGroupAlternativas.getCheckedRadioButtonId() != -1) {
+            calculaEscoreAtual();
+            if (codQuestao == VINTE_CINCO) {
+                codQuestao++;
+                Intent intentEscore;
+                intentEscore = new Intent(QuestionarioActivity.this, EscoreActivity.class);
+                intentEscore.putParcelableArrayListExtra(LISTA, (ArrayList<Questao>) listaMelhorar);
+                intentEscore.putExtra(PONTOS, pontos);
+                startActivity(intentEscore);
+            } else {
+                codQuestao++;
+                Intent intentProximo = new Intent(QuestionarioActivity.this, QuestionarioActivity.class);
+                intentProximo.putExtra(COD_QUESTAO, codQuestao);
+                intentProximo.putParcelableArrayListExtra(LISTA, (ArrayList<Questao>) listaMelhorar);
+                intentProximo.putExtra(PONTOS, pontos);
+                startActivity(intentProximo);
+            }
+        } else {
+            Toast.makeText(QuestionarioActivity.this, Constants.SELECIONE_ALTERNATIVA,
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 }

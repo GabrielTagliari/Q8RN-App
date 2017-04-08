@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_questionario"
     android:layout_width="match_parent"
@@ -10,16 +11,34 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="q8rn.com.q8rn.activities.QuestionarioActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/botaoProximoId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="5dp"
+        android:clickable="true"
+        android:onClick="proximaQuestao"
+        app:fabSize="normal"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        app:srcCompat="@drawable/ic_forward_white_36dp" />
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_above="@+id/footer">
+        android:layout_height="fill_parent">
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tituloId"
@@ -29,71 +48,47 @@
                 android:textSize="18sp" />
 
             <RadioGroup
+                android:id="@+id/radioGroupAlternativasId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/radioGroupAlternativasId"
                 android:layout_gravity="center"
                 android:layout_margin="50dp">
 
                 <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/radioUmId"
-                    android:layout_weight="1"
-                    android:layout_marginBottom="10dp" />
-
-                <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1" />
+
+                <RadioButton
                     android:id="@+id/radioDoisId"
-                    android:layout_weight="1"
-                    android:layout_marginBottom="10dp" />
-
-                <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1" />
+
+                <RadioButton
                     android:id="@+id/radioTresId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp" />
 
                 <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/radioQuatroId"
-                    android:layout_weight="1"
-                    android:layout_marginBottom="10dp" />
-
-                <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1" />
+
+                <RadioButton
                     android:id="@+id/radioCincoId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1" />
             </RadioGroup>
         </LinearLayout>
     </ScrollView>
-
-        <LinearLayout
-            android:id="@+id/footer"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true">
-
-            <Button
-                android:text="@string/botao_voltar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/botaoVoltarId"
-                android:layout_weight="1"
-                style="@style/Widget.AppCompat.Button" />
-
-            <Button
-                android:text="@string/botao_proximo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/botaoProximoId"
-                android:layout_weight="1"
-                style="@style/Widget.AppCompat.Button.Colored" />
-        </LinearLayout>
 
 </RelativeLayout>
 
