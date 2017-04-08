@@ -1,5 +1,4 @@
-package q8rn.com.q8rn.controllers;
-/* Created by Gabriel on 14/03/2017. */
+package q8rn.com.q8rn.business;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,24 +11,29 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-import q8rn.com.q8rn.entities.Entrevistado;
-import q8rn.com.q8rn.model.CriaBanco;
+import q8rn.com.q8rn.entity.Entrevistado;
+import q8rn.com.q8rn.repository.CriaBanco;
 
-public class EntrevistadoController {
+/** Created by gabriel on 07/04/17. */
+
+public class EntrevistadoBusiness extends BaseBusiness {
 
     private static final String ERRO_AO_INSERIR_ENTREVISTADO = "Erro ao inserir entrevistado";
     private static final String ENTREVISTADO_INSERIDO_SUCESSO = "Entrevistado inserido com sucesso";
-    private CriaBanco banco;
 
-    public EntrevistadoController(Context context) {
-        this.banco = new CriaBanco(context);
+    private CriaBanco mBanco;
+
+    public EntrevistadoBusiness(Context context) {
+        super(context);
+
+        this.mBanco = new CriaBanco(mContext);
     }
 
     public String insereEntrevistado(Entrevistado entrevistado) {
         ContentValues valores;
         long resultado;
 
-        SQLiteDatabase db = banco.getWritableDatabase();
+        SQLiteDatabase db = mBanco.getWritableDatabase();
         valores = new ContentValues();
         valores.put(CriaBanco.ALTURA, entrevistado.getAltura());
         valores.put(CriaBanco.CINTURA_QUADRIL, entrevistado.getCinturaQuadril());
@@ -64,7 +68,7 @@ public class EntrevistadoController {
     public List<Entrevistado> findAllEntrevistados() {
         List<Entrevistado> entrevistados = new ArrayList<>();
 
-        SQLiteDatabase db = banco.getReadableDatabase();
+        SQLiteDatabase db = mBanco.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM " + CriaBanco.TABELA_ENTREVISTADO, null);
         if(c.moveToFirst()) do {
             Entrevistado entrevistado = new Entrevistado();
@@ -108,7 +112,7 @@ public class EntrevistadoController {
     public int recuperaLastId() {
         int lastId = 0;
 
-        SQLiteDatabase db = banco.getReadableDatabase();
+        SQLiteDatabase db = mBanco.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM " + CriaBanco.TABELA_ENTREVISTADO +
                 " ORDER BY " + CriaBanco.ID_ENTREVISTADO + " DESC LIMIT 1" , null);
         if(c.moveToFirst()){
@@ -118,7 +122,7 @@ public class EntrevistadoController {
         }
         c.close();
         db.close();
-        
+
         return lastId;
     }
 }

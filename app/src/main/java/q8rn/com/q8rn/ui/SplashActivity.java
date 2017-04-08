@@ -1,4 +1,4 @@
-package q8rn.com.q8rn.activities;
+package q8rn.com.q8rn.ui;
 
 import android.content.Intent;
 import android.os.Bundle;

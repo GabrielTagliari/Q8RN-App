@@ -1,4 +1,4 @@
-package q8rn.com.q8rn.controllers;
+package q8rn.com.q8rn.business;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,20 +9,22 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import q8rn.com.q8rn.entities.Questao;
-import q8rn.com.q8rn.model.CriaBanco;
+import q8rn.com.q8rn.entity.Questao;
+import q8rn.com.q8rn.repository.CriaBanco;
 
 /* Created by Gabriel on 08/03/2017. */
 
-public class QuestaoController {
+public class QuestaoBusiness extends BaseBusiness {
 
     private static final String ERRO_AO_INSERIR_QUESTÃO = "Erro ao inserir questão";
     private static final String QUESTÃO_INSERIDA_COM_SUCESSO = "Questão inserida com sucesso";
 
-    private CriaBanco banco;
+    private CriaBanco mBanco;
 
-    public QuestaoController(Context context) {
-        this.banco = new CriaBanco(context);
+    public QuestaoBusiness(Context context) {
+        super(context);
+
+        this.mBanco = new CriaBanco(mContext);
     }
 
     public String insereQuestao(long codQuestao, String titulo, String alternativa1,
@@ -32,7 +34,7 @@ public class QuestaoController {
         long resultado;
 
         SQLiteDatabase db;
-        db = banco.getWritableDatabase();
+        db = mBanco.getWritableDatabase();
         valores = new ContentValues();
         valores.put(CriaBanco.COD_QUESTAO, codQuestao);
         valores.put(CriaBanco.TITULO_QUESTAO, titulo);
@@ -55,7 +57,7 @@ public class QuestaoController {
     public Questao findQuestaoByCod(long codQuestao) {
         List<Questao> questoes = new ArrayList<>();
 
-        SQLiteDatabase db = banco.getReadableDatabase();
+        SQLiteDatabase db = mBanco.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM " + CriaBanco.TABELA_QUESTAO + " WHERE "
                 + CriaBanco.COD_QUESTAO + " = " + codQuestao , null);
         if(c.moveToFirst()){
@@ -86,7 +88,7 @@ public class QuestaoController {
     }
 
     public void deletaAllQuestoes() {
-        SQLiteDatabase db = banco.getReadableDatabase();
+        SQLiteDatabase db = mBanco.getReadableDatabase();
         db.delete(CriaBanco.TABELA_QUESTAO, null, null);
         db.close();
     }

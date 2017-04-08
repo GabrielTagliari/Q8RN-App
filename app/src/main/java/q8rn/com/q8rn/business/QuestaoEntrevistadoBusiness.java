@@ -1,4 +1,4 @@
-package q8rn.com.q8rn.controllers;
+package q8rn.com.q8rn.business;
 /* Created by Gabriel on 15/03/2017. */
 
 import android.content.ContentValues;
@@ -16,24 +16,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import au.com.bytecode.opencsv.CSVWriter;
-import q8rn.com.q8rn.entities.Entrevistado;
-import q8rn.com.q8rn.entities.QuestaoEntrevistado;
-import q8rn.com.q8rn.model.CriaBanco;
+import q8rn.com.q8rn.entity.Entrevistado;
+import q8rn.com.q8rn.entity.QuestaoEntrevistado;
+import q8rn.com.q8rn.manager.EntrevistadoManager;
+import q8rn.com.q8rn.repository.CriaBanco;
 
-public class QuestaoEntrevistadoController {
+public class QuestaoEntrevistadoBusiness extends BaseBusiness {
 
     private static final String ERRO_AO_INSERIR_QE = "Erro ao inserir resultado";
     private static final String QE_INSERIDA_COM_SUCESSO = "Resultado inserido com sucesso";
-    public static final String OCORREU_UM_ERRO = "Ocorreu um erro";
+    private static final String OCORREU_UM_ERRO = "Ocorreu um erro";
 
-    private CriaBanco banco;
+    private CriaBanco mBanco;
 
-    public QuestaoEntrevistadoController(Context context) {
-        this.banco = new CriaBanco(context);
+    public QuestaoEntrevistadoBusiness(Context context) {
+        super(context);
+
+        this.mBanco = new CriaBanco(mContext);
     }
 
     public String insereQuestaoEntrevistado(int idEntrevistado, int idQuestao, int escore) {
-        SQLiteDatabase db = banco.getWritableDatabase();
+        SQLiteDatabase db = mBanco.getWritableDatabase();
         ContentValues valores;
         long resultado;
 
@@ -54,7 +57,7 @@ public class QuestaoEntrevistadoController {
     public List<QuestaoEntrevistado> findAllQuestaoEntrevistadoByIdEntrevistado(long idEntrevistado) {
         List<QuestaoEntrevistado> resultados = new ArrayList<>();
 
-        SQLiteDatabase db = banco.getReadableDatabase();
+        SQLiteDatabase db = mBanco.getReadableDatabase();
         /*Cursor c = db.rawQuery("SELECT qe.* FROM " + CriaBanco.TABELA_QUESTAO + " q " +
                 " LEFT JOIN " + CriaBanco.TABELA_QUESTAO_ENTREVISTADO + " qe " +
                 " ON qe." + CriaBanco.QUESTAO_ID + " = q." + CriaBanco.ID_QUESTAO +
@@ -106,9 +109,9 @@ public class QuestaoEntrevistadoController {
 
             csvWrite.writeNext(header);
 
-            EntrevistadoController entrevistadoController = new EntrevistadoController(context);
+            EntrevistadoManager entrevistadoManager = new EntrevistadoManager(context);
             ArrayList<Entrevistado> allEntrevistados =
-                    (ArrayList<Entrevistado>) entrevistadoController.findAllEntrevistados();
+                    (ArrayList<Entrevistado>) entrevistadoManager.findAllEntrevistados();
 
             if (allEntrevistados.isEmpty()) {
                 throw new RuntimeException();
@@ -213,7 +216,7 @@ public class QuestaoEntrevistadoController {
 
     @NonNull
     private ArrayList<Integer> recuperaDadosPontosRelatorio(long idEntrevistado) {
-        SQLiteDatabase db = banco.getReadableDatabase();
+        SQLiteDatabase db = mBanco.getReadableDatabase();
         Cursor cq;
 
         cq = db.rawQuery("SELECT * FROM " + CriaBanco.TABELA_QUESTAO_ENTREVISTADO

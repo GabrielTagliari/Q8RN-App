@@ -1,4 +1,4 @@
-package q8rn.com.q8rn.constants;
+package q8rn.com.q8rn.infrastructure;
 
 /* Created by Gabriel on 05/03/2017. */
 
