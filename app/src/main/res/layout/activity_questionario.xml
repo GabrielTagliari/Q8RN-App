@@ -27,6 +27,8 @@
         android:clickable="true"
         android:onClick="proximaQuestao"
         app:fabSize="normal"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
         app:srcCompat="@drawable/ic_forward_white_36dp" />
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
