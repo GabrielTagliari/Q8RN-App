@@ -10,7 +10,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="q8rn.com.q8rn.ui.QuestionarioActivity"
+    tools:context="q8rn.com.q8rn.ui.main.QuestionarioActivity"
     android:orientation="vertical"
     android:clipChildren="false"
     android:clipToPadding="false">

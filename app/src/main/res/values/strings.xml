@@ -34,7 +34,7 @@
     <string name="glicemia_capilar">Glicemia capilar</string>
     <string name="feminino">Feminino</string>
     <string name="espirometria">Espirometria</string>
-    <string name="escolaridade">Escolaridade</string>
+    <string name="escolaridade">Escolaridade:</string>
     <string name="doencas_referidas">Doenças referidas</string>
     <string name="cor_da_pele">Cor da pele:</string>
 
@@ -55,4 +55,9 @@
     <!-- Escore -->
     <string name="pontuacao">Pontuação:</string>
     <string name="resultado">Resultado:</string>
+    <string name="tab_title">Tab Title</string>
+    <string name="step_botao_voltar">VOLTAR</string>
+    <string name="step_botao_proximo">PRÓXIMO</string>
+    <string name="step_botao_completar">COMPLETAR</string>
+    <string name="sexo_sem_ponto">Sexo</string>
 </resources>
