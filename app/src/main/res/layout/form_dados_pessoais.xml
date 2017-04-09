@@ -1,52 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:orientation="vertical"
     android:paddingLeft="40dp"
-    android:paddingRight="40dp"
-    android:paddingTop="20dp">
+    android:paddingRight="40dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:orientation="vertical">
 
-        <android.support.design.widget.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:layout_weight="1"
-            android:paddingTop="8dp">
+            android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/iniciaisNomeId"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:ems="10"
-                android:hint="@string/iniciais_do_nome"
-                android:inputType="textCapSentences|textPersonName"
-                android:maxLength="7" />
-        </android.support.design.widget.TextInputLayout>
+                android:paddingTop="8dp">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="8dp">
+                <EditText
+                    android:id="@+id/iniciaisNomeId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="@string/iniciais_do_nome"
+                    android:inputType="textCapSentences|textPersonName"
+                    android:maxLength="7" />
+            </android.support.design.widget.TextInputLayout>
 
-            <EditText
-                android:id="@+id/idadeId"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:ems="10"
-                android:hint="@string/idade"
-                android:inputType="number"
-                android:maxLength="3" />
+                android:paddingTop="8dp">
 
-        </android.support.design.widget.TextInputLayout>
+                <EditText
+                    android:id="@+id/idadeId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="@string/idade"
+                    android:inputType="number"
+                    android:maxLength="3" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
 
         <RadioGroup
             android:id="@+id/radioGroupSexoId"
@@ -61,6 +70,7 @@
                 android:id="@+id/sexoTextId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingRight="8dp"
                 android:text="@string/sexo"
                 android:textSize="18sp" />
 
@@ -137,9 +147,71 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="left|start"
+            android:paddingBottom="8dp"
             android:paddingTop="8dp"
             android:spinnerMode="dialog" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/alturaId"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="@string/altura"
+                    android:inputType="numberDecimal"
+                    android:maxLength="4" />
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="0.15"
+                android:paddingBottom="8dp"
+                android:paddingRight="8dp"
+                android:text="@string/cm"
+                android:textAlignment="textStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/pesoId"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="@string/peso"
+                    android:inputType="number"
+                    android:maxLength="4" />
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="0.15"
+                android:paddingBottom="8dp"
+                android:paddingRight="8dp"
+                android:text="@string/kg"
+                android:textAlignment="textStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+        </LinearLayout>
+
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

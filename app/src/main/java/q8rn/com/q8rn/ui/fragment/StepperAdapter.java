@@ -39,9 +39,16 @@ public class StepperAdapter extends AbstractFragmentStepAdapter {
     @NonNull
     @Override
     public StepViewModel getViewModel(@IntRange(from = 0) int position) {
-        //Override this method to set Step title for the Tabs, not necessary for other stepper types
+        if (position == 0)
+            return new StepViewModel.Builder(context)
+                .setTitle(R.string.tab_title_dados_pessoais)
+                .create();
+        if (position == 1)
+            return new StepViewModel.Builder(context)
+                .setTitle(R.string.tab_title_medidas)
+                .create();
         return new StepViewModel.Builder(context)
-                .setTitle(R.string.tab_title) //can be a CharSequence instead
+                .setTitle(R.string.tab_title_dados_pessoais)
                 .create();
     }
 }
