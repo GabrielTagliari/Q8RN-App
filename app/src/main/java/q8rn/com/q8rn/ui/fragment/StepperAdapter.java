@@ -24,31 +24,47 @@ public class StepperAdapter extends AbstractFragmentStepAdapter {
 
     @Override
     public Step createStep(int position) {
-        final StepDadosPessoaisFragment step = new StepDadosPessoaisFragment();
-        Bundle b = new Bundle();
-        b.putInt(CURRENT_STEP_POSITION_KEY, position);
-        step.setArguments(b);
-        return step;
+        if (position == 0) {
+            final StepDadosPessoaisFragment step = new StepDadosPessoaisFragment();
+            Bundle b = new Bundle();
+            b.putInt(CURRENT_STEP_POSITION_KEY, position);
+            step.setArguments(b);
+            return step;
+        } else if (position == 1) {
+            final StepDadosBiologicosFragment step = new StepDadosBiologicosFragment();
+            Bundle b = new Bundle();
+            b.putInt(CURRENT_STEP_POSITION_KEY, position);
+            step.setArguments(b);
+            return step;
+        } else {
+            final StepReligiaoSaudeFragment step = new StepReligiaoSaudeFragment();
+            Bundle b = new Bundle();
+            b.putInt(CURRENT_STEP_POSITION_KEY, position);
+            step.setArguments(b);
+            return step;
+        }
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 
     @NonNull
     @Override
     public StepViewModel getViewModel(@IntRange(from = 0) int position) {
-        if (position == 0)
+        if (position == 0) {
             return new StepViewModel.Builder(context)
                 .setTitle(R.string.tab_title_dados_pessoais)
                 .create();
-        if (position == 1)
+        } else if (position == 1) {
             return new StepViewModel.Builder(context)
-                .setTitle(R.string.tab_title_medidas)
+                .setTitle(R.string.tab_title_dados_biologicos)
                 .create();
-        return new StepViewModel.Builder(context)
-                .setTitle(R.string.tab_title_dados_pessoais)
+        } else {
+            return new StepViewModel.Builder(context)
+                .setTitle(R.string.tab_title_religiao_saude)
                 .create();
+        }
     }
 }

@@ -1,5 +1,6 @@
 package q8rn.com.q8rn.ui.main;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,8 +16,6 @@ import q8rn.com.q8rn.ui.fragment.StepperAdapter;
 
 public class FormStepperActivity extends AppCompatActivity implements StepperLayout.StepperListener {
 
-    private StepperLayout mStepperLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +28,9 @@ public class FormStepperActivity extends AppCompatActivity implements StepperLay
             supportActionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        mStepperLayout = (StepperLayout) findViewById(R.id.stepperLayout);
+
+        StepperLayout mStepperLayout = (StepperLayout) findViewById(R.id.stepperLayout);
+        mStepperLayout.setListener(this);
         mStepperLayout.setAdapter(new StepperAdapter(getSupportFragmentManager(), this));
     }
 

@@ -18,42 +18,53 @@
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:focusableInTouchMode="false">
 
             <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingRight="8dp"
                 android:paddingTop="8dp">
 
                 <EditText
                     android:id="@+id/iniciaisNomeId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
+                    android:layout_weight="0.75"
                     android:hint="@string/iniciais_do_nome"
                     android:inputType="textCapSentences|textPersonName"
                     android:maxLength="7" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
                 android:paddingTop="8dp">
 
                 <EditText
                     android:id="@+id/idadeId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
+                    android:layout_weight="0.5"
                     android:hint="@string/idade"
                     android:inputType="number"
                     android:maxLength="3" />
 
             </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="0.05"
+                android:paddingBottom="8dp"
+                android:text="@string/anos"
+                android:textAlignment="textStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
         </LinearLayout>
 

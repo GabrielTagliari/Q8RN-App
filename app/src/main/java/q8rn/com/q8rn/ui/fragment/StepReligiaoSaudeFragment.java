@@ -16,19 +16,19 @@ import q8rn.com.q8rn.R;
 
 /** Created by gabriel on 09/04/17. */
 
-public class StepDadosPessoaisFragment extends Fragment implements Step {
+public class StepReligiaoSaudeFragment extends Fragment implements Step {
 
-    private Spinner mCorPeleSpinner;
-    private Spinner mEscolaridadeSpinner;
+    private Spinner mSaudeFisicaSpinner;
+    private Spinner mSaudeMentalSpinner;
 
     //private ProgressDialog dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.form_dados_pessoais, container, false);
+        View v = inflater.inflate(R.layout.form_dados_religiao, container, false);
 
-        mCorPeleSpinner = (Spinner) v.findViewById(R.id.corPeleIdSpinner);
-        mEscolaridadeSpinner = (Spinner) v.findViewById(R.id.escolaridadeIdSpinner);
+        mSaudeFisicaSpinner = (Spinner) v.findViewById(R.id.saudeFisicaIdSpinner);
+        mSaudeMentalSpinner = (Spinner) v.findViewById(R.id.saudeMentalIdSpinner);
 
         //dialog = new ProgressDialog(getActivity());
 
@@ -38,8 +38,8 @@ public class StepDadosPessoaisFragment extends Fragment implements Step {
     }
 
     private void populaTodosSpinners() {
-        populaSpinner(R.array.corpele_array, mCorPeleSpinner);
-        populaSpinner(R.array.escolaridade_array, mEscolaridadeSpinner);
+        populaSpinner(R.array.saude_array, mSaudeFisicaSpinner);
+        populaSpinner(R.array.saude_array, mSaudeMentalSpinner);
     }
 
     private void populaSpinner(int array, Spinner spinner) {

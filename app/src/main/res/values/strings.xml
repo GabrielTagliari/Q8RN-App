@@ -62,5 +62,7 @@
 
     <!-- Tabs -->
     <string name="tab_title_dados_pessoais">Dados Pessoais</string>
-    <string name="tab_title_medidas">Medidas</string>
+    <string name="tab_title_dados_biologicos">Dados Biológicos</string>
+    <string name="tab_title_religiao_saude">Religião/Saúde</string>
+    <string name="anos">anos</string>
 </resources>
