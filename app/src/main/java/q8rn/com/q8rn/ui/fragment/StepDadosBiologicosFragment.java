@@ -6,8 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.VerificationError;
@@ -16,37 +14,17 @@ import q8rn.com.q8rn.R;
 
 /** Created by gabriel on 09/04/17. */
 
-public class StepDadosPessoaisFragment extends Fragment implements Step {
-
-    private Spinner mCorPeleSpinner;
-    private Spinner mEscolaridadeSpinner;
+public class StepDadosBiologicosFragment extends Fragment implements Step {
 
     //private ProgressDialog dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.form_dados_pessoais, container, false);
-
-        mCorPeleSpinner = (Spinner) v.findViewById(R.id.corPeleIdSpinner);
-        mEscolaridadeSpinner = (Spinner) v.findViewById(R.id.escolaridadeIdSpinner);
+        View v = inflater.inflate(R.layout.form_dados_biologicos, container, false);
 
         //dialog = new ProgressDialog(getActivity());
 
-        populaTodosSpinners();
-
         return v;
-    }
-
-    private void populaTodosSpinners() {
-        populaSpinner(R.array.corpele_array, mCorPeleSpinner);
-        populaSpinner(R.array.escolaridade_array, mEscolaridadeSpinner);
-    }
-
-    private void populaSpinner(int array, Spinner spinner) {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
-                array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
     }
 
     @Override

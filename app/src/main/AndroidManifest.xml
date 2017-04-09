@@ -27,12 +27,14 @@
             android:name=".ui.main.FormActivity"
             android:configChanges="orientation|screenSize" />
         <activity
+            android:name=".ui.main.FormStepperActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
             android:name=".ui.main.QuestionarioActivity"
             android:configChanges="orientation|screenSize" />
         <activity
             android:name=".ui.main.EscoreActivity"
             android:configChanges="orientation|screenSize" />
-        <activity android:name=".ui.main.FormStepperActivity"></activity>
     </application>
 
 </manifest>
