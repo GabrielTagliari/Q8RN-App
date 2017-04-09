@@ -1,4 +1,4 @@
-package q8rn.com.q8rn.ui;
+package q8rn.com.q8rn.ui.main;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;

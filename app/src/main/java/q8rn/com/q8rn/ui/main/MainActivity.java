@@ -1,4 +1,4 @@
-package q8rn.com.q8rn.ui;
+package q8rn.com.q8rn.ui.main;
 
 import android.Manifest;
 import android.content.Intent;
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void realizarQuestionario(View view) {
-        Intent intent = new Intent(MainActivity.this, FormActivity.class);
+        Intent intent = new Intent(MainActivity.this, FormStepperActivity.class);
         startActivity(intent);
     }
 
