@@ -54,7 +54,7 @@ public class FormActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_form);
+        //setContentView(R.layout.activity_form);
 
         instanciaElementosTela();
         populaTodosSpinners();
@@ -184,8 +184,8 @@ public class FormActivity extends AppCompatActivity {
     private void instanciaElementosTela() {
         mIniciaisNome = (EditText) findViewById(R.id.iniciaisNomeId);
         mIdade = (EditText) findViewById(R.id.idadeId);
-        mReligiao = (EditText) findViewById(R.id.religiaoId);
-        mTempoReligiao = (EditText) findViewById(R.id.tempoReligiaoId);
+        //mReligiao = (EditText) findViewById(R.id.religiaoId);
+        //mTempoReligiao = (EditText) findViewById(R.id.tempoReligiaoId);
         mProfissao = (EditText) findViewById(R.id.profissaoId);
         mPeso = (EditText) findViewById(R.id.pesoId);
         mAltura = (EditText) findViewById(R.id.alturaId);
@@ -195,7 +195,7 @@ public class FormActivity extends AppCompatActivity {
         mPad = (EditText) findViewById(R.id.padId);
         mGlicemiaCapilar = (EditText) findViewById(R.id.glicemiaId);
         mEspirometria = (EditText) findViewById(R.id.espirometriaId);
-        mDoencas = (EditText) findViewById(R.id.doencasId);
+        //mDoencas = (EditText) findViewById(R.id.doencasId);
 
         mRadioGroupSexo = (RadioGroup) findViewById(R.id.radioGroupSexoId);
         mFemininoRadio = (RadioButton) findViewById(R.id.femininoId);
@@ -231,25 +231,25 @@ public class FormActivity extends AppCompatActivity {
         mSaudeMentalSpinner.setSelection(2);
     }
 
-    public void iniciarQuestionario(View view) {
-        List<EditText> listaEditText = montaListaEditText();
-        List<Spinner> listaSpinners = montaListaSpinners();
-
-        EntrevistadoValidator validator = new EntrevistadoValidator();
-
-        boolean permiteSalvar = validator.validate(listaEditText, mRadioGroupSexo,
-                mFemininoRadio, listaSpinners);
-
-        if (permiteSalvar) {
-            Entrevistado entrevistado = retornaEntrevistado();
-            salvarIdSharedPreferences(entrevistado);
-            Intent intent = new Intent(FormActivity.this, QuestionarioActivity.class);
-            intent.putExtra(COD_QUESTAO, 1);
-            startActivity(intent);
-
-        } else {
-            Toast.makeText(FormActivity.this,
-                    Constants.PREENCHA_CAMPOS, Toast.LENGTH_SHORT).show();
-        }
-    }
+//    public void iniciarQuestionario(View view) {
+//        List<EditText> listaEditText = montaListaEditText();
+//        List<Spinner> listaSpinners = montaListaSpinners();
+//
+//        EntrevistadoValidator validator = new EntrevistadoValidator();
+//
+//        boolean permiteSalvar = validator.validate(listaEditText, mRadioGroupSexo,
+//                mFemininoRadio, listaSpinners);
+//
+//        if (permiteSalvar) {
+//            Entrevistado entrevistado = retornaEntrevistado();
+//            salvarIdSharedPreferences(entrevistado);
+//            Intent intent = new Intent(FormActivity.this, QuestionarioActivity.class);
+//            intent.putExtra(COD_QUESTAO, 1);
+//            startActivity(intent);
+//
+//        } else {
+//            Toast.makeText(FormActivity.this,
+//                    Constants.PREENCHA_CAMPOS, Toast.LENGTH_SHORT).show();
+//        }
+//    }
 }

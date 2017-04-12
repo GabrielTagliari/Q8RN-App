@@ -4,8 +4,8 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:orientation="vertical"
-    android:paddingLeft="40dp"
-    android:paddingRight="40dp">
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,17 +18,18 @@
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:focusableInTouchMode="false">
+            android:focusableInTouchMode="false"
+            android:orientation="horizontal">
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_iniciais_nome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingRight="8dp"
                 android:paddingTop="8dp">
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
                     android:id="@+id/iniciaisNomeId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -39,12 +40,13 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_idade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:paddingTop="8dp">
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
                     android:id="@+id/idadeId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -63,7 +65,6 @@
                 android:layout_weight="0.05"
                 android:paddingBottom="8dp"
                 android:text="@string/anos"
-                android:textAlignment="textStart"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
         </LinearLayout>
@@ -127,12 +128,13 @@
         </LinearLayout>
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_profissao"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <EditText
-                android:id="@+id/editText"
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/profissaoId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -173,7 +175,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
                     android:id="@+id/alturaId"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -192,7 +194,6 @@
                 android:paddingBottom="8dp"
                 android:paddingRight="8dp"
                 android:text="@string/cm"
-                android:textAlignment="textStart"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
             <android.support.design.widget.TextInputLayout
@@ -200,7 +201,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
                     android:id="@+id/pesoId"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -219,7 +220,6 @@
                 android:paddingBottom="8dp"
                 android:paddingRight="8dp"
                 android:text="@string/kg"
-                android:textAlignment="textStart"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
         </LinearLayout>
 
