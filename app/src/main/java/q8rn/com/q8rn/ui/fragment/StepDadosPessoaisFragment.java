@@ -178,14 +178,17 @@ public class StepDadosPessoaisFragment extends Fragment implements BlockingStep 
         int codEscolaridade = entrevistado
                 .getCodEscolaridade(mEscolaridadeSpinner.getSelectedItem().toString());
 
+        String alturaFormatada = mAltura.getText().toString().replace(",", ".");
+        String pesoFormatado = mPeso.getText().toString().replace(",", ".");
+
         entrevistado.setIniciaisNome(mIniciaisNome.getText().toString());
         entrevistado.setIdade(Integer.parseInt(mIdade.getText().toString()));
         entrevistado.setSexo(rb.getText().toString());
         entrevistado.setCorPele(mCorPeleSpinner.getSelectedItem().toString());
         entrevistado.setProfissao(mProfissao.getText().toString());
         entrevistado.setEscolaridade(codEscolaridade);
-        entrevistado.setAltura(Double.parseDouble(mAltura.getText().toString()));
-        entrevistado.setPeso(Double.parseDouble(mPeso.getText().toString()));
+        entrevistado.setAltura(Double.parseDouble(alturaFormatada));
+        entrevistado.setPeso(Double.parseDouble(pesoFormatado));
 
         salvarEntrevistadoSharedPreferences(entrevistado);
 
@@ -216,7 +219,7 @@ public class StepDadosPessoaisFragment extends Fragment implements BlockingStep 
     @Override
     @UiThread
     public void onBackClicked(StepperLayout.OnBackClickedCallback callback) {
-        Toast.makeText(this.getContext(), "Your custom back action. Here you should cancel currently running operations", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this.getContext(), "Your custom back action. Here you should cancel currently running operations", Toast.LENGTH_SHORT).show();
         callback.goToPrevStep();
     }
 

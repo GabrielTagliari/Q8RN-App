@@ -1,6 +1,8 @@
 package q8rn.com.q8rn.ui.main;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +20,11 @@ import q8rn.com.q8rn.ui.fragment.StepperAdapter;
 public class FormStepperActivity extends AppCompatActivity implements StepperLayout.StepperListener {
 
     public static final String COD_QUESTAO = "codQuestao";
+
+    public static final String ALERTA = "Alerta";
+    public static final String QUER_REALMENTE_VOLTAR_AO_MENU = "Quer realmente voltar ao menu?";
+    public static final String SIM = "Sim";
+    public static final String NAO = "Não";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,5 +75,23 @@ public class FormStepperActivity extends AppCompatActivity implements StepperLay
     @Override
     public void onReturn() {
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+            .setIcon(android.R.drawable.ic_dialog_info)
+            .setTitle(ALERTA)
+            .setMessage(QUER_REALMENTE_VOLTAR_AO_MENU)
+            .setPositiveButton(SIM, new DialogInterface.OnClickListener()
+            {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+
+            })
+            .setNegativeButton(NAO, null)
+            .show();
     }
 }
