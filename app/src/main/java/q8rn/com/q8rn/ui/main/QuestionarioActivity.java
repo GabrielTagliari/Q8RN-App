@@ -23,8 +23,8 @@ import q8rn.com.q8rn.manager.QuestaoManager;
 
 public class QuestionarioActivity extends AppCompatActivity {
 
-    public static final String LISTA = "mListaMelhorar";
-    public static final String PONTOS = "mPontos";
+    public static final String LISTA = "listaMelhorar";
+    public static final String PONTOS = "pontos";
     public static final String COD_QUESTAO = "codQuestao";
 
     public static final int UM = 1;
