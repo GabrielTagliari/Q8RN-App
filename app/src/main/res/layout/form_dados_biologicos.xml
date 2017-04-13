@@ -4,8 +4,8 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:orientation="vertical"
-    android:paddingLeft="40dp"
-    android:paddingRight="40dp">
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
                 android:paddingRight="8dp"
                 android:paddingTop="8dp">
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
                     android:id="@+id/imcId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                 android:paddingRight="8dp"
                 android:paddingTop="8dp">
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
                     android:id="@+id/cinturaQuadrilId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
                 android:paddingRight="8dp"
                 android:paddingTop="8dp">
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
                     android:id="@+id/pasId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
                 android:paddingRight="8dp"
                 android:paddingTop="8dp">
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
                     android:id="@+id/padId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -162,7 +162,7 @@
                 android:paddingRight="8dp"
                 android:paddingTop="8dp">
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
                     android:id="@+id/glicemiaId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -191,7 +191,7 @@
                 android:paddingRight="8dp"
                 android:paddingTop="8dp">
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
                     android:id="@+id/espirometriaId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -221,8 +221,8 @@
             android:paddingRight="8dp"
             android:paddingTop="8dp">
 
-            <EditText
-                android:id="@+id/editText2"
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/doencasId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

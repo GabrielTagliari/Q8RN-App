@@ -9,7 +9,7 @@ import q8rn.com.q8rn.infrastructure.Constants;
 public class Entrevistado implements Parcelable{
 
     private transient long id;
-    private String codIdentificacao;
+    private String iniciaisNome;
     private int idade;
     private String sexo;
     private String corPele;
@@ -32,7 +32,7 @@ public class Entrevistado implements Parcelable{
     public Entrevistado() {}
 
     private Entrevistado(Parcel in) {
-        codIdentificacao = in.readString();
+        iniciaisNome = in.readString();
         idade = in.readInt();
         sexo = in.readString();
         corPele = in.readString();
@@ -55,7 +55,7 @@ public class Entrevistado implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(codIdentificacao);
+        dest.writeString(iniciaisNome);
         dest.writeInt(idade);
         dest.writeString(sexo);
         dest.writeString(corPele);
@@ -101,12 +101,12 @@ public class Entrevistado implements Parcelable{
         this.id = id;
     }
 
-    public String getCodIdentificacao() {
-        return codIdentificacao;
+    public String getIniciaisNome() {
+        return iniciaisNome;
     }
 
-    public void setCodIdentificacao(String codIdentificacao) {
-        this.codIdentificacao = codIdentificacao;
+    public void setIniciaisNome(String iniciaisNome) {
+        this.iniciaisNome = iniciaisNome;
     }
 
     public int getIdade() {
@@ -253,7 +253,7 @@ public class Entrevistado implements Parcelable{
         this.doencas = doencas;
     }
 
-    public static int getCodEscolaridade(String escolaridade){
+    public int getCodEscolaridade(String escolaridade){
         switch (escolaridade){
             case Constants.SIOUFI:
                 return 1;
@@ -265,5 +265,31 @@ public class Entrevistado implements Parcelable{
                 return 4;
         }
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Entrevistado{" +
+                "id=" + id +
+                ", iniciaisNome='" + iniciaisNome + '\'' +
+                ", idade=" + idade +
+                ", sexo='" + sexo + '\'' +
+                ", corPele='" + corPele + '\'' +
+                ", religiao='" + religiao + '\'' +
+                ", tempoReligiao=" + tempoReligiao +
+                ", profissao='" + profissao + '\'' +
+                ", escolaridade=" + escolaridade +
+                ", peso=" + peso +
+                ", altura=" + altura +
+                ", imc=" + imc +
+                ", cinturaQuadril=" + cinturaQuadril +
+                ", pas=" + pas +
+                ", pad=" + pad +
+                ", glicemiaCapilar=" + glicemiaCapilar +
+                ", espirometria=" + espirometria +
+                ", saudeFisica='" + saudeFisica + '\'' +
+                ", saudeMental='" + saudeMental + '\'' +
+                ", doencas='" + doencas + '\'' +
+                '}';
     }
 }

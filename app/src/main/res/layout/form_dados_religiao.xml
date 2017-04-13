@@ -58,7 +58,7 @@
                 android:id="@+id/textView24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
+                android:layout_gravity="center_vertical"
                 android:paddingBottom="8dp"
                 android:text="@string/anos"
                 android:textAlignment="textStart"

@@ -1,6 +1,7 @@
 package q8rn.com.q8rn.ui.main;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import q8rn.com.q8rn.R;
 import q8rn.com.q8rn.ui.fragment.StepperAdapter;
 
 public class FormStepperActivity extends AppCompatActivity implements StepperLayout.StepperListener {
+
+    public static final String COD_QUESTAO = "codQuestao";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,9 @@ public class FormStepperActivity extends AppCompatActivity implements StepperLay
 
     @Override
     public void onCompleted(View completeButton) {
-        Toast.makeText(this, "onCompleted!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(FormStepperActivity.this, QuestionarioActivity.class);
+        intent.putExtra(COD_QUESTAO, 1);
+        startActivity(intent);
     }
 
     @Override

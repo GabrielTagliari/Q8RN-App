@@ -1,7 +1,6 @@
 package q8rn.com.q8rn.ui.main;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -13,7 +12,6 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -23,7 +21,6 @@ import java.util.List;
 import q8rn.com.q8rn.R;
 import q8rn.com.q8rn.infrastructure.Constants;
 import q8rn.com.q8rn.entity.Entrevistado;
-import q8rn.com.q8rn.infrastructure.EntrevistadoValidator;
 
 public class FormActivity extends AppCompatActivity {
 
@@ -125,8 +122,6 @@ public class FormActivity extends AppCompatActivity {
     private Entrevistado retornaEntrevistado() {
 
         RadioButton rb = (RadioButton) findViewById(mRadioGroupSexo.getCheckedRadioButtonId());
-        int codEscolaridade = Entrevistado
-                .getCodEscolaridade(mEscolaridadeSpinner.getSelectedItem().toString());
 
         String cinturaTexto = mCinturaQuadril.getText().toString();
         String espirometriaTexto = mEspirometria.getText().toString();
@@ -140,7 +135,11 @@ public class FormActivity extends AppCompatActivity {
         boolean espirometriaVazio = isVazio(mEspirometria);
 
         Entrevistado entrevistado = new Entrevistado();
-        entrevistado.setCodIdentificacao(mIniciaisNome.getText().toString());
+
+        int codEscolaridade = entrevistado
+                .getCodEscolaridade(mEscolaridadeSpinner.getSelectedItem().toString());
+
+        entrevistado.setIniciaisNome(mIniciaisNome.getText().toString());
         entrevistado.setIdade(Integer.parseInt(mIdade.getText().toString()));
         entrevistado.setSexo(rb.getText().toString());
         entrevistado.setCorPele(mCorPeleSpinner.getSelectedItem().toString());

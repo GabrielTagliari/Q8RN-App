@@ -25,7 +25,7 @@ public class QuestionarioActivity extends AppCompatActivity {
 
     public static final String LISTA = "mListaMelhorar";
     public static final String PONTOS = "mPontos";
-    public static final String COD_QUESTAO = "mCodQuestao";
+    public static final String COD_QUESTAO = "codQuestao";
 
     public static final int UM = 1;
     public static final int VINTE_CINCO = 25;

@@ -37,7 +37,7 @@ public class EntrevistadoBusiness extends BaseBusiness {
         valores = new ContentValues();
         valores.put(CriaBanco.ALTURA, entrevistado.getAltura());
         valores.put(CriaBanco.CINTURA_QUADRIL, entrevistado.getCinturaQuadril());
-        valores.put(CriaBanco.COD_IDENTIFICACAO, entrevistado.getCodIdentificacao());
+        valores.put(CriaBanco.COD_IDENTIFICACAO, entrevistado.getIniciaisNome());
         valores.put(CriaBanco.COR_PELE, entrevistado.getCorPele());
         valores.put(CriaBanco.DOENCAS, entrevistado.getDoencas());
         valores.put(CriaBanco.DOENCAS, entrevistado.getDoencas());
@@ -76,7 +76,7 @@ public class EntrevistadoBusiness extends BaseBusiness {
             entrevistado.setId(c.getLong(0));
             entrevistado.setAltura(c.getDouble(1));
             entrevistado.setCinturaQuadril(c.getDouble(2));
-            entrevistado.setCodIdentificacao(c.getString(3));
+            entrevistado.setIniciaisNome(c.getString(3));
             entrevistado.setCorPele(c.getString(4));
             entrevistado.setDoencas(c.getString(5));
             entrevistado.setEscolaridade(c.getInt(6));

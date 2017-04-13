@@ -1,10 +1,15 @@
 package q8rn.com.q8rn.ui.fragment;
 
+import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.UiThread;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,22 +17,32 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
-import com.stepstone.stepper.Step;
+import com.google.gson.Gson;
+import com.stepstone.stepper.BlockingStep;
+import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import q8rn.com.q8rn.R;
+import q8rn.com.q8rn.entity.Entrevistado;
+import q8rn.com.q8rn.infrastructure.Constants;
 import q8rn.com.q8rn.infrastructure.EntrevistadoValidator;
+import q8rn.com.q8rn.manager.EntrevistadoManager;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /** Created by gabriel on 09/04/17. */
 
 @SuppressWarnings("FieldCanBeLocal")
-public class StepDadosPessoaisFragment extends Fragment implements Step {
+public class StepDadosPessoaisFragment extends Fragment implements BlockingStep {
 
     public static final String FAVOR_PREENCHER_OS_CAMPOS_OBRIGATORIOS = "Favor preencher os campos obrigatórios";
+    private static final String ENTREVISTADO = "entrevistado";
+
     private TextInputEditText mIniciaisNome;
     private TextInputEditText mIdade;
     private TextInputEditText mProfissao;
@@ -46,7 +61,8 @@ public class StepDadosPessoaisFragment extends Fragment implements Step {
 
     private View v;
 
-    //private ProgressDialog dialog;
+    private ProgressDialog dialog;
+    private EntrevistadoManager mEntrevistadoManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,7 +71,8 @@ public class StepDadosPessoaisFragment extends Fragment implements Step {
         mCorPeleSpinner = (Spinner) v.findViewById(R.id.corPeleIdSpinner);
         mEscolaridadeSpinner = (Spinner) v.findViewById(R.id.escolaridadeIdSpinner);
 
-        //dialog = new ProgressDialog(getActivity());
+        dialog = new ProgressDialog(getActivity());
+        dialog.setMessage("Carregando");
 
         instanciaElementosTela();
         populaTodosSpinners();
@@ -120,6 +137,23 @@ public class StepDadosPessoaisFragment extends Fragment implements Step {
         return listaSpinner;
     }
 
+    private void salvarEntrevistadoSharedPreferences(Entrevistado entrevistado) {
+        SharedPreferences.Editor editor;
+        editor = getActivity().getSharedPreferences(Constants.PREFERENCES, MODE_PRIVATE).edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(entrevistado);
+        editor.putString(ENTREVISTADO, json);
+        editor.apply();
+    }
+
+    private Entrevistado recuperaEntrevistadoShared() {
+        SharedPreferences preferences;
+        preferences = getActivity().getSharedPreferences(Constants.PREFERENCES, MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = preferences.getString(ENTREVISTADO, "");
+        return gson.fromJson(json, Entrevistado.class);
+    }
+
     @Override
     public void onSelected() {
         //update UI when selected
@@ -129,10 +163,34 @@ public class StepDadosPessoaisFragment extends Fragment implements Step {
     public void onError(@NonNull VerificationError error) {
     }
 
-    /*@Override
+    @Override
     @UiThread
     public void onNextClicked(final StepperLayout.OnNextClickedCallback callback) {
         dialog.show();
+
+        Entrevistado entrevistado = recuperaEntrevistadoShared();
+
+        if (entrevistado == null) {
+            entrevistado = new Entrevistado();
+        }
+
+        RadioButton rb = (RadioButton) v.findViewById(mRadioGroupSexo.getCheckedRadioButtonId());
+        int codEscolaridade = entrevistado
+                .getCodEscolaridade(mEscolaridadeSpinner.getSelectedItem().toString());
+
+        entrevistado.setIniciaisNome(mIniciaisNome.getText().toString());
+        entrevistado.setIdade(Integer.parseInt(mIdade.getText().toString()));
+        entrevistado.setSexo(rb.getText().toString());
+        entrevistado.setCorPele(mCorPeleSpinner.getSelectedItem().toString());
+        entrevistado.setProfissao(mProfissao.getText().toString());
+        entrevistado.setEscolaridade(codEscolaridade);
+        entrevistado.setAltura(Double.parseDouble(mAltura.getText().toString()));
+        entrevistado.setPeso(Double.parseDouble(mPeso.getText().toString()));
+
+        salvarEntrevistadoSharedPreferences(entrevistado);
+
+        Log.i("biologicos", entrevistado.toString());
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -168,5 +226,5 @@ public class StepDadosPessoaisFragment extends Fragment implements Step {
         if (dialog != null) {
             dialog.dismiss();
         }
-    }*/
+    }
 }
