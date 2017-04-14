@@ -1,4 +1,4 @@
-package q8rn.com.q8rn.ui;
+package q8rn.com.q8rn.ui.main;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -23,9 +23,9 @@ import q8rn.com.q8rn.manager.QuestaoManager;
 
 public class QuestionarioActivity extends AppCompatActivity {
 
-    public static final String LISTA = "mListaMelhorar";
-    public static final String PONTOS = "mPontos";
-    public static final String COD_QUESTAO = "mCodQuestao";
+    public static final String LISTA = "listaMelhorar";
+    public static final String PONTOS = "pontos";
+    public static final String COD_QUESTAO = "codQuestao";
 
     public static final int UM = 1;
     public static final int VINTE_CINCO = 25;

@@ -1,4 +1,4 @@
-package q8rn.com.q8rn.ui;
+package q8rn.com.q8rn.ui.main;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -268,19 +268,19 @@ public class EscoreActivity extends AppCompatActivity {
 
     public void voltarMenu(View view) {
         new AlertDialog.Builder(this)
-                .setIcon(android.R.drawable.ic_dialog_info)
-                .setTitle(ALERTA)
-                .setMessage(QUER_REALMENTE_VOLTAR_AO_MENU)
-                .setPositiveButton(SIM, new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intentMenu = new Intent(EscoreActivity.this, MainActivity.class);
-                        startActivity(intentMenu);
-                    }
+            .setIcon(android.R.drawable.ic_dialog_info)
+            .setTitle(ALERTA)
+            .setMessage(QUER_REALMENTE_VOLTAR_AO_MENU)
+            .setPositiveButton(SIM, new DialogInterface.OnClickListener()
+            {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intentMenu = new Intent(EscoreActivity.this, MainActivity.class);
+                    startActivity(intentMenu);
+                }
 
-                })
-                .setNegativeButton(NAO, null)
-                .show();
+            })
+            .setNegativeButton(NAO, null)
+            .show();
     }
 }

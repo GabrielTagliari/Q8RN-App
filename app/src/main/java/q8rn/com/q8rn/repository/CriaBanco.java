@@ -50,7 +50,7 @@ public class CriaBanco extends SQLiteOpenHelper{
     public static final String SAUDE_FISICA = "saude_fisica";
     public static final String SAUDE_MENTAL = "saude_mental";
     public static final String SEXO = "sexo";
-    public static final String TEMPO_RELIGIAO = "tempo_";
+    public static final String TEMPO_RELIGIAO = "tempo_religiao";
 
     /* TABELA RELACIONAMENTO QUESTAO USUARIO */
     public static final String ENTREVISTADO_ID = "entrevistado_id";

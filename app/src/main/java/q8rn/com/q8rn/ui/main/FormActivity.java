@@ -1,7 +1,6 @@
-package q8rn.com.q8rn.ui;
+package q8rn.com.q8rn.ui.main;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -13,7 +12,6 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -23,7 +21,6 @@ import java.util.List;
 import q8rn.com.q8rn.R;
 import q8rn.com.q8rn.infrastructure.Constants;
 import q8rn.com.q8rn.entity.Entrevistado;
-import q8rn.com.q8rn.infrastructure.EntrevistadoValidator;
 
 public class FormActivity extends AppCompatActivity {
 
@@ -54,7 +51,7 @@ public class FormActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_form);
+        //setContentView(R.layout.activity_form);
 
         instanciaElementosTela();
         populaTodosSpinners();
@@ -125,8 +122,6 @@ public class FormActivity extends AppCompatActivity {
     private Entrevistado retornaEntrevistado() {
 
         RadioButton rb = (RadioButton) findViewById(mRadioGroupSexo.getCheckedRadioButtonId());
-        int codEscolaridade = Entrevistado
-                .getCodEscolaridade(mEscolaridadeSpinner.getSelectedItem().toString());
 
         String cinturaTexto = mCinturaQuadril.getText().toString();
         String espirometriaTexto = mEspirometria.getText().toString();
@@ -140,7 +135,11 @@ public class FormActivity extends AppCompatActivity {
         boolean espirometriaVazio = isVazio(mEspirometria);
 
         Entrevistado entrevistado = new Entrevistado();
-        entrevistado.setCodIdentificacao(mIniciaisNome.getText().toString());
+
+        int codEscolaridade = entrevistado
+                .getCodEscolaridade(mEscolaridadeSpinner.getSelectedItem().toString());
+
+        entrevistado.setIniciaisNome(mIniciaisNome.getText().toString());
         entrevistado.setIdade(Integer.parseInt(mIdade.getText().toString()));
         entrevistado.setSexo(rb.getText().toString());
         entrevistado.setCorPele(mCorPeleSpinner.getSelectedItem().toString());
@@ -184,8 +183,8 @@ public class FormActivity extends AppCompatActivity {
     private void instanciaElementosTela() {
         mIniciaisNome = (EditText) findViewById(R.id.iniciaisNomeId);
         mIdade = (EditText) findViewById(R.id.idadeId);
-        mReligiao = (EditText) findViewById(R.id.religiaoId);
-        mTempoReligiao = (EditText) findViewById(R.id.tempoReligiaoId);
+        //mReligiao = (EditText) findViewById(R.id.religiaoId);
+        //mTempoReligiao = (EditText) findViewById(R.id.tempoReligiaoId);
         mProfissao = (EditText) findViewById(R.id.profissaoId);
         mPeso = (EditText) findViewById(R.id.pesoId);
         mAltura = (EditText) findViewById(R.id.alturaId);
@@ -195,7 +194,7 @@ public class FormActivity extends AppCompatActivity {
         mPad = (EditText) findViewById(R.id.padId);
         mGlicemiaCapilar = (EditText) findViewById(R.id.glicemiaId);
         mEspirometria = (EditText) findViewById(R.id.espirometriaId);
-        mDoencas = (EditText) findViewById(R.id.doencasId);
+        //mDoencas = (EditText) findViewById(R.id.doencasId);
 
         mRadioGroupSexo = (RadioGroup) findViewById(R.id.radioGroupSexoId);
         mFemininoRadio = (RadioButton) findViewById(R.id.femininoId);
@@ -231,25 +230,25 @@ public class FormActivity extends AppCompatActivity {
         mSaudeMentalSpinner.setSelection(2);
     }
 
-    public void iniciarQuestionario(View view) {
-        List<EditText> listaEditText = montaListaEditText();
-        List<Spinner> listaSpinners = montaListaSpinners();
-
-        EntrevistadoValidator validator = new EntrevistadoValidator();
-
-        boolean permiteSalvar = validator.validate(listaEditText, mRadioGroupSexo,
-                mFemininoRadio, listaSpinners);
-
-        if (permiteSalvar) {
-            Entrevistado entrevistado = retornaEntrevistado();
-            salvarIdSharedPreferences(entrevistado);
-            Intent intent = new Intent(FormActivity.this, QuestionarioActivity.class);
-            intent.putExtra(COD_QUESTAO, 1);
-            startActivity(intent);
-
-        } else {
-            Toast.makeText(FormActivity.this,
-                    Constants.PREENCHA_CAMPOS, Toast.LENGTH_SHORT).show();
-        }
-    }
+//    public void iniciarQuestionario(View view) {
+//        List<EditText> listaEditText = montaListaEditText();
+//        List<Spinner> listaSpinners = montaListaSpinners();
+//
+//        EntrevistadoValidator validator = new EntrevistadoValidator();
+//
+//        boolean permiteSalvar = validator.validate(listaEditText, mRadioGroupSexo,
+//                mFemininoRadio, listaSpinners);
+//
+//        if (permiteSalvar) {
+//            Entrevistado entrevistado = retornaEntrevistado();
+//            salvarIdSharedPreferences(entrevistado);
+//            Intent intent = new Intent(FormActivity.this, QuestionarioActivity.class);
+//            intent.putExtra(COD_QUESTAO, 1);
+//            startActivity(intent);
+//
+//        } else {
+//            Toast.makeText(FormActivity.this,
+//                    Constants.PREENCHA_CAMPOS, Toast.LENGTH_SHORT).show();
+//        }
+//    }
 }
