@@ -49,24 +49,15 @@ public class Main2Activity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        Fragment mFragment = new AbaQuestionarioFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content, mFragment).commit();
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
     @Override
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
-        /*// Create custom dialog object
-        final Dialog dialog = new Dialog(this);
-        // Include dialog.xml file
-        dialog.setContentView(R.layout.dialog); // layout of your dialog
-        // Set dialog title
-        dialog.setTitle("Detail");
-
-        // set values for custom dialog components - text, image and button
-        TextView text = (TextView) dialog.findViewById(R.id.textDialog);
-        text.setText(item.toString());
-        // similar add statements for other details
-        dialog.show();*/
     }
 
     @Override

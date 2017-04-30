@@ -68,7 +68,7 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_home">Home</string>
     <string name="title_historico">Histórico</string>
-    <string name="title_dados">Dados</string>
+    <string name="title_questionario">Questionário</string>
     <string name="title_entrevistado_list">Entrevistados</string>
     <string name="title_entrevistado_detail">Entrevistado Detail</string>
 </resources>
