@@ -64,12 +64,12 @@ public class FormStepperActivity extends AppCompatActivity implements StepperLay
 
     @Override
     public void onError(VerificationError verificationError) {
-        Toast.makeText(this, verificationError.getErrorMessage(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, verificationError.getErrorMessage(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onStepSelected(int newStepPosition) {
-        Toast.makeText(this, "onStepSelected! -> " + newStepPosition, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "onStepSelected! -> " + newStepPosition, Toast.LENGTH_SHORT).show();
     }
 
     @Override
