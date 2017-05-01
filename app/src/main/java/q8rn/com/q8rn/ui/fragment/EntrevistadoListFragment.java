@@ -8,13 +8,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,22 +20,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import q8rn.com.q8rn.R;
-
-import q8rn.com.q8rn.entity.Entrevistado;
-import q8rn.com.q8rn.manager.EntrevistadoManager;
-import q8rn.com.q8rn.manager.QuestaoEntrevistadoManager;
-import q8rn.com.q8rn.ui.main.EntrevistadoDetailActivity;
-import q8rn.com.q8rn.ui.main.MainActivity;
-import q8rn.com.q8rn.ui.main.dummy.DummyContent;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import q8rn.com.q8rn.R;
+import q8rn.com.q8rn.manager.QuestaoEntrevistadoManager;
+import q8rn.com.q8rn.ui.main.EntrevistadoDetailActivity;
+import q8rn.com.q8rn.ui.main.dummy.EntrevistadoContent;
 
 /**
  * An activity representing a list of Entrevistados. This activity
@@ -70,6 +63,8 @@ public class EntrevistadoListFragment extends Fragment {
         View v = inflater.inflate(R.layout.activity_entrevistado_list, container, false);
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+
+        EntrevistadoContent.populaHistorico(getContext());
 
         FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -141,37 +136,16 @@ public class EntrevistadoListFragment extends Fragment {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(EntrevistadoContent.ITEMS));
     }
 
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final List<DummyContent.DummyItem> mValues;
-        private List<Entrevistado> mEntrevistados;
+        private final List<EntrevistadoContent.EntrevistadoItem> mValues;
 
-        public SimpleItemRecyclerViewAdapter(List<DummyContent.DummyItem> items) {
-            mEntrevistados = new ArrayList<>();
-
-            EntrevistadoManager em = new EntrevistadoManager(getContext());
-
-            mEntrevistados = em.findAllEntrevistados();
-
-            List<DummyContent.DummyItem> lista = new ArrayList<>();
-
-            if (mEntrevistados != null) {
-
-                for (Entrevistado e : mEntrevistados) {
-                    DummyContent.DummyItem item = new DummyContent.DummyItem(
-                            String.valueOf(e.getId()),
-                            e.getIniciaisNome(),
-                            String.valueOf(e.getEscolaridade())
-                    );
-                    lista.add(item);
-                }
-            }
-
-            mValues = lista;
+        public SimpleItemRecyclerViewAdapter(List<EntrevistadoContent.EntrevistadoItem> items) {
+            mValues = items;
         }
 
         @Override
@@ -218,7 +192,7 @@ public class EntrevistadoListFragment extends Fragment {
             public final View mView;
             public final TextView mIdView;
             public final TextView mContentView;
-            public DummyContent.DummyItem mItem;
+            public EntrevistadoContent.EntrevistadoItem mItem;
 
             public ViewHolder(View view) {
                 super(view);
