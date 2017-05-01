@@ -1,25 +1,42 @@
 package q8rn.com.q8rn.ui.fragment;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import q8rn.com.q8rn.R;
 
+import q8rn.com.q8rn.entity.Entrevistado;
+import q8rn.com.q8rn.manager.EntrevistadoManager;
+import q8rn.com.q8rn.manager.QuestaoEntrevistadoManager;
 import q8rn.com.q8rn.ui.main.EntrevistadoDetailActivity;
+import q8rn.com.q8rn.ui.main.MainActivity;
 import q8rn.com.q8rn.ui.main.dummy.DummyContent;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,6 +48,15 @@ import java.util.List;
  * item details side-by-side using two vertical panes.
  */
 public class EntrevistadoListFragment extends Fragment {
+
+    private static final String TAG = "questao";
+    public static final String NÃO_EXISTEM_DADOS = "Não existem dados a serem exportados";
+    public static final String PERMISSION_IS_GRANTED = "Permission is granted";
+    public static final String PERMISSION_IS_REVOKED = "Permission is revoked";
+    public static final String Q8RN_TRACO = "Q8RN - ";
+    public static final String CORPO_EMAIL = "Banco de dados do questionário dos oito remédios naturais gerado em: ";
+    public static final String TEXT_HTML = "text/html";
+    public static final String DD_MM_YYYY_HH_MM_SS = "dd/MM/yyyy hh:mm:ss";
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -49,8 +75,33 @@ public class EntrevistadoListFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                QuestaoEntrevistadoManager qeManager = new QuestaoEntrevistadoManager(getContext());
+
+                if (temPermissaoArmazenamento()) {
+                    try {
+                        File file = qeManager.gerarExcel(getContext());
+                        Uri u1;
+                        u1 = Uri.fromFile(file);
+
+                        Date dataSemformato = Calendar.getInstance().getTime();
+
+                        SimpleDateFormat spf = new SimpleDateFormat(DD_MM_YYYY_HH_MM_SS);
+                        String dataFormatada = spf.format(dataSemformato);
+
+                        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                        sendIntent.putExtra(Intent.EXTRA_SUBJECT, Q8RN_TRACO + dataFormatada);
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, CORPO_EMAIL + dataFormatada + "\n\n");
+                        sendIntent.putExtra(Intent.EXTRA_STREAM, u1);
+                        sendIntent.setType(TEXT_HTML);
+                        startActivity(sendIntent);
+
+                    } catch (RuntimeException e) {
+                        Log.i(TAG, e.getMessage());
+                        Toast.makeText(getActivity(), NÃO_EXISTEM_DADOS, Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
 
@@ -69,6 +120,26 @@ public class EntrevistadoListFragment extends Fragment {
         return v;
     }
 
+    public boolean temPermissaoArmazenamento() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (getActivity().checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.v(TAG, PERMISSION_IS_GRANTED);
+                return true;
+            } else {
+
+                Log.v(TAG, PERMISSION_IS_REVOKED);
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else {
+            Log.v(TAG,PERMISSION_IS_GRANTED);
+            return true;
+        }
+    }
+
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS));
     }
@@ -77,9 +148,30 @@ public class EntrevistadoListFragment extends Fragment {
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
         private final List<DummyContent.DummyItem> mValues;
+        private List<Entrevistado> mEntrevistados;
 
         public SimpleItemRecyclerViewAdapter(List<DummyContent.DummyItem> items) {
-            mValues = items;
+            mEntrevistados = new ArrayList<>();
+
+            EntrevistadoManager em = new EntrevistadoManager(getContext());
+
+            mEntrevistados = em.findAllEntrevistados();
+
+            List<DummyContent.DummyItem> lista = new ArrayList<>();
+
+            if (mEntrevistados != null) {
+
+                for (Entrevistado e : mEntrevistados) {
+                    DummyContent.DummyItem item = new DummyContent.DummyItem(
+                            String.valueOf(e.getId()),
+                            e.getIniciaisNome(),
+                            String.valueOf(e.getEscolaridade())
+                    );
+                    lista.add(item);
+                }
+            }
+
+            mValues = lista;
         }
 
         @Override

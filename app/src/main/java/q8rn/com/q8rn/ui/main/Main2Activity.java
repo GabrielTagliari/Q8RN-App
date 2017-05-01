@@ -7,17 +7,15 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import q8rn.com.q8rn.R;
+import q8rn.com.q8rn.ui.fragment.AbaHomeFragment;
 import q8rn.com.q8rn.ui.fragment.AbaQuestionarioFragment;
 import q8rn.com.q8rn.ui.fragment.EntrevistadoListFragment;
-import q8rn.com.q8rn.ui.fragment.ItemFragment;
-import q8rn.com.q8rn.ui.fragment.dummy.DummyContent;
 
 public class Main2Activity extends AppCompatActivity
-        implements ItemFragment.OnListFragmentInteractionListener,
-                   AbaQuestionarioFragment.OnFragmentInteractionListener {
+        implements AbaQuestionarioFragment.OnFragmentInteractionListener,
+        AbaHomeFragment.OnFragmentInteractionListener {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -27,7 +25,7 @@ public class Main2Activity extends AppCompatActivity
             Fragment mFragment;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mFragment = new AbaQuestionarioFragment();
+                    mFragment = new AbaHomeFragment();
                     getSupportFragmentManager().beginTransaction().replace(R.id.content, mFragment).commit();
                     return true;
                 case R.id.navigation_dashboard:
@@ -49,15 +47,11 @@ public class Main2Activity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        Fragment mFragment = new AbaQuestionarioFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.content, mFragment).commit();
-
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
 
-    @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+        Fragment mFragment = new AbaHomeFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content, mFragment).commit();
     }
 
     @Override

@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import q8rn.com.q8rn.business.EntrevistadoBusiness;
+import q8rn.com.q8rn.manager.EntrevistadoManager;
+
 /**
  * Helper class for providing sample content for user interfaces created by
  * Android template wizards.
@@ -38,7 +41,7 @@ public class DummyContent {
     }
 
     private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
+        return new DummyItem(String.valueOf(position), "Teste " + position, makeDetails(position));
     }
 
     private static String makeDetails(int position) {

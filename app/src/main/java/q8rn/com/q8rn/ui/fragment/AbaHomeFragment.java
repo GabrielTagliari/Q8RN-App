@@ -1,28 +1,26 @@
 package q8rn.com.q8rn.ui.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import q8rn.com.q8rn.R;
-import q8rn.com.q8rn.ui.main.FormStepperActivity;
-import q8rn.com.q8rn.ui.main.MainActivity;
+import q8rn.com.q8rn.repository.PopulaBanco;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link AbaQuestionarioFragment.OnFragmentInteractionListener} interface
+ * {@link AbaHomeFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link AbaQuestionarioFragment#newInstance} factory method to
+ * Use the {@link AbaHomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AbaQuestionarioFragment extends Fragment {
+public class AbaHomeFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,7 +32,7 @@ public class AbaQuestionarioFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public AbaQuestionarioFragment() {
+    public AbaHomeFragment() {
         // Required empty public constructor
     }
 
@@ -44,11 +42,11 @@ public class AbaQuestionarioFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AbaQuestionarioFragment.
+     * @return A new instance of fragment AbaHomeFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AbaQuestionarioFragment newInstance(String param1, String param2) {
-        AbaQuestionarioFragment fragment = new AbaQuestionarioFragment();
+    public static AbaHomeFragment newInstance(String param1, String param2) {
+        AbaHomeFragment fragment = new AbaHomeFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -68,18 +66,12 @@ public class AbaQuestionarioFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_aba_questionario, container, false);
+        View view = inflater.inflate(R.layout.fragment_aba_home, container, false);
 
-        Button botaoQuestionario = (Button) view.findViewById(R.id.botaoRealizarQuestionario);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
-        botaoQuestionario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), FormStepperActivity.class);
-                startActivity(intent);
-            }
-        });
+        PopulaBanco populaBanco = new PopulaBanco(getContext());
+        populaBanco.popularQuestoes();
 
         return view;
     }
