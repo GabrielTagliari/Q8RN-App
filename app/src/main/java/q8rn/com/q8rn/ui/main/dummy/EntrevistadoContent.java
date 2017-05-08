@@ -32,8 +32,10 @@ public class EntrevistadoContent {
 
         List<Entrevistado> mEntrevistados = em.findAllEntrevistados();
 
-        for (Entrevistado e : mEntrevistados) {
-            addItem(createDummyItem(e));
+        if (mEntrevistados != null) {
+            for (Entrevistado e : mEntrevistados) {
+                addItem(createDummyItem(e));
+            }
         }
     }
 
