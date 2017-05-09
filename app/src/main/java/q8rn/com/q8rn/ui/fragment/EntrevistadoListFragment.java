@@ -66,6 +66,12 @@ public class EntrevistadoListFragment extends Fragment {
 
         EntrevistadoContent.populaHistorico(getContext());
 
+        TextView nenhumHistorico = (TextView) v.findViewById(R.id.nenhum_historico);
+
+        if (EntrevistadoContent.ITEMS.isEmpty()) {
+            nenhumHistorico.setVisibility(View.VISIBLE);
+        }
+
         FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
