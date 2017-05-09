@@ -15,22 +15,6 @@
     android:clipChildren="false"
     android:clipToPadding="false">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/botaoProximoId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="5dp"
-        android:clickable="true"
-        android:onClick="proximaQuestao"
-        app:fabSize="normal"
-        app:elevation="6dp"
-        app:pressedTranslationZ="12dp"
-        app:srcCompat="@drawable/ic_forward_white_36dp" />
-
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
@@ -89,6 +73,22 @@
             </RadioGroup>
         </LinearLayout>
     </ScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/botaoProximoId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="5dp"
+        android:clickable="true"
+        android:onClick="proximaQuestao"
+        app:fabSize="normal"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        app:srcCompat="@drawable/ic_forward_white_36dp" />
 
 </RelativeLayout>
 
