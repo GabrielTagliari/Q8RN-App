@@ -275,7 +275,7 @@ public class EscoreActivity extends AppCompatActivity {
             {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Intent intentMenu = new Intent(EscoreActivity.this, MainActivity.class);
+                    Intent intentMenu = new Intent(EscoreActivity.this, Main2Activity.class);
                     startActivity(intentMenu);
                 }
 
