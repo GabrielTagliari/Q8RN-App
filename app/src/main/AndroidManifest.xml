@@ -13,22 +13,37 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.MainActivity" />
+        <activity android:name=".ui.main.MainActivity" />
         <activity
-            android:name=".activities.SplashActivity"
+            android:name=".ui.main.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.FormActivity"
+        <activity
+            android:name=".ui.main.FormActivity"
             android:configChanges="orientation|screenSize" />
-        <activity android:name=".activities.QuestionarioActivity"
+        <activity
+            android:name=".ui.main.FormStepperActivity"
             android:configChanges="orientation|screenSize" />
-        <activity android:name=".activities.EscoreActivity"
+        <activity
+            android:name=".ui.main.QuestionarioActivity"
             android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".ui.main.EscoreActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".ui.main.Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".ui.main.EntrevistadoDetailActivity"
+            android:label="@string/title_entrevistado_detail"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="orientation|screenSize">
+        </activity>
     </application>
 
 </manifest>

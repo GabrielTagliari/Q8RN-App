@@ -17,7 +17,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="q8rn.com.q8rn.activities.MainActivity">
+        tools:context="q8rn.com.q8rn.ui.main.MainActivity">
 
         <ImageView
             android:id="@+id/imageView"
@@ -50,19 +50,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="120dp"
                 android:layout_marginEnd="3dp"
+                android:layout_marginRight="3dp"
                 android:layout_weight="1"
-                android:text="@string/botao_simular"
-                android:layout_marginRight="3dp" />
+                android:onClick="enviarDadosEmail"
+                android:text="@string/botao_enviar_email" />
 
             <Button
                 android:id="@+id/botaoOnlineId"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="120dp"
+                android:layout_marginLeft="3dp"
                 android:layout_marginStart="3dp"
                 android:layout_weight="1"
-                android:text="@string/realizar_questionario"
-                android:layout_marginLeft="3dp" />
+                android:onClick="realizarQuestionario"
+                android:text="@string/realizar_questionario" />
 
         </LinearLayout>
 
