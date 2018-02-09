@@ -292,4 +292,8 @@ public class Entrevistado implements Parcelable{
                 ", doencas='" + doencas + '\'' +
                 '}';
     }
+
+    public Double getIMC() {
+        return this.peso / (this.altura * this.altura);
+    }
 }
