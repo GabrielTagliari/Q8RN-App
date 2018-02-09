@@ -40,6 +40,8 @@ public class StepDadosBiologicosFragment extends Fragment implements BlockingSte
     private TextInputEditText mEspirometria;
     private TextInputEditText mDoencas;
 
+    private Entrevistado entrevistado;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.form_dados_biologicos, container, false);
@@ -66,7 +68,8 @@ public class StepDadosBiologicosFragment extends Fragment implements BlockingSte
 
     @Override
     public void onSelected() {
-        //update UI when selected
+        entrevistado = recuperaEntrevistadoShared();
+        mImc.setText(String.valueOf(entrevistado.getIMC()));
     }
 
     @Override
@@ -95,8 +98,6 @@ public class StepDadosBiologicosFragment extends Fragment implements BlockingSte
     @UiThread
     public void onNextClicked(final StepperLayout.OnNextClickedCallback callback) {
         dialog.show();
-
-        Entrevistado entrevistado = recuperaEntrevistadoShared();
 
         if (entrevistado == null) {
             entrevistado = new Entrevistado();
