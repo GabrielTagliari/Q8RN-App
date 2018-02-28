@@ -180,7 +180,6 @@ public class StepDadosBiologicosFragment extends Fragment implements BlockingSte
     @Override
     @UiThread
     public void onBackClicked(StepperLayout.OnBackClickedCallback callback) {
-        Toast.makeText(this.getContext(), "Your custom back action. Here you should cancel currently running operations", Toast.LENGTH_SHORT).show();
         callback.goToPrevStep();
     }
 
