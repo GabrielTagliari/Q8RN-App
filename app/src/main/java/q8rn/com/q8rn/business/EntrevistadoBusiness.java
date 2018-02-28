@@ -37,7 +37,7 @@ public class EntrevistadoBusiness extends BaseBusiness {
         valores = new ContentValues();
         valores.put(CriaBanco.ALTURA, entrevistado.getAltura());
         valores.put(CriaBanco.CINTURA_QUADRIL, entrevistado.getCinturaQuadril());
-        valores.put(CriaBanco.COD_IDENTIFICACAO, entrevistado.getIniciaisNome());
+        valores.put(CriaBanco.INICIAIS_NOME, entrevistado.getIniciaisNome());
         valores.put(CriaBanco.COR_PELE, entrevistado.getCorPele());
         valores.put(CriaBanco.DOENCAS, entrevistado.getDoencas());
         valores.put(CriaBanco.DOENCAS, entrevistado.getDoencas());
@@ -55,6 +55,14 @@ public class EntrevistadoBusiness extends BaseBusiness {
         valores.put(CriaBanco.SAUDE_MENTAL, entrevistado.getSaudeMental());
         valores.put(CriaBanco.SEXO, entrevistado.getSexo());
         valores.put(CriaBanco.TEMPO_RELIGIAO, entrevistado.getTempoReligiao());
+
+        valores.put(CriaBanco.COD_IDENTIFICACAO, entrevistado.getCodIdentificacao());
+        valores.put(CriaBanco.CONSTITUICAO_FAMILIAR, entrevistado.getConstituicaoFamiliar());
+        valores.put(CriaBanco.CINTURA, entrevistado.getCintura());
+        valores.put(CriaBanco.QUADRIL, entrevistado.getQuadril());
+        valores.put(CriaBanco.TESTE_ESFORCO_ANTES, entrevistado.getTesteEsforcoAntes());
+        valores.put(CriaBanco.TESTE_ESFORCO_DEPOIS, entrevistado.getTesteEsforcoDepois());
+        valores.put(CriaBanco.O_QUE_MELHORAR, entrevistado.getoQueMelhorar());
 
         resultado = db.insert(CriaBanco.TABELA_ENTREVISTADO, null, valores);
         db.close();
@@ -93,6 +101,14 @@ public class EntrevistadoBusiness extends BaseBusiness {
             entrevistado.setSaudeMental(c.getString(18));
             entrevistado.setSexo(c.getString(19));
             entrevistado.setTempoReligiao(c.getInt(20));
+
+            entrevistado.setCodIdentificacao(c.getString(21));
+            entrevistado.setConstituicaoFamiliar(c.getString(22));
+            entrevistado.setCintura(c.getInt(23));
+            entrevistado.setQuadril(c.getInt(24));
+            entrevistado.setTesteEsforcoAntes(c.getInt(25));
+            entrevistado.setTesteEsforcoDepois(c.getInt(26));
+            entrevistado.setoQueMelhorar(c.getString(27));
 
             entrevistados.add(entrevistado);
 

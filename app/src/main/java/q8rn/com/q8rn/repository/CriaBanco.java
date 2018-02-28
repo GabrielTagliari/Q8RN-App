@@ -33,7 +33,7 @@ public class CriaBanco extends SQLiteOpenHelper{
     /* CAMPOS TABELA ENTREVISTADO */
     public static final String ALTURA = "altura";
     public static final String CINTURA_QUADRIL = "cintura_quadril";
-    public static final String COD_IDENTIFICACAO = "cod_identificacao";
+    public static final String INICIAIS_NOME = "cod_identificacao";
     public static final String COR_PELE = "cor_pele";
     public static final String DOENCAS = "doencas";
     public static final String IDADE = "idade";
@@ -56,6 +56,14 @@ public class CriaBanco extends SQLiteOpenHelper{
     public static final String ENTREVISTADO_ID = "entrevistado_id";
     public static final String QUESTAO_ID = "questao_id";
     public static final String ESCORE = "escore";
+    public static final String COD_IDENTIFICACAO = "cod_identificacao";
+    public static final String CONSTITUICAO_FAMILIAR = "constituicao_familiar";
+    public static final String CINTURA = "cintura";
+    public static final String QUADRIL = "quadril";
+    public static final String TESTE_ESFORCO_ANTES = "teste_esforco_antes";
+    public static final String TESTE_ESFORCO_DEPOIS = "teste_esforco_depois";
+    public static final String QUALIDADE_VIDA = "qualidade_vida";
+    public static final String O_QUE_MELHORAR = "o_que_melhorar";
 
     public CriaBanco(Context context) {
         super(context, NOME_BANCO, null, VERSAO);
@@ -98,7 +106,7 @@ public class CriaBanco extends SQLiteOpenHelper{
         sql.append("   " + ID_ENTREVISTADO + " integer PRIMARY KEY NOT NULL, ");
         sql.append("   " + ALTURA + " float(19), ");
         sql.append("   " + CINTURA_QUADRIL + " float(19), ");
-        sql.append("   " + COD_IDENTIFICACAO + " varchar(255), ");
+        sql.append("   " + INICIAIS_NOME + " varchar(255), ");
         sql.append("   " + COR_PELE + " varchar(255), ");
         sql.append("   " + DOENCAS + " varchar(255), ");
         sql.append("   " + ESCOLARIDADE + " int, ");
@@ -115,7 +123,16 @@ public class CriaBanco extends SQLiteOpenHelper{
         sql.append("   " + SAUDE_FISICA + " varchar(255), ");
         sql.append("   " + SAUDE_MENTAL + " varchar(255), ");
         sql.append("   " + SEXO + " varchar(255), ");
-        sql.append("   " + TEMPO_RELIGIAO + " int ");
+        sql.append("   " + TEMPO_RELIGIAO + " int, ");
+
+        sql.append("   " + COD_IDENTIFICACAO + " varchar(20), ");
+        sql.append("   " + CONSTITUICAO_FAMILIAR + " varchar(255), ");
+        sql.append("   " + CINTURA + " float(19), ");
+        sql.append("   " + QUADRIL + " float(19), ");
+        sql.append("   " + TESTE_ESFORCO_ANTES + " float(19), ");
+        sql.append("   " + TESTE_ESFORCO_DEPOIS + " float(19), ");
+        sql.append("   " + QUALIDADE_VIDA + " varchar(255), ");
+        sql.append("   " + O_QUE_MELHORAR + " varchar(255) ");
         sql.append(")");
         return String.valueOf(sql);
     }
