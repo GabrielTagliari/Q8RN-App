@@ -82,4 +82,6 @@
     <string name="esforco_antes">Teste de esforço antes</string>
     <string name="esforco_depois">Teste de esforço depois</string>
     <string name="bpm">BPM</string>
+    <string name="qualidade_vida">Qualidade de vida referida</string>
+    <string name="o_que_melhorar">O que você deseja melhorar em sua saúde?</string>
 </resources>

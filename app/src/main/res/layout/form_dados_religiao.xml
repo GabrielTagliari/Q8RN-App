@@ -113,6 +113,45 @@
                 android:spinnerMode="dialog" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/qualidadeVidaTextId"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/qualidade_vida"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/qualidadeVidaSpinnerId"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:spinnerMode="dialog" />
+        </LinearLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/oQueMelhorarId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/o_que_melhorar"
+                android:inputType="text"
+                android:maxLength="4" />
+        </android.support.design.widget.TextInputLayout>
+
     </LinearLayout>
 
 </ScrollView>
