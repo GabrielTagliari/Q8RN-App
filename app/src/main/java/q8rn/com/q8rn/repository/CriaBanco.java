@@ -33,7 +33,7 @@ public class CriaBanco extends SQLiteOpenHelper{
     /* CAMPOS TABELA ENTREVISTADO */
     public static final String ALTURA = "altura";
     public static final String CINTURA_QUADRIL = "cintura_quadril";
-    public static final String INICIAIS_NOME = "cod_identificacao";
+    public static final String INICIAIS_NOME = "iniciais_nome";
     public static final String COR_PELE = "cor_pele";
     public static final String DOENCAS = "doencas";
     public static final String IDADE = "idade";
