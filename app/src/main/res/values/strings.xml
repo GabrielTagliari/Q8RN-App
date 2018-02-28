@@ -17,13 +17,15 @@
 
     <!-- Strings -->
     <string name="altura">Altura</string>
-    <string name="cintura_quadril">Cintura-Quadril</string>
+    <string name="cintura">Cintura</string>
+    <string name="quadril">Quadril</string>
+    <string name="cintura_quadril">Relação Cintura/Quadril</string>
     <string name="sexo">Sexo:</string>
     <string name="saude_mental">Saúde mental:</string>
     <string name="saude_f_sica">Saúde física:</string>
     <string name="religiao_referida">Religião Referida</string>
     <string name="profissao">Profissão</string>
-    <string name="pas">Pressão Arterial Sistólica (PAS)</string>
+    <string name="pa">Pressão Arterial</string>
     <string name="pad">Pressão Arterial Diastólica (PAD)</string>
     <string name="peso">Peso</string>
     <string name="masculino">Masculino</string>
@@ -77,4 +79,7 @@
     <string name="nenhum_historico">Sem dados</string>
     <string name="cod_identificacao">Cód. Identificação</string>
     <string name="consituicao_familiar">Constituição Familiar</string>
+    <string name="esforco_antes">Teste de esforço antes</string>
+    <string name="esforco_depois">Teste de esforço depois</string>
+    <string name="bpm">BPM</string>
 </resources>

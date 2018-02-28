@@ -191,7 +191,6 @@ public class FormActivity extends AppCompatActivity {
         mImc = (EditText) findViewById(R.id.imcId);
         mCinturaQuadril = (EditText) findViewById(R.id.cinturaQuadrilId);
         mPas = (EditText) findViewById(R.id.pasId);
-        mPad = (EditText) findViewById(R.id.padId);
         mGlicemiaCapilar = (EditText) findViewById(R.id.glicemiaId);
         mEspirometria = (EditText) findViewById(R.id.espirometriaId);
         //mDoencas = (EditText) findViewById(R.id.doencasId);

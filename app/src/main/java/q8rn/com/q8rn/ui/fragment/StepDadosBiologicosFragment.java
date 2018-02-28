@@ -52,7 +52,6 @@ public class StepDadosBiologicosFragment extends Fragment implements BlockingSte
         mImc = (TextInputEditText) v.findViewById(R.id.imcId);
         mCinturaQuadril = (TextInputEditText) v.findViewById(R.id.cinturaQuadrilId);
         mPas = (TextInputEditText) v.findViewById(R.id.pasId);
-        mPad = (TextInputEditText) v.findViewById(R.id.padId);
         mGlicemiaCapilar = (TextInputEditText) v.findViewById(R.id.glicemiaId);
         mEspirometria = (TextInputEditText) v.findViewById(R.id.espirometriaId);
         mDoencas = (TextInputEditText) v.findViewById(R.id.doencasId);
@@ -110,14 +109,12 @@ public class StepDadosBiologicosFragment extends Fragment implements BlockingSte
         boolean imcVazio = isVazioOuZerado(mImc);
         boolean cinturaVazio = isVazioOuZerado(mCinturaQuadril);
         boolean pasVazio = isVazioOuZerado(mPas);
-        boolean padVazio = isVazioOuZerado(mPad);
         boolean glicemiaVazio = isVazioOuZerado(mGlicemiaCapilar);
         boolean espirometriaVazio = isVazioOuZerado(mEspirometria);
 
         entrevistado.setImc(imcVazio ? 0 : Double.parseDouble(mImc.getText().toString()));
         entrevistado.setCinturaQuadril(cinturaVazio ? 0 : Double.parseDouble(cinturaTexto));
         entrevistado.setPas(pasVazio ? 0 : Double.parseDouble(mPas.getText().toString()));
-        entrevistado.setPad(padVazio ? 0 : Double.parseDouble(mPad.getText().toString()));
         entrevistado.setGlicemiaCapilar(glicemiaVazio ? 0 : Double.parseDouble(glicemiaTexto));
         entrevistado.setEspirometria(espirometriaVazio ? 0 : Integer.parseInt(espirometriaTexto));
         entrevistado.setDoencas(mDoencas.getText().toString());
