@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
@@ -62,7 +63,8 @@
                 android:paddingBottom="8dp"
                 android:text="@string/anos"
                 android:textAlignment="textStart"
-                android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                tools:ignore="RtlCompat" />
         </LinearLayout>
 
         <LinearLayout
@@ -148,8 +150,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="@string/o_que_melhorar"
-                android:inputType="text"
-                android:maxLength="4" />
+                android:inputType="text|textCapSentences"
+                android:maxLength="40" />
         </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>

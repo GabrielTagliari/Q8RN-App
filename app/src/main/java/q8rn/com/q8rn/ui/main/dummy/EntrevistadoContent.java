@@ -77,22 +77,10 @@ public class EntrevistadoContent {
             builder.append("\nPAS: ").append("Não preenchido");
         }
 
-        if (e.getPad() != 0) {
-            builder.append("\nPAD: ").append(e.getPad()).append(" mm/hg");
-        } else {
-            builder.append("\nPAD: ").append("Não preenchido");
-        }
-
         if (e.getGlicemiaCapilar() != 0) {
             builder.append("\nGlicemia capilar: ").append(e.getGlicemiaCapilar()).append(" mg/dl");
         } else {
             builder.append("\nGlicemia capilar: ").append("Não preenchido");
-        }
-
-        if (e.getEspirometria() != 0) {
-            builder.append("\nEspirometria: ").append(e.getEspirometria()).append(" dl");
-        } else {
-            builder.append("\nEspirometria: ").append("Não preenchido");
         }
 
         if (e.getEspirometria() != 0) {
@@ -108,7 +96,7 @@ public class EntrevistadoContent {
         }
 
         builder.append("\nReligião referidas: ").append(e.getReligiao());
-        builder.append("\nHá quantos anos: ").append(e.getDoencas()).append(" anos");
+        builder.append("\nHá quantos anos: ").append(e.getTempoReligiao()).append(" anos");
         builder.append("\nSaúde física: ").append(e.getSaudeFisica());
         builder.append("\nSaúde mental: ").append(e.getSaudeMental());
         return builder.toString();

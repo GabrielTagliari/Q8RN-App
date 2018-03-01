@@ -62,7 +62,35 @@ public class StepDadosBiologicosFragment extends Fragment implements BlockingSte
         dialog = new ProgressDialog(getActivity());
         dialog.setMessage("Carregando");
 
+        mCintura.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                setValorCampoRelacaoCinturaQuadril();
+            }
+        });
+
+        mQuadril.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                setValorCampoRelacaoCinturaQuadril();
+            }
+        });
+
         return v;
+    }
+
+    private void setValorCampoRelacaoCinturaQuadril() {
+        boolean campoCinturaNuloOuVazio = null == mCintura || mCintura.getText().toString().isEmpty();
+        boolean campoQuadrilNuloOuVazio = null == mQuadril || mQuadril.getText().toString().isEmpty();
+        if (!campoCinturaNuloOuVazio && !campoQuadrilNuloOuVazio) {
+            double relacaoCinturaQuadril = calculaRCQ();
+            mCinturaQuadril.setText(String.valueOf(relacaoCinturaQuadril));
+        }
+    }
+
+    private double calculaRCQ() {
+        return Double.valueOf(
+                mCintura.getText().toString()) / Double.valueOf(mQuadril.getText().toString());
     }
 
     @Override

@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.75"
                     android:hint="@string/cod_identificacao"
-                    android:inputType="textCapSentences|textPersonName"
+                    android:inputType="text|textCapSentences|textPersonName"
                     android:maxLength="7" />
             </android.support.design.widget.TextInputLayout>
 
@@ -269,7 +269,7 @@
                     android:layout_weight="0.5"
                     android:ems="10"
                     android:hint="@string/consituicao_familiar"
-                    android:inputType="textCapSentences|textPersonName"
+                    android:inputType="text|textCapSentences"
                     android:maxLength="30" />
             </android.support.design.widget.TextInputLayout>
 
