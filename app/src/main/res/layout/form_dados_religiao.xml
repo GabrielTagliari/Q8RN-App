@@ -127,7 +127,7 @@
                 android:id="@+id/qualidadeVidaTextId"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="1.5"
                 android:text="@string/qualidade_vida"
                 android:textSize="18sp" />
 
