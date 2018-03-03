@@ -19,6 +19,9 @@ import com.stepstone.stepper.BlockingStep;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import q8rn.com.q8rn.R;
 import q8rn.com.q8rn.entity.Entrevistado;
 import q8rn.com.q8rn.infrastructure.Constants;
@@ -31,33 +34,75 @@ public class StepDadosBiologicosFragment extends Fragment implements BlockingSte
 
     private static final String ENTREVISTADO = "entrevistado";
 
-    private ProgressDialog dialog;
-    private TextInputEditText mImc;
-    private TextInputEditText mCinturaQuadril;
-    private TextInputEditText mPas;
-    private TextInputEditText mPad;
-    private TextInputEditText mGlicemiaCapilar;
-    private TextInputEditText mEspirometria;
-    private TextInputEditText mDoencas;
+
+    @BindView(R.id.imcId) TextInputEditText mImc;
+    @BindView(R.id.cinturaQuadrilId) TextInputEditText mCinturaQuadril;
+    @BindView(R.id.cinturaEstaturaId) TextInputEditText mCinturaEstatura;
+    @BindView(R.id.pasId) TextInputEditText mPas;
+    @BindView(R.id.glicemiaId) TextInputEditText mGlicemiaCapilar;
+    @BindView(R.id.espirometriaId) TextInputEditText mEspirometria;
+    @BindView(R.id.doencasId) TextInputEditText mDoencas;
+
+    @BindView(R.id.cinturaId) TextInputEditText mCintura;
+    @BindView(R.id.quadrilId) TextInputEditText mQuadril;
+    @BindView(R.id.esforcoAntesId) TextInputEditText mEsforcoAntes;
+    @BindView(R.id.esforcoDepoisId) TextInputEditText mEsforcoDepois;
 
     private Entrevistado entrevistado;
+
+    private ProgressDialog dialog;
+
+    private Unbinder unbinder;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.form_dados_biologicos, container, false);
 
+        unbinder = ButterKnife.bind(this, v);
+
         dialog = new ProgressDialog(getActivity());
         dialog.setMessage("Carregando");
 
-        mImc = (TextInputEditText) v.findViewById(R.id.imcId);
-        mCinturaQuadril = (TextInputEditText) v.findViewById(R.id.cinturaQuadrilId);
-        mPas = (TextInputEditText) v.findViewById(R.id.pasId);
-        mPad = (TextInputEditText) v.findViewById(R.id.padId);
-        mGlicemiaCapilar = (TextInputEditText) v.findViewById(R.id.glicemiaId);
-        mEspirometria = (TextInputEditText) v.findViewById(R.id.espirometriaId);
-        mDoencas = (TextInputEditText) v.findViewById(R.id.doencasId);
+        mCintura.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                setValorCampoRelacaoCinturaQuadril();
+                setValorCampoRelacaoCinturaEstatura();
+            }
+        });
+
+        mQuadril.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                setValorCampoRelacaoCinturaQuadril();
+            }
+        });
 
         return v;
+    }
+
+    private void setValorCampoRelacaoCinturaEstatura() {
+        boolean campoCinturaNuloOuVazio = null == mCintura || mCintura.getText().toString().isEmpty();
+        if (!campoCinturaNuloOuVazio) {
+            mCinturaEstatura.setText(String.valueOf(calculaRCE()));
+        }
+    }
+
+    private void setValorCampoRelacaoCinturaQuadril() {
+        boolean campoCinturaNuloOuVazio = null == mCintura || mCintura.getText().toString().isEmpty();
+        boolean campoQuadrilNuloOuVazio = null == mQuadril || mQuadril.getText().toString().isEmpty();
+        if (!campoCinturaNuloOuVazio && !campoQuadrilNuloOuVazio) {
+            mCinturaQuadril.setText(String.valueOf(calculaRCQ()));
+        }
+    }
+
+    private double calculaRCE() {
+        return Double.valueOf(mCintura.getText().toString()) / entrevistado.getAltura();
+    }
+
+    private double calculaRCQ() {
+        return Double.valueOf(
+                mCintura.getText().toString()) / Double.valueOf(mQuadril.getText().toString());
     }
 
     @Override
@@ -103,23 +148,40 @@ public class StepDadosBiologicosFragment extends Fragment implements BlockingSte
             entrevistado = new Entrevistado();
         }
 
-        String cinturaTexto = mCinturaQuadril.getText().toString();
+        String cinturaQuadrilTexto = mCinturaQuadril.getText().toString();
         String espirometriaTexto = mEspirometria.getText().toString();
         String glicemiaTexto = mGlicemiaCapilar.getText().toString();
 
+        String cinturaTexto = mCintura.getText().toString();
+        String quadrilTexto = mQuadril.getText().toString();
+        String esforcoAntesTexto = mEsforcoAntes.getText().toString();
+        String esforcoDepoisTexto = mEsforcoDepois.getText().toString();
+        String cinturaEstaturaTexto = mCinturaEstatura.getText().toString();
+
         boolean imcVazio = isVazioOuZerado(mImc);
-        boolean cinturaVazio = isVazioOuZerado(mCinturaQuadril);
+        boolean cinturaQuadrilVazio = isVazioOuZerado(mCinturaQuadril);
         boolean pasVazio = isVazioOuZerado(mPas);
-        boolean padVazio = isVazioOuZerado(mPad);
         boolean glicemiaVazio = isVazioOuZerado(mGlicemiaCapilar);
         boolean espirometriaVazio = isVazioOuZerado(mEspirometria);
 
+        boolean cinturaVazio = isVazioOuZerado(mCintura);
+        boolean quadrilVazio = isVazioOuZerado(mQuadril);
+        boolean esforcoAntesVazio = isVazioOuZerado(mEsforcoAntes);
+        boolean esforcoDepoisVazio = isVazioOuZerado(mEsforcoDepois);
+        boolean cinturaEstaturaVazio = isVazioOuZerado(mCinturaEstatura);
+
         entrevistado.setImc(imcVazio ? 0 : Double.parseDouble(mImc.getText().toString()));
-        entrevistado.setCinturaQuadril(cinturaVazio ? 0 : Double.parseDouble(cinturaTexto));
+        entrevistado.setCinturaQuadril(cinturaQuadrilVazio ? 0 : Double.parseDouble(cinturaQuadrilTexto));
         entrevistado.setPas(pasVazio ? 0 : Double.parseDouble(mPas.getText().toString()));
-        entrevistado.setPad(padVazio ? 0 : Double.parseDouble(mPad.getText().toString()));
         entrevistado.setGlicemiaCapilar(glicemiaVazio ? 0 : Double.parseDouble(glicemiaTexto));
         entrevistado.setEspirometria(espirometriaVazio ? 0 : Integer.parseInt(espirometriaTexto));
+
+        entrevistado.setCintura(cinturaVazio ? 0 : Double.parseDouble(cinturaTexto));
+        entrevistado.setQuadril(quadrilVazio ? 0 : Double.parseDouble(quadrilTexto));
+        entrevistado.setTesteEsforcoAntes(esforcoAntesVazio ? 0 : Double.parseDouble(esforcoAntesTexto));
+        entrevistado.setTesteEsforcoDepois(esforcoDepoisVazio ? 0 : Double.parseDouble(esforcoDepoisTexto));
+        entrevistado.setCinturaEstatura(cinturaEstaturaVazio ? 0 : Double.parseDouble(cinturaEstaturaTexto));
+
         entrevistado.setDoencas(mDoencas.getText().toString());
 
         salvarEntrevistadoSharedPreferences(entrevistado);
@@ -161,13 +223,13 @@ public class StepDadosBiologicosFragment extends Fragment implements BlockingSte
     @Override
     @UiThread
     public void onBackClicked(StepperLayout.OnBackClickedCallback callback) {
-        Toast.makeText(this.getContext(), "Your custom back action. Here you should cancel currently running operations", Toast.LENGTH_SHORT).show();
         callback.goToPrevStep();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        unbinder.unbind();
         if (dialog != null) {
             dialog.dismiss();
         }

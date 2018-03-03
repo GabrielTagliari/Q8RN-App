@@ -29,6 +29,17 @@ public class Entrevistado implements Parcelable{
     private String saudeMental;
     private String doencas;
 
+    // Pos alteracao no formulario
+    private String codIdentificacao;
+    private String constituicaoFamiliar;
+    private double cintura;
+    private double quadril;
+    private double testeEsforcoAntes;
+    private double testeEsforcoDepois;
+    private String qualidadeVida;
+    private String oQueMelhorar;
+    private double cinturaEstatura;
+
     public Entrevistado() {}
 
     private Entrevistado(Parcel in) {
@@ -51,6 +62,16 @@ public class Entrevistado implements Parcelable{
         saudeFisica = in.readString();
         saudeMental = in.readString();
         doencas = in.readString();
+        // Pos alteracao no formulario
+        codIdentificacao = in.readString();
+        constituicaoFamiliar = in.readString();
+        cintura = in.readDouble();
+        quadril = in.readDouble();
+        testeEsforcoAntes = in.readDouble();
+        testeEsforcoDepois = in.readDouble();
+        qualidadeVida = in.readString();
+        oQueMelhorar = in.readString();
+        cinturaEstatura = in.readDouble();
     }
 
     @Override
@@ -74,6 +95,16 @@ public class Entrevistado implements Parcelable{
         dest.writeString(saudeFisica);
         dest.writeString(saudeMental);
         dest.writeString(doencas);
+        // Pos alteracao no formulario
+        dest.writeString(codIdentificacao);
+        dest.writeString(constituicaoFamiliar);
+        dest.writeDouble(cintura);
+        dest.writeDouble(quadril);
+        dest.writeDouble(testeEsforcoAntes);
+        dest.writeDouble(testeEsforcoDepois);
+        dest.writeString(qualidadeVida);
+        dest.writeString(oQueMelhorar);
+        dest.writeDouble(cinturaEstatura);
     }
 
     @Override
@@ -253,6 +284,78 @@ public class Entrevistado implements Parcelable{
         this.doencas = doencas;
     }
 
+    public String getCodIdentificacao() {
+        return codIdentificacao;
+    }
+
+    public void setCodIdentificacao(String codIdentificacao) {
+        this.codIdentificacao = codIdentificacao;
+    }
+
+    public String getConstituicaoFamiliar() {
+        return constituicaoFamiliar;
+    }
+
+    public void setConstituicaoFamiliar(String constituicaoFamiliar) {
+        this.constituicaoFamiliar = constituicaoFamiliar;
+    }
+
+    public double getCintura() {
+        return cintura;
+    }
+
+    public void setCintura(double cintura) {
+        this.cintura = cintura;
+    }
+
+    public double getQuadril() {
+        return quadril;
+    }
+
+    public void setQuadril(double quadril) {
+        this.quadril = quadril;
+    }
+
+    public double getTesteEsforcoAntes() {
+        return testeEsforcoAntes;
+    }
+
+    public void setTesteEsforcoAntes(double testeEsforcoAntes) {
+        this.testeEsforcoAntes = testeEsforcoAntes;
+    }
+
+    public double getTesteEsforcoDepois() {
+        return testeEsforcoDepois;
+    }
+
+    public void setTesteEsforcoDepois(double testeEsforcoDepois) {
+        this.testeEsforcoDepois = testeEsforcoDepois;
+    }
+
+    public String getQualidadeVida() {
+        return qualidadeVida;
+    }
+
+    public void setQualidadeVida(String qualidadeVida) {
+        this.qualidadeVida = qualidadeVida;
+    }
+
+    public String getoQueMelhorar() {
+        return oQueMelhorar;
+    }
+
+    public void setoQueMelhorar(String oQueMelhorar) {
+        this.oQueMelhorar = oQueMelhorar;
+    }
+
+    public double getCinturaEstatura() {
+        return cinturaEstatura;
+    }
+
+    public void setCinturaEstatura(double cinturaEstatura) {
+        this.cinturaEstatura = cinturaEstatura;
+    }
+
     public int getCodEscolaridade(String escolaridade){
         switch (escolaridade){
             case Constants.SIOUFI:
@@ -290,6 +393,15 @@ public class Entrevistado implements Parcelable{
                 ", saudeFisica='" + saudeFisica + '\'' +
                 ", saudeMental='" + saudeMental + '\'' +
                 ", doencas='" + doencas + '\'' +
+                ", codIdentificacao='" + codIdentificacao + '\'' +
+                ", constituicaoFamiliar='" + constituicaoFamiliar + '\'' +
+                ", cintura=" + cintura +
+                ", quadril=" + quadril +
+                ", testeEsforcoAntes=" + testeEsforcoAntes +
+                ", testeEsforcoDepois=" + testeEsforcoDepois +
+                ", qualidadeVida='" + qualidadeVida + '\'' +
+                ", oQueMelhorar='" + oQueMelhorar + '\'' +
+                ", cinturaEstatura=" + cinturaEstatura +
                 '}';
     }
 

@@ -25,6 +25,9 @@ import com.stepstone.stepper.VerificationError;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import q8rn.com.q8rn.R;
 import q8rn.com.q8rn.entity.Entrevistado;
 import q8rn.com.q8rn.infrastructure.Constants;
@@ -39,23 +42,23 @@ public class StepReligiaoSaudeFragment extends Fragment implements BlockingStep 
 
     private static final String ENTREVISTADO = "entrevistado";
 
-    private TextInputEditText mReligiao;
-    private TextInputEditText mTempoReligiao;
+    @BindView(R.id.religiaoId) TextInputEditText mReligiao;
+    @BindView(R.id.tempoReligiaoId) TextInputEditText mTempoReligiao;
+    @BindView(R.id.saudeFisicaIdSpinner) Spinner mSaudeFisicaSpinner;
+    @BindView(R.id.saudeMentalIdSpinner) Spinner mSaudeMentalSpinner;
 
-    private Spinner mSaudeFisicaSpinner;
-    private Spinner mSaudeMentalSpinner;
+    @BindView(R.id.qualidadeVidaSpinnerId) Spinner mQualidadeVidaSpinner;
+    @BindView(R.id.oQueMelhorarId) TextInputEditText mOQueMelhorar;
 
     private ProgressDialog dialog;
+
+    private Unbinder unbinder;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.form_dados_religiao, container, false);
 
-        mReligiao = (TextInputEditText) v.findViewById(R.id.religiaoId);
-        mTempoReligiao = (TextInputEditText) v.findViewById(R.id.tempoReligiaoId);
-
-        mSaudeFisicaSpinner = (Spinner) v.findViewById(R.id.saudeFisicaIdSpinner);
-        mSaudeMentalSpinner = (Spinner) v.findViewById(R.id.saudeMentalIdSpinner);
+        unbinder = ButterKnife.bind(this, v);
 
         dialog = new ProgressDialog(getActivity());
         dialog.setMessage("Carregando questionário");
@@ -68,6 +71,7 @@ public class StepReligiaoSaudeFragment extends Fragment implements BlockingStep 
     private void populaTodosSpinners() {
         populaSpinner(R.array.saude_array, mSaudeFisicaSpinner);
         populaSpinner(R.array.saude_array, mSaudeMentalSpinner);
+        populaSpinner(R.array.saude_array, mQualidadeVidaSpinner);
     }
 
     private void populaSpinner(int array, Spinner spinner) {
@@ -98,6 +102,7 @@ public class StepReligiaoSaudeFragment extends Fragment implements BlockingStep 
         List<Spinner> listaSpinner = new ArrayList<>();
         listaSpinner.add(mSaudeFisicaSpinner);
         listaSpinner.add(mSaudeMentalSpinner);
+        listaSpinner.add(mQualidadeVidaSpinner);
         return listaSpinner;
     }
 
@@ -156,10 +161,12 @@ public class StepReligiaoSaudeFragment extends Fragment implements BlockingStep 
         entrevistado.setTempoReligiao(Integer.parseInt(mTempoReligiao.getText().toString()));
         entrevistado.setSaudeFisica(mSaudeFisicaSpinner.getSelectedItem().toString());
         entrevistado.setSaudeMental(mSaudeMentalSpinner.getSelectedItem().toString());
+        entrevistado.setQualidadeVida(mQualidadeVidaSpinner.getSelectedItem().toString());
+        entrevistado.setoQueMelhorar(mOQueMelhorar.getText().toString());
 
         salvarEntrevistadoSharedPreferences(entrevistado);
 
-        Log.i("biologicos", entrevistado.toString());
+        Log.i("saude", entrevistado.toString());
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -173,13 +180,13 @@ public class StepReligiaoSaudeFragment extends Fragment implements BlockingStep 
     @Override
     @UiThread
     public void onBackClicked(StepperLayout.OnBackClickedCallback callback) {
-        Toast.makeText(this.getContext(), "Your custom back action. Here you should cancel currently running operations", Toast.LENGTH_SHORT).show();
         callback.goToPrevStep();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        unbinder.unbind();
         if (dialog != null) {
             dialog.dismiss();
         }

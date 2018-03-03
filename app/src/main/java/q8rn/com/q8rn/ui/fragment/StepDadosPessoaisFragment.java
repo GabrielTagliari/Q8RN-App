@@ -27,6 +27,9 @@ import com.stepstone.stepper.VerificationError;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import q8rn.com.q8rn.R;
 import q8rn.com.q8rn.entity.Entrevistado;
 import q8rn.com.q8rn.infrastructure.Constants;
@@ -43,21 +46,26 @@ public class StepDadosPessoaisFragment extends Fragment implements BlockingStep 
     public static final String FAVOR_PREENCHER_OS_CAMPOS_OBRIGATORIOS = "Favor preencher os campos obrigatórios";
     private static final String ENTREVISTADO = "entrevistado";
 
-    private TextInputEditText mIniciaisNome;
-    private TextInputEditText mIdade;
-    private TextInputEditText mProfissao;
-    private TextInputEditText mPeso;
-    private TextInputEditText mAltura;
+    @BindView(R.id.iniciaisNomeId) TextInputEditText mIniciaisNome;
+    @BindView(R.id.idadeId) TextInputEditText mIdade;
+    @BindView(R.id.profissaoId) TextInputEditText mProfissao;
+    @BindView(R.id.pesoId) TextInputEditText mPeso;
+    @BindView(R.id.alturaId) TextInputEditText mAltura;
 
-    private TextInputLayout mTilIniciaisNome;
-    private TextInputLayout mTilIdade;
-    private TextInputLayout mTilProfissao;
+    @BindView(R.id.til_iniciais_nome) TextInputLayout mTilIniciaisNome;
+    @BindView(R.id.til_idade) TextInputLayout mTilIdade;
+    @BindView(R.id.til_profissao) TextInputLayout mTilProfissao;
 
-    private RadioGroup mRadioGroupSexo;
-    private RadioButton mFemininoRadio;
+    @BindView(R.id.radioGroupSexoId) RadioGroup mRadioGroupSexo;
+    @BindView(R.id.femininoId) RadioButton mFemininoRadio;
 
-    private Spinner mCorPeleSpinner;
-    private Spinner mEscolaridadeSpinner;
+    @BindView(R.id.corPeleIdSpinner) Spinner mCorPeleSpinner;
+    @BindView(R.id.escolaridadeIdSpinner) Spinner mEscolaridadeSpinner;
+
+    @BindView(R.id.codIdentificacaoId) TextInputEditText mCodIdentificacao;
+    @BindView(R.id.constituicaoId) TextInputEditText mContituicaoFamiliar;
+
+    private Unbinder unbinder;
 
     private View v;
 
@@ -68,13 +76,11 @@ public class StepDadosPessoaisFragment extends Fragment implements BlockingStep 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.form_dados_pessoais, container, false);
 
-        mCorPeleSpinner = (Spinner) v.findViewById(R.id.corPeleIdSpinner);
-        mEscolaridadeSpinner = (Spinner) v.findViewById(R.id.escolaridadeIdSpinner);
+        unbinder = ButterKnife.bind(this, v);
 
         dialog = new ProgressDialog(getActivity());
         dialog.setMessage("Carregando");
 
-        instanciaElementosTela();
         populaTodosSpinners();
 
         return v;
@@ -90,24 +96,6 @@ public class StepDadosPessoaisFragment extends Fragment implements BlockingStep 
                 array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-    }
-
-    private void instanciaElementosTela() {
-        mTilIniciaisNome = (TextInputLayout) v.findViewById(R.id.til_iniciais_nome);
-        mTilIdade = (TextInputLayout) v.findViewById(R.id.til_idade);
-        mTilProfissao = (TextInputLayout) v.findViewById(R.id.til_profissao);
-
-        mIniciaisNome = (TextInputEditText) v.findViewById(R.id.iniciaisNomeId);
-        mIdade = (TextInputEditText) v.findViewById(R.id.idadeId);
-        mProfissao = (TextInputEditText) v.findViewById(R.id.profissaoId);
-        mPeso = (TextInputEditText) v.findViewById(R.id.pesoId);
-        mAltura = (TextInputEditText) v.findViewById(R.id.alturaId);
-
-        mRadioGroupSexo = (RadioGroup) v.findViewById(R.id.radioGroupSexoId);
-        mFemininoRadio = (RadioButton) v.findViewById(R.id.femininoId);
-
-        mCorPeleSpinner = (Spinner) v.findViewById(R.id.corPeleIdSpinner);
-        mEscolaridadeSpinner = (Spinner) v.findViewById(R.id.escolaridadeIdSpinner);
     }
 
     @Override
@@ -189,6 +177,8 @@ public class StepDadosPessoaisFragment extends Fragment implements BlockingStep 
         entrevistado.setEscolaridade(codEscolaridade);
         entrevistado.setAltura(Double.parseDouble(alturaFormatada));
         entrevistado.setPeso(Double.parseDouble(pesoFormatado));
+        entrevistado.setCodIdentificacao(mCodIdentificacao.getText().toString());
+        entrevistado.setConstituicaoFamiliar(mContituicaoFamiliar.getText().toString());
 
         salvarEntrevistadoSharedPreferences(entrevistado);
 
@@ -226,6 +216,7 @@ public class StepDadosPessoaisFragment extends Fragment implements BlockingStep 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        unbinder.unbind();
         if (dialog != null) {
             dialog.dismiss();
         }
