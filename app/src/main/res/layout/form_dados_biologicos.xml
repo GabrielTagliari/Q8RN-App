@@ -33,11 +33,12 @@
                     android:layout_weight="0"
                     android:hint="@string/cintura"
                     android:inputType="number|numberDecimal"
-                    android:maxLength="5" />
+                    android:maxLength="5"
+                    android:nextFocusDown="@id/quadrilId" />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
-                android:id="@+id/tv_cm"
+                android:id="@+id/tv_cm1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
@@ -63,17 +64,17 @@
                     android:layout_weight="0"
                     android:hint="@string/quadril"
                     android:inputType="numberDecimal"
-                    android:maxLength="4" />
+                    android:maxLength="4"
+                    android:nextFocusDown="@id/imcId" />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
-                android:id="@+id/tv_cm2"
+                android:id="@+id/tv_cm3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:layout_weight="0.05"
+                android:layout_weight="0"
                 android:paddingBottom="8dp"
-                android:paddingRight="8dp"
                 android:text="@string/cm"
                 android:textAlignment="textStart"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button"
@@ -88,20 +89,23 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:paddingRight="8dp"
+                android:paddingTop="8dp">
 
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/imcId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0"
                     android:hint="@string/imc"
                     android:inputType="number|numberDecimal"
-                    android:maxLength="5" />
+                    android:maxLength="5"
+                    android:nextFocusDown="@id/pasId" />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/tv_cm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
@@ -116,6 +120,43 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="8dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/pasId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:hint="@string/pa"
+                    android:inputType="numberDecimal"
+                    android:maxLength="4"
+                    android:nextFocusDown="@id/cinturaQuadrilId" />
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_cm2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="0"
+                android:paddingBottom="8dp"
+                android:text="@string/mm_hg"
+                android:textAlignment="textStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                tools:ignore="RtlCompat" />
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1">
 
                 <android.support.design.widget.TextInputEditText
@@ -125,15 +166,9 @@
                     android:layout_weight="1"
                     android:hint="@string/cintura_quadril"
                     android:inputType="numberDecimal"
-                    android:maxLength="4" />
+                    android:maxLength="4"
+                    android:nextFocusDown="@id/cinturaEstaturaId" />
             </android.support.design.widget.TextInputLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="wrap_content"
@@ -141,28 +176,16 @@
                 android:layout_weight="1">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/pasId"
+                    android:id="@+id/cinturaEstaturaId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="@string/pa"
+                    android:hint="@string/cintura_estatura"
                     android:inputType="numberDecimal"
-                    android:maxLength="4" />
+                    android:maxLength="4"
+                    android:nextFocusDown="@id/glicemiaId" />
             </android.support.design.widget.TextInputLayout>
 
-            <TextView
-                android:id="@+id/textView20"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_weight="0"
-                android:paddingBottom="8dp"
-                android:paddingRight="8dp"
-                android:text="@string/mm_hg"
-                android:textAlignment="textStart"
-                android:textAppearance="@style/TextAppearance.AppCompat.Button"
-                tools:ignore="RtlCompat" />
         </LinearLayout>
 
         <LinearLayout
@@ -193,10 +216,11 @@
                     android:id="@+id/glicemiaId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0"
                     android:hint="@string/glicemia_capilar"
                     android:inputType="numberDecimal"
-                    android:maxLength="4" />
+                    android:maxLength="4"
+                    android:nextFocusDown="@id/espirometriaId" />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
@@ -224,7 +248,8 @@
                     android:layout_weight="0.05"
                     android:hint="@string/espirometria"
                     android:inputType="numberDecimal"
-                    android:maxLength="4" />
+                    android:maxLength="4"
+                    android:nextFocusDown="@id/doencasId" />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
@@ -234,7 +259,6 @@
                 android:layout_gravity="bottom"
                 android:layout_weight="0.02"
                 android:paddingBottom="8dp"
-                android:paddingRight="8dp"
                 android:text="@string/dl"
                 android:textAlignment="textStart"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button"
@@ -254,7 +278,8 @@
                 android:ems="10"
                 android:hint="@string/doencas_referidas"
                 android:inputType="textCapSentences|textPersonName"
-                android:maxLength="30" />
+                android:maxLength="30"
+                android:nextFocusDown="@id/esforcoAntesId" />
         </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
@@ -274,7 +299,8 @@
                     android:ems="10"
                     android:hint="@string/esforco_antes"
                     android:inputType="numberDecimal"
-                    android:maxLength="30" />
+                    android:maxLength="30"
+                    android:nextFocusDown="@id/esforcoDepoisId" />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
@@ -313,7 +339,6 @@
                 android:layout_gravity="bottom"
                 android:layout_weight="0"
                 android:paddingBottom="8dp"
-                android:paddingRight="8dp"
                 android:text="@string/bpm"
                 android:textAlignment="textStart"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button"

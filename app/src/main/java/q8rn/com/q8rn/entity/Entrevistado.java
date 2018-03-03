@@ -38,6 +38,7 @@ public class Entrevistado implements Parcelable{
     private double testeEsforcoDepois;
     private String qualidadeVida;
     private String oQueMelhorar;
+    private double cinturaEstatura;
 
     public Entrevistado() {}
 
@@ -70,6 +71,7 @@ public class Entrevistado implements Parcelable{
         testeEsforcoDepois = in.readDouble();
         qualidadeVida = in.readString();
         oQueMelhorar = in.readString();
+        cinturaEstatura = in.readDouble();
     }
 
     @Override
@@ -102,6 +104,7 @@ public class Entrevistado implements Parcelable{
         dest.writeDouble(testeEsforcoDepois);
         dest.writeString(qualidadeVida);
         dest.writeString(oQueMelhorar);
+        dest.writeDouble(cinturaEstatura);
     }
 
     @Override
@@ -345,6 +348,14 @@ public class Entrevistado implements Parcelable{
         this.oQueMelhorar = oQueMelhorar;
     }
 
+    public double getCinturaEstatura() {
+        return cinturaEstatura;
+    }
+
+    public void setCinturaEstatura(double cinturaEstatura) {
+        this.cinturaEstatura = cinturaEstatura;
+    }
+
     public int getCodEscolaridade(String escolaridade){
         switch (escolaridade){
             case Constants.SIOUFI:
@@ -390,6 +401,7 @@ public class Entrevistado implements Parcelable{
                 ", testeEsforcoDepois=" + testeEsforcoDepois +
                 ", qualidadeVida='" + qualidadeVida + '\'' +
                 ", oQueMelhorar='" + oQueMelhorar + '\'' +
+                ", cinturaEstatura=" + cinturaEstatura +
                 '}';
     }
 
