@@ -94,9 +94,15 @@ public class EntrevistadoContent {
         }
 
         if (e.getCinturaQuadril() != 0) {
-            builder.append("\nCintura-quadril: ").append(e.getCinturaQuadril());
+            builder.append("\nRelação cintura/quadril: ").append(e.getCinturaQuadril());
         } else {
-            builder.append("\nCintura-quadril: ").append(NÃO_PREENCHIDO);
+            builder.append("\nRelação cintura/quadril: ").append(NÃO_PREENCHIDO);
+        }
+
+        if (e.getCinturaQuadril() != 0) {
+            builder.append("\nRelação cintura/estatura: ").append(e.getCinturaEstatura());
+        } else {
+            builder.append("\nRelação cintura/estatura: ").append(NÃO_PREENCHIDO);
         }
 
         if (e.getPas() != 0) {

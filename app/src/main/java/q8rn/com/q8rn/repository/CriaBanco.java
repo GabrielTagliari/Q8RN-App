@@ -51,11 +51,6 @@ public class CriaBanco extends SQLiteOpenHelper{
     public static final String SAUDE_MENTAL = "saude_mental";
     public static final String SEXO = "sexo";
     public static final String TEMPO_RELIGIAO = "tempo_religiao";
-
-    /* TABELA RELACIONAMENTO QUESTAO USUARIO */
-    public static final String ENTREVISTADO_ID = "entrevistado_id";
-    public static final String QUESTAO_ID = "questao_id";
-    public static final String ESCORE = "escore";
     public static final String COD_IDENTIFICACAO = "cod_identificacao";
     public static final String CONSTITUICAO_FAMILIAR = "constituicao_familiar";
     public static final String CINTURA = "cintura";
@@ -64,6 +59,12 @@ public class CriaBanco extends SQLiteOpenHelper{
     public static final String TESTE_ESFORCO_DEPOIS = "teste_esforco_depois";
     public static final String QUALIDADE_VIDA = "qualidade_vida";
     public static final String O_QUE_MELHORAR = "o_que_melhorar";
+    public static final String CINTURA_ESTATURA = "cintura_estatura";
+
+    /* TABELA RELACIONAMENTO QUESTAO USUARIO */
+    public static final String ENTREVISTADO_ID = "entrevistado_id";
+    public static final String QUESTAO_ID = "questao_id";
+    public static final String ESCORE = "escore";
 
     public CriaBanco(Context context) {
         super(context, NOME_BANCO, null, VERSAO);
@@ -78,9 +79,9 @@ public class CriaBanco extends SQLiteOpenHelper{
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS" + TABELA_QUESTAO);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS" + TABELA_ENTREVISTADO);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS" + TABELA_QUESTAO_ENTREVISTADO);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABELA_QUESTAO);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABELA_ENTREVISTADO);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABELA_QUESTAO_ENTREVISTADO);
         onCreate(sqLiteDatabase);
     }
 
@@ -132,7 +133,8 @@ public class CriaBanco extends SQLiteOpenHelper{
         sql.append("   " + TESTE_ESFORCO_ANTES + " float(19), ");
         sql.append("   " + TESTE_ESFORCO_DEPOIS + " float(19), ");
         sql.append("   " + QUALIDADE_VIDA + " varchar(255), ");
-        sql.append("   " + O_QUE_MELHORAR + " varchar(255) ");
+        sql.append("   " + O_QUE_MELHORAR + " varchar(255), ");
+        sql.append("   " + CINTURA_ESTATURA + " varchar(255) ");
         sql.append(")");
         return String.valueOf(sql);
     }

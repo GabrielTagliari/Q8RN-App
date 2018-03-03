@@ -37,6 +37,7 @@ public class StepDadosBiologicosFragment extends Fragment implements BlockingSte
 
     @BindView(R.id.imcId) TextInputEditText mImc;
     @BindView(R.id.cinturaQuadrilId) TextInputEditText mCinturaQuadril;
+    @BindView(R.id.cinturaEstaturaId) TextInputEditText mCinturaEstatura;
     @BindView(R.id.pasId) TextInputEditText mPas;
     @BindView(R.id.glicemiaId) TextInputEditText mGlicemiaCapilar;
     @BindView(R.id.espirometriaId) TextInputEditText mEspirometria;
@@ -66,6 +67,7 @@ public class StepDadosBiologicosFragment extends Fragment implements BlockingSte
             @Override
             public void onFocusChange(View view, boolean b) {
                 setValorCampoRelacaoCinturaQuadril();
+                setValorCampoRelacaoCinturaEstatura();
             }
         });
 
@@ -79,13 +81,23 @@ public class StepDadosBiologicosFragment extends Fragment implements BlockingSte
         return v;
     }
 
+    private void setValorCampoRelacaoCinturaEstatura() {
+        boolean campoCinturaNuloOuVazio = null == mCintura || mCintura.getText().toString().isEmpty();
+        if (!campoCinturaNuloOuVazio) {
+            mCinturaEstatura.setText(String.valueOf(calculaRCE()));
+        }
+    }
+
     private void setValorCampoRelacaoCinturaQuadril() {
         boolean campoCinturaNuloOuVazio = null == mCintura || mCintura.getText().toString().isEmpty();
         boolean campoQuadrilNuloOuVazio = null == mQuadril || mQuadril.getText().toString().isEmpty();
         if (!campoCinturaNuloOuVazio && !campoQuadrilNuloOuVazio) {
-            double relacaoCinturaQuadril = calculaRCQ();
-            mCinturaQuadril.setText(String.valueOf(relacaoCinturaQuadril));
+            mCinturaQuadril.setText(String.valueOf(calculaRCQ()));
         }
+    }
+
+    private double calculaRCE() {
+        return Double.valueOf(mCintura.getText().toString()) / entrevistado.getAltura();
     }
 
     private double calculaRCQ() {
@@ -144,6 +156,7 @@ public class StepDadosBiologicosFragment extends Fragment implements BlockingSte
         String quadrilTexto = mQuadril.getText().toString();
         String esforcoAntesTexto = mEsforcoAntes.getText().toString();
         String esforcoDepoisTexto = mEsforcoDepois.getText().toString();
+        String cinturaEstaturaTexto = mCinturaEstatura.getText().toString();
 
         boolean imcVazio = isVazioOuZerado(mImc);
         boolean cinturaQuadrilVazio = isVazioOuZerado(mCinturaQuadril);
@@ -155,6 +168,7 @@ public class StepDadosBiologicosFragment extends Fragment implements BlockingSte
         boolean quadrilVazio = isVazioOuZerado(mQuadril);
         boolean esforcoAntesVazio = isVazioOuZerado(mEsforcoAntes);
         boolean esforcoDepoisVazio = isVazioOuZerado(mEsforcoDepois);
+        boolean cinturaEstaturaVazio = isVazioOuZerado(mCinturaEstatura);
 
         entrevistado.setImc(imcVazio ? 0 : Double.parseDouble(mImc.getText().toString()));
         entrevistado.setCinturaQuadril(cinturaQuadrilVazio ? 0 : Double.parseDouble(cinturaQuadrilTexto));
@@ -166,6 +180,7 @@ public class StepDadosBiologicosFragment extends Fragment implements BlockingSte
         entrevistado.setQuadril(quadrilVazio ? 0 : Double.parseDouble(quadrilTexto));
         entrevistado.setTesteEsforcoAntes(esforcoAntesVazio ? 0 : Double.parseDouble(esforcoAntesTexto));
         entrevistado.setTesteEsforcoDepois(esforcoDepoisVazio ? 0 : Double.parseDouble(esforcoDepoisTexto));
+        entrevistado.setCinturaEstatura(cinturaEstaturaVazio ? 0 : Double.parseDouble(cinturaEstaturaTexto));
 
         entrevistado.setDoencas(mDoencas.getText().toString());
 

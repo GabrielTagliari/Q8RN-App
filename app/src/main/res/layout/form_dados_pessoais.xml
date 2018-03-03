@@ -36,7 +36,8 @@
                     android:layout_weight="0.75"
                     android:hint="@string/cod_identificacao"
                     android:inputType="text|textCapSentences|textPersonName"
-                    android:maxLength="7" />
+                    android:maxLength="7"
+                    android:nextFocusDown="@id/iniciaisNomeId"/>
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -54,7 +55,8 @@
                     android:layout_weight="0.75"
                     android:hint="@string/iniciais_do_nome"
                     android:inputType="textCapSentences|textPersonName"
-                    android:maxLength="7" />
+                    android:maxLength="7"
+                    android:nextFocusDown="@id/idadeId" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -71,7 +73,8 @@
                     android:layout_weight="0.5"
                     android:hint="@string/idade"
                     android:inputType="number"
-                    android:maxLength="3" />
+                    android:maxLength="3"
+                    android:nextFocusDown="@id/alturaId" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -194,7 +197,8 @@
                     android:layout_weight="1"
                     android:hint="@string/altura"
                     android:inputType="phone"
-                    android:maxLength="4" />
+                    android:maxLength="4"
+                    android:nextFocusDown="@id/pesoId" />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
@@ -220,7 +224,8 @@
                     android:layout_weight="1"
                     android:hint="@string/peso"
                     android:inputType="phone"
-                    android:maxLength="4" />
+                    android:maxLength="4"
+                    android:nextFocusDown="@id/profissaoId" />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
@@ -253,7 +258,8 @@
                     android:ems="10"
                     android:hint="@string/profissao"
                     android:inputType="textCapSentences|textPersonName"
-                    android:maxLength="30" />
+                    android:maxLength="30"
+                    android:nextFocusDown="@id/constituicaoId" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout

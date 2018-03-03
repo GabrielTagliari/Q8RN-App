@@ -64,6 +64,7 @@ public class EntrevistadoBusiness extends BaseBusiness {
         valores.put(CriaBanco.TESTE_ESFORCO_DEPOIS, entrevistado.getTesteEsforcoDepois());
         valores.put(CriaBanco.QUALIDADE_VIDA, entrevistado.getQualidadeVida());
         valores.put(CriaBanco.O_QUE_MELHORAR, entrevistado.getoQueMelhorar());
+        valores.put(CriaBanco.CINTURA_ESTATURA, entrevistado.getCinturaEstatura());
 
         resultado = db.insert(CriaBanco.TABELA_ENTREVISTADO, null, valores);
         db.close();
@@ -111,6 +112,7 @@ public class EntrevistadoBusiness extends BaseBusiness {
             entrevistado.setTesteEsforcoDepois(c.getDouble(26));
             entrevistado.setQualidadeVida(c.getString(27));
             entrevistado.setoQueMelhorar(c.getString(28));
+            entrevistado.setCinturaEstatura(c.getDouble(29));
 
             entrevistados.add(entrevistado);
 
