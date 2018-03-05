@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.main.HomeActivity">
+
+    <item android:id="@+id/item_menu_exportar"
+        android:title="Exportar dados"
+        android:icon="@drawable/ic_cloud_upload_black_24dp"
+        android:orderInCategory="100"
+        android:clickable="true"
+        android:background="?android:attr/actionBarItemBackground"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/item_menu_questionario"
+        android:title="Exportar dados"
+        android:icon="@drawable/ic_assignment_black_24px"
+        android:orderInCategory="200"
+        android:clickable="true"
+        android:background="?android:attr/actionBarItemBackground"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/item_menu_creditos"
+        android:title="Créditos"
+        android:icon="@drawable/ic_info_outline_black_24dp"
+        android:orderInCategory="300"
+        android:clickable="true"
+        android:background="?android:attr/actionBarItemBackground"
+        app:showAsAction="ifRoom"/>
+
+</menu>

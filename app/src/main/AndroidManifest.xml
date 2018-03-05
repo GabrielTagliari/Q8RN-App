@@ -19,6 +19,7 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -36,14 +37,15 @@
             android:configChanges="orientation|screenSize" />
         <activity
             android:name=".ui.main.Main2Activity"
-            android:label="@string/title_activity_main2"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_main2" />
         <activity
             android:name=".ui.main.EntrevistadoDetailActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/title_entrevistado_detail"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="orientation|screenSize">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.main.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
