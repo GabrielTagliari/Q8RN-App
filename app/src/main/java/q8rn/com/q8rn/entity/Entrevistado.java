@@ -31,7 +31,6 @@ public class Entrevistado implements Parcelable{
 
     // Pos alteracao no formulario
     private String codIdentificacao;
-    private String constituicaoFamiliar;
     private double cintura;
     private double quadril;
     private double testeEsforcoAntes;
@@ -39,6 +38,9 @@ public class Entrevistado implements Parcelable{
     private String qualidadeVida;
     private String oQueMelhorar;
     private double cinturaEstatura;
+
+    private String estadoCivil;
+    private String comQuemMora;
 
     public Entrevistado() {}
 
@@ -64,7 +66,6 @@ public class Entrevistado implements Parcelable{
         doencas = in.readString();
         // Pos alteracao no formulario
         codIdentificacao = in.readString();
-        constituicaoFamiliar = in.readString();
         cintura = in.readDouble();
         quadril = in.readDouble();
         testeEsforcoAntes = in.readDouble();
@@ -72,6 +73,8 @@ public class Entrevistado implements Parcelable{
         qualidadeVida = in.readString();
         oQueMelhorar = in.readString();
         cinturaEstatura = in.readDouble();
+        estadoCivil = in.readString();
+        comQuemMora = in.readString();
     }
 
     @Override
@@ -97,7 +100,6 @@ public class Entrevistado implements Parcelable{
         dest.writeString(doencas);
         // Pos alteracao no formulario
         dest.writeString(codIdentificacao);
-        dest.writeString(constituicaoFamiliar);
         dest.writeDouble(cintura);
         dest.writeDouble(quadril);
         dest.writeDouble(testeEsforcoAntes);
@@ -105,6 +107,8 @@ public class Entrevistado implements Parcelable{
         dest.writeString(qualidadeVida);
         dest.writeString(oQueMelhorar);
         dest.writeDouble(cinturaEstatura);
+        dest.writeString(estadoCivil);
+        dest.writeString(comQuemMora);
     }
 
     @Override
@@ -292,14 +296,6 @@ public class Entrevistado implements Parcelable{
         this.codIdentificacao = codIdentificacao;
     }
 
-    public String getConstituicaoFamiliar() {
-        return constituicaoFamiliar;
-    }
-
-    public void setConstituicaoFamiliar(String constituicaoFamiliar) {
-        this.constituicaoFamiliar = constituicaoFamiliar;
-    }
-
     public double getCintura() {
         return cintura;
     }
@@ -356,6 +352,22 @@ public class Entrevistado implements Parcelable{
         this.cinturaEstatura = cinturaEstatura;
     }
 
+    public String getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
+    }
+
+    public String getComQuemMora() {
+        return comQuemMora;
+    }
+
+    public void setComQuemMora(String comQuemMora) {
+        this.comQuemMora = comQuemMora;
+    }
+
     public int getCodEscolaridade(String escolaridade){
         switch (escolaridade){
             case Constants.SIOUFI:
@@ -394,7 +406,6 @@ public class Entrevistado implements Parcelable{
                 ", saudeMental='" + saudeMental + '\'' +
                 ", doencas='" + doencas + '\'' +
                 ", codIdentificacao='" + codIdentificacao + '\'' +
-                ", constituicaoFamiliar='" + constituicaoFamiliar + '\'' +
                 ", cintura=" + cintura +
                 ", quadril=" + quadril +
                 ", testeEsforcoAntes=" + testeEsforcoAntes +
@@ -402,6 +413,8 @@ public class Entrevistado implements Parcelable{
                 ", qualidadeVida='" + qualidadeVida + '\'' +
                 ", oQueMelhorar='" + oQueMelhorar + '\'' +
                 ", cinturaEstatura=" + cinturaEstatura +
+                ", estadoCivil='" + estadoCivil + '\'' +
+                ", comQuemMora='" + comQuemMora + '\'' +
                 '}';
     }
 

@@ -57,7 +57,6 @@ public class EntrevistadoBusiness extends BaseBusiness {
         valores.put(CriaBanco.TEMPO_RELIGIAO, entrevistado.getTempoReligiao());
 
         valores.put(CriaBanco.COD_IDENTIFICACAO, entrevistado.getCodIdentificacao());
-        valores.put(CriaBanco.CONSTITUICAO_FAMILIAR, entrevistado.getConstituicaoFamiliar());
         valores.put(CriaBanco.CINTURA, entrevistado.getCintura());
         valores.put(CriaBanco.QUADRIL, entrevistado.getQuadril());
         valores.put(CriaBanco.TESTE_ESFORCO_ANTES, entrevistado.getTesteEsforcoAntes());
@@ -65,6 +64,8 @@ public class EntrevistadoBusiness extends BaseBusiness {
         valores.put(CriaBanco.QUALIDADE_VIDA, entrevistado.getQualidadeVida());
         valores.put(CriaBanco.O_QUE_MELHORAR, entrevistado.getoQueMelhorar());
         valores.put(CriaBanco.CINTURA_ESTATURA, entrevistado.getCinturaEstatura());
+        valores.put(CriaBanco.ESTADO_CIVIL, entrevistado.getEstadoCivil());
+        valores.put(CriaBanco.COM_QUEM_MORA, entrevistado.getComQuemMora());
 
         resultado = db.insert(CriaBanco.TABELA_ENTREVISTADO, null, valores);
         db.close();
@@ -105,14 +106,15 @@ public class EntrevistadoBusiness extends BaseBusiness {
             entrevistado.setTempoReligiao(c.getInt(20));
 
             entrevistado.setCodIdentificacao(c.getString(21));
-            entrevistado.setConstituicaoFamiliar(c.getString(22));
-            entrevistado.setCintura(c.getDouble(23));
-            entrevistado.setQuadril(c.getDouble(24));
-            entrevistado.setTesteEsforcoAntes(c.getDouble(25));
-            entrevistado.setTesteEsforcoDepois(c.getDouble(26));
-            entrevistado.setQualidadeVida(c.getString(27));
-            entrevistado.setoQueMelhorar(c.getString(28));
-            entrevistado.setCinturaEstatura(c.getDouble(29));
+            entrevistado.setCintura(c.getDouble(22));
+            entrevistado.setQuadril(c.getDouble(23));
+            entrevistado.setTesteEsforcoAntes(c.getDouble(24));
+            entrevistado.setTesteEsforcoDepois(c.getDouble(25));
+            entrevistado.setQualidadeVida(c.getString(26));
+            entrevistado.setoQueMelhorar(c.getString(27));
+            entrevistado.setCinturaEstatura(c.getDouble(28));
+            entrevistado.setEstadoCivil(c.getString(29));
+            entrevistado.setComQuemMora(c.getString(30));
 
             entrevistados.add(entrevistado);
 

@@ -38,7 +38,7 @@
     <string name="espirometria">Espirometria</string>
     <string name="escolaridade">Escolaridade:</string>
     <string name="doencas_referidas">Doenças referidas</string>
-    <string name="cor_da_pele">Cor da pele:</string>
+    <string name="cor_da_pele">Cor da pele referida:</string>
 
     <!-- Copyright -->
     <string name="copyright">Copyright ©</string>
@@ -85,4 +85,6 @@
     <string name="qualidade_vida">Qualidade de vida referida</string>
     <string name="o_que_melhorar">O que você deseja melhorar em sua saúde?</string>
     <string name="cintura_estatura">Relação cintura/estatura</string>
+    <string name="estado_civil">Estado civil:</string>
+    <string name="com_quem_mora">Com quem mora:</string>
 </resources>
