@@ -65,6 +65,8 @@ public class CriaBanco extends SQLiteOpenHelper{
     public static final String ENTREVISTADO_ID = "entrevistado_id";
     public static final String QUESTAO_ID = "questao_id";
     public static final String ESCORE = "escore";
+    public static final String ESTADO_CIVIL = "estado_civil";
+    public static final String COM_QUEM_MORA = "com_quem_mora";
 
     public CriaBanco(Context context) {
         super(context, NOME_BANCO, null, VERSAO);
@@ -127,14 +129,15 @@ public class CriaBanco extends SQLiteOpenHelper{
         sql.append("   " + TEMPO_RELIGIAO + " int, ");
 
         sql.append("   " + COD_IDENTIFICACAO + " varchar(20), ");
-        sql.append("   " + CONSTITUICAO_FAMILIAR + " varchar(255), ");
         sql.append("   " + CINTURA + " float(19), ");
         sql.append("   " + QUADRIL + " float(19), ");
         sql.append("   " + TESTE_ESFORCO_ANTES + " float(19), ");
         sql.append("   " + TESTE_ESFORCO_DEPOIS + " float(19), ");
         sql.append("   " + QUALIDADE_VIDA + " varchar(255), ");
         sql.append("   " + O_QUE_MELHORAR + " varchar(255), ");
-        sql.append("   " + CINTURA_ESTATURA + " varchar(255) ");
+        sql.append("   " + CINTURA_ESTATURA + " varchar(255), ");
+        sql.append("   " + ESTADO_CIVIL + " varchar(255), ");
+        sql.append("   " + COM_QUEM_MORA + " varchar(255) ");
         sql.append(")");
         return String.valueOf(sql);
     }

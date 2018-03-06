@@ -25,4 +25,31 @@
         <item>Ruim</item>
         <item>Muito ruim</item>
     </string-array>
+
+    <string-array name="qualidade_vida_array">
+        <item>Selecione uma opção</item>
+        <item>Muito boa</item>
+        <item>Boa</item>
+        <item>Regular</item>
+        <item>Ruim</item>
+        <item>Muito ruim</item>
+    </string-array>
+
+    <string-array name="estado_civil_array">
+        <item>Selecione uma opção</item>
+        <item>Solteiro</item>
+        <item>Casado</item>
+        <item>Divorciado</item>
+        <item>Viúvo</item>
+        <item>Outro</item>
+    </string-array>
+
+    <string-array name="com_quem_mora_array">
+        <item>Selecione uma opção</item>
+        <item>Sozinho</item>
+        <item>Pai e Mãe</item>
+        <item>Pai</item>
+        <item>Mãe</item>
+        <item>Outros</item>
+    </string-array>
 </resources>

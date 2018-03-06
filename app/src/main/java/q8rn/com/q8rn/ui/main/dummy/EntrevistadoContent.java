@@ -62,14 +62,9 @@ public class EntrevistadoContent {
         builder.append("\nIniciais do nome: ").append(e.getIniciaisNome());
         builder.append("\nIdade: ").append(e.getIdade()).append(" anos");
         builder.append("\nSexo: ").append(e.getSexo());
+        builder.append("\nEstado Civil: ").append(e.getEstadoCivil());
+        builder.append("\nCom quem mora: ").append(e.getComQuemMora());
         builder.append("\nCor da pele: ").append(e.getCorPele());
-
-        if (!e.getConstituicaoFamiliar().equals(Constants.VAZIO)) {
-            builder.append("\nConstituição familiar: ").append(e.getConstituicaoFamiliar());
-        } else {
-            builder.append("\nConstituição familiar: ").append(NÃO_PREENCHIDO);
-        }
-
         builder.append("\nProfissão: ").append(e.getProfissao());
         builder.append("\nEscolaridade: ").append(e.getEscolaridade());
         builder.append("\nAltura: ").append(e.getAltura()).append(" m");

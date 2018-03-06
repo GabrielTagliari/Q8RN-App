@@ -58,10 +58,6 @@ public class QuestaoEntrevistadoBusiness extends BaseBusiness {
         List<QuestaoEntrevistado> resultados = new ArrayList<>();
 
         SQLiteDatabase db = mBanco.getReadableDatabase();
-        /*Cursor c = db.rawQuery("SELECT qe.* FROM " + CriaBanco.TABELA_QUESTAO + " q " +
-                " LEFT JOIN " + CriaBanco.TABELA_QUESTAO_ENTREVISTADO + " qe " +
-                " ON qe." + CriaBanco.QUESTAO_ID + " = q." + CriaBanco.ID_QUESTAO +
-                " WHERE qe." + CriaBanco.ENTREVISTADO_ID + " = " + idEntrevistado, null);*/
         Cursor c = db.rawQuery("SELECT * FROM " + CriaBanco.TABELA_QUESTAO_ENTREVISTADO
                 +" WHERE "+ CriaBanco.ENTREVISTADO_ID + " = " + idEntrevistado
                 + " ORDER BY " + CriaBanco.QUESTAO_ID + " ASC", null);
@@ -99,8 +95,8 @@ public class QuestaoEntrevistadoBusiness extends BaseBusiness {
             CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
 
             //Headers
-            String header[] = {"numeração", "codidentificacao", "iniciaisnome", "constfamiliar",
-                    "IDADE", "sexo", "CORDAPELE", "religiao", "haqtotempo",
+            String header[] = {"numeração", "codidentificacao", "iniciaisnome",
+                    "IDADE", "sexo", "estadoCivil", "comQuemMora", "CORDAPELE", "religiao", "haqtotempo",
                     "profissao", "escolaridade", "peso", "altura", "IMC", "cintura", "quadril",
                     "cinturaquadril", "cinturaEstatura", "PAS", "esforcoantes", "esforcodepois", "qualidadevida",
                     "oquemelhorar", "glicemiacap", "espirometria", "saudefisica", "saudemental",
@@ -122,48 +118,49 @@ public class QuestaoEntrevistadoBusiness extends BaseBusiness {
             for (Entrevistado entrevistado : allEntrevistados) {
                 adicionaLegendaCampos(entrevistado);
 
-                String[] eachRow = new String[54];
+                String[] eachRow = new String[55];
                 eachRow[0] = String.valueOf(entrevistado.getId());
                 eachRow[1] = String.valueOf(entrevistado.getCodIdentificacao());
                 eachRow[2] = String.valueOf(entrevistado.getIniciaisNome());
-                eachRow[3] = String.valueOf(entrevistado.getConstituicaoFamiliar());
-                eachRow[4] = String.valueOf(entrevistado.getIdade());
-                eachRow[5] = String.valueOf(entrevistado.getSexo());
-                eachRow[6] = String.valueOf(entrevistado.getCorPele());
-                eachRow[7] = String.valueOf(entrevistado.getReligiao());
-                eachRow[8] = String.valueOf(entrevistado.getTempoReligiao());
-                eachRow[9] = String.valueOf(entrevistado.getProfissao());
-                eachRow[10] = String.valueOf(entrevistado.getEscolaridade());
-                eachRow[11] = String.valueOf(entrevistado.getPeso());
-                eachRow[12] = String.valueOf(entrevistado.getAltura());
-                eachRow[13] = String.valueOf(entrevistado.getImc());
-                eachRow[14] = String.valueOf(entrevistado.getCintura());
-                eachRow[15] = String.valueOf(entrevistado.getQuadril());
-                eachRow[16] = String.valueOf(entrevistado.getCinturaQuadril());
-                eachRow[17] = String.valueOf(entrevistado.getCinturaEstatura());
-                eachRow[18] = String.valueOf(entrevistado.getPas());
-                eachRow[19] = String.valueOf(entrevistado.getTesteEsforcoAntes());
-                eachRow[20] = String.valueOf(entrevistado.getTesteEsforcoDepois());
-                eachRow[21] = String.valueOf(entrevistado.getQualidadeVida());
-                eachRow[22] = String.valueOf(entrevistado.getoQueMelhorar());
-                eachRow[23] = String.valueOf(entrevistado.getGlicemiaCapilar());
-                eachRow[24] = String.valueOf(entrevistado.getEspirometria());
-                eachRow[25] = String.valueOf(entrevistado.getSaudeFisica());
-                eachRow[26] = String.valueOf(entrevistado.getSaudeMental());
-                eachRow[27] = String.valueOf(entrevistado.getDoencas());
+                eachRow[3] = String.valueOf(entrevistado.getIdade());
+                eachRow[4] = String.valueOf(entrevistado.getSexo());
+                eachRow[5] = String.valueOf(entrevistado.getEstadoCivil());
+                eachRow[6] = String.valueOf(entrevistado.getComQuemMora());
+                eachRow[7] = String.valueOf(entrevistado.getCorPele());
+                eachRow[8] = String.valueOf(entrevistado.getReligiao());
+                eachRow[9] = String.valueOf(entrevistado.getTempoReligiao());
+                eachRow[10] = String.valueOf(entrevistado.getProfissao());
+                eachRow[11] = String.valueOf(entrevistado.getEscolaridade());
+                eachRow[12] = String.valueOf(entrevistado.getPeso());
+                eachRow[13] = String.valueOf(entrevistado.getAltura());
+                eachRow[14] = String.valueOf(entrevistado.getImc());
+                eachRow[15] = String.valueOf(entrevistado.getCintura());
+                eachRow[16] = String.valueOf(entrevistado.getQuadril());
+                eachRow[17] = String.valueOf(entrevistado.getCinturaQuadril());
+                eachRow[18] = String.valueOf(entrevistado.getCinturaEstatura());
+                eachRow[19] = String.valueOf(entrevistado.getPas());
+                eachRow[20] = String.valueOf(entrevistado.getTesteEsforcoAntes());
+                eachRow[21] = String.valueOf(entrevistado.getTesteEsforcoDepois());
+                eachRow[22] = String.valueOf(entrevistado.getQualidadeVida());
+                eachRow[23] = String.valueOf(entrevistado.getoQueMelhorar());
+                eachRow[24] = String.valueOf(entrevistado.getGlicemiaCapilar());
+                eachRow[25] = String.valueOf(entrevistado.getEspirometria());
+                eachRow[26] = String.valueOf(entrevistado.getSaudeFisica());
+                eachRow[27] = String.valueOf(entrevistado.getSaudeMental());
+                eachRow[28] = String.valueOf(entrevistado.getDoencas());
 
                 ArrayList<Integer> pontos = recuperaDadosPontosRelatorio(entrevistado.getId());
 
                 int total = 0;
                 int contador = 0;
 
-                for (int i = 28;i < 53;i++){
+                for (int i = 29;i < 54;i++){
                     eachRow[i] = String.valueOf(pontos.get(contador));
                     total += pontos.get(contador);
                     contador++;
                 }
 
-                eachRow[53] = String.valueOf(total);
+                eachRow[54] = String.valueOf(total);
 
                 csvWrite.writeNext(eachRow);
             }
@@ -185,27 +182,50 @@ public class QuestaoEntrevistadoBusiness extends BaseBusiness {
         entrevistado.setSaudeFisica(adicionaLegenda(entrevistado.getSaudeFisica()));
         entrevistado.setSaudeMental(adicionaLegenda(entrevistado.getSaudeMental()));
         entrevistado.setQualidadeVida(adicionaLegenda(entrevistado.getQualidadeVida()));
+        entrevistado.setEstadoCivil(adicionaLegendaEstadoCivil(entrevistado.getEstadoCivil()));
+        entrevistado.setComQuemMora(adicionaLegendaComQueMora(entrevistado.getComQuemMora()));
 
         switch (entrevistado.getCorPele()) {
             case "Branca":
                 entrevistado.setCorPele("1");
                 break;
             case "Parda":
-                entrevistado.setCorPele("1");
+                entrevistado.setCorPele("2");
                 break;
             case "Preta":
-                entrevistado.setCorPele("1");
+                entrevistado.setCorPele("3");
                 break;
             case "Indígena":
-                entrevistado.setCorPele("1");
+                entrevistado.setCorPele("4");
                 break;
             case "Amarela":
-                entrevistado.setCorPele("1");
+                entrevistado.setCorPele("5");
                 break;
         }
     }
 
-        private String adicionaLegenda(String valor) {
+    private String adicionaLegendaComQueMora(String valor) {
+        switch (valor) {
+            case "Sozinho":
+                valor = "1";
+                break;
+            case "Pai e Mãe":
+                valor = "2";
+                break;
+            case "Pai":
+                valor = "3";
+                break;
+            case "Mãe":
+                valor = "4";
+                break;
+            case "Outros":
+                valor = "5";
+                break;
+        }
+        return valor;
+    }
+
+    private String adicionaLegenda(String valor) {
         switch (valor) {
             case "Muito boa":
                 valor = "1";
@@ -220,6 +240,27 @@ public class QuestaoEntrevistadoBusiness extends BaseBusiness {
                 valor = "4";
                 break;
             case "Muito ruim":
+                valor = "5";
+                break;
+        }
+        return valor;
+    }
+
+    private String adicionaLegendaEstadoCivil(String valor) {
+        switch (valor) {
+            case "Solteiro":
+                valor = "1";
+                break;
+            case "Casado":
+                valor = "2";
+                break;
+            case "Divorciado":
+                valor = "3";
+                break;
+            case "Viúvo":
+                valor = "4";
+                break;
+            case "Outro":
                 valor = "5";
                 break;
         }

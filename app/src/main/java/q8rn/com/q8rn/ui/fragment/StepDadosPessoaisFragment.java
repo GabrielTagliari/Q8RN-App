@@ -61,9 +61,10 @@ public class StepDadosPessoaisFragment extends Fragment implements BlockingStep 
 
     @BindView(R.id.corPeleIdSpinner) Spinner mCorPeleSpinner;
     @BindView(R.id.escolaridadeIdSpinner) Spinner mEscolaridadeSpinner;
+    @BindView(R.id.estadoCivilIdSpinner) Spinner mEstadoCivilSpinner;
+    @BindView(R.id.comQuemMoraIdSpinner) Spinner mComQuemMoraSpinner;
 
     @BindView(R.id.codIdentificacaoId) TextInputEditText mCodIdentificacao;
-    @BindView(R.id.constituicaoId) TextInputEditText mContituicaoFamiliar;
 
     private Unbinder unbinder;
 
@@ -89,11 +90,13 @@ public class StepDadosPessoaisFragment extends Fragment implements BlockingStep 
     private void populaTodosSpinners() {
         populaSpinner(R.array.corpele_array, mCorPeleSpinner);
         populaSpinner(R.array.escolaridade_array, mEscolaridadeSpinner);
+        populaSpinner(R.array.estado_civil_array, mEstadoCivilSpinner);
+        populaSpinner(R.array.com_quem_mora_array, mComQuemMoraSpinner);
     }
 
     private void populaSpinner(int array, Spinner spinner) {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
-                array, android.R.layout.simple_spinner_item);
+                array, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
@@ -122,6 +125,8 @@ public class StepDadosPessoaisFragment extends Fragment implements BlockingStep 
         List<Spinner> listaSpinner = new ArrayList<>();
         listaSpinner.add(mCorPeleSpinner);
         listaSpinner.add(mEscolaridadeSpinner);
+        listaSpinner.add(mEstadoCivilSpinner);
+        listaSpinner.add(mComQuemMoraSpinner);
         return listaSpinner;
     }
 
@@ -178,7 +183,8 @@ public class StepDadosPessoaisFragment extends Fragment implements BlockingStep 
         entrevistado.setAltura(Double.parseDouble(alturaFormatada));
         entrevistado.setPeso(Double.parseDouble(pesoFormatado));
         entrevistado.setCodIdentificacao(mCodIdentificacao.getText().toString());
-        entrevistado.setConstituicaoFamiliar(mContituicaoFamiliar.getText().toString());
+        entrevistado.setEstadoCivil(mEstadoCivilSpinner.getSelectedItem().toString());
+        entrevistado.setComQuemMora(mComQuemMoraSpinner.getSelectedItem().toString());
 
         salvarEntrevistadoSharedPreferences(entrevistado);
 
