@@ -97,7 +97,7 @@ public class StepDadosBiologicosFragment extends Fragment implements BlockingSte
     }
 
     private double calculaRCE() {
-        return Double.valueOf(mCintura.getText().toString()) / entrevistado.getAltura();
+        return Double.valueOf(mCintura.getText().toString()) / (entrevistado.getAltura() * 100);
     }
 
     private double calculaRCQ() {
