@@ -100,10 +100,10 @@ public class QuestaoEntrevistadoBusiness extends BaseBusiness {
                     "profissao", "escolaridade", "peso", "altura", "IMC", "cintura", "quadril",
                     "cinturaquadril", "cinturaEstatura", "PAS", "esforcoantes", "esforcodepois", "qualidadevida",
                     "oquemelhorar", "glicemiacap", "espirometria", "saudefisica", "saudemental",
-                    "doençarefer", "nutricao1", "nutricao2", "nutricao3", "nutricao4", "exercicio5",
-                    "exercicio6", "exercicio7", "agua8", "agua9", "sol10", "sol11", "temp12",
-                    "temp13", "temp14", "temp15", "temp16", "ar17", "ar18","descanso19",
-                    "descanso20", "descanso21", "conf22", "conf23", "conf24", "conf25", "Q8RNtotal"};
+                    "doençarefer", "nutricao1", "nutricao2", "nutricao3", "exercicio4",
+                    "exercicio5", "exercicio6", "agua7", "agua8", "sol9", "sol10", "temp11",
+                    "temp12", "temp13", "temp14", "ar15", "ar16","descanso17",
+                    "descanso18", "conf19", "conf20", "conf21", "conf22", "Q8RNtotal"};
 
             csvWrite.writeNext(header);
 
@@ -118,7 +118,7 @@ public class QuestaoEntrevistadoBusiness extends BaseBusiness {
             for (Entrevistado entrevistado : allEntrevistados) {
                 adicionaLegendaCampos(entrevistado);
 
-                String[] eachRow = new String[55];
+                String[] eachRow = new String[52];
                 eachRow[0] = String.valueOf(entrevistado.getId());
                 eachRow[1] = String.valueOf(entrevistado.getCodIdentificacao());
                 eachRow[2] = String.valueOf(entrevistado.getIniciaisNome());
@@ -154,13 +154,13 @@ public class QuestaoEntrevistadoBusiness extends BaseBusiness {
                 int total = 0;
                 int contador = 0;
 
-                for (int i = 29;i < 54;i++){
+                for (int i = 29;i < 51;i++){
                     eachRow[i] = String.valueOf(pontos.get(contador));
                     total += pontos.get(contador);
                     contador++;
                 }
 
-                eachRow[54] = String.valueOf(total);
+                eachRow[51] = String.valueOf(total);
 
                 csvWrite.writeNext(eachRow);
             }

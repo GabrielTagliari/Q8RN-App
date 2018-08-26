@@ -28,7 +28,7 @@ public class QuestionarioActivity extends AppCompatActivity {
     public static final String COD_QUESTAO = "codQuestao";
 
     public static final int UM = 1;
-    public static final int VINTE_CINCO = 25;
+    public static final int NUM_MAX_QUESTOES = 22;
 
     private TextView mTitulo;
     private RadioGroup mRadioGroupAlternativas;
@@ -191,8 +191,7 @@ public class QuestionarioActivity extends AppCompatActivity {
     public void proximaQuestao(View view) {
         if (mRadioGroupAlternativas.getCheckedRadioButtonId() != -1) {
             calculaEscoreAtual();
-            if (mCodQuestao == VINTE_CINCO) {
-                mCodQuestao++;
+            if (mCodQuestao == NUM_MAX_QUESTOES) {
                 Intent intentEscore;
                 intentEscore = new Intent(QuestionarioActivity.this, EscoreActivity.class);
                 intentEscore.putParcelableArrayListExtra(LISTA, (ArrayList<Questao>) mListaMelhorar);

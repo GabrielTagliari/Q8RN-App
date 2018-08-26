@@ -208,15 +208,15 @@ public class EscoreActivity extends AppCompatActivity {
     }
 
     private String calculaResultado(int escoreTotal) {
-        if (escoreTotal >= 0 && escoreTotal <= 34) {
+        if (escoreTotal >= 0 && escoreTotal <= 25) {
             return Constants.INSUFICIENTE;
-        } else if (escoreTotal > 34 && escoreTotal <= 54) {
+        } else if (escoreTotal > 25 && escoreTotal <= 44) {
             return Constants.REGULAR;
-        } else if (escoreTotal > 54 && escoreTotal <= 69) {
+        } else if (escoreTotal > 44 && escoreTotal <= 58) {
             return Constants.BOM;
-        } else if (escoreTotal > 69 && escoreTotal <= 84) {
+        } else if (escoreTotal > 58 && escoreTotal <= 73) {
             return Constants.MUITO_BOM;
-        } else if (escoreTotal > 84 && escoreTotal <= 100) {
+        } else if (escoreTotal > 73 && escoreTotal <= 88) {
             return Constants.EXCELENTE;
         } else {
             Toast.makeText(this, Constants.ERRO_AO_CARREGAR_RESULTADO, Toast.LENGTH_SHORT).show();
