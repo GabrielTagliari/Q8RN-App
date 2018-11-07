@@ -28,6 +28,7 @@ import java.util.Date;
 import java.util.List;
 
 import q8rn.com.q8rn.R;
+import q8rn.com.q8rn.helper.PermissaoHelper;
 import q8rn.com.q8rn.manager.QuestaoEntrevistadoManager;
 import q8rn.com.q8rn.ui.main.EntrevistadoDetailActivity;
 import q8rn.com.q8rn.ui.main.dummy.EntrevistadoContent;
@@ -44,8 +45,6 @@ public class EntrevistadoListFragment extends Fragment {
 
     private static final String TAG = "questao";
     public static final String NÃO_EXISTEM_DADOS = "Não existem dados a serem exportados";
-    public static final String PERMISSION_IS_GRANTED = "Permission is granted";
-    public static final String PERMISSION_IS_REVOKED = "Permission is revoked";
     public static final String Q8RN_TRACO = "Q8RN - ";
     public static final String CORPO_EMAIL = "Banco de dados do questionário dos oito remédios naturais gerado em: ";
     public static final String TEXT_HTML = "text/html";
@@ -78,7 +77,9 @@ public class EntrevistadoListFragment extends Fragment {
             public void onClick(View view) {
                 QuestaoEntrevistadoManager qeManager = new QuestaoEntrevistadoManager(getContext());
 
-                if (temPermissaoArmazenamento()) {
+                PermissaoHelper permissaoHelper = new PermissaoHelper(getContext());
+
+                if (permissaoHelper.temPermissaoArmazenamento()) {
                     try {
                         File file = qeManager.gerarExcel(getContext());
                         Uri u1;
@@ -119,26 +120,6 @@ public class EntrevistadoListFragment extends Fragment {
         }
 
         return v;
-    }
-
-    public boolean temPermissaoArmazenamento() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (getActivity().checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    == PackageManager.PERMISSION_GRANTED) {
-                Log.v(TAG, PERMISSION_IS_GRANTED);
-                return true;
-            } else {
-
-                Log.v(TAG, PERMISSION_IS_REVOKED);
-                ActivityCompat.requestPermissions(getActivity(),
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                return false;
-            }
-        }
-        else {
-            Log.v(TAG,PERMISSION_IS_GRANTED);
-            return true;
-        }
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {

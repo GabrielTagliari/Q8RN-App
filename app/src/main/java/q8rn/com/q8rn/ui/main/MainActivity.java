@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.v(TAG, PERMISSION_IS_GRANTED);
                 return true;
             } else {
-
                 Log.v(TAG, PERMISSION_IS_REVOKED);
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);

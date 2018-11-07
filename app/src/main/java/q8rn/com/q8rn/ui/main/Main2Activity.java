@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import q8rn.com.q8rn.R;
+import q8rn.com.q8rn.helper.PermissaoHelper;
 import q8rn.com.q8rn.ui.fragment.AbaHomeFragment;
 import q8rn.com.q8rn.ui.fragment.AbaQuestionarioFragment;
 import q8rn.com.q8rn.ui.fragment.EntrevistadoListFragment;
@@ -52,6 +53,10 @@ public class Main2Activity extends AppCompatActivity
 
         Fragment mFragment = new AbaHomeFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.content, mFragment).commit();
+
+        final PermissaoHelper permissaoHelper = new PermissaoHelper(this);
+
+        permissaoHelper.temPermissaoArmazenamento();
     }
 
     @Override
