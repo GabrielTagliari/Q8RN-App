@@ -12,7 +12,6 @@ import android.widget.Button;
 
 import q8rn.com.q8rn.R;
 import q8rn.com.q8rn.ui.main.FormStepperActivity;
-import q8rn.com.q8rn.ui.main.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
