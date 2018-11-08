@@ -75,16 +75,11 @@
                 android:layout_gravity="bottom"
                 android:layout_weight="0"
                 android:paddingBottom="8dp"
+                android:paddingRight="8dp"
                 android:text="@string/cm"
                 android:textAlignment="textStart"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button"
                 tools:ignore="RtlCompat" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="wrap_content"
@@ -93,15 +88,15 @@
                 android:paddingRight="8dp"
                 android:paddingTop="8dp">
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/imcId"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:hint="@string/imc"
-                    android:inputType="number|numberDecimal"
-                    android:maxLength="5"
-                    android:nextFocusDown="@id/pasId" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/imcId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:hint="@string/imc"
+                android:inputType="number|numberDecimal"
+                android:maxLength="5"
+                android:nextFocusDown="@id/pasId" />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
@@ -111,11 +106,17 @@
                 android:layout_gravity="bottom"
                 android:layout_weight="0"
                 android:paddingBottom="8dp"
-                android:paddingRight="8dp"
                 android:text="@string/kg_m"
                 android:textAlignment="textStart"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button"
                 tools:ignore="RtlCompat" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="wrap_content"
@@ -128,14 +129,43 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:hint="@string/pa"
+                    android:hint="@string/pas"
+                    android:inputType="numberDecimal"
+                    android:maxLength="4"
+                    android:nextFocusDown="@id/padId" />
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_mmgh1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="0"
+                android:paddingBottom="8dp"
+                android:text="@string/mm_hg"
+                android:textAlignment="textStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                tools:ignore="RtlCompat" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="8dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/padId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:hint="@string/pad"
                     android:inputType="numberDecimal"
                     android:maxLength="4"
                     android:nextFocusDown="@id/cinturaQuadrilId" />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
-                android:id="@+id/tv_cm2"
+                android:id="@+id/tv_mmgh2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
@@ -146,8 +176,6 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Button"
                 tools:ignore="RtlCompat" />
         </LinearLayout>
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -265,23 +293,6 @@
                 tools:ignore="RtlCompat" />
         </LinearLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/doencasId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="@string/doencas_referidas"
-                android:inputType="textCapSentences|textPersonName"
-                android:maxLength="30"
-                android:nextFocusDown="@id/esforcoAntesId" />
-        </android.support.design.widget.TextInputLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -344,6 +355,23 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Button"
                 tools:ignore="RtlCompat" />
         </LinearLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/doencasId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/doencas_referidas"
+                android:inputType="textCapSentences|textPersonName"
+                android:maxLength="30"
+                android:nextFocusDown="@id/esforcoAntesId" />
+        </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 
 </ScrollView>

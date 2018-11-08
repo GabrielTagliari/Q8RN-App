@@ -88,6 +88,12 @@ public class EntrevistadoContent {
             builder.append("\nQuadril: ").append(NÃO_PREENCHIDO);
         }
 
+        if (e.getPad() != 0) {
+            builder.append("\nPAD: ").append(e.getPad()).append(" mm/hg");
+        } else {
+            builder.append("\nPAD: ").append("Não preenchido");
+        }
+
         if (e.getCinturaQuadril() != 0) {
             builder.append("\nRelação cintura/quadril: ").append(e.getCinturaQuadril());
         } else {

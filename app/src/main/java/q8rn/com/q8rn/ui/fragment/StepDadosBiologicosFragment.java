@@ -39,6 +39,7 @@ public class StepDadosBiologicosFragment extends Fragment implements BlockingSte
     @BindView(R.id.cinturaQuadrilId) TextInputEditText mCinturaQuadril;
     @BindView(R.id.cinturaEstaturaId) TextInputEditText mCinturaEstatura;
     @BindView(R.id.pasId) TextInputEditText mPas;
+    @BindView(R.id.padId) TextInputEditText mPad;
     @BindView(R.id.glicemiaId) TextInputEditText mGlicemiaCapilar;
     @BindView(R.id.espirometriaId) TextInputEditText mEspirometria;
     @BindView(R.id.doencasId) TextInputEditText mDoencas;
@@ -161,6 +162,7 @@ public class StepDadosBiologicosFragment extends Fragment implements BlockingSte
         boolean imcVazio = isVazioOuZerado(mImc);
         boolean cinturaQuadrilVazio = isVazioOuZerado(mCinturaQuadril);
         boolean pasVazio = isVazioOuZerado(mPas);
+        boolean padVazio = isVazioOuZerado(mPad);
         boolean glicemiaVazio = isVazioOuZerado(mGlicemiaCapilar);
         boolean espirometriaVazio = isVazioOuZerado(mEspirometria);
 
@@ -173,6 +175,7 @@ public class StepDadosBiologicosFragment extends Fragment implements BlockingSte
         entrevistado.setImc(imcVazio ? 0 : Double.parseDouble(mImc.getText().toString()));
         entrevistado.setCinturaQuadril(cinturaQuadrilVazio ? 0 : Double.parseDouble(cinturaQuadrilTexto));
         entrevistado.setPas(pasVazio ? 0 : Double.parseDouble(mPas.getText().toString()));
+        entrevistado.setPad(padVazio ? 0 : Double.parseDouble(mPad.getText().toString()));
         entrevistado.setGlicemiaCapilar(glicemiaVazio ? 0 : Double.parseDouble(glicemiaTexto));
         entrevistado.setEspirometria(espirometriaVazio ? 0 : Integer.parseInt(espirometriaTexto));
 

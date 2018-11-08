@@ -98,7 +98,7 @@ public class QuestaoEntrevistadoBusiness extends BaseBusiness {
             String header[] = {"numeração", "codidentificacao", "iniciaisnome",
                     "IDADE", "sexo", "estadoCivil", "comQuemMora", "CORDAPELE", "religiao", "haqtotempo",
                     "profissao", "escolaridade", "peso", "altura", "IMC", "cintura", "quadril",
-                    "cinturaquadril", "cinturaEstatura", "PAS", "esforcoantes", "esforcodepois", "qualidadevida",
+                    "cinturaquadril", "cinturaEstatura", "PAS", "PAD", "esforcoantes", "esforcodepois", "qualidadevida",
                     "oquemelhorar", "glicemiacap", "espirometria", "saudefisica", "saudemental",
                     "doençarefer", "nutricao1", "nutricao2", "nutricao3", "exercicio4",
                     "exercicio5", "exercicio6", "agua7", "agua8", "sol9", "sol10", "temp11",
@@ -118,7 +118,7 @@ public class QuestaoEntrevistadoBusiness extends BaseBusiness {
             for (Entrevistado entrevistado : allEntrevistados) {
                 adicionaLegendaCampos(entrevistado);
 
-                String[] eachRow = new String[52];
+                String[] eachRow = new String[53];
                 eachRow[0] = String.valueOf(entrevistado.getId());
                 eachRow[1] = String.valueOf(entrevistado.getCodIdentificacao());
                 eachRow[2] = String.valueOf(entrevistado.getIniciaisNome());
@@ -139,28 +139,29 @@ public class QuestaoEntrevistadoBusiness extends BaseBusiness {
                 eachRow[17] = String.valueOf(entrevistado.getCinturaQuadril());
                 eachRow[18] = String.valueOf(entrevistado.getCinturaEstatura());
                 eachRow[19] = String.valueOf(entrevistado.getPas());
-                eachRow[20] = String.valueOf(entrevistado.getTesteEsforcoAntes());
-                eachRow[21] = String.valueOf(entrevistado.getTesteEsforcoDepois());
-                eachRow[22] = String.valueOf(entrevistado.getQualidadeVida());
-                eachRow[23] = String.valueOf(entrevistado.getoQueMelhorar());
-                eachRow[24] = String.valueOf(entrevistado.getGlicemiaCapilar());
-                eachRow[25] = String.valueOf(entrevistado.getEspirometria());
-                eachRow[26] = String.valueOf(entrevistado.getSaudeFisica());
-                eachRow[27] = String.valueOf(entrevistado.getSaudeMental());
-                eachRow[28] = String.valueOf(entrevistado.getDoencas());
+                eachRow[20] = String.valueOf(entrevistado.getPad());
+                eachRow[21] = String.valueOf(entrevistado.getTesteEsforcoAntes());
+                eachRow[22] = String.valueOf(entrevistado.getTesteEsforcoDepois());
+                eachRow[23] = String.valueOf(entrevistado.getQualidadeVida());
+                eachRow[24] = String.valueOf(entrevistado.getoQueMelhorar());
+                eachRow[25] = String.valueOf(entrevistado.getGlicemiaCapilar());
+                eachRow[26] = String.valueOf(entrevistado.getEspirometria());
+                eachRow[27] = String.valueOf(entrevistado.getSaudeFisica());
+                eachRow[28] = String.valueOf(entrevistado.getSaudeMental());
+                eachRow[29] = String.valueOf(entrevistado.getDoencas());
 
                 ArrayList<Integer> pontos = recuperaDadosPontosRelatorio(entrevistado.getId());
 
                 int total = 0;
                 int contador = 0;
 
-                for (int i = 29;i < 51;i++){
+                for (int i = 30;i < 52;i++){
                     eachRow[i] = String.valueOf(pontos.get(contador));
                     total += pontos.get(contador);
                     contador++;
                 }
 
-                eachRow[51] = String.valueOf(total);
+                eachRow[52] = String.valueOf(total);
 
                 csvWrite.writeNext(eachRow);
             }

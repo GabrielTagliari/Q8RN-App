@@ -25,8 +25,8 @@
     <string name="saude_f_sica">Saúde física:</string>
     <string name="religiao_referida">Religião Referida</string>
     <string name="profissao">Profissão</string>
-    <string name="pa">Pressão arterial</string>
-    <string name="pad">Pressão Arterial Diastólica (PAD)</string>
+    <string name="pas">Pressão arterial sistólica (PAS)</string>
+    <string name="pad">Pressão arterial diastólica (PAD)</string>
     <string name="peso">Peso</string>
     <string name="masculino">Masculino</string>
     <string name="iniciais_do_nome">Iniciais do nome</string>
